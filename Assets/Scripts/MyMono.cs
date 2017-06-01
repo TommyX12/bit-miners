@@ -5,16 +5,35 @@ using UnityEngine;
 public class MyMono : MonoBehaviour {
     public static bool Paused = false;
 
-    public void Update()
+	public void Update()
+	{
+		if (!Paused) {
+			PausingUpdate();
+		}
+		NormalUpdate();
+	}
+
+    public void FixedUpdate()
     {
-        PausingUpdate();
-        // other stuff
+		if (!Paused) {
+			PausingFixedUpdate();
+		}
+		NormalFixedUpdate();
     }
 
-    // this update returns when paused
-    public virtual void PausingUpdate() {
-        if (Paused) {
-            return;
-        }
+	public virtual void PausingUpdate() {
+		
+	}
+	
+	public virtual void NormalUpdate() {
+		
+	}
+	
+    public virtual void PausingFixedUpdate() {
+		
     }
+	
+	public virtual void NormalFixedUpdate() {
+		
+	}
 }
