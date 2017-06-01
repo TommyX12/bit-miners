@@ -5,9 +5,7 @@ using System.Collections;
 public class JurassicTest : MonoBehaviour {
 	
 	public static string lib = @"
-		function print(obj) {
-			console_print(String(obj));
-		}
+		
 	";
 	
 	public static string test = @"
@@ -32,9 +30,8 @@ public class JurassicTest : MonoBehaviour {
 		return fibonacci(n - 1) + fibonacci(n - 2);
 	}
 	
-	string print(string str) {
+	void print(string str) {
 		Debug.Log(str);
-		return str;
 	}
 	
 	void thing(Jurassic.Library.ObjectInstance obj) {
@@ -45,7 +42,7 @@ public class JurassicTest : MonoBehaviour {
 	void Start () {
 		var engine = new Jurassic.ScriptEngine();
 		// engine.SetGlobalValue("console", new Jurassic.Library.FirebugConsole(engine));
-		engine.SetGlobalFunction("console_print", new Func<string, string>(print));
+		engine.SetGlobalFunction("print", new Action<string>(print));
 		engine.Execute(lib);
 		
 		var host = engine.Object.Construct();
