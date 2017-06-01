@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitComponent : MonoBehaviour {
+public class UnitComponent : MyMono {
     public Unit unit;
-    public bool actionDone;
 }
