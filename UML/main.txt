@@ -1,0 +1,31 @@
+
+[ScriptSystem|
+namespace: game.scripting
+|
+interface
+|
+run()
+]
+
+IScriptSystemAPI:
+    C# side
+    JavaScript side
+    
+    Register(ScriptSystem scriptSystem) method
+
+ScriptSystem extends Jurassic.ScriptEngine:
+    Load APIs
+    Edit script
+    Start running (run once)
+        Register API
+            Basic API by ScriptSystem, for event handling etc
+            Custom API for drone etc
+        
+        Run
+        Deal with error (javascript error, stack error, time out etc)
+            set to not running
+        
+        set to running
+        
+    DispatchEvent as game goes on
+        (return asap if not successfully ran)

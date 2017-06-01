@@ -41,13 +41,15 @@ public class ScriptSystem {
 	
 	public void Start() {
 		// API registration
-		BasicAPI.GetInstance().Register(this);
+		BasicAPI.GetInstance().Register(this, this.engine);
 		foreach (IScriptSystemAPI api in this.APIList) {
-			api.Register(this);
+			api.Register(this, this.engine);
 		}
 		
+		// Execution
 		this.engine.Execute(this.Script);
 		
+		// Status update
 		this.Running = true;
 	}
 	
