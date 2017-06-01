@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 1
-  indicatorPrefab: {fileID: 1156383100966606, guid: 335145d1cd7cf3741810ba7163755862,
+  IndicatorPrefab: {fileID: 1156383100966606, guid: 335145d1cd7cf3741810ba7163755862,
     type: 2}
 --- !u!212 &1535419726
 SpriteRenderer:
