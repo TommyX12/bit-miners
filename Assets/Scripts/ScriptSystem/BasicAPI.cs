@@ -20,7 +20,7 @@ public class BasicAPI : IScriptSystemAPI {
 		Debug.Log(str);
 	}
 	
-	private static string javaScript = @"
+	private const string javaScript = @"
 		var _events = {};
 		
 		function when(event, handler) {
