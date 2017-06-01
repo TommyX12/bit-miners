@@ -7,11 +7,11 @@ public class GridLocator : MonoBehaviour {
     public bool debug;
 
     private GameObject indicator;
-    public GameObject indicatorPrefab;
+    public GameObject IndicatorPrefab;
 
     private void Start()
     {
-        indicator = GameObject.Instantiate(indicatorPrefab);
+        indicator = GameObject.Instantiate(IndicatorPrefab);
     }
 
     public void Update()
