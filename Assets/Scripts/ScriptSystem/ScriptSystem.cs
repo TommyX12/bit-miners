@@ -69,7 +69,7 @@ public class ScriptSystem {
 		this.engine.SetGlobalFunction("_critical_on", new Action(this.timeoutHelper.EnterCriticalSection));
 		this.engine.SetGlobalFunction("_critical_off", new Action(this.timeoutHelper.ExitCriticalSection));
 		foreach (IScriptSystemAPI api in this.APIList) {
-			api.Register(this, this.engine);
+			api.Register(this);
 		}
 		
 		// Execution
@@ -79,7 +79,7 @@ public class ScriptSystem {
 		
 		// API Post registration
 		foreach (IScriptSystemAPI api in this.APIList) {
-			api.PostRegister(this, this.engine);
+			api.PostRegister(this);
 		}
 		
 		// Status update

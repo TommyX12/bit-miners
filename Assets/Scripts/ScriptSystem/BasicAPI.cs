@@ -50,13 +50,13 @@ public class BasicAPI : IScriptSystemAPI {
 		_events_sealed = true;
 	";
 	
-	public void Register(ScriptSystem scriptSystem, Jurassic.ScriptEngine engine) {
+	public void Register(ScriptSystem scriptSystem) {
 		scriptSystem.RegisterFunction("_print", new Action<string>(Print));
 		
 		scriptSystem.RegisterJavaScript(javaScript);
 	}
 	
-	public void PostRegister(ScriptSystem scriptSystem, Jurassic.ScriptEngine engine) {
+	public void PostRegister(ScriptSystem scriptSystem) {
 		scriptSystem.RegisterJavaScript(postJavsScript);
 	}
 }
