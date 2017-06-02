@@ -13,11 +13,6 @@ public class MoveComponent : UnitComponent {
     public GameObject gameObjectMoveTarget;
     private Vector2 vectorTarget;
 
-    private void Start()
-    {
-        
-    }
-
     public void SetGameObjectTarget(GameObject target) {
         MoveToTarget = target;
         gameObjectTarget = true;
@@ -33,13 +28,25 @@ public class MoveComponent : UnitComponent {
         base.PausingFixedUpdate();
         if (MoveToTarget) {
             Vector2 dv = gameObjectTarget ? (Vector2) (gameObjectMoveTarget.transform.position - transform.position) : vectorTarget - (Vector2) transform.position;
-            if (dv.magnitude <= 0.1f)
+            float da = Vector2.SignedAngle(transform.up, dv);
+
+            if (dv.magnitude <= 0.25f)
             {
                 // close enough
             }
             else {
                 transform.position += (Vector3) dv.normalized * speed * Time.fixedDeltaTime;
             }
+
+            // 5 degrees off is okay
+            if (da >= -5 && da <= 5)
+            {
+
+            }
+            else {
+                transform.Rotate(new Vector3(0, 0, (da / Mathf.Abs(da)) * turnRate * Time.fixedDeltaTime));
+            }
+
         }
     }
 }

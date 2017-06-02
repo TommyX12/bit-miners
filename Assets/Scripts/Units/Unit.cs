@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Unit : MyMono {
-    
+
+    public float BuildTime;
+    public int BuildCost;
 
     public int MaxHP;
     int currentHP;
