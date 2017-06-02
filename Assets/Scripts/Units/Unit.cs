@@ -10,6 +10,11 @@ public class Unit : MyMono {
     public int MaxHP;
     int currentHP;
 
+    private void Start()
+    {
+        RegisterComponents();
+    }
+
     public int GetMaxHP() {
         return MaxHP;
     }
@@ -24,8 +29,9 @@ public class Unit : MyMono {
 
     public List<UnitComponent> components;
 
-    public UnitComponent getUnitcomponentOfType<T>() {
+    public UnitComponent GetUnitComponent<T>() {
         foreach (UnitComponent comp in components) {
+            Debug.Log(comp.GetType() + " " +  typeof(T));
             if (comp.GetType() == typeof(T)) {
                 return comp;
             }
@@ -36,7 +42,7 @@ public class Unit : MyMono {
     public void RegisterComponents() {
         foreach (UnitComponent component in GetComponentsInChildren<UnitComponent>()) {
             component.unit = this;
+            components.Add(component);
         }
     }
-
 }

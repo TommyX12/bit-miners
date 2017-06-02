@@ -83,6 +83,7 @@ public class ProductionComponent : UnitComponent {
         if (id >= buildQueue.Count) {
             return;
         }
+        ResourceManager.Add(buildQueue[id].cost);
         buildQueue.RemoveAt(id);
     }
 

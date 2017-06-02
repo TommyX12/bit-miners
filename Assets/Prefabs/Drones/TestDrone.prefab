@@ -150,6 +150,7 @@ MonoBehaviour:
   MiningRange: 0.25
   TimeMultiplier: 1
   MaxCapacity: 30
+  storage: 0
 --- !u!114 &114436505401939752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -178,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildTime: 5
-  BuildCost: 0
+  BuildCost: 30
   MaxHP: 25
   components: []
 --- !u!212 &212002517078656618

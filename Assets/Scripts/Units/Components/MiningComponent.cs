@@ -6,7 +6,7 @@ public class MiningComponent : UnitComponent {
     public float MiningRange = 0.25f;
     public float TimeMultiplier = 1f;
     public int MaxCapacity = 30;
-    int currentCapacity = 0;
+    public int storage = 0;
     float miningTimer;
     bool mining;
     Resource resource;
@@ -22,7 +22,7 @@ public class MiningComponent : UnitComponent {
             return;
         }
 
-        if (currentCapacity >= MaxCapacity) {
+        if (storage >= MaxCapacity) {
             return;
         }
 
@@ -46,9 +46,9 @@ public class MiningComponent : UnitComponent {
             if (miningTimer <= 0) {
                 Debug.Log("Collected");
                 mining = false;
-                currentCapacity += resource.GetResource();
-                if (currentCapacity >= MaxCapacity) {
-                    currentCapacity = MaxCapacity;
+                storage += resource.GetResource();
+                if (storage >= MaxCapacity) {
+                    storage = MaxCapacity;
                 }
 
                 if (((Vector2)(transform.position - resource.gameObject.transform.position)).magnitude > MiningRange) {

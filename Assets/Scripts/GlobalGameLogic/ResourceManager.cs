@@ -7,6 +7,8 @@ public class ResourceManager : MyMono {
     private static int MaxCapacity;
     private static int AmtStored;
 
+    private static List<SiloComponent> silos = new List<SiloComponent>();
+
     public static void AddCapacity(int amt) {
         MaxCapacity += amt;
     }
@@ -23,7 +25,7 @@ public class ResourceManager : MyMono {
         return MaxCapacity;
     }
 
-    public static int GEtAmtStored() {
+    public static int GetAmtStored() {
         return AmtStored;
     }
 
@@ -54,4 +56,31 @@ public class ResourceManager : MyMono {
         }
     }
 
+    public static void AddSilo(SiloComponent silo) {
+        if (silos.Contains(silo))
+        {
+            return;
+        }
+        else {
+            silos.Add(silo);
+            Refresh();
+        }
+    }
+
+    public static void RemoveSilo(SiloComponent silo) {
+        silos.Remove(silo);
+        Refresh();
+    }
+
+    public static void Refresh() {
+        MaxCapacity = 0;
+
+        foreach (SiloComponent s in silos) {
+            MaxCapacity += s.MaxCapacity;
+        }
+
+        if (AmtStored >= MaxCapacity) {
+            AmtStored = MaxCapacity;
+        }
+    }
 }
