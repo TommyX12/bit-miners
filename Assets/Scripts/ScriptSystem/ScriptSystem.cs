@@ -43,13 +43,13 @@ public class ScriptSystem {
 		string wrapperFunction = @"
 			function " + functionName + "(" + wrapperArguments + @") {
 				_critical_on();
-				var result = _" + functionName +"(" + wrapperArguments + @");
+				var result = __" + functionName +"__(" + wrapperArguments + @");
 				_critical_off();
 				
 				return result;
 			}
 		";
-		this.engine.SetGlobalFunction("_" + functionName, functionDelegate);
+		this.engine.SetGlobalFunction("__" + functionName + "__", functionDelegate);
 		this.engine.Execute(wrapperFunction);
 	}
 	
