@@ -5,6 +5,7 @@ using UnityEngine;
 public class ProductionComponent : UnitComponent {
 
     public GameObject SpawnLocation;
+    public ProductionUI UI;
 
     public class BuildItem
     {
@@ -19,11 +20,13 @@ public class ProductionComponent : UnitComponent {
     }
 
     public List<GameObject> BuildPrefabs; // limit this to 4
-    private List<BuildItem> buildQueue; // max 7 build items at a time
+    public List<BuildItem> buildQueue; // max 7 build items at a time
 
-    private void Start()
+    void Start()
     {
+        if(buildQueue == null)
         buildQueue = new List<BuildItem>();
+        if(BuildPrefabs == null)
         BuildPrefabs = new List<GameObject>();
     }
 
@@ -32,7 +35,7 @@ public class ProductionComponent : UnitComponent {
             return;
             // TODO: error message
         }
-        if (buildQueue.Count >= 8) {
+        if (buildQueue.Count >= 7) {
             return;
             // TODO: error message
         }
@@ -70,12 +73,16 @@ public class ProductionComponent : UnitComponent {
                 obj.transform.position = new Vector3(SpawnLocation.transform.position.x, SpawnLocation.transform.position.y, obj.transform.position.z);
             }
             buildQueue.RemoveAt(0);
+            UI.Refresh();
         } else {
             buildQueue[0].ProgressBuild(Time.fixedDeltaTime);
         }
     }
 
     public void Cancel(int id) {
+        if (id >= buildQueue.Count) {
+            return;
+        }
         buildQueue.RemoveAt(id);
     }
 
