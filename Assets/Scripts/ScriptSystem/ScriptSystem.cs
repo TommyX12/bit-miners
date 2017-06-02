@@ -1,11 +1,16 @@
 using UnityEngine;
 using System;
+using System.Runtime.ExceptionServices;
 using System.Collections;
 using System.Collections.Generic;
 
 public class ScriptSystem {
 	
 	private Jurassic.ScriptEngine engine;
+	private ScriptTimeoutHelper timeoutHelper;
+	
+	public int TimeoutMS = 100;
+	public int RecursionDepthLimit = 1000;
 	
 	public List<IScriptSystemAPI> APIList {
 		get; set;
@@ -24,7 +29,7 @@ public class ScriptSystem {
 		this.Running = false;
 		this.Script = "";
 		
-		this.engine = new Jurassic.ScriptEngine();
+		this.timeoutHelper = new ScriptTimeoutHelper();
 	}
 	
 	public void RegisterFunction(string functionName, Delegate functionDelegate) {
@@ -40,6 +45,9 @@ public class ScriptSystem {
 	}
 	
 	public void Start() {
+		this.engine = new Jurassic.ScriptEngine();
+		this.engine.RecursionDepthLimit = this.RecursionDepthLimit;
+		
 		// API registration
 		BasicAPI.GetInstance().Register(this, this.engine);
 		foreach (IScriptSystemAPI api in this.APIList) {
@@ -47,7 +55,9 @@ public class ScriptSystem {
 		}
 		
 		// Execution
-		this.engine.Execute(this.Script);
+		this.ExecuteAction(() => {
+			this.engine.Execute(this.Script);
+		});
 		
 		// Status update
 		this.Running = true;
@@ -55,6 +65,24 @@ public class ScriptSystem {
 	
 	public void DispatchEvent() {
 		if (!this.Running) return;
+	}
+	
+	private void ExecuteAction(Action action) {
+		try {
+			this.timeoutHelper.RunWithTimeout(action, this.TimeoutMS);
+		}
+		catch (TimeoutException ex) {
+			
+		}
+		catch (OutOfMemoryException ex) {
+			
+		}
+		catch (StackOverflowException ex) {
+			
+		}
+		catch (Jurassic.JavaScriptException ex) {
+			
+		}
 	}
 	
 }
