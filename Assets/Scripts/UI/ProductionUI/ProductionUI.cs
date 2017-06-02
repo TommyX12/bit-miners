@@ -41,6 +41,23 @@ public class ProductionUI : MyMono {
             ProductionQueueImages[i].sprite = null;
         }
 
+        float progress;
+
+        if (Production.buildQueue.Count >= 1)
+        {
+            progress = 1 - Production.buildQueue[0].time / Production.buildQueue[0].prefab.GetComponent<Unit>().BuildTime;
+
+        }
+        else {
+            progress = 0;
+        }
+
+        RectTransform rt = ProgressBar.GetComponent<RectTransform>();
+        rt.anchorMax = new Vector2(progress, 1);
+        rt.anchorMin = new Vector2(0, 0);
+        rt.sizeDelta = new Vector2(0, 0);
+        rt.offsetMax = new Vector2(0, 0);
+        rt.offsetMin = new Vector2(0, 0);
 
         // logic to update progress bar
 
