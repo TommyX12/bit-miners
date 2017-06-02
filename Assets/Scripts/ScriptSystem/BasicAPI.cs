@@ -16,14 +16,18 @@ public class BasicAPI : IScriptSystemAPI {
 		
 	}
 	
-	private void print(string str) {
+	private void Print(string str) {
 		Debug.Log(str);
 	}
 	
 	private const string javaScript = @"
 		var _events = {};
+		var _events_sealed = false;
 		
+		// cannot call this function inside other function. only when initializing.
 		function when(event, handler) {
+			if (_events_sealed) return;
+			
 			if (_events[event] === undefined) {
 				_events[event] = [];
 			}
@@ -31,7 +35,7 @@ public class BasicAPI : IScriptSystemAPI {
 			_events[event].push(handler);
 		}
 	
-		function dispatch(event, data) {
+		function _dispatch(event, data) {
 			if (_events[event] === undefined) return;
 			
 			var handlers = _events[event];
@@ -42,9 +46,17 @@ public class BasicAPI : IScriptSystemAPI {
 		}
 	";
 	
+	private const string postJavsScript = @"
+		_events_sealed = true;
+	";
+	
 	public void Register(ScriptSystem scriptSystem, Jurassic.ScriptEngine engine) {
-		scriptSystem.RegisterFunction("print", new Action<string>(print));
+		scriptSystem.RegisterFunction("_print", new Action<string>(Print));
 		
 		scriptSystem.RegisterJavaScript(javaScript);
+	}
+	
+	public void PostRegister(ScriptSystem scriptSystem, Jurassic.ScriptEngine engine) {
+		scriptSystem.RegisterJavaScript(postJavsScript);
 	}
 }
