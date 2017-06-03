@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface Interactable {
+public interface IInteractable {
 
     void Interact(GameObject g);
 

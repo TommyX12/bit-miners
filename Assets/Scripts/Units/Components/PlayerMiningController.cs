@@ -13,6 +13,4 @@ public class PlayerMiningController : MyMono {
             miner.startMining();
         }
     }
-
-
 }
