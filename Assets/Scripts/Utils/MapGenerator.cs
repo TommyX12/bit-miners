@@ -94,10 +94,10 @@ public static class MapGenerator
 	}
 	public static ArrayTexture2D generate_DiamondSquare(int size, float initialMin, float initialMax, float randomMin, float randomMax, float randomFallOff) {
 		size = Util.ClosestPow2(size - 1) + 1;
-		ArrayTexture2D sampler = new ArrayTexture2D(size, size, 0);
-		sampler.Data[0, 0] = Util.RandomFloat(initialMin, initialMax);
-		sampler.Data[0, size-1] = Util.RandomFloat(initialMin, initialMax);
-		sampler.Data[size-1, 0] = Util.RandomFloat(initialMin, initialMax);
+		ArrayTexture2D sampler       = new ArrayTexture2D(size, size, 0);
+		sampler.Data[0, 0]           = Util.RandomFloat(initialMin, initialMax);
+		sampler.Data[0, size-1]      = Util.RandomFloat(initialMin, initialMax);
+		sampler.Data[size-1, 0]      = Util.RandomFloat(initialMin, initialMax);
 		sampler.Data[size-1, size-1] = Util.RandomFloat(initialMin, initialMax);
 		
 		// var a;
