@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SiloComponent : UnitComponent, Interactable
+public class SiloComponent : UnitComponent, IInteractable
 {
 
     public int MaxCapacity;

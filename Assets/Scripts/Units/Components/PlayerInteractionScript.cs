@@ -14,9 +14,9 @@ public class PlayerInteractionScript : UnitComponent {
             int hitCount = coll.Cast(Vector2.zero, hits);
             for (int i = 0; i < hitCount; i++)
             {
-                if (hits[i].collider.gameObject.GetComponent<Interactable>() != null)
+                if (hits[i].collider.gameObject.GetComponent<IInteractable>() != null)
                 {
-                    hits[i].collider.gameObject.GetComponent<Interactable>().Interact(unit.gameObject);
+                    hits[i].collider.gameObject.GetComponent<IInteractable>().Interact(unit.gameObject);
                 }
             }
         }

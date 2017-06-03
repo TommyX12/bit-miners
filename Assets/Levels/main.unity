@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 831796107}
   - component: {fileID: 831796106}
   m_Layer: 0
-  m_Name: GrassTile_4x32_0 (1)
+  m_Name: GrassTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -447,6 +447,10 @@ Prefab:
     - target: {fileID: 1522087060404352, guid: c7a35d73ee06b0a44b04676e9828ed83, type: 2}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1522087060404352, guid: c7a35d73ee06b0a44b04676e9828ed83, type: 2}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -968,7 +972,7 @@ GameObject:
   - component: {fileID: 1535419731}
   m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1332,6 +1336,44 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7431ace90fcbcd04cb3a8bab0df7381f, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1664980079 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1941512091229288, guid: 7431ace90fcbcd04cb3a8bab0df7381f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1664980078}
+--- !u!58 &1664980080
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1664980079}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &1664980081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1664980079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae34ee6f63963a429cd8eb293099683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ToEnable: {fileID: 1664980082}
+  col: {fileID: 1664980080}
+--- !u!1 &1664980082 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1442015677313354, guid: 7431ace90fcbcd04cb3a8bab0df7381f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1664980078}
 --- !u!1001 &1750083130
 Prefab:
   m_ObjectHideFlags: 0
