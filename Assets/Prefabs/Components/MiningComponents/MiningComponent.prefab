@@ -71,3 +71,4 @@ MonoBehaviour:
   MiningRange: 0.25
   TimeMultiplier: 1
   MaxCapacity: 30
+  storage: 0

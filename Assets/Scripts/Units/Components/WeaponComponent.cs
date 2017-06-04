@@ -13,7 +13,7 @@ public class WeaponComponent : UnitComponent {
     private Vector2 vectorTarget;
 
     public virtual void fire() {
-        if (cooldownTimer > 0) {
+        if (cooldownTimer >= 0) {
             return;
         }
         cooldownTimer = CooldownTime;
@@ -46,7 +46,7 @@ public class WeaponComponent : UnitComponent {
         }
         else
         {
-            transform.Rotate(new Vector3(0, 0, (da / Mathf.Abs(da)) * 30 * Time.fixedDeltaTime));
+            transform.Rotate(new Vector3(0, 0, (da / Mathf.Abs(da)) * 180 * Time.fixedDeltaTime));
         }
     }
 

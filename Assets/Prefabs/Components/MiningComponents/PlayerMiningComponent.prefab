@@ -67,3 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4cb1213d3fa744fbaa3e04debf974f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unit: {fileID: 0}
+  MiningRange: 0.25
+  TimeMultiplier: 1
+  MaxCapacity: 30
