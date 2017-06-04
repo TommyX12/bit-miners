@@ -10,7 +10,7 @@ public class JurassicTest : MonoBehaviour {
 		scriptSystem.Script = @"
 			_print('Hello World!');
 		";
-		scriptSystem.Start();
+		scriptSystem.Start(true);
 		
 		scriptSystem.Script = @"
 			function f() {
@@ -19,23 +19,38 @@ public class JurassicTest : MonoBehaviour {
 			
 			f();
 		";
-		scriptSystem.Start();
+		scriptSystem.Start(true);
 		
 		scriptSystem.Script = @"
 			while (true);
 		";
-		scriptSystem.Start();
+		scriptSystem.Start(true);
 		
 		scriptSystem.Script = @"
-			when('test', function(data) {
+			function on_test(data) {
 				_print(data.message);
-			})
+			}
+		
+			function on_test2(a, b) {
+				_print(a + b);
+			}
 		";
-		scriptSystem.Start();
+		scriptSystem.Start(true);
 		var data = scriptSystem.ConstructObject();
 		data["message"] = "Test Event Message";
+		scriptSystem.DispatchEvent("none", 1, 2);
+		scriptSystem.DispatchEvent("test2", "a", "b");
 		scriptSystem.DispatchEvent("test", data);
 		scriptSystem.DispatchEvent("test");
+		scriptSystem.DispatchEvent("test", data);
+		
+		scriptSystem.Script = @"
+			function _print() {
+				
+			}
+		";
+		scriptSystem.Start();
+		
 	}
 	
 	// Update is called once per frame

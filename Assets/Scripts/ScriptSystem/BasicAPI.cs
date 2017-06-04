@@ -21,7 +21,7 @@ public class BasicAPI : IScriptSystemAPI {
 	}
 	
 	private const string javaScript = @"
-		var _events = {};
+		/* var _events = {};
 		var _events_sealed = false;
 		
 		// cannot call this function inside other function. only when initializing.
@@ -43,11 +43,11 @@ public class BasicAPI : IScriptSystemAPI {
 				var handler = handlers[i];
 				handler(data);
 			}
-		}
+		} */
 	";
 	
 	private const string postJavsScript = @"
-		_events_sealed = true;
+		// _events_sealed = true;
 	";
 	
 	public void Register(ScriptSystem scriptSystem) {

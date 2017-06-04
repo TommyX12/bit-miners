@@ -3,6 +3,7 @@ using System;
 using System.Runtime.ExceptionServices;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class ScriptSystem {
 	
@@ -33,7 +34,7 @@ public class ScriptSystem {
 		this.timeoutHelper = new ScriptTimeoutHelper();
 	}
 	
-	public void RegisterFunction(string functionName, Delegate functionDelegate) {
+	public void RegisterFunction(string functionName, Delegate functionDelegate, bool unlisted = false) {
 		string wrapperArguments = "";
 		int numArguments = functionDelegate.Method.GetParameters().Length;
 		for (int i = 0; i < numArguments; ++i) {
@@ -51,6 +52,12 @@ public class ScriptSystem {
 		";
 		this.engine.SetGlobalFunction("__" + functionName + "__", functionDelegate);
 		this.engine.Execute(wrapperFunction);
+		
+		if (!unlisted) this.AddToList(functionName);
+	}
+	
+	public void AddToList(string apiElement) {
+		
 	}
 	
 	public void RegisterVariable(string variableName, object variableValue) {
@@ -61,7 +68,14 @@ public class ScriptSystem {
 		this.engine.Execute(script);
 	}
 	
-	public void Start() {
+	public void Start(bool skipValidation = false) {
+		// Validation
+		if (!skipValidation && !this.ValidateScript()) {
+			Debug.LogWarning("User script contains elements not allowed for stability reasons");
+			return;
+		}
+		
+		// Initialization
 		this.engine = new Jurassic.ScriptEngine();
 		this.engine.RecursionDepthLimit = this.RecursionDepthLimit;
 		
@@ -86,22 +100,30 @@ public class ScriptSystem {
 		this.Running = true;
 	}
 	
+	public bool ValidateScript() {
+		string pattern = @"\b_\w*\b";
+		Regex regex = new Regex(pattern);
+		Match match = regex.Match(this.Script);
+		if (match.Success) return false;
+		
+		return true;
+	}
+	
 	public Jurassic.Library.ObjectInstance ConstructObject() {
 		if (!this.Running) return null;
 		
 		return this.engine.Object.Construct();
 	}
 	
-	public void DispatchEvent(string name, Jurassic.Library.ObjectInstance data = null) {
+	public void DispatchEvent(string name, params object[] args) {
 		if (!this.Running) return;
 		
+		string handlerName = "on_" + name;
+		
+		if (this.engine.Evaluate<bool>("this[\'" + handlerName + "\'] === undefined")) return;
+		
 		this.ExecuteAction(() => {
-			if (data == null) {
-				this.engine.CallGlobalFunction("_dispatch", name);
-			}
-			else {
-				this.engine.CallGlobalFunction("_dispatch", name, data);
-			}
+			this.engine.CallGlobalFunction(handlerName, args);
 		});
 	}
 	
