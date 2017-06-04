@@ -14,6 +14,7 @@ public class Unit : MyMono {
     private void Start()
     {
         RegisterComponents();
+        currentHP = MaxHP;
     }
 
     public int GetMaxHP() {
@@ -26,6 +27,9 @@ public class Unit : MyMono {
 
     public void ApplyDamage(int damage) {
         currentHP -= damage;
+        if (currentHP <= 0) {
+            Destroy(gameObject);
+        }
     }
 
     public List<UnitComponent> components;

@@ -16,11 +16,13 @@ public class MoveComponent : UnitComponent {
     public void SetGameObjectTarget(GameObject target) {
         MoveToTarget = target;
         gameObjectTarget = true;
+        MoveToTarget = true;
     }
 
     public void SetVectorTarget(Vector2 target) {
         vectorTarget = target;
         gameObjectTarget = false;
+        MoveToTarget = true;
     }
 
     public override void PausingFixedUpdate()
@@ -48,5 +50,9 @@ public class MoveComponent : UnitComponent {
             }
 
         }
+    }
+
+    public void Stop() {
+        MoveToTarget = false;
     }
 }

@@ -15,7 +15,7 @@ public class CombatComponent : UnitComponent {
     private bool holdPosition;
     private RaycastHit2D[] hits = new RaycastHit2D[20];
 
-    public float EngangementDistance;
+    private float EngangementDistance;
 
     private Vector2 positionTarget;
 
@@ -23,19 +23,29 @@ public class CombatComponent : UnitComponent {
     {
         base.PausingFixedUpdate();
         if (attacking) {
+            if (enemy == null) {
+                attacking = false;
+                return;
+            }
             if (isHoldingPosition())
             {
 
             }
             else {
                 Vector2 targetPos = attackingObject ? (Vector2)enemy.transform.position : positionTarget;
-                if (targetPos.magnitude < EngangementDistance)
+                if (Mathf.Abs(((targetPos - (Vector2)transform.position)).magnitude) - EngangementDistance < 0.05)
+                {
+                        Movement.Stop();
+                }
+                else if (((targetPos - (Vector2)transform.position)).magnitude - EngangementDistance < 0.05)
                 {
                     Movement.SetVectorTarget((Vector2)transform.position - (targetPos - (Vector2)transform.position));
                 }
-                else {
+                else if (((targetPos - (Vector2)transform.position)).magnitude - EngangementDistance > 0.05)
+                {
                     Movement.SetVectorTarget(targetPos);
                 }
+
             }
             foreach (WeaponComponent weapon in Weapons)
             {
@@ -45,6 +55,7 @@ public class CombatComponent : UnitComponent {
     }
 
     public void AttackNearestEnemy() {
+        attackingObject = true;
         if ((enemy = GetNearestEnemy())!= null) {
             attacking = true;
         }
@@ -53,7 +64,19 @@ public class CombatComponent : UnitComponent {
         {
             weapon.TrackObject(enemy);
         }
+    }
 
+    public void AttackRandomEnemy() {
+        attackingObject = true;
+        if ((enemy = GetRandomEnemy()) != null)
+        {
+            attacking = true;
+        }
+
+        foreach (WeaponComponent weapon in Weapons)
+        {
+            weapon.TrackObject(enemy);
+        }
     }
 
     public void StopAttacking() {
@@ -90,6 +113,18 @@ public class CombatComponent : UnitComponent {
         }
     }
 
+    public GameObject GetRandomEnemy() {
+        int hitcount = SensorCollider.Cast(Vector2.zero, hits);
+        for (int i = 0; i < hitcount && i < hits.Length; i++)
+        {
+            if (hits[i].collider.gameObject.GetComponent<Unit>().teamid != unit.teamid)
+            {
+                return hits[i].collider.gameObject;
+            }
+        }
+        return null;
+    }
+
     public void AttackPosition(Vector2 pos) {
         positionTarget = pos;
         attacking = true;
@@ -105,6 +140,10 @@ public class CombatComponent : UnitComponent {
         holdPosition = true;
     }
 
+    public void StopHoldingPosition() {
+        holdPosition = false;
+    }
+
     public bool isHoldingPosition() {
         return holdPosition;
     }
@@ -115,5 +154,12 @@ public class CombatComponent : UnitComponent {
 
     public void SetEngagementDistance(float distance) {
         EngangementDistance = distance;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject != null && collision.gameObject == enemy) {
+            attacking = false;
+        }
     }
 }
