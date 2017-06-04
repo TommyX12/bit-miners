@@ -51,7 +51,7 @@ public class BasicAPI : IScriptSystemAPI {
 	";
 	
 	public void Register(ScriptSystem scriptSystem) {
-		scriptSystem.RegisterFunction("_print", new Action<string>(Print));
+		scriptSystem.RegisterFunction("print", new Action<string>(Print));
 		
 		scriptSystem.RegisterJavaScript(javaScript);
 	}

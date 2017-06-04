@@ -8,7 +8,7 @@ public class JurassicTest : MonoBehaviour {
 	void Start () {
 		var scriptSystem = new ScriptSystem();
 		scriptSystem.Script = @"
-			_print('Hello World!');
+			print('Hello World!');
 		";
 		scriptSystem.Start(true);
 		
@@ -28,11 +28,11 @@ public class JurassicTest : MonoBehaviour {
 		
 		scriptSystem.Script = @"
 			function on_test(data) {
-				_print(data.message);
+				print(data.message);
 			}
 		
 			function on_test2(a, b) {
-				_print(a + b);
+				print(a + b);
 			}
 		";
 		scriptSystem.Start(true);

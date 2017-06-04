@@ -11,7 +11,7 @@ public class GameManager : MyMono {
 		this.scriptSystem = new ScriptSystem();
 		this.scriptSystem.Script = @"
 function hello_world() {
-	
+	print('Hello, World!');
 }
 
 hello_world();
@@ -28,7 +28,7 @@ hello_world();
 	
 	public override void NormalUpdate() {
 		if (Input.GetKeyDown(KeyCode.Tab)) {
-			if (this.ScriptEditorObject.ScriptSystemObject != null) {
+			if (this.ScriptEditorObject.ScriptSystemObject == null) {
 				this.ScriptEditorObject.StartEdit(this.scriptSystem);
 			}
 		}

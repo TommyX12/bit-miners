@@ -96,20 +96,21 @@ public class ScriptSystem {
 			api.Register(this);
 		}
 		
+		// Status update
+		this.Running = true;
+		this.ErrorCaught = false;
+		this.Message = "Running";
+		
 		// Execution
 		this.ExecuteAction(() => {
 			this.engine.Execute(this.Script);
 		});
+		if (this.ErrorCaught) return;
 		
 		// API Post registration
 		foreach (IScriptSystemAPI api in this.APIList) {
 			api.PostRegister(this);
 		}
-		
-		// Status update
-		this.Running = true;
-		this.ErrorCaught = false;
-		this.Message = "Running";
 	}
 	
 	public bool ValidateScript() {
@@ -157,7 +158,8 @@ public class ScriptSystem {
 				this.Message = "Recursion depth limit exceeded";
 			}
 			else if (ex is Jurassic.JavaScriptException) {
-				this.Message = ((Jurassic.JavaScriptException)ex).ErrorObject.ToString();
+				Jurassic.JavaScriptException jsex = (Jurassic.JavaScriptException)ex;
+				this.Message = jsex.LineNumber + ": " + jsex.ErrorObject.ToString();
 			}
 			else {
 				throw;
