@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114397375185751962}
   - component: {fileID: 114159612984741682}
   m_Layer: 5
-  m_Name: Button
+  m_Name: DiscardButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 222772406520722928}
   - component: {fileID: 114203348679255774}
   m_Layer: 5
-  m_Name: Panel (1)
+  m_Name: ButtonPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 114251705795777858}
   - component: {fileID: 114245054784791736}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: SaveButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -265,6 +265,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InputFieldObject: {fileID: 114334288057990262}
+  SaveButtonObject: {fileID: 114245054784791736}
+  DiscardButtonObject: {fileID: 114159612984741682}
 --- !u!114 &114203348679255774
 MonoBehaviour:
   m_ObjectHideFlags: 1

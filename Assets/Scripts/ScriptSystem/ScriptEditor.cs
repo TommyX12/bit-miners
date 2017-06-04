@@ -6,13 +6,15 @@ using UnityEngine.UI;
 public class ScriptEditor : MyMono {
 	
 	public InputField InputFieldObject;
+	public Button SaveButtonObject;
+	public Button DiscardButtonObject;
 	
 	public ScriptSystem CurrentScriptSystem {
 		get; private set;
 	}
 	
 	void Awake() {
-		
+		this.DiscardButtonObject.onClick.AddListener(this.DiscardEdit);
 	}
 
 	void Start() {
@@ -25,10 +27,18 @@ public class ScriptEditor : MyMono {
 		
 		this.CurrentScriptSystem = scriptSystem;
 		
-		InputFieldObject.text = this.CurrentScriptSystem.Script;
+		this.InputFieldObject.text = this.CurrentScriptSystem.Script;
 	}
 	
-	public void EndEdit() {
+	public void DiscardEdit() {
+		EndEdit();
+	}
+	
+	public void SaveEdit() {
+		
+	}
+	
+	private void EndEdit() {
 		this.gameObject.SetActive(false);
 		MyMono.Paused = false;
 		
