@@ -6,9 +6,10 @@ public class Unit : MyMono {
 
     public float BuildTime;
     public int BuildCost;
-
     public int MaxHP;
+    public int teamid;
     int currentHP;
+ 
 
     private void Start()
     {
@@ -45,4 +46,6 @@ public class Unit : MyMono {
             components.Add(component);
         }
     }
+
+
 }
