@@ -8,17 +8,17 @@ public class MyMono : MonoBehaviour {
 	public void Update()
 	{
 		if (!Paused) {
-			PausingUpdate();
+			this.PausingUpdate();
 		}
-		NormalUpdate();
+		this.NormalUpdate();
 	}
 
     public void FixedUpdate()
     {
 		if (!Paused) {
-			PausingFixedUpdate();
+			this.PausingFixedUpdate();
 		}
-		NormalFixedUpdate();
+		this.NormalFixedUpdate();
     }
 
 	public virtual void PausingUpdate() {
