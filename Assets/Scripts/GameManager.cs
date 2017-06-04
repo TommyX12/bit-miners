@@ -10,12 +10,12 @@ public class GameManager : MyMono {
 	void Awake() {
 		this.scriptSystem = new ScriptSystem();
 		this.scriptSystem.Script = @"
-			function hello_world() {
-				
-			}
-		
-			hello_world();
-		";
+function hello_world() {
+	
+}
+
+hello_world();
+";
 	}
 
 	void Start() {
