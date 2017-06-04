@@ -28,7 +28,9 @@ hello_world();
 	
 	public override void NormalUpdate() {
 		if (Input.GetKeyDown(KeyCode.Tab)) {
-			this.ScriptEditorObject.StartEdit(this.scriptSystem);
+			if (this.ScriptEditorObject.ScriptSystemObject != null) {
+				this.ScriptEditorObject.StartEdit(this.scriptSystem);
+			}
 		}
 	}
 	

@@ -21,15 +21,25 @@ public class ScriptSystem {
 		get; private set;
 	}
 	
+	public bool ErrorCaught {
+		get; private set;
+	}
+	
 	public string Script {
 		get; set;
+	}
+	
+	public string Message {
+		get; private set;
 	}
 	
 	public ScriptSystem(List<IScriptSystemAPI> apiList = null) {
 		this.APIList = apiList == null ? new List<IScriptSystemAPI>() : apiList;
 		this.APIList.Insert(0, BasicAPI.GetInstance());
 		this.Running = false;
+		this.ErrorCaught = false;
 		this.Script = "";
+		this.Message = "Idle";
 		
 		this.timeoutHelper = new ScriptTimeoutHelper();
 	}
@@ -98,6 +108,8 @@ public class ScriptSystem {
 		
 		// Status update
 		this.Running = true;
+		this.ErrorCaught = false;
+		this.Message = "Running";
 	}
 	
 	public bool ValidateScript() {
@@ -131,21 +143,27 @@ public class ScriptSystem {
 		try {
 			this.timeoutHelper.RunWithTimeout(action, this.TimeoutMS);
 		}
-		catch (TimeoutException ex) {
-			Debug.LogWarning("TimeoutException");
+		catch (Exception ex) {
 			this.Running = false;
-		}
-		catch (OutOfMemoryException ex) {
-			Debug.LogWarning("OutOfMemoryException");
-			this.Running = false;
-		}
-		catch (StackOverflowException ex) {
-			Debug.LogWarning("StackOverflowException");
-			this.Running = false;
-		}
-		catch (Jurassic.JavaScriptException ex) {
-			Debug.LogWarning(ex.Message);
-			this.Running = false;
+			this.ErrorCaught = true;
+			
+			if (ex is TimeoutException) {
+				this.Message = "Time limit exceeded";
+			}
+			else if (ex is OutOfMemoryException) {
+				this.Message = "Out of memory";
+			}
+			else if (ex is StackOverflowException) {
+				this.Message = "Recursion depth limit exceeded";
+			}
+			else if (ex is Jurassic.JavaScriptException) {
+				this.Message = ((Jurassic.JavaScriptException)ex).ErrorObject.ToString();
+			}
+			else {
+				throw;
+			}
+			
+			Debug.LogWarning(this.Message);
 		}
 	}
 	
