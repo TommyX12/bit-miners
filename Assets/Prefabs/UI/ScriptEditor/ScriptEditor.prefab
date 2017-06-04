@@ -73,13 +73,14 @@ GameObject:
   - component: {fileID: 224597865173364696}
   - component: {fileID: 222075720069385714}
   - component: {fileID: 114998524316274176}
+  - component: {fileID: 114885948492888974}
   m_Layer: 5
   m_Name: ScriptEditor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &114079888949743664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -230,6 +231,17 @@ MonoBehaviour:
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
+--- !u!114 &114885948492888974
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1735135116999398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7914d052e55740b4581573e09a7394a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114998524316274176
 MonoBehaviour:
   m_ObjectHideFlags: 1
