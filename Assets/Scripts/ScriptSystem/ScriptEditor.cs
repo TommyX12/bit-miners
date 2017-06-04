@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScriptEditor : MyMono {
+	
+	public InputField InputFieldObject;
 	
 	public ScriptSystem CurrentScriptSystem {
 		get; private set;
@@ -21,6 +24,8 @@ public class ScriptEditor : MyMono {
 		MyMono.Paused = true;
 		
 		this.CurrentScriptSystem = scriptSystem;
+		
+		InputFieldObject.text = this.CurrentScriptSystem.Script;
 	}
 	
 	public void EndEdit() {
@@ -28,6 +33,8 @@ public class ScriptEditor : MyMono {
 		MyMono.Paused = false;
 		
 		this.CurrentScriptSystem = null;
+		
+		InputFieldObject.text = "";
 	}
 	
 	public override void NormalUpdate() {

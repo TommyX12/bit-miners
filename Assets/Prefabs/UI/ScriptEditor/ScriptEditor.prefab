@@ -80,7 +80,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &114079888949743664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7914d052e55740b4581573e09a7394a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InputFieldObject: {fileID: 114334288057990262}
 --- !u!114 &114257254105240994
 MonoBehaviour:
   m_ObjectHideFlags: 1

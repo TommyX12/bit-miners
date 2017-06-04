@@ -502,6 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7914d052e55740b4581573e09a7394a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InputFieldObject: {fileID: 0}
 --- !u!1 &831796105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,10 +1512,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1735135116999398, guid: 30226ccbdad5f7e4faeccfd1e037e0b0, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 30226ccbdad5f7e4faeccfd1e037e0b0, type: 2}
   m_IsPrefabParent: 0
@@ -1638,7 +1635,7 @@ Transform:
   m_Children:
   - {fileID: 1152147234}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1268653530
 MonoBehaviour:
@@ -2490,7 +2487,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1981957218
 Prefab:
