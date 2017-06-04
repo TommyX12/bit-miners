@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 224597865173364696}
   - component: {fileID: 222075720069385714}
   - component: {fileID: 114998524316274176}
+  - component: {fileID: 114163523307673080}
   m_Layer: 5
   m_Name: ScriptEditor
   m_TagString: Untagged
@@ -107,6 +108,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114163523307673080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1735135116999398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7914d052e55740b4581573e09a7394a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114257254105240994
 MonoBehaviour:
   m_ObjectHideFlags: 1
