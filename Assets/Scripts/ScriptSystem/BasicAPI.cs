@@ -21,39 +21,32 @@ public class BasicAPI : IScriptSystemAPI {
 	}
 	
 	private const string javaScript = @"
-		/* var _events = {};
-		var _events_sealed = false;
 		
-		// cannot call this function inside other function. only when initializing.
-		function when(event, handler) {
-			if (_events_sealed) return;
-			
-			if (_events[event] === undefined) {
-				_events[event] = [];
-			}
-			
-			_events[event].push(handler);
-		}
-	
-		function _dispatch(event, data) {
-			if (_events[event] === undefined) return;
-			
-			var handlers = _events[event];
-			for (var i = 0; i < handlers.length; ++i) {
-				var handler = handlers[i];
-				handler(data);
-			}
-		} */
 	";
 	
 	private const string postJavsScript = @"
-		// _events_sealed = true;
+		
 	";
 	
 	public void Register(ScriptSystem scriptSystem) {
 		scriptSystem.RegisterFunction("print", new Action<string>(Print));
 		
 		scriptSystem.RegisterJavaScript(javaScript);
+		
+		scriptSystem.RegisterMacro(
+			@"\brepeat\s*" + ScriptSystem.MatchingBracketPattern("param"),
+			@"for (var _ = 0; _ < ${param}; ++_)"
+		);
+		
+		scriptSystem.RegisterMacro(
+			@"\bwhen\s+" + ScriptSystem.IdentifierPattern("name") + ScriptSystem.MatchingBracketPattern("param"),
+			@"function " + ScriptSystem.EVENT_HANDLER_PREFIX + @"${name}(${param})"
+		);
+		
+		scriptSystem.RegisterMacro(
+			@"\bloop\b",
+			@"while (true)"
+		);
 	}
 	
 	public void PostRegister(ScriptSystem scriptSystem) {

@@ -22,24 +22,30 @@ public class JurassicTest : MonoBehaviour {
 		scriptSystem.Start(true);
 		
 		scriptSystem.Script = @"
-			while (true);
+			loop;
 		";
 		scriptSystem.Start(true);
 		
 		scriptSystem.Script = @"
-			function on_test(data) {
+			when test(data) {
 				print(data.message);
 			}
 		
-			function on_test2(a, b) {
-				print(a + b);
+			function nothing(a) {
+				return 0;
+			}
+		
+			when test2(a, b) {
+				repeat (b + nothing(nothing())) { nothing()
+					print(a);
+				}
 			}
 		";
 		scriptSystem.Start(true);
 		var data = scriptSystem.ConstructObject();
 		data["message"] = "Test Event Message";
 		scriptSystem.DispatchEvent("none", 1, 2);
-		scriptSystem.DispatchEvent("test2", "a", "b");
+		scriptSystem.DispatchEvent("test2", "a", 5);
 		scriptSystem.DispatchEvent("test", data);
 		scriptSystem.DispatchEvent("test");
 		scriptSystem.DispatchEvent("test", data);

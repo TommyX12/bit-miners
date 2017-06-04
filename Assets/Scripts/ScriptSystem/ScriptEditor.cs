@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 public class ScriptEditor : MyMono {
 	
-	public static readonly Color ERROR_COLOR = new Color(1.0f, 0.2f, 0.2f, 1.0f);
-	public static readonly Color IDLE_COLOR = new Color(0.2f, 0.2f, 1.0f, 1.0f);
-	public static readonly Color RUNNING_COLOR = new Color(0.2f, 1.0f, 0.2f, 1.0f);
+	public static readonly Color ERROR_COLOR = new Color(0.75f, 0.2f, 0.0f, 1.0f);
+	public static readonly Color IDLE_COLOR = new Color(0.0f, 0.0f, 0.2f, 1.0f);
+	public static readonly Color RUNNING_COLOR = new Color(0.0f, 0.5f, 0.1f, 1.0f);
 	
 	public InputField InputFieldObject;
 	public Text StatusTextObject;

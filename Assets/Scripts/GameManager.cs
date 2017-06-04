@@ -11,11 +11,22 @@ public class GameManager : MyMono {
 		this.scriptSystem = new ScriptSystem();
 		this.scriptSystem.Script = @"
 function hello_world() {
-	print('Hello, World!');
+	print('Hello, World!')
 }
 
-hello_world();
+hello_world()
+
+when start() {
+	repeat (5) {
+		print('started')
+	}
+}
+
+when update() {
+	
+}
 ";
+		this.scriptSystem.Start();
 	}
 
 	void Start() {
@@ -23,7 +34,7 @@ hello_world();
 	}
 
 	public override void PausingUpdate() {
-		
+		this.scriptSystem.DispatchEvent("update");
 	}
 	
 	public override void NormalUpdate() {

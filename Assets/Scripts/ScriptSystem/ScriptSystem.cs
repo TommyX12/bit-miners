@@ -13,6 +13,29 @@ public class ScriptSystem {
 	public int TimeoutMS = 100;
 	public int RecursionDepthLimit = 1000;
 	
+	public static string MatchingBracketPattern(string groupName) {
+		return @"
+			\(                      # First '('
+				(?<" + groupName + @">
+				(?:
+				[^()]               # Match all non-braces
+				|
+				(?<br> \( )         # Match '(', and capture into 'br'
+				|
+				(?<-br> \) )        # Match ')', and delete the 'br' capture
+				)*
+				(?(br)(?!))         # Fails if 'br' stack isn't empty!
+				)
+			\)                      # Last ')'
+		";
+	}
+	
+	public static string IdentifierPattern(string groupName) {
+		return @"(?<" + groupName + ">[a-zA-Z_][a-zA-Z0-9_]*)";
+	}
+	
+	public const string EVENT_HANDLER_PREFIX = "_on_";
+	
 	public List<IScriptSystemAPI> APIList {
 		get; set;
 	}
@@ -33,6 +56,8 @@ public class ScriptSystem {
 		get; private set;
 	}
 	
+	private List<Macro> macros;
+	
 	public ScriptSystem(List<IScriptSystemAPI> apiList = null) {
 		this.APIList = apiList == null ? new List<IScriptSystemAPI>() : apiList;
 		this.APIList.Insert(0, BasicAPI.GetInstance());
@@ -42,6 +67,10 @@ public class ScriptSystem {
 		this.Message = "Idle";
 		
 		this.timeoutHelper = new ScriptTimeoutHelper();
+	}
+	
+	public void AddToList(string apiElement) {
+		
 	}
 	
 	public void RegisterFunction(string functionName, Delegate functionDelegate, bool unlisted = false) {
@@ -66,16 +95,16 @@ public class ScriptSystem {
 		if (!unlisted) this.AddToList(functionName);
 	}
 	
-	public void AddToList(string apiElement) {
-		
-	}
-	
 	public void RegisterVariable(string variableName, object variableValue) {
 		this.engine.SetGlobalValue(variableName, variableValue);
 	}
 	
 	public void RegisterJavaScript(string script) {
 		this.engine.Execute(script);
+	}
+	
+	public void RegisterMacro(string pattern, string replacement) {
+		this.macros.Add(new Macro(pattern, replacement));
 	}
 	
 	public void Start(bool skipValidation = false) {
@@ -88,12 +117,19 @@ public class ScriptSystem {
 		// Initialization
 		this.engine = new Jurassic.ScriptEngine();
 		this.engine.RecursionDepthLimit = this.RecursionDepthLimit;
+		this.macros = new List<Macro>();
 		
 		// API registration
 		this.engine.SetGlobalFunction("_critical_on", new Action(this.timeoutHelper.EnterCriticalSection));
 		this.engine.SetGlobalFunction("_critical_off", new Action(this.timeoutHelper.ExitCriticalSection));
 		foreach (IScriptSystemAPI api in this.APIList) {
 			api.Register(this);
+		}
+		
+		// Macros registration
+		string compiledScript = this.Script;
+		foreach (Macro macro in this.macros) {
+			compiledScript = Regex.Replace(compiledScript, macro.Pattern, macro.Replacement, RegexOptions.IgnorePatternWhitespace);
 		}
 		
 		// Status update
@@ -103,9 +139,10 @@ public class ScriptSystem {
 		
 		// Execution
 		this.ExecuteAction(() => {
-			this.engine.Execute(this.Script);
+			this.engine.Execute(compiledScript);
 		});
 		if (this.ErrorCaught) return;
+		this.DispatchEvent("start");
 		
 		// API Post registration
 		foreach (IScriptSystemAPI api in this.APIList) {
@@ -131,7 +168,7 @@ public class ScriptSystem {
 	public void DispatchEvent(string name, params object[] args) {
 		if (!this.Running) return;
 		
-		string handlerName = "on_" + name;
+		string handlerName = EVENT_HANDLER_PREFIX + name;
 		
 		if (this.engine.Evaluate<bool>("this[\'" + handlerName + "\'] === undefined")) return;
 		
@@ -159,13 +196,23 @@ public class ScriptSystem {
 			}
 			else if (ex is Jurassic.JavaScriptException) {
 				Jurassic.JavaScriptException jsex = (Jurassic.JavaScriptException)ex;
-				this.Message = jsex.LineNumber + ": " + jsex.ErrorObject.ToString();
+				this.Message = "Script error: Line " + jsex.LineNumber + " - " + jsex.ErrorObject.ToString();
 			}
 			else {
 				throw;
 			}
 			
 			Debug.LogWarning(this.Message);
+		}
+	}
+	
+	private struct Macro {
+		public string Pattern;
+		public string Replacement;
+		
+		public Macro(string pattern, string replacement) {
+			this.Pattern = pattern;
+			this.Replacement = replacement;
 		}
 	}
 	
