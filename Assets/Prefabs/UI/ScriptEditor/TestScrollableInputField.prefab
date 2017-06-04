@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 222131986643528182}
   - component: {fileID: 114887495339526626}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: TestScrollableInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
