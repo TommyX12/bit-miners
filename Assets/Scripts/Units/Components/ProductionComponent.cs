@@ -6,6 +6,8 @@ public class ProductionComponent : UnitComponent {
 
     public GameObject SpawnLocation;
     public ProductionUI UI;
+    public ProductionTooltip TT;
+
 
     public class BuildItem
     {
@@ -87,4 +89,20 @@ public class ProductionComponent : UnitComponent {
         buildQueue.RemoveAt(id);
     }
 
+    public void PostData(int unit)
+    {
+        if (unit > 3 || unit < 0 || unit >= BuildPrefabs.Count) {
+            return;
+        }
+
+        TT.PostInfo(BuildPrefabs[unit].GetComponent<Unit>());
+    }
+
+    public void showTT() {
+        TT.gameObject.SetActive(true);
+    }
+
+    public void hideTT() {
+        TT.gameObject.SetActive(false);
+    }
 }

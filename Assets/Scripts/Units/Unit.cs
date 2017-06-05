@@ -8,6 +8,7 @@ public class Unit : MyMono {
     public int BuildCost;
     public int MaxHP;
     public int teamid;
+    public string description;
     int currentHP;
  
 

@@ -62,5 +62,4 @@ public class ProductionUI : MyMono {
         // logic to update progress bar
 
     }
-
 }

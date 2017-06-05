@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114011279532253114}
   - component: {fileID: 61671185503736954}
   m_Layer: 9
-  m_Name: ResourceMiningDrone
+  m_Name: BMD MKI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,10 +224,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9833d81f656c1e24881f29b83b37b746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildTime: 0
-  BuildCost: 0
+  BuildTime: 5
+  BuildCost: 20
   MaxHP: 3
   teamid: 0
+  description: A basic drone for collecting resources. Cannot fight.
   components: []
 --- !u!114 &114702945876345680
 MonoBehaviour:
