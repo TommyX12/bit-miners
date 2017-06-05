@@ -17,8 +17,12 @@ function hello_world() {
 hello_world()
 
 when start() {
-	repeat (5) {
-		print('started')
+	for (var i) from (1) to (5) by (2) {
+		var array = []
+		for (var j) from (i) to (0) {
+			array.push(j)
+		}
+		print(array)
 	}
 }
 
