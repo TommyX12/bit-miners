@@ -18,9 +18,9 @@ TagManager:
   - Unit
   - Bullets
   - Component
-  - 
-  - 
-  - 
+  - Resource
+  - ResourceOnly
+  - Base
   - 
   - 
   - 

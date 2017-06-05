@@ -83,4 +83,20 @@ public class ResourceManager : MyMono {
             AmtStored = MaxCapacity;
         }
     }
+
+    public static GameObject GetNearestSilo(Vector2 position) {
+        GameObject winner = null;
+        foreach (SiloComponent silo in silos) {
+            if (winner == null) {
+                winner = silo.gameObject;
+            }
+            if (((Vector2)(position - (Vector2)winner.transform.position)).magnitude >
+                ((Vector2)(position - (Vector2)silo.gameObject.transform.position)).magnitude)
+            {
+                winner = silo.gameObject;
+            }
+
+        }
+        return winner;
+    }
 }

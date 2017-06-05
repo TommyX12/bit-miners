@@ -14,7 +14,7 @@ public class Resource : MyMono {
         ResourceValue -= ResourcePerCollection;
         if (ResourceValue <= 0) {
             value += ResourceValue;
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
         return value;
     }
