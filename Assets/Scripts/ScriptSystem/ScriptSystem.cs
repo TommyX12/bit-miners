@@ -131,7 +131,6 @@ public class ScriptSystem {
 		foreach (Macro macro in this.macros) {
 			compiledScript = Regex.Replace(compiledScript, macro.Pattern, macro.Replacement, RegexOptions.IgnorePatternWhitespace);
 		}
-		Debug.Log(compiledScript);
 		
 		// Status update
 		this.Running = true;
