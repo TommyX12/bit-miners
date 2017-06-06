@@ -3958,6 +3958,11 @@ Prefab:
       propertyPath: BuildCost
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 114011279532253114, guid: 1fbdd51a5db213349991b65d8856fa05,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1fbdd51a5db213349991b65d8856fa05, type: 2}
   m_IsPrefabParent: 0

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 
 // For drones and AI units. Player Move Component will be different
@@ -19,8 +20,14 @@ public class MoveComponent : UnitComponent {
         MoveToTarget = true;
     }
 
-    public void SetVectorTarget(Vector2 target) {
-        vectorTarget = target;
+	public void SetVectorTarget(Vector2 target) {
+		vectorTarget = target;
+		gameObjectTarget = false;
+		MoveToTarget = true;
+	}
+
+    public void SetXYTarget(float x, float y) {
+        vectorTarget = new Vector2(x, y);
         gameObjectTarget = false;
         MoveToTarget = true;
     }
@@ -55,4 +62,9 @@ public class MoveComponent : UnitComponent {
     public void Stop() {
         MoveToTarget = false;
     }
+	
+	public override void Register(ScriptSystem scriptSystem) {
+		scriptSystem.RegisterFunction("move_to", new Action<float, float>(this.SetXYTarget));
+		scriptSystem.RegisterFunction("stop", new Action(this.Stop));
+	}
 }

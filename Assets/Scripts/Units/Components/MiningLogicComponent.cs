@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MiningLogicComponent : UnitComponent {
 
@@ -38,14 +39,18 @@ public class MiningLogicComponent : UnitComponent {
         return winner;
     }
 
-    public Vector2 GetNearestResourcePosition() {
-        GameObject returnval;
-        if ((returnval = GetNearestResource()) != null)
-        {
-            return returnval.transform.position;
-        } else {
-            return unit.transform.position;
-        }
+	public Vector2 GetNearestResourcePosition() {
+		GameObject returnval;
+		if ((returnval = GetNearestResource()) != null)
+		{
+			return returnval.transform.position;
+		} else {
+			return unit.transform.position;
+		}
+	}
+
+    public Jurassic.Library.ObjectInstance GetNearestResourcePositionScript() {
+		return UnitComponent.Vector2ToObject(this.GetNearestResourcePosition());
     }
 
     public void GoToNearestResource() {
@@ -66,5 +71,9 @@ public class MiningLogicComponent : UnitComponent {
     public void GoToNearestSilo() {
         mover.SetVectorTarget(GetNearestSiloPosition());
     }
+	
+	public override void Register(ScriptSystem scriptSystem) {
+		scriptSystem.RegisterFunction("get_nearest_resource_position", new Func<Jurassic.Library.ObjectInstance>(this.GetNearestResourcePositionScript));
+	}
 
 }

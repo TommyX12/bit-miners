@@ -9,6 +9,9 @@ public class GameManager : MyMono {
 	
 	void Awake() {
 		this.scriptSystem = new ScriptSystem();
+	}
+
+	void Start() {
 		this.scriptSystem.Script = @"
 function hello_world() {
 	print('Hello, World!')
@@ -31,10 +34,6 @@ when update() {
 }
 ";
 		this.scriptSystem.Start();
-	}
-
-	void Start() {
-		
 	}
 
 	public override void PausingUpdate() {

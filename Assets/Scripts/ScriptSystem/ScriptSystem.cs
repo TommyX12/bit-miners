@@ -13,6 +13,12 @@ public class ScriptSystem {
 	public int TimeoutMS = 100;
 	public int RecursionDepthLimit = 1000;
 	
+	// the instance that is currently executing a script.
+	// used to returns an object constructed by the instance currently executing a script, used by c# functions callable in script.
+	public static ScriptSystem Current {
+		get; private set;
+	}
+	
 	public static string MatchingBracketPattern(string groupName) {
 		return @"
 			\(                      # First '('
@@ -179,6 +185,7 @@ public class ScriptSystem {
 	
 	private void ExecuteAction(Action action) {
 		try {
+			Current = this;
 			this.timeoutHelper.RunWithTimeout(action, this.TimeoutMS);
 		}
 		catch (Exception ex) {
@@ -203,6 +210,9 @@ public class ScriptSystem {
 			}
 			
 			Debug.LogWarning(this.Message);
+		}
+		finally {
+			Current = null;
 		}
 	}
 	
