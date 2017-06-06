@@ -62,7 +62,7 @@ public class MoveComponent : UnitComponent {
     public void Stop() {
         MoveToTarget = false;
     }
-	
+
 	public override void Register(ScriptSystem scriptSystem) {
 		scriptSystem.RegisterFunction("move_to", new Action<float, float>(this.SetXYTarget));
 		scriptSystem.RegisterFunction("stop", new Action(this.Stop));

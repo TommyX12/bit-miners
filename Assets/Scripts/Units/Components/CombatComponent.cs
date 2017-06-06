@@ -162,4 +162,10 @@ public class CombatComponent : UnitComponent {
             attacking = false;
         }
     }
+
+    public override void Register(ScriptSystem scriptSystem)
+    {
+        base.Register(scriptSystem);
+    }
+
 }
