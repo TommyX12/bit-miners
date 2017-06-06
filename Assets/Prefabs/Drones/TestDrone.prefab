@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4394802709269332}
   - component: {fileID: 114753143815984694}
   - component: {fileID: 58182324579675472}
+  - component: {fileID: 114475241934795408}
   m_Layer: 10
   m_Name: Programmable
   m_TagString: Untagged
@@ -117,7 +118,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1876961163816578
 GameObject:
   m_ObjectHideFlags: 1
@@ -385,6 +386,17 @@ MonoBehaviour:
   turnRate: 180
   MoveToTarget: 0
   gameObjectMoveTarget: {fileID: 0}
+--- !u!114 &114475241934795408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1266332026724480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75fa54810ee2d542861d365af477548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114753143815984694
 MonoBehaviour:
   m_ObjectHideFlags: 1
