@@ -53,6 +53,11 @@ public class MiningLogicComponent : UnitComponent {
 		return UnitComponent.Vector2ToObject(this.GetNearestResourcePosition());
     }
 
+    public Jurassic.Library.ObjectInstance GetNearestSiloPositionScript()
+    {
+        return UnitComponent.Vector2ToObject(this.GetNearestSiloPosition());
+    }
+
     public void GoToNearestResource() {
         mover.SetVectorTarget(GetNearestResourcePosition());
     }
@@ -74,6 +79,12 @@ public class MiningLogicComponent : UnitComponent {
 	
 	public override void Register(ScriptSystem scriptSystem) {
 		scriptSystem.RegisterFunction("get_nearest_resource_position", new Func<Jurassic.Library.ObjectInstance>(this.GetNearestResourcePositionScript));
+
+        scriptSystem.RegisterFunction("get_nearest_silo_position", new Func<Jurassic.Library.ObjectInstance>(this.GetNearestSiloPositionScript));
+
+        scriptSystem.RegisterFunction("go_to_nearest_resource", new Action(GoToNearestResource));
+
+        scriptSystem.RegisterFunction("go_to_nearest_silo", new Action(GoToNearestSilo));
 	}
 
 }

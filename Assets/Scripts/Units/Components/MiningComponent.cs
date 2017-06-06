@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class MiningComponent : UnitComponent {
     public float MiningRange = 0.25f;
@@ -76,5 +77,26 @@ public class MiningComponent : UnitComponent {
                 hits[i].collider.gameObject.GetComponent<IInteractable>().Interact(unit.gameObject);
             }
         }
+    }
+
+    public int GetMaxStorage() {
+        return MaxCapacity;
+    }
+
+    public int GetStorage() {
+        return storage;
+    }
+
+    public float GetMiningRange() {
+        return MiningRange;
+    }
+
+    public override void Register(ScriptSystem scriptSystem)
+    {
+        scriptSystem.RegisterFunction("get_max_storage", new Func<int>(GetMaxStorage));
+        scriptSystem.RegisterFunction("get_storage", new Func<int>(GetStorage));
+        scriptSystem.RegisterFunction("mine", new Action(startMining));
+        scriptSystem.RegisterFunction("turn_in", new Action(TurnIn));
+        scriptSystem.RegisterFunction("get_mining_range", new Func<float>(GetMiningRange));
     }
 }

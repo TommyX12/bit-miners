@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Unit : MyMono {
+public class Unit : MyMono, IScriptSystemAPI {
 
 	public float BuildTime;
 	public int BuildCost;
@@ -64,5 +66,18 @@ public class Unit : MyMono {
 		}
 	}
 
+    public Jurassic.Library.ObjectInstance GetPositionScript()
+    {
+        return UnitComponent.Vector2ToObject(transform.position);
+    }
 
+    public void Register(ScriptSystem scriptSystem)
+    {
+        scriptSystem.RegisterFunction("get_position", new   Func<Jurassic.Library.ObjectInstance>(GetPositionScript));
+    }
+
+    public void PostRegister(ScriptSystem scriptSystem)
+    {
+        
+    }
 }

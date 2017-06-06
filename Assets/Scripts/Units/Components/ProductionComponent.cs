@@ -105,4 +105,8 @@ public class ProductionComponent : UnitComponent {
     public void hideTT() {
         TT.gameObject.SetActive(false);
     }
+
+    public override void Register(ScriptSystem scriptSystem)
+    {
+    }
 }
