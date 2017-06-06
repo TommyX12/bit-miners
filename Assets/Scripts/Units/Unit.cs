@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class Unit : MyMono, IScriptSystemAPI {
@@ -15,6 +16,12 @@ public class Unit : MyMono, IScriptSystemAPI {
  
 	public List<UnitComponent> components;
 	
+	public Button ScriptButtonObject;
+	
+	private void StartEditor() {
+		GameManager.Current.ScriptEditorObject.StartEdit(this.ScriptSystemObject);
+	}
+	
 	public ScriptSystem ScriptSystemObject {
 		get; set;
 	}
@@ -22,6 +29,8 @@ public class Unit : MyMono, IScriptSystemAPI {
 	private void Awake() {
 		this.ScriptSystemObject = new ScriptSystem();
 		this.RegisterComponents();
+		
+		if (this.ScriptButtonObject != null) this.ScriptButtonObject.onClick.AddListener(this.StartEditor);
 	}
 
 	private void Start()
