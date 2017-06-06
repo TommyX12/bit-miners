@@ -43,14 +43,15 @@ public class ScriptEditor : MyMono {
 	}
 	
 	public void DiscardEdit() {
-		EndEdit();
+		this.EndEdit();
 	}
 	
 	public void SaveAndRun() {
 		this.ScriptSystemObject.Script = this.InputFieldObject.text;
 		this.ScriptSystemObject.Start();
 		
-		this.ReloadStatus();
+		if (!this.ScriptSystemObject.ErrorCaught) this.EndEdit();
+		else this.ReloadStatus();
 	}
 	
 	private void ReloadStatus() {

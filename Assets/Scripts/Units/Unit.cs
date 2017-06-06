@@ -41,7 +41,7 @@ public class Unit : MyMono, IScriptSystemAPI {
 		currentHP = MaxHP;
 	}
 	
-	private void PausingUpdate() {
+	public override void PausingUpdate() {
 		this.ScriptSystemObject.DispatchEvent("update");
 	}
 
@@ -71,6 +71,8 @@ public class Unit : MyMono, IScriptSystemAPI {
 	}
 
 	public void RegisterComponents() {
+		this.ScriptSystemObject.APIList.Add(this);
+		
 		foreach (UnitComponent component in GetComponentsInChildren<UnitComponent>()) {
 			component.unit = this;
 			components.Add(component);
@@ -86,7 +88,7 @@ public class Unit : MyMono, IScriptSystemAPI {
 
     public void Register(ScriptSystem scriptSystem)
     {
-        scriptSystem.RegisterFunction("get_position", new   Func<Jurassic.Library.ObjectInstance>(GetPositionScript));
+        scriptSystem.RegisterFunction("get_position", new Func<Jurassic.Library.ObjectInstance>(GetPositionScript));
     }
 
     public void PostRegister(ScriptSystem scriptSystem)
