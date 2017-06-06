@@ -40,6 +40,10 @@ public class Unit : MyMono, IScriptSystemAPI {
 		
 		currentHP = MaxHP;
 	}
+	
+	private void PausingUpdate() {
+		this.ScriptSystemObject.DispatchEvent("update");
+	}
 
 	public int GetMaxHP() {
 		return MaxHP;

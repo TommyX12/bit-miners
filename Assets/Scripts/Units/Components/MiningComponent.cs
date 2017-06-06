@@ -87,7 +87,7 @@ public class MiningComponent : UnitComponent {
         return storage;
     }
 
-    public float GetMiningRange() {
+    public double GetMiningRange() {
         return MiningRange;
     }
 
@@ -97,6 +97,6 @@ public class MiningComponent : UnitComponent {
         scriptSystem.RegisterFunction("get_storage", new Func<int>(GetStorage));
         scriptSystem.RegisterFunction("mine", new Action(startMining));
         scriptSystem.RegisterFunction("turn_in", new Action(TurnIn));
-        scriptSystem.RegisterFunction("get_mining_range", new Func<float>(GetMiningRange));
+        scriptSystem.RegisterFunction("get_mining_range", new Func<double>(GetMiningRange));
     }
 }

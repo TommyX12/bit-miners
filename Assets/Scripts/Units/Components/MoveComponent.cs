@@ -26,8 +26,8 @@ public class MoveComponent : UnitComponent {
 		MoveToTarget = true;
 	}
 
-    public void SetXYTarget(float x, float y) {
-        vectorTarget = new Vector2(x, y);
+    public void SetXYTarget(double x, double y) {
+        vectorTarget = new Vector2((float)x, (float)y);
         gameObjectTarget = false;
         MoveToTarget = true;
     }
@@ -64,7 +64,7 @@ public class MoveComponent : UnitComponent {
     }
 
 	public override void Register(ScriptSystem scriptSystem) {
-		scriptSystem.RegisterFunction("move_to", new Action<float, float>(this.SetXYTarget));
+		scriptSystem.RegisterFunction("move_to", new Action<double, double>(this.SetXYTarget));
 		scriptSystem.RegisterFunction("stop", new Action(this.Stop));
 	}
 }
