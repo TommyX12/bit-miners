@@ -1,0 +1,10 @@
+when start() {
+	set_engagement_distance(2)
+	stop_hold_position()
+}
+
+when update() {
+	if(!is_attacking()){
+		attack_nearest_enemy()
+	}
+}

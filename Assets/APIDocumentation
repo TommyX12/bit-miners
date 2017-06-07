@@ -1,0 +1,51 @@
+Documentation
+
+-Movement-
+// moves the unit towards the specified coordinates
+move_to(double x, double y)
+
+// stops the unit from moving
+stop()
+
+-combat-
+
+// returs true if this unit is attacking an enemy
+is_attacking()
+
+// returns true if the unit is holding position when attacking
+is_holding_position()
+
+// sets the distance the drone will try to stay at when attacking enemies
+set_engagement_distance(double distance)
+
+// holds position when attacking enemies
+hold_position()
+
+// stops holding position when attacking enemies
+stop_hold_position()
+
+// stops the unit from attacking
+stop_attacking()
+
+// attacks the nearest enemy
+attack_nearest_enemy()
+
+- resource collection -
+
+// gets the maximum number of resources this unit can hold
+get_max_storage()
+
+// gets the current number of resources this unit is holding
+get_current_storage()
+
+// goes to the nearest resource
+go_to_nearest_resource()
+
+// will attempt to gather resources from nearby resources
+mine()
+
+// goes to the nearest resource storage
+go_to_nearest_silo()
+
+// deposits held resources into the nearest storage
+turn_in()

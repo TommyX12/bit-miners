@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114090356616829080}
   - component: {fileID: 61908679489008432}
   - component: {fileID: 50821869103821002}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ResourceNode
   m_TagString: Resource
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1188908104282224}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

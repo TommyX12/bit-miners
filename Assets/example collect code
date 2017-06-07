@@ -1,0 +1,9 @@
+when update() {
+	if(get_max_storage() > get_storage()){
+		go_to_nearest_resource()
+		mine()
+	} else {
+		go_to_nearest_silo()
+		turn_in()
+	}
+}

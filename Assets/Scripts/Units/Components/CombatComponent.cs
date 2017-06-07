@@ -23,6 +23,7 @@ public class CombatComponent : UnitComponent {
     {
         base.PausingFixedUpdate();
         if (attacking) {
+            Vector2 targetPos = attackingObject ? (Vector2)enemy.transform.position : positionTarget;
             if (enemy == null) {
                 attacking = false;
                 return;
@@ -32,7 +33,7 @@ public class CombatComponent : UnitComponent {
 
             }
             else {
-                Vector2 targetPos = attackingObject ? (Vector2)enemy.transform.position : positionTarget;
+                
                 if (Mathf.Abs(((targetPos - (Vector2)transform.position)).magnitude) - EngangementDistance < 0.05)
                 {
                         Movement.Stop();
@@ -47,9 +48,12 @@ public class CombatComponent : UnitComponent {
                 }
 
             }
-            foreach (WeaponComponent weapon in Weapons)
+            if ((targetPos - (Vector2)transform.position).magnitude < 4)
             {
-                weapon.fire();
+                foreach (WeaponComponent weapon in Weapons)
+                {
+                    weapon.fire();
+                }
             }
         }
     }
@@ -152,8 +156,8 @@ public class CombatComponent : UnitComponent {
         return attacking;
     }
 
-    public void SetEngagementDistance(float distance) {
-        EngangementDistance = distance;
+    public void SetEngagementDistance(double distance) {
+        EngangementDistance = (float)distance;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -166,6 +170,14 @@ public class CombatComponent : UnitComponent {
     public override void Register(ScriptSystem scriptSystem)
     {
         base.Register(scriptSystem);
+
+        scriptSystem.RegisterFunction("is_attacking", new Func<bool>(isAttacking));
+        scriptSystem.RegisterFunction("is_holding_position", new Func<bool>(isHoldingPosition));
+        scriptSystem.RegisterFunction("set_engagement_distance", new Action<double>(SetEngagementDistance));
+        scriptSystem.RegisterFunction("hold_position", new Action(HoldPosition));
+        scriptSystem.RegisterFunction("stop_hold_position", new Action(StopHoldingPosition));
+        scriptSystem.RegisterFunction("stop_attacking", new Action(StopAttacking));
+        scriptSystem.RegisterFunction("attack_nearest_enemy", new Action(AttackNearestEnemy));
     }
 
 }
