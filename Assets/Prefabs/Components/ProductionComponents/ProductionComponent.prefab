@@ -274,7 +274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1444455754844688
 GameObject:
   m_ObjectHideFlags: 1
@@ -428,7 +428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1589982330092062
 GameObject:
   m_ObjectHideFlags: 1
@@ -969,7 +969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1314,10 +1314,10 @@ MonoBehaviour:
   unit: {fileID: 0}
   SpawnLocation: {fileID: 1518355725801324}
   UI: {fileID: 114733471120721958}
-  TT: {fileID: 0}
+  TT: {fileID: 114020489370798604}
   BuildPrefabs:
-  - {fileID: 1376246394822292, guid: 53d4e9754e6c7ec419f84f0e78d0c562, type: 2}
   - {fileID: 1070059350565954, guid: 1fbdd51a5db213349991b65d8856fa05, type: 2}
+  - {fileID: 1381549642254292, guid: 467ecbaec82d92b4d85099d7041158ef, type: 2}
 --- !u!114 &114385968663289512
 MonoBehaviour:
   m_ObjectHideFlags: 1

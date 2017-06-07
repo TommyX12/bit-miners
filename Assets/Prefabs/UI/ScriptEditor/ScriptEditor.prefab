@@ -183,7 +183,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1754421540595696
 GameObject:
   m_ObjectHideFlags: 1
@@ -334,6 +334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InputFieldObject: {fileID: 114334288057990262}
   StatusTextObject: {fileID: 114801480830606866}
+  APITextObject: {fileID: 114306001895626404}
   SaveButtonObject: {fileID: 114245054784791736}
   DiscardButtonObject: {fileID: 114159612984741682}
 --- !u!114 &114202468607871082
@@ -546,7 +547,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
-    m_RichText: 0
+    m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
@@ -774,7 +775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.447}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.691}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -991,10 +992,10 @@ RectTransform:
   m_Father: {fileID: 224341936750598748}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 151.70862, y: -16.712017}
+  m_SizeDelta: {x: 97.80574, y: 33.424034}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224464412330600984
 RectTransform:
@@ -1160,8 +1161,8 @@ RectTransform:
   m_Father: {fileID: 224341936750598748}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 48.90287, y: -16.712017}
+  m_SizeDelta: {x: 97.80574, y: 33.424034}
   m_Pivot: {x: 0.5, y: 0.5}
