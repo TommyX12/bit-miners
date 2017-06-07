@@ -18,6 +18,8 @@ public class Unit : MyMono, IScriptSystemAPI {
 	
 	public Button ScriptButtonObject;
 	
+	private float timer = 0.0f;
+	
 	private void StartEditor() {
 		GameManager.Current.ScriptEditorObject.StartEdit(this.ScriptSystemObject);
 	}
@@ -42,7 +44,17 @@ public class Unit : MyMono, IScriptSystemAPI {
 	}
 	
 	public override void PausingUpdate() {
-		this.ScriptSystemObject.DispatchEvent("update");
+		this.ScriptUpdate();
+	}
+	
+	private void ScriptUpdate() {
+		this.ScriptSystemObject.DispatchEvent("update", (double)Time.deltaTime);
+		while (this.timer >= 1.0f) {
+			this.ScriptSystemObject.DispatchEvent("update_per_second");
+			this.timer -= 1.0f;
+		}
+		
+		this.timer += Time.deltaTime;
 	}
 
 	public int GetMaxHP() {
