@@ -31,6 +31,7 @@ public class Unit : MyMono, IScriptSystemAPI {
 	private void Awake() {
 		this.ScriptSystemObject = new ScriptSystem();
 		this.RegisterComponents();
+		this.RegisterScriptSystem();
 		
 		if (this.ScriptButtonObject != null) this.ScriptButtonObject.onClick.AddListener(this.StartEditor);
 	}
@@ -83,14 +84,20 @@ public class Unit : MyMono, IScriptSystemAPI {
 	}
 
 	public void RegisterComponents() {
-		this.ScriptSystemObject.APIList.Add(this);
-		
 		foreach (UnitComponent component in GetComponentsInChildren<UnitComponent>()) {
 			component.unit = this;
 			components.Add(component);
-			
-			this.ScriptSystemObject.APIList.Add(component);
 		}
+	}
+	
+	public void RegisterScriptSystem() {
+		List<IScriptSystemAPI> apiList = new List<IScriptSystemAPI>();
+		apiList.Add(this);
+		foreach (var component in this.components) {
+			apiList.Add(component);
+		}
+		
+		this.ScriptSystemObject.SetAPIList(apiList);
 	}
 
     public Jurassic.Library.ObjectInstance GetPositionScript()
@@ -101,10 +108,16 @@ public class Unit : MyMono, IScriptSystemAPI {
     public void Register(ScriptSystem scriptSystem)
     {
         scriptSystem.RegisterFunction("get_position", new Func<Jurassic.Library.ObjectInstance>(GetPositionScript));
+		
+		scriptSystem.RegisterEvent("update", new string[]{"time_passed"});
+		scriptSystem.RegisterEvent("update_per_second", new string[]{});
     }
-
-    public void PostRegister(ScriptSystem scriptSystem)
-    {
-        
-    }
+	
+	public void PreRun(ScriptSystem scriptSystem) {
+		
+	}
+	
+	public void PostRun(ScriptSystem scriptSystem) {
+		this.ScriptSystemObject.DispatchEvent("update", 0.0);
+	}
 }

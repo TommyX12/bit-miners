@@ -204,4 +204,8 @@ static public class Util
 		RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, screenPos, camera, out pos);
 		elementTransform.position = canvas.transform.TransformPoint(pos);
 	}
+	
+	static public string ColoredRichText(string color, string text) {
+		return "<color=" + color + ">" + text + "</color>";
+	}
 }

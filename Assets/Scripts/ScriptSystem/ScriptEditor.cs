@@ -11,6 +11,7 @@ public class ScriptEditor : MyMono {
 	
 	public InputField InputFieldObject;
 	public Text StatusTextObject;
+	public Text APITextObject;
 	public Button SaveButtonObject;
 	public Button DiscardButtonObject;
 	
@@ -38,6 +39,7 @@ public class ScriptEditor : MyMono {
 		this.ScriptSystemObject = scriptSystem;
 		
 		this.InputFieldObject.text = this.ScriptSystemObject.Script;
+		this.APITextObject.text = this.ScriptSystemObject.GetAPIListText();
 		
 		this.ReloadStatus();
 	}

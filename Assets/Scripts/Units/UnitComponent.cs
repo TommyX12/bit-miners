@@ -8,8 +8,8 @@ public class UnitComponent : MyMono, IScriptSystemAPI {
 	public static Jurassic.Library.ObjectInstance Vector2ToObject(Vector2 v) {
 		Jurassic.Library.ObjectInstance obj = ScriptSystem.Current.ConstructObject();
 		
-		obj["x"] = v.x;
-		obj["y"] = v.y;
+		obj["x"] = (double)v.x;
+		obj["y"] = (double)v.y;
 		
 		return obj;
 	}
@@ -18,7 +18,11 @@ public class UnitComponent : MyMono, IScriptSystemAPI {
 		
 	}
 	
-	public virtual void PostRegister(ScriptSystem scriptSystem) {
+	public virtual void PreRun(ScriptSystem scriptSystem) {
+		
+	}
+	
+	public virtual void PostRun(ScriptSystem scriptSystem) {
 		
 	}
 }

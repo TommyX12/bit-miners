@@ -20,35 +20,37 @@ public class BasicAPI : IScriptSystemAPI {
 		Debug.Log(str);
 	}
 	
-	private const string javaScript = @"
-		function _closer_to(i, from, to) {
-			if (i > to) --i;
-			else if (i < to) ++i;
-			else {
-				if (to > from) ++i;
-				else --i;
-			}
-			return i;
-		}
-	
-		function _in_between(i, a, b) {
-			if (a < b) {
-				return a <= i && i <= b;
-			}
-			else {
-				return b <= i && i <= a;
-			}
-		}
-	";
-	
-	private const string postJavsScript = @"
-		
-	";
-	
 	public void Register(ScriptSystem scriptSystem) {
-		scriptSystem.RegisterFunction("print", new Action<string>(Print));
+		scriptSystem.RegisterFunction("print", new Action<string>(Print), false);
 		
-		scriptSystem.RegisterJavaScript(javaScript);
+		scriptSystem.RegisterJSFunction(
+			"_closer_to", 
+			new string[]{"i", "from", "to"}, 
+			@"
+				if (i > to) --i;
+				else if (i < to) ++i;
+				else {
+					if (to > from) ++i;
+					else --i;
+				}
+				return i;
+			",
+			false
+		);
+		
+		scriptSystem.RegisterJSFunction(
+			"_in_between", 
+			new string[]{"i", "a", "b"}, 
+			@"
+				if (a < b) {
+					return a <= i && i <= b;
+				}
+				else {
+					return b <= i && i <= a;
+				}
+			",
+			false
+		);
 		
 		/* scriptSystem.RegisterMacro(
 			@"\brepeat\s*" + ScriptSystem.MatchingBracketPattern("param"),
@@ -74,9 +76,15 @@ public class BasicAPI : IScriptSystemAPI {
 			@"\bloop\b",
 			@"while (true)"
 		);
+		
+		scriptSystem.RegisterEvent("start", new string[]{});
+	}
+
+	public void PreRun(ScriptSystem scriptSystem) {
+		
 	}
 	
-	public void PostRegister(ScriptSystem scriptSystem) {
-		scriptSystem.RegisterJavaScript(postJavsScript);
+	public void PostRun(ScriptSystem scriptSystem) {
+		
 	}
 }
