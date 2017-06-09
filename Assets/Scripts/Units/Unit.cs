@@ -73,6 +73,14 @@ public class Unit : MyMono, IScriptSystemAPI {
 		}
 	}
 
+    public void UpdateHealthBar() {
+        HealthBar bar;
+
+        if ((bar = (HealthBar) GetUnitComponent<HealthBar>())) {
+            bar.Refresh((float)(currentHP/MaxHP));
+        }
+    }
+
 	public UnitComponent GetUnitComponent<T>() {
 		foreach (UnitComponent comp in components) {
 			Debug.Log(comp.GetType() + " " +  typeof(T));
