@@ -76,7 +76,7 @@ public class MiningLogicComponent : UnitComponent {
     public void GoToNearestSilo() {
         mover.SetVectorTarget(GetNearestSiloPosition());
     }
-	
+
 	public override void Register(ScriptSystem scriptSystem) {
 		scriptSystem.RegisterFunction("get_nearest_resource_position", new Func<Jurassic.Library.ObjectInstance>(this.GetNearestResourcePositionScript));
 

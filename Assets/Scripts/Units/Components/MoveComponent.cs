@@ -10,6 +10,7 @@ public class MoveComponent : UnitComponent {
     public float turnRate;
     private bool gameObjectTarget = true;
     public bool MoveToTarget = false;
+    public bool IsMoveDirection = false;
 
     public GameObject gameObjectMoveTarget;
     private Vector2 vectorTarget;
@@ -18,17 +19,28 @@ public class MoveComponent : UnitComponent {
         MoveToTarget = target;
         gameObjectTarget = true;
         MoveToTarget = true;
+        IsMoveDirection = false;
     }
 
 	public void SetVectorTarget(Vector2 target) {
 		vectorTarget = target;
 		gameObjectTarget = false;
 		MoveToTarget = true;
-	}
+        IsMoveDirection = false;
+
+    }
 
     public void SetXYTarget(double x, double y) {
         vectorTarget = new Vector2((float)x, (float)y);
         gameObjectTarget = false;
+        MoveToTarget = true;
+        IsMoveDirection = false;
+    }
+
+    public void MoveDirection(double x, double y) {
+        vectorTarget = (Vector2)transform.position + new Vector2((float)x, (float)y);
+        gameObjectTarget = false;
+        IsMoveDirection = true;
         MoveToTarget = true;
     }
 
@@ -56,6 +68,9 @@ public class MoveComponent : UnitComponent {
                 transform.Rotate(new Vector3(0, 0, (da / Mathf.Abs(da)) * turnRate * Time.fixedDeltaTime));
             }
 
+            if (IsMoveDirection) {
+                vectorTarget = (Vector2)transform.position + dv;
+            }
         }
     }
 
@@ -65,6 +80,7 @@ public class MoveComponent : UnitComponent {
 
 	public override void Register(ScriptSystem scriptSystem) {
 		scriptSystem.RegisterFunction("move_to", new Action<double, double>(this.SetXYTarget));
-		scriptSystem.RegisterFunction("stop", new Action(this.Stop));
+        scriptSystem.RegisterFunction("move_in_direction", new Action<double, double>(this.MoveDirection));
+        scriptSystem.RegisterFunction("stop", new Action(this.Stop));
 	}
 }
