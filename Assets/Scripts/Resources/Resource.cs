@@ -9,7 +9,7 @@ public class Resource : MyMono {
     public int ResourcePerCollection;
     public float CollectionTime;
     public string type;
-
+        
     public int GetResource() {
         int value = ResourcePerCollection;
         ResourceValue -= ResourcePerCollection;

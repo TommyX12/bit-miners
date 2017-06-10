@@ -92,6 +92,15 @@ public class MiningComponent : UnitComponent {
         return MiningRange;
     }
 
+    public void ChangeType(string type) {
+        storage = 0;
+        this.type = type;
+    }
+
+    public string GetType() {
+        return type;
+    }
+
     public override void Register(ScriptSystem scriptSystem)
     {
         scriptSystem.RegisterFunction("get_max_storage", new Func<int>(GetMaxStorage));
@@ -99,5 +108,7 @@ public class MiningComponent : UnitComponent {
         scriptSystem.RegisterFunction("mine", new Action(startMining));
         scriptSystem.RegisterFunction("turn_in", new Action(TurnIn));
         scriptSystem.RegisterFunction("get_mining_range", new Func<double>(GetMiningRange));
+        scriptSystem.RegisterFunction("change_type", new Action<string>(ChangeType));
+        scriptSystem.RegisterFunction("get_type", new Func<string>(GetType));
     }
 }

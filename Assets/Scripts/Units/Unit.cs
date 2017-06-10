@@ -8,8 +8,12 @@ using System;
 public class Unit : MyMono, IScriptSystemAPI {
 
 	public float BuildTime;
-	public int BuildCost;
-	public int MaxHP;
+
+    public List<string> ResourceTypes;
+    public List<int> ResourceCosts;
+
+    public int MaxHP;
+
 	public int teamid;
 	public string description;
 	int currentHP;

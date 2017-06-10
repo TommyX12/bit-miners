@@ -12,12 +12,12 @@ public class SiloComponent : UnitComponent, IInteractable
 
     private void Start()
     {
-        ResourceManager.AddSilo(this);
+        NewResourceManager.AddSilo(this);
     }
 
     private void OnDestroy()
     {
-        ResourceManager.RemoveSilo(this);
+        NewResourceManager.RemoveSilo(this);
     }
 
     public void Interact(GameObject g)

@@ -8,11 +8,10 @@ public class ProductionComponent : UnitComponent {
     public ProductionUI UI;
     public ProductionTooltip TT;
 
-
     public class BuildItem
     {
         public float time;
-        public int cost;
+        public Dictionary<string, int> cost;
         public GameObject prefab;
 
         public void ProgressBuild(float progTime) {
@@ -45,12 +44,17 @@ public class ProductionComponent : UnitComponent {
         BuildItem bi = new BuildItem();
         Unit info = BuildPrefabs[id].GetComponent<Unit>();
         bi.time = info.BuildTime;
-        bi.cost = info.BuildCost;
+        Dictionary<string, int> cost = new Dictionary<string, int>();
+
+        for (int i = 0; i < info.ResourceTypes.Count; i++) {
+            cost.Add(info.ResourceTypes[i], info.ResourceCosts[i]);
+        }
+
         bi.prefab = BuildPrefabs[id];
 
-        if (ResourceManager.HasEnough(bi.cost)) {
+        if (NewResourceManager.HasEnough(bi.cost)) {
             buildQueue.Add(bi);
-            ResourceManager.Remove(bi.cost);
+            NewResourceManager.Remove(bi.cost);
         }
     }
 
@@ -85,7 +89,7 @@ public class ProductionComponent : UnitComponent {
         if (id >= buildQueue.Count) {
             return;
         }
-        ResourceManager.Add(buildQueue[id].cost);
+        NewResourceManager.Add(buildQueue[id].cost);
         buildQueue.RemoveAt(id);
     }
 

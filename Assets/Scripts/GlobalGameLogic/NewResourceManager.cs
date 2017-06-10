@@ -48,6 +48,17 @@ public class NewResourceManager : MyMono
         }
     }
 
+    public static void Add(Dictionary<string, int> values) {
+        foreach (string key in values.Keys) {
+            if (Stored.ContainsKey(key)) {
+                Stored[key] += values[key];
+                if (Stored[key] > Capacity[key]) {
+                    Stored[key] = Capacity[key];
+                }
+            }
+        }
+    }
+
     public static void Remove(string type, int amt)
     {
         if (amt > Stored[type])
@@ -57,6 +68,20 @@ public class NewResourceManager : MyMono
         else
         {
             Stored[type] -= amt;
+        }
+    }
+
+    public static void Remove(Dictionary<string, int> values) {
+        foreach (string key in values.Keys) {
+            if (Stored.ContainsKey(key)) {
+                if (Stored[key] >= values[key])
+                {
+                    Stored[key] -= values[key];
+                }
+                else {
+                    Stored[key] = 0;
+                }
+            }
         }
     }
 
@@ -72,6 +97,19 @@ public class NewResourceManager : MyMono
         }
     }
 
+    public static bool HasEnough(Dictionary<string, int> costs) {
+        foreach (string key in costs.Keys) {
+            if (Stored.ContainsKey(key) && Stored[key] >= costs[key])
+            {
+
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static void AddSilo(SiloComponent silo)
     {
         if (silos.Contains(silo))
@@ -81,7 +119,13 @@ public class NewResourceManager : MyMono
         else
         {
             silos.Add(silo);
-            Refresh();
+            if (!Capacity.ContainsKey(silo.type))
+            {
+
+                Stored.Add(silo.type, 0);
+                Capacity.Add(silo.type, 0);
+            }
+                Refresh();
         }
     }
 
@@ -116,12 +160,12 @@ public class NewResourceManager : MyMono
         GameObject winner = null;
         foreach (SiloComponent silo in silos)
         {
-            if (winner == null)
+            if (winner == null && silo.type == type)
             {
                 winner = silo.gameObject;
             }
             if (((Vector2)(position - (Vector2)winner.transform.position)).magnitude >
-                ((Vector2)(position - (Vector2)silo.gameObject.transform.position)).magnitude)
+                ((Vector2)(position - (Vector2)silo.gameObject.transform.position)).magnitude && silo.type == type)
             {
                 winner = silo.gameObject;
             }
