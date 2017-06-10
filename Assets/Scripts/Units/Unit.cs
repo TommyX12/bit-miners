@@ -71,13 +71,14 @@ public class Unit : MyMono, IScriptSystemAPI {
 		if (currentHP <= 0) {
 			Destroy(gameObject);
 		}
+        UpdateHealthBar();
 	}
 
     public void UpdateHealthBar() {
         HealthBar bar;
 
         if ((bar = (HealthBar) GetUnitComponent<HealthBar>())) {
-            bar.Refresh((float)(currentHP/MaxHP));
+            bar.Refresh(((float)currentHP / (float) MaxHP));
         }
     }
 
@@ -116,7 +117,8 @@ public class Unit : MyMono, IScriptSystemAPI {
     public void Register(ScriptSystem scriptSystem)
     {
         scriptSystem.RegisterFunction("get_position", new Func<Jurassic.Library.ObjectInstance>(GetPositionScript));
-		
+        scriptSystem.RegisterFunction("get_max_hp", new Func<int>(GetMaxHP));
+        scriptSystem.RegisterFunction("get_current_hp", new Func<int>(GetCurrentHP));
 		scriptSystem.RegisterEvent("update", new string[]{"time_passed"});
 		scriptSystem.RegisterEvent("update_per_second", new string[]{});
     }

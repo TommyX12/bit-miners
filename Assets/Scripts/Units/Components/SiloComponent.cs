@@ -8,6 +8,8 @@ public class SiloComponent : UnitComponent, IInteractable
 
     public int MaxCapacity;
 
+    public string type;
+
     private void Start()
     {
         ResourceManager.AddSilo(this);
@@ -22,15 +24,21 @@ public class SiloComponent : UnitComponent, IInteractable
     {
         MiningComponent miner = (MiningComponent) g.GetComponent<Unit>().GetUnitComponent<MiningComponent>();
 
-        Debug.Log(miner.storage);
-        if (ResourceManager.GetMaxCapacity() - ResourceManager.GetAmtStored() < miner.storage)
+        // type mismatch
+
+        if (miner.type != type) {
+            return;
+        }
+
+        if (NewResourceManager.GetMaxCapacity(type) - NewResourceManager.GetAmtStored(type) < miner.storage)
         {
-            miner.storage -= ResourceManager.GetMaxCapacity() - ResourceManager.GetAmtStored();
-            ResourceManager.Add(ResourceManager.GetMaxCapacity() - ResourceManager.GetAmtStored());
+            miner.storage -= NewResourceManager.GetMaxCapacity(type) - NewResourceManager.GetAmtStored(type);
+            NewResourceManager.Add(type, NewResourceManager.GetMaxCapacity(type) - NewResourceManager.GetAmtStored(type));
         }
         else {
-            ResourceManager.Add(miner.storage);
+            NewResourceManager.Add(type, miner.storage);
             miner.storage = 0;
         }
+
     }
 }

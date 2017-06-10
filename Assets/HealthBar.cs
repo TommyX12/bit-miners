@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HealthBar : UnitComponent {
     public RectTransform Health;
-    public float test;
 
     public void Refresh(float percent)
     {

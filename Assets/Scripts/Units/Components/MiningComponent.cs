@@ -8,6 +8,7 @@ public class MiningComponent : UnitComponent {
     public float TimeMultiplier = 1f;
     public int MaxCapacity = 30;
     public int storage = 0;
+    public string type;
     float miningTimer;
     bool mining;
     Resource resource;

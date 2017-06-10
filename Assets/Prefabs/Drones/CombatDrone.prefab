@@ -647,7 +647,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 0}
   Health: {fileID: 224627495474581304}
-  test: 0
 --- !u!114 &114712687858052278
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -675,8 +674,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9833d81f656c1e24881f29b83b37b746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildTime: 5
-  BuildCost: 30
+  BuildTime: 30
+  BuildCost: 300
   MaxHP: 6
   teamid: 0
   description: A combat drone used to defend and attack.

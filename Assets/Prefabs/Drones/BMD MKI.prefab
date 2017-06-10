@@ -521,7 +521,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 0}
   Health: {fileID: 224829527170636906}
-  test: 0
 --- !u!114 &114403380867791794
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -560,8 +559,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9833d81f656c1e24881f29b83b37b746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildTime: 5
-  BuildCost: 10
+  BuildTime: 60
+  BuildCost: 500
   MaxHP: 3
   teamid: 0
   description: A basic drone for collecting resources. Cannot fight.
