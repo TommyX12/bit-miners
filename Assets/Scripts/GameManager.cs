@@ -6,6 +6,7 @@ public class GameManager : MyMono {
 	
 	public static GameManager Current;
 	public ScriptEditor ScriptEditorObject;
+	public MapTile MapTilePrefab;
 	
 	void Awake() {
 		Current = this;

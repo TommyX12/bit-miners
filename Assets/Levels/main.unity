@@ -1900,6 +1900,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 811302703}
+  - component: {fileID: 811302704}
   m_Layer: 5
   m_Name: Map
   m_TagString: Untagged
@@ -1943,6 +1944,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &811302704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 811302702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22227b222dda0d741b9ed591e1a10552, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TileSize: 0.5
+  MapRadiusH: 64
+  MapRadiusV: 64
 --- !u!1001 &834023683
 Prefab:
   m_ObjectHideFlags: 0
@@ -4511,6 +4526,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScriptEditorObject: {fileID: 294083778}
+  MapTilePrefab: {fileID: 114260321366887552, guid: 3d9935107aeea3e4286eb1a9ae3113ca,
+    type: 2}
 --- !u!4 &1955540693
 Transform:
   m_ObjectHideFlags: 0
