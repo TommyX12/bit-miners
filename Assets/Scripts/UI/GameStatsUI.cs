@@ -22,7 +22,11 @@ public class GameStatsUI : MyMono {
     }
 
     public void Refresh() {
-        ResourceText.text = "Resources: " + ResourceManager.GetAmtStored() + "/" + ResourceManager.GetMaxCapacity();
+        string str = "Resources:";
+        foreach (string key in new List<string>(NewResourceManager.Capacity.Keys)) {
+            str += " " + key + "-" + NewResourceManager.Stored[key] + "/" + NewResourceManager.Capacity[key];
+        }
+        ResourceText.text = str;
     }
 
 }

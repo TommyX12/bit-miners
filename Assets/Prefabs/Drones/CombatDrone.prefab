@@ -479,6 +479,7 @@ MonoBehaviour:
   TimeMultiplier: 1
   MaxCapacity: 30
   storage: 0
+  type: 
 --- !u!114 &114313929179423460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -675,7 +676,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildTime: 30
-  BuildCost: 300
+  ResourceTypes:
+  - iron
+  ResourceCosts: 2c010000
   MaxHP: 6
   teamid: 0
   description: A combat drone used to defend and attack.

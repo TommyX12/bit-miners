@@ -8,8 +8,8 @@ public class NewResourceManager : MyMono
     private static int MaxCapacity;
     private static int AmtStored;
 
-    public static Dictionary<string, int> Capacity;
-    public static Dictionary<string, int> Stored;
+    public static Dictionary<string, int> Capacity = new Dictionary<string, int>();
+    public static Dictionary<string, int> Stored = new Dictionary<string, int>();
 
     private static List<SiloComponent> silos = new List<SiloComponent>();
 
@@ -137,11 +137,9 @@ public class NewResourceManager : MyMono
 
     public static void Refresh()
     {
-        foreach (string key in Capacity.Keys) {
+        foreach (string key in (new List<string>(Capacity.Keys))) {
             Capacity[key] = 0;
         }
-
-
 
         foreach (SiloComponent s in silos)
         {

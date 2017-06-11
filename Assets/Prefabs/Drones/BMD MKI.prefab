@@ -446,6 +446,7 @@ MonoBehaviour:
   TimeMultiplier: 1
   MaxCapacity: 30
   storage: 0
+  type: 
 --- !u!114 &114156485428814328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -560,7 +561,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildTime: 60
-  BuildCost: 500
+  ResourceTypes:
+  - iron
+  ResourceCosts: 2c010000
   MaxHP: 3
   teamid: 0
   description: A basic drone for collecting resources. Cannot fight.

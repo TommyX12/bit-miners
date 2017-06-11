@@ -32,7 +32,7 @@ public class MiningComponent : UnitComponent {
         RaycastHit2D[] hitsBuffer = new RaycastHit2D[25];
         int hitCount = miningCollider.Cast(Vector2.zero, hitsBuffer);
         for (int i = 0; i < hitCount; i++) {
-            if (hitsBuffer[i].collider.gameObject.CompareTag("Resource")) {
+            if (hitsBuffer[i].collider.gameObject.CompareTag("Resource") && hitsBuffer[i].collider.gameObject.GetComponent<Resource>().type == type) {
                 resource = hitsBuffer[i].collider.gameObject.GetComponent<Resource>();
                 mining = true;
                 miningTimer = resource.CollectionTime * TimeMultiplier;
@@ -97,7 +97,7 @@ public class MiningComponent : UnitComponent {
         this.type = type;
     }
 
-    public string GetType() {
+    public string GetMiningType() {
         return type;
     }
 
@@ -109,6 +109,6 @@ public class MiningComponent : UnitComponent {
         scriptSystem.RegisterFunction("turn_in", new Action(TurnIn));
         scriptSystem.RegisterFunction("get_mining_range", new Func<double>(GetMiningRange));
         scriptSystem.RegisterFunction("change_type", new Action<string>(ChangeType));
-        scriptSystem.RegisterFunction("get_type", new Func<string>(GetType));
+        scriptSystem.RegisterFunction("get_type", new Func<string>(GetMiningType));
     }
 }

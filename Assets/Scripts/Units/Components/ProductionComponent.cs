@@ -50,6 +50,7 @@ public class ProductionComponent : UnitComponent {
             cost.Add(info.ResourceTypes[i], info.ResourceCosts[i]);
         }
 
+        bi.cost = cost;
         bi.prefab = BuildPrefabs[id];
 
         if (NewResourceManager.HasEnough(bi.cost)) {
