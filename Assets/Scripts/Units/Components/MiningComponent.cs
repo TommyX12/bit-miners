@@ -111,4 +111,5 @@ public class MiningComponent : UnitComponent {
         scriptSystem.RegisterFunction("change_type", new Action<string>(ChangeType));
         scriptSystem.RegisterFunction("get_type", new Func<string>(GetMiningType));
     }
+
 }
