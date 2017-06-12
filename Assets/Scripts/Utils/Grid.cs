@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class Grid<TData>
 {
+	
+	public delegate IGridElement<TData> ConstructElementCallback(Grid<TData> grid);
+
+	public delegate void ApplySamplerDataFunction<TData>(Grid<TData> grid, GridCoord coord, float pixel);
+	
 	#region Members
 	
 	public Dictionary<GridCoord, TData> m_data;
@@ -36,8 +41,7 @@ public class Grid<TData>
 
 	#region Constructors
 
-	public Grid(float tileSize, bool autoElementManagement, int batchRadius, Transform parentTransform, ConstructElementCallback constructElementFunc)
-	{
+	public Grid(float tileSize, bool autoElementManagement, int batchRadius, Transform parentTransform, ConstructElementCallback constructElementFunc) {
 		this.TileSize = tileSize;
 		
 		this.AutoElementManagement = autoElementManagement;
@@ -57,8 +61,7 @@ public class Grid<TData>
 
 	#region Instance Methods
 	
-	public void Fill(int radiusH, int radiusV, TData val)
-	{
+	public void Fill(int radiusH, int radiusV, TData val) {
 		for (int x = -radiusH; x <= radiusH; ++x) {
 			for (int y = -radiusV; y <= radiusV; ++y) {
 				GridCoord coord = new GridCoord(x, y);
@@ -67,59 +70,49 @@ public class Grid<TData>
 		}
 	}
 	
-	public bool Contains(GridCoord coord)
-	{
+	public bool Contains(GridCoord coord) {
 		return m_data.ContainsKey(coord);
 	}
 	
-	public TData Get(GridCoord coord)
-	{
+	public TData Get(GridCoord coord) {
 		TData result;
 		m_data.TryGetValue(coord, out result);
 		return result;
 	}
 	
-	public TData GetFromPoint(Vector2 point)
-	{
+	public TData GetFromPoint(Vector2 point) {
 		return Get(PointToCoord(point));
 	}
 	
-	public TData Set(GridCoord coord, TData val)
-	{
+	public TData Set(GridCoord coord, TData val) {
 		return m_data[coord] = val;
 	}
 	
-	public TData Remove(GridCoord coord)
-	{
+	public TData Remove(GridCoord coord) {
 		TData result = Get(coord);
 		m_data.Remove(coord);
 		return result;
 	}
 	
-	public TData SetFromPoint(Vector2 point, TData val)
-	{
+	public TData SetFromPoint(Vector2 point, TData val) {
 		return Set(PointToCoord(point), val);
 	}
 	
-	public bool ContainsElement(GridCoord coord)
-	{
+	public bool ContainsElement(GridCoord coord) {
 		return m_elements.ContainsKey(coord);
 	}
 	
-	public IGridElement<TData> GetElement(GridCoord coord)
-	{
+	public IGridElement<TData> GetElement(GridCoord coord) {
 		IGridElement<TData> result;
 		m_elements.TryGetValue(coord, out result);
 		return result;
 	}
 	
-	public IGridElement<TData> GetElementFromPoint(Vector2 point)
-	{
+	public IGridElement<TData> GetElementFromPoint(Vector2 point) {
 		return GetElement(PointToCoord(point));
 	}
 	
-	public IGridElement<TData> AttachElement(GridCoord coord, IGridElement<TData> element)
-	{
+	public IGridElement<TData> AttachElement(GridCoord coord, IGridElement<TData> element) {
 		if (AutoElementManagement) throw new Exception("Cannot manually attach element when AutoElementManagement is true.");
 		
 		return _attachElement(coord, element);
@@ -137,15 +130,13 @@ public class Grid<TData>
 		return m_elements[coord] = element;
 	}
 	
-	public IGridElement<TData> DetachElement(GridCoord coord)
-	{
+	public IGridElement<TData> DetachElement(GridCoord coord) {
 		if (AutoElementManagement) throw new Exception("Cannot manually detach element when AutoElementManagement is true.");
 		
 		return _detachElement(coord);
 	}
 	
-	public void ClearElements()
-	{
+	public void ClearElements() {
 		if (AutoElementManagement) throw new Exception("Cannot manually detach element when AutoElementManagement is true.");
 		
 		foreach (GridCoord coord in Coords()){
@@ -155,8 +146,7 @@ public class Grid<TData>
 		}
 	}
 
-	public IGridElement<TData> _detachElement(GridCoord coord)
-	{
+	public IGridElement<TData> _detachElement(GridCoord coord) {
 		IGridElement<TData> result = m_elements[coord];
 		m_elements.Remove(coord);
 		
@@ -165,42 +155,33 @@ public class Grid<TData>
 		return result;
 	}
 	
-	public Vector2 ToLocal(Vector2 globalPoint)
-	{
+	public Vector2 ToLocal(Vector2 globalPoint) {
 		return ParentTransform.InverseTransformPoint(globalPoint);
 	}
 	
-	public Vector2 ToGlobal(Vector2 localPoint)
-	{
+	public Vector2 ToGlobal(Vector2 localPoint) {
 		return ParentTransform.TransformPoint(localPoint);
 	}
 	
-	public IEnumerable Coords()
-	{
+	public IEnumerable Coords() {
 		return m_data.Keys.ToArray();
 	}
 	
-	public IEnumerable Data()
-	{
+	public IEnumerable Data() {
 		return m_data.Values;
 	}
 
-	public IEnumerable ElementCoords()
-	{
+	public IEnumerable ElementCoords() {
 		return m_elements.Keys;
 	}
 
-	public IEnumerable Elements()
-	{
+	public IEnumerable Elements() {
 		return m_elements.Values;
 	}
 	
-	public IEnumerable<GridCoord> Range(int radius, int spacing, GridCoord center)
-	{
+	public IEnumerable<GridCoord> Range(int radius, int spacing, GridCoord center) {
 		for (int dx = -radius; dx <= radius; ++dx){
-			int min = Math.Max(-radius, -dx-radius);
-			int max = Math.Min(radius, -dx+radius);
-			for (int dy = min; dy <= max; ++dy){
+			for (int dy = -radius; dy <= radius; ++dy){
 				yield return new GridCoord(
 						center.x + dx * spacing,
 						center.y + dy * spacing
@@ -209,8 +190,7 @@ public class Grid<TData>
 		}
 	}
 	
-	public IEnumerable<GridCoord> Line(GridCoord start, GridCoord end)
-	{
+	public IEnumerable<GridCoord> Line(GridCoord start, GridCoord end) {
 		int distance = ManhattanDistance(start, end);
 		
 		for (int i = 0; i <= distance; ++i) {
@@ -221,15 +201,13 @@ public class Grid<TData>
 		}
 	}
 	
-	public IEnumerable<GridCoord> Neighbors(GridCoord coord)
-	{
+	public IEnumerable<GridCoord> Neighbors(GridCoord coord) {
 		foreach (GridCoord dir in GridCoord.DIRECTIONS) {
 			yield return coord + dir;
 		}
 	}
 	
-	public IEnumerable<GridCoord> LineFromPoint(Vector2 from, Vector2 to)
-	{
+	public IEnumerable<GridCoord> LineFromPoint(Vector2 from, Vector2 to) {
 		FloatGridCoord start = PointToFloatCoord(from), end = PointToFloatCoord(to);
 
 		int distance = ManhattanDistance(start.Round(), end.Round());
@@ -242,8 +220,7 @@ public class Grid<TData>
 		}
 	}
 	
-	private GridCoord _getClosestBatch(GridCoord coord)
-	{
+	private GridCoord _getClosestBatch(GridCoord coord) {
 		int BatchDiameter = 1 + BatchRadius * 2;
 		return new GridCoord(
 				(int)(Math.Round((float)coord.x / BatchDiameter) * BatchDiameter),
@@ -251,8 +228,7 @@ public class Grid<TData>
 				);
 	}
 	
-	private void _addBatch(GridCoord batch)
-	{
+	private void _addBatch(GridCoord batch) {
 		for (int dx = -BatchRadius; dx <= BatchRadius; ++dx){
 			for (int dy = -BatchRadius; dy <= BatchRadius; ++dy){
 				GridCoord coord = new GridCoord(
@@ -268,8 +244,7 @@ public class Grid<TData>
 		}
 	}
 	
-	private void _removeBatch(GridCoord batch)
-	{
+	private void _removeBatch(GridCoord batch) {
 		for (int dx = -BatchRadius; dx <= BatchRadius; ++dx){
 			for (int dy = -BatchRadius; dy <= BatchRadius; ++dy){
 				GridCoord coord = new GridCoord(
@@ -285,10 +260,7 @@ public class Grid<TData>
 		}
 	}
 	
-	public delegate IGridElement<TData> ConstructElementCallback(Grid<TData> grid);
-
-	public void Update(Camera cam)
-	{
+	public void Update(Camera cam) {
 		if (!AutoElementManagement) throw new Exception("Cannot update when AutoElementManagement is false.");
 		
 		Rect camRect = cam.pixelRect;
@@ -331,8 +303,7 @@ public class Grid<TData>
 		if (m_inactiveElements.Count > m_elements.Count / 2) m_inactiveElements.Pop().Destroy();
 	}
 	
-	public void RefreshElement(GridCoord coord)
-	{
+	public void RefreshElement(GridCoord coord) {
 		if (ContainsElement(coord)) {
 			GetElement(coord).Deactivate();
 			GetElement(coord).Activate();
@@ -347,31 +318,38 @@ public class Grid<TData>
 		
 	} */
 	
-	public Vector2 CoordToPoint(GridCoord coord)
-	{
+	public Vector2 CoordToPoint(GridCoord coord) {
 		float x = ((float)coord.x) * this.TileSize;
 		float y = ((float)coord.y) * this.TileSize;
 		
 		return new Vector2(x, y);
 	}
 	
-	public static int ManhattanDistance(GridCoord a, GridCoord b)
-	{
+	public static int ManhattanDistance(GridCoord a, GridCoord b) {
 		return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
 	}
 	
-	public FloatGridCoord PointToFloatCoord(Vector2 point)
-	{
+	public FloatGridCoord PointToFloatCoord(Vector2 point) {
 		float x = point.x / this.TileSize;
 		float y = point.y / this.TileSize;
 		
 		return new FloatGridCoord(x, y);
 	}
 	
-	public GridCoord PointToCoord(Vector2 point)
-	{
+	public GridCoord PointToCoord(Vector2 point) {
 		return PointToFloatCoord(point).Round();
 	}
+	
+	public void ApplySampler(ArrayTexture2D sampler, int minX, int maxX, int minY, int maxY, bool useLinearFiltering, ApplySamplerDataFunction<TData> applyFunction, bool clamped = false) {
+		Vector2 point = new Vector2();
+		foreach (GridCoord coord in this.Coords()){
+			point.x = Util.Map(coord.x, minX, maxX, 0.0f, 1.0f, clamped);
+			point.y = Util.Map(coord.y, minY, maxY, 0.0f, 1.0f, clamped);
+			float pixel = useLinearFiltering ? sampler.Texture2DLinear(point) : sampler.Texture2DNearest(point);
+			applyFunction(this, coord, pixel);
+		}
+	} 
 
 	#endregion
+	
 }

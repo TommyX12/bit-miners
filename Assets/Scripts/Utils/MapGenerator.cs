@@ -313,17 +313,4 @@ public static class MapGenerator
 		// if (target == 0) grid1 = grid2;
 	} */
 	
-	/* public delegate void ApplySamplerDataFunction<TData>(HexGrid<TData> grid, CubicHexCoord hex, float pixel);
-	
-	public static void ApplySamplerToHexGrid<TData>(HexGrid<TData> grid, ArrayTexture2D sampler, int mapRadius, bool useLinearFiltering, ApplySamplerDataFunction<TData> applyFunction)
-	{
-		float scale = 1.0f / (grid.HexRadius * mapRadius * 4.0f);
-		foreach (CubicHexCoord hex in grid.HexCoords()){
-			Vector2 point = grid.CubicToPoint(hex);
-			point = point * scale + new Vector2(0.5f, 0.5f);
-			float pixel = useLinearFiltering ? sampler.Texture2DLinear(point) : sampler.Texture2DNearest(point);
-			applyFunction(grid, hex, pixel);
-		}
-	} */
-	
 }

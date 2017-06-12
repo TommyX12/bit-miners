@@ -31,6 +31,19 @@ public class Map : MyMono {
 		foreach (GridCoord coord in Grid.Coords()){
 			Grid.Set(coord, new MapData());
 		}
+		
+		// Util.PushRandomSeed(Util.StringHash(SubjectName));
+		
+		// ArrayTexture2D mapBiomeParam1 = MapGenerator.generate_DiamondSquare(257, 0.35f, 0.65f, -0.4f, 0.4f, 0.75f);
+		ArrayTexture2D mapBiomeParam1 = MapGenerator.generate_CaveCA(168, 168, 0.5f, 3);
+		mapBiomeParam1.ReAverage(0.25f);
+		this.Grid.ApplySampler(mapBiomeParam1, -MapRadiusH, MapRadiusH, -MapRadiusV, MapRadiusV, true, 
+			delegate(Grid<MapData> grid, GridCoord coord, float pixel) {
+				grid.Get(coord).Color[0] = pixel;
+				grid.Get(coord).Color[1] = 0.85f;
+				grid.Get(coord).Color[2] = 1.0f - pixel;
+			}
+		);
 	}
 
 	void Start() {

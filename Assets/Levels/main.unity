@@ -2611,12 +2611,12 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 811302702}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22227b222dda0d741b9ed591e1a10552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TileSize: 0.5
+  TileSize: 0.25
   MapRadiusH: 64
   MapRadiusV: 64
 --- !u!1 &815425009
@@ -4516,7 +4516,7 @@ MonoBehaviour:
   type: 
   MaxCapacity: 30
   stored: 0
-  coll: {fileID: 1497410444}
+  coll: {fileID: 0}
   MiningRange: 0.25
   TimeMultiplier: 1
 --- !u!58 &1497410444
@@ -6047,7 +6047,7 @@ MonoBehaviour:
   type: 
   MaxCapacity: 30
   stored: 0
-  coll: {fileID: 2036417854}
+  coll: {fileID: 0}
   MiningRange: 0.25
   TimeMultiplier: 1
 --- !u!58 &2036417854

@@ -109,7 +109,7 @@ static public class Util
 		return val < lower ? lower : (val > higher ? higher : val);
 	}
 	
-	static public float Map(float x, float in_min, float in_max, float out_min, float out_max, bool clamped)
+	static public float Map(float x, float in_min, float in_max, float out_min, float out_max, bool clamped = false)
 	{
 		float result = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 		if (clamped) return Clamp(result, out_min, out_max);
