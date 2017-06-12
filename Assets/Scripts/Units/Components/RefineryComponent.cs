@@ -50,18 +50,22 @@ public class RefineryComponent : UnitComponent, IInteractable
 
     public void Interact(GameObject g)
     {
-        MiningComponent comp;
-        if ((comp = (MiningComponent)g.GetComponent<Unit>().GetUnitComponent<MiningComponent>()) != null)
+        Debug.Log("Interact");
+        StorageComponent comp;
+        if ((comp = (StorageComponent)g.GetComponent<Unit>().GetUnitComponent<StorageComponent>()) != null)
         {
+            Debug.Log("Grab");
             if (Stored.ContainsKey(comp.type)) {
-                if (Stored[comp.type] > comp.GetMaxStorage() - comp.GetStorage())
+                if (Stored[comp.type] > comp.GetMaxCapacity() - comp.stored)
                 {
-                    int amt = comp.GetMaxStorage() - comp.storage;
+                    Debug.Log("Added Remainder");
+                    int amt = comp.GetMaxCapacity() - comp.stored;
                     Stored[comp.type] -= amt;
-                    comp.storage += amt;
+                    comp.stored += amt;
                 }
                 else {
-                    comp.storage += Stored[comp.type];
+                    Debug.Log("Added");
+                    comp.stored = comp.stored + Stored[comp.type];
                     Stored[comp.type] = 0;
                 }
             }

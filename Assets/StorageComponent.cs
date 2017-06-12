@@ -12,17 +12,17 @@ public class StorageComponent : UnitComponent, IInteractable {
 
     public void Interact(GameObject g)
     {
-        MiningComponent comp;
-        if ((comp = (MiningComponent)g.GetComponent<Unit>().GetUnitComponent<MiningComponent>())) {
-            if (comp.GetStorage() > MaxCapacity - stored)
+        StorageComponent comp;
+        if ((comp = (StorageComponent)g.GetComponent<Unit>().GetUnitComponent<StorageComponent>())) {
+            if (comp.GetCurrentCapacity() > MaxCapacity - stored)
             {
                 int amt = MaxCapacity - stored;
-                comp.storage -= amt;
+                comp.stored -= amt;
                 stored += amt;
             }
             else {
-                stored += comp.GetStorage();
-                comp.storage = 0;
+                stored += comp.GetCurrentCapacity();
+                comp.stored = 0;
             }
         }
     }

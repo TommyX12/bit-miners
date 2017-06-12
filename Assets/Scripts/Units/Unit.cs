@@ -88,7 +88,6 @@ public class Unit : MyMono, IScriptSystemAPI {
 
 	public UnitComponent GetUnitComponent<T>() {
 		foreach (UnitComponent comp in components) {
-			Debug.Log(comp.GetType() + " " +  typeof(T));
 			if (comp.GetType() == typeof(T)) {
 				return comp;
 			}

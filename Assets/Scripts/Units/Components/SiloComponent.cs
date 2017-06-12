@@ -22,7 +22,7 @@ public class SiloComponent : UnitComponent, IInteractable
 
     public void Interact(GameObject g)
     {
-        MiningComponent miner = (MiningComponent) g.GetComponent<Unit>().GetUnitComponent<MiningComponent>();
+        StorageComponent miner = (StorageComponent) g.GetComponent<Unit>().GetUnitComponent<StorageComponent>();
 
         // type mismatch
 
@@ -30,14 +30,14 @@ public class SiloComponent : UnitComponent, IInteractable
             return;
         }
 
-        if (NewResourceManager.GetMaxCapacity(type) - NewResourceManager.GetAmtStored(type) < miner.storage)
+        if (NewResourceManager.GetMaxCapacity(type) - NewResourceManager.GetAmtStored(type) < miner.stored)
         {
-            miner.storage -= NewResourceManager.GetMaxCapacity(type) - NewResourceManager.GetAmtStored(type);
+            miner.stored -= NewResourceManager.GetMaxCapacity(type) - NewResourceManager.GetAmtStored(type);
             NewResourceManager.Add(type, NewResourceManager.GetMaxCapacity(type) - NewResourceManager.GetAmtStored(type));
         }
         else {
-            NewResourceManager.Add(type, miner.storage);
-            miner.storage = 0;
+            NewResourceManager.Add(type, miner.stored);
+            miner.stored = 0;
         }
 
     }

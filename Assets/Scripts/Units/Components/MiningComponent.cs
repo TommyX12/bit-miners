@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class MiningComponent : UnitComponent {
+public class MiningComponent : StorageComponent {
     public float MiningRange = 0.25f;
     public float TimeMultiplier = 1f;
-    public int MaxCapacity = 30;
-    public int storage = 0;
-    public string type;
     float miningTimer;
     bool mining;
     Resource resource;
@@ -25,7 +22,7 @@ public class MiningComponent : UnitComponent {
             return;
         }
 
-        if (storage >= MaxCapacity) {
+        if (stored >= MaxCapacity) {
             return;
         }
 
@@ -55,9 +52,9 @@ public class MiningComponent : UnitComponent {
             if (miningTimer <= 0) {
                 Debug.Log("Collected");
                 mining = false;
-                storage += resource.GetResource();
-                if (storage >= MaxCapacity) {
-                    storage = MaxCapacity;
+                stored += resource.GetResource();
+                if (stored >= MaxCapacity) {
+                    stored = MaxCapacity;
                 }
                 if (((Vector2)(transform.position - resource.gameObject.transform.position)).magnitude > MiningRange) {
                     mining = false;
@@ -68,33 +65,8 @@ public class MiningComponent : UnitComponent {
         }
     }
 
-    public void TurnIn() {
-        RaycastHit2D[] hits = new RaycastHit2D[20];
-        int hitCount = miningCollider.Cast(Vector2.zero, hits);
-        for (int i = 0; i < hitCount; i++)
-        {
-            if (hits[i].collider.gameObject.GetComponent<IInteractable>() != null)
-            {
-                hits[i].collider.gameObject.GetComponent<IInteractable>().Interact(unit.gameObject);
-            }
-        }
-    }
-
-    public int GetMaxStorage() {
-        return MaxCapacity;
-    }
-
-    public int GetStorage() {
-        return storage;
-    }
-
     public double GetMiningRange() {
         return MiningRange;
-    }
-
-    public void ChangeType(string type) {
-        storage = 0;
-        this.type = type;
     }
 
     public string GetMiningType() {
@@ -103,13 +75,13 @@ public class MiningComponent : UnitComponent {
 
     public override void Register(ScriptSystem scriptSystem)
     {
-        scriptSystem.RegisterFunction("get_max_storage", new Func<int>(GetMaxStorage));
-        scriptSystem.RegisterFunction("get_storage", new Func<int>(GetStorage));
-        scriptSystem.RegisterFunction("mine", new Action(startMining));
+        scriptSystem.RegisterFunction("set_type", new Action<string>(SetType));
+        scriptSystem.RegisterFunction("get_type", new Func<string>(GetResourceType));
+        scriptSystem.RegisterFunction("get_current_capacity", new Func<int>(GetCurrentCapacity));
+        scriptSystem.RegisterFunction("get_max_capacity", new Func<int>(GetMaxCapacity));
         scriptSystem.RegisterFunction("turn_in", new Action(TurnIn));
+        scriptSystem.RegisterFunction("mine", new Action(startMining));
         scriptSystem.RegisterFunction("get_mining_range", new Func<double>(GetMiningRange));
-        scriptSystem.RegisterFunction("change_type", new Action<string>(ChangeType));
-        scriptSystem.RegisterFunction("get_type", new Func<string>(GetMiningType));
     }
 
 }

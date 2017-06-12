@@ -20,7 +20,7 @@ public class TestMiningAI : MyMono {
 
         if (miningTarget != null)
         {
-            if (miner.storage < miner.MaxCapacity)
+            if (miner.stored < miner.MaxCapacity)
             {
                 mover.SetVectorTarget(miningTarget.transform.position);
                 miner.startMining();
