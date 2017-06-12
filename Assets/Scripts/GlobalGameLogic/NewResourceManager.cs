@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewResourceManager : MyMono
+public class NewResourceManager
 {
 
     private static int MaxCapacity;
@@ -127,6 +127,11 @@ public class NewResourceManager : MyMono
             }
                 Refresh();
         }
+
+        foreach (SiloComponent s in silos) {
+            Debug.Log(s.gameObject.name);
+        }
+
     }
 
     public static void RemoveSilo(SiloComponent silo)
@@ -161,8 +166,7 @@ public class NewResourceManager : MyMono
             if (winner == null && silo.type == type)
             {
                 winner = silo.gameObject;
-            }
-            if (((Vector2)(position - (Vector2)winner.transform.position)).magnitude >
+            } else if (winner != null && ((Vector2)(position - (Vector2)winner.transform.position)).magnitude >
                 ((Vector2)(position - (Vector2)silo.gameObject.transform.position)).magnitude && silo.type == type)
             {
                 winner = silo.gameObject;

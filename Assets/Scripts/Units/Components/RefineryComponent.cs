@@ -11,9 +11,9 @@ public class RefineryComponent : UnitComponent, IInteractable
     public List<string> OutputTypes;
     public List<int> OutputAmounts;
 
-    public Dictionary<string, int> Inputs;
-    public Dictionary<string, int> Outputs;
-    public Dictionary<string, int> Stored;
+    public Dictionary<string, int> Inputs = new Dictionary<string, int>();
+    public Dictionary<string, int> Outputs = new Dictionary<string, int>();
+    public Dictionary<string, int> Stored = new Dictionary<string, int>();
 
     public float ProcessTime;
     private float ProcessTimer;
@@ -24,6 +24,9 @@ public class RefineryComponent : UnitComponent, IInteractable
     {
         for (int i = 0; i < InputTypes.Count; i ++) {
             Inputs.Add(InputTypes[i], InputAmounts[i]);
+        }
+
+        for (int i = 0; i < OutputTypes.Count; i++) {
             Outputs.Add(OutputTypes[i], OutputAmounts[i]);
             Stored.Add(OutputTypes[i], 0);
         }

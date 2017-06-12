@@ -11,6 +11,6 @@ public class CheatResources : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        ResourceManager.Add(100);
+        NewResourceManager.Add("iron", 100);
 	}
 }
