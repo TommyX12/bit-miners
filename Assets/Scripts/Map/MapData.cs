@@ -9,6 +9,7 @@ public class MapData {
 	
 	public float BiomeParam1 = 0.0f; // precipitation 
 	public float BiomeParam2 = 0.0f; // temperature
+	public string BiomeName = "";
 	
 	public MapData() {
 		
@@ -19,6 +20,8 @@ public class MapData {
 		this.BiomeParam2 = Util.Clamp(this.BiomeParam2, 0.0f, 1.0f);
 
 		Biome biome = Biome.GetBiome(this.BiomeParam1, this.BiomeParam2);
+		
+		this.BiomeName = biome.Name;
 		
 		this.Color[0] = biome.Color[0];
 		this.Color[1] = biome.Color[1];

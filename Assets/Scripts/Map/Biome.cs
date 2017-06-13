@@ -13,10 +13,7 @@ public class Biome
 	
 	public float[] Color = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
 	public string SpriteName = "tile";
-	
-	public Biome() {
-		
-	}
+	public string Name = "";
 	
 	private static Dictionary<string, Biome> biomeDict = new Dictionary<string, Biome>() {
 		{"tundra", new Biome(){
@@ -38,7 +35,17 @@ public class Biome
 			Color = Util.HexToFloat4("32780b"),
 		}},
 	};
+	
+	static Biome() {
+		foreach (var item in biomeDict) {
+			item.Value.Name = item.Key;
+		}
+	}
 
+	public Biome() {
+		
+	}
+	
 	public static Biome GetBiome(float param1, float param2) {
 		param1 = Util.Clamp(param1, 0.0f, 0.999f);
 		param2 = Util.Clamp(param2, 0.0f, 0.999f);
@@ -47,5 +54,9 @@ public class Biome
 		int column = (int)(param2 * _biomeMapHeight);
 		
 		return biomeDict[biomeMap[row, column]];
+	}
+	
+	public static Biome GetBiome(string name) {
+		return biomeDict[name];
 	}
 }
