@@ -1,5 +1,5 @@
 when update() {
-	if(get_max_storage() > get_storage()){
+	if(get_max_capacity() > get_current_capacity()){
 		go_to_nearest_resource()
 		mine()
 	} else {
