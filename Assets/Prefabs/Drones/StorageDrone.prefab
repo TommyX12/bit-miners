@@ -194,7 +194,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1970563472385530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.254, y: 0.526, z: 0}
+  m_LocalPosition: {x: -2.293, y: 0.537, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4964129902464492}
@@ -400,12 +400,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9833d81f656c1e24881f29b83b37b746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildTime: 0
-  ResourceTypes: []
-  ResourceCosts: 
+  BuildTime: 30
+  ResourceTypes:
+  - gold
+  ResourceCosts: 32000000
   MaxHP: 6
   teamid: 0
-  description: 
+  description: A drone for moving resources between buildings.
   components: []
   ScriptButtonObject: {fileID: 114977040269934334}
 --- !u!114 &114175600774277616

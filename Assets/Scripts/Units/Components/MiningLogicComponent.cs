@@ -8,6 +8,7 @@ public class MiningLogicComponent : UnitComponent {
     public CircleCollider2D Sensor;
     public MoveComponent mover;
     public float SensorRange;
+    public MiningComponent miner;
     private RaycastHit2D[] hits = new RaycastHit2D[50];
 
 
@@ -16,14 +17,13 @@ public class MiningLogicComponent : UnitComponent {
         Sensor.radius = SensorRange;
     }
 
-
-    public GameObject GetNearestResource(string type) {
+    public GameObject GetNearestResource() {
         int hitcount = Sensor.Cast(Vector2.zero, hits);
 
         GameObject winner = null;
 
         for (int i = 0; i < hitcount && i < hits.Length; i++) {
-            if (hits[i].collider.gameObject.CompareTag("Resource") && hits[i].collider.gameObject.GetComponent<Resource>().type == type) {
+            if (hits[i].collider.gameObject.CompareTag("Resource") && hits[i].collider.gameObject.GetComponent<Resource>().type == miner.type) {
                 if (winner == null)
                 {
                     winner = hits[i].collider.gameObject;
@@ -39,9 +39,9 @@ public class MiningLogicComponent : UnitComponent {
         return winner;
     }
 
-	public Vector2 GetNearestResourcePosition(string type) {
+	public Vector2 GetNearestResourcePosition() {
 		GameObject returnval;
-		if ((returnval = GetNearestResource(type)) != null)
+		if ((returnval = GetNearestResource()) != null)
 		{
 			return returnval.transform.position;
 		} else {
@@ -49,42 +49,42 @@ public class MiningLogicComponent : UnitComponent {
 		}
 	}
 
-    public Jurassic.Library.ObjectInstance GetNearestResourcePositionScript(string type) {
-		return UnitComponent.Vector2ToObject(this.GetNearestResourcePosition(type));
+    public Jurassic.Library.ObjectInstance GetNearestResourcePositionScript() {
+		return UnitComponent.Vector2ToObject(this.GetNearestResourcePosition());
     }
 
-    public Jurassic.Library.ObjectInstance GetNearestSiloPositionScript(string type)
+    public Jurassic.Library.ObjectInstance GetNearestSiloPositionScript()
     {
-        return UnitComponent.Vector2ToObject(this.GetNearestSiloPosition(type));
+        return UnitComponent.Vector2ToObject(this.GetNearestSiloPosition());
     }
 
-    public void GoToNearestResource(string type) {
-        mover.SetVectorTarget(GetNearestResourcePosition(type));
+    public void GoToNearestResource() {
+        mover.SetVectorTarget(GetNearestResourcePosition());
     }
 
-    public GameObject GetNearestSilo(string type) {
-        return NewResourceManager.GetNearestSilo(transform.position, type);
+    public GameObject GetNearestSilo() {
+        return NewResourceManager.GetNearestSilo(transform.position, miner.type);
     }
 
-    public Vector2 GetNearestSiloPosition(string type) {
+    public Vector2 GetNearestSiloPosition() {
         GameObject returnval;
-        if ((returnval = GetNearestSilo(type)) != null) {
+        if ((returnval = GetNearestSilo()) != null) {
             return returnval.transform.position;
         } else { return transform.position; }
     }
 
-    public void GoToNearestSilo(string type) {
-        mover.SetVectorTarget(GetNearestSiloPosition(type));
+    public void GoToNearestSilo() {
+        mover.SetVectorTarget(GetNearestSiloPosition());
     }
 
 	public override void Register(ScriptSystem scriptSystem) {
-		scriptSystem.RegisterFunction("get_nearest_resource_position", new Func<string, Jurassic.Library.ObjectInstance>(this.GetNearestResourcePositionScript));
+		scriptSystem.RegisterFunction("get_nearest_resource_position", new Func<Jurassic.Library.ObjectInstance>(this.GetNearestResourcePositionScript));
 
-        scriptSystem.RegisterFunction("get_nearest_silo_position", new Func<string, Jurassic.Library.ObjectInstance>(this.GetNearestSiloPositionScript));
+        scriptSystem.RegisterFunction("get_nearest_silo_position", new Func<Jurassic.Library.ObjectInstance>(this.GetNearestSiloPositionScript));
 
-        scriptSystem.RegisterFunction("go_to_nearest_resource", new Action<string> (GoToNearestResource));
+        scriptSystem.RegisterFunction("go_to_nearest_resource", new Action(GoToNearestResource));
 
-        scriptSystem.RegisterFunction("go_to_nearest_silo", new Action<string> (GoToNearestSilo));
+        scriptSystem.RegisterFunction("go_to_nearest_silo", new Action(GoToNearestSilo));
 	}
 
 }

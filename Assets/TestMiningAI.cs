@@ -14,7 +14,7 @@ public class TestMiningAI : MyMono {
         base.PausingFixedUpdate();
         
         if (miningTarget == null) {
-            miningTarget = miningControl.GetNearestResource("iron");
+            miningTarget = miningControl.GetNearestResource();
             Debug.Log("FindTarget");
         }
 
@@ -27,7 +27,7 @@ public class TestMiningAI : MyMono {
             }
             else
             {
-                miningControl.GoToNearestSilo("iron");
+                miningControl.GoToNearestSilo();
                 miner.TurnIn();
             }
         }

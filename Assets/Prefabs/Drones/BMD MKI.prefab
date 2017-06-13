@@ -227,7 +227,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1070059350565954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7885818, y: -0.41098458, z: 0}
+  m_LocalPosition: {x: -4.517052, y: 1.6235297, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4455164980119768}
@@ -448,7 +448,6 @@ MonoBehaviour:
   coll: {fileID: 58283131441528000}
   MiningRange: 0.25
   TimeMultiplier: 1
-  storage: 0
 --- !u!114 &114156485428814328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -615,6 +614,7 @@ MonoBehaviour:
   Sensor: {fileID: 58608892847609098}
   mover: {fileID: 114946740535806858}
   SensorRange: 15
+  miner: {fileID: 114104397307655570}
 --- !u!114 &114725260427657632
 MonoBehaviour:
   m_ObjectHideFlags: 1

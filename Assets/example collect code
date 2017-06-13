@@ -1,3 +1,7 @@
+when start() {
+	set_type("iron")
+}
+
 when update() {
 	if(get_max_capacity() > get_current_capacity()){
 		go_to_nearest_resource()

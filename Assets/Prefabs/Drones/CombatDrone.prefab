@@ -475,11 +475,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unit: {fileID: 0}
+  type: 
+  MaxCapacity: 30
+  stored: 0
+  coll: {fileID: 0}
   MiningRange: 0.25
   TimeMultiplier: 1
-  MaxCapacity: 30
-  storage: 0
-  type: 
 --- !u!114 &114313929179423460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,7 +680,7 @@ MonoBehaviour:
   ResourceTypes:
   - iron
   ResourceCosts: 2c010000
-  MaxHP: 6
+  MaxHP: 12
   teamid: 0
   description: A combat drone used to defend and attack.
   components: []
