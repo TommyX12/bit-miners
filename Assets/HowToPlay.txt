@@ -1,0 +1,45 @@
+=How To Play-
+
+This is a resource collection game.
+
+You will control a unit (the circle). Press WASD to move. The camera will follow the circle.
+
+- Bases -
+
+There will be some base buildings Large square base buildings. Each holds it's own type of resource. iron, gold, and chips
+
+The bases also allow for the production of more units that you can program to help you collect and defend
+
+- Units -
+
+Each unit has a predefined task.
+
+Currently there are 3 types of unit.
+
+- Miners -
+
+These units are supposed to collect resources on the map and deposit them in the base
+
+- Defenders -
+
+These units fight off enemies that periodically spawn
+
+- Transporters -
+
+These units can transport resources from one point to another.
+
+- Resources -
+
+iron and gold are primary resources, they can be found in the map naturally.
+
+chips are a secondary resource and require both iron and gold to be created. They are created in the refinery, marked by R F
+
+Resources are used to create more units
+
+- Programming -
+
+Each unit can be programmed, some buildings can also be programmed (The refinery).
+
+Units and buildings will only act according to their program, so make sure to do it correctly!
+
+To program a unit walk up to it and click on the program button.
