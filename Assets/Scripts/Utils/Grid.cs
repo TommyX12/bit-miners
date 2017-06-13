@@ -260,18 +260,18 @@ public class Grid<TData>
 		}
 	}
 	
-	public void Update(Camera cam) {
+	public void Update(Camera camera) {
 		if (!AutoElementManagement) throw new Exception("Cannot update when AutoElementManagement is false.");
 		
-		Rect camRect = cam.pixelRect;
-		float relativeDepth = ParentTransform.position.z - cam.transform.position.z;
-		Vector2 camTopLeftLocal = ToLocal(Camera.main.ScreenToWorldPoint(new Vector3(camRect.x, camRect.y, relativeDepth)));
-		Vector2 camBottomRightLocal = ToLocal(Camera.main.ScreenToWorldPoint(new Vector3(camRect.x + camRect.width, camRect.y + camRect.height, relativeDepth)));
+		Rect cameraRect = camera.pixelRect;
+		float relativeDepth = ParentTransform.position.z - camera.transform.position.z;
+		Vector2 camTopLeftLocal = ToLocal(Camera.main.ScreenToWorldPoint(new Vector3(cameraRect.x, cameraRect.y, relativeDepth)));
+		Vector2 camBottomRightLocal = ToLocal(Camera.main.ScreenToWorldPoint(new Vector3(cameraRect.x + cameraRect.width, cameraRect.y + cameraRect.height, relativeDepth)));
 		
 		float batchRadius = Util.Distance(this.TileSize, this.TileSize) * (1 + BatchRadius * 2) * 0.5f;
 			
-		float maxViewRadius = (camBottomRightLocal - camTopLeftLocal).magnitude / 2.0f + batchRadius;
-		int maxViewBatchRadius = (int)Math.Ceiling(maxViewRadius / (batchRadius * 1.5f) + 0.75f);
+		float maxViewRadius = (camBottomRightLocal - camTopLeftLocal).magnitude / 2.0f;
+		int maxViewBatchRadius = (int)Math.Ceiling(maxViewRadius / batchRadius);
 		
 		HashSet<GridCoord> lastActiveBatches = new HashSet<GridCoord>(m_activeBatches);
 		

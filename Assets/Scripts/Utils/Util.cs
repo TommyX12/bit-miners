@@ -198,6 +198,63 @@ static public class Util
 		return new Color(floats[0], floats[1], floats[2], floats[3]);
 	}
 	
+	private static readonly Dictionary<char, int> hexCharToInt = new Dictionary<char, int>() {
+		{'0', 0},
+		{'1', 1},
+		{'2', 2},
+		{'3', 3},
+		{'4', 4},
+		{'5', 5},
+		{'6', 6},
+		{'7', 7},
+		{'8', 8},
+		{'9', 9},
+		{'a', 10},
+		{'b', 11},
+		{'c', 12},
+		{'d', 13},
+		{'e', 14},
+		{'f', 15},
+	};
+	
+	static private int HexSubstringToInt(string hex, int i, int j) {
+		int result = 0;
+		
+		for (; i < j; ++i) {
+			char c = hex[i];
+			result = result * 16 + hexCharToInt[c];
+		}
+		
+		return result;
+	}
+	
+	static public float[] HexToFloat4(string hex) {
+		hex = hex.ToLower();
+		int a = 255;
+		int r = 255;
+		int g = 255;
+		int b = 255;
+		if (hex.Length == 6) {
+			r = HexSubstringToInt(hex, 0, 2);
+			g = HexSubstringToInt(hex, 2, 4);
+			b = HexSubstringToInt(hex, 4, 6);
+		}
+		else if (hex.Length == 8) {
+			a = HexSubstringToInt(hex, 0, 2);
+			r = HexSubstringToInt(hex, 2, 4);
+			g = HexSubstringToInt(hex, 4, 6);
+			b = HexSubstringToInt(hex, 6, 8);
+		}
+		else return null;
+		
+		return new float[]{
+			(float)r / 255.0f,
+			(float)g / 255.0f,
+			(float)b / 255.0f,
+			(float)a / 255.0f,
+		};
+	}
+	
 	static public void SetUIScreenPos(Canvas canvas, Camera camera, Vector2 screenPos, Transform elementTransform)
 	{
 		Vector2 pos;

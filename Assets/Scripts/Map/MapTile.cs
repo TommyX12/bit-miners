@@ -16,6 +16,8 @@ public class MapTile : MyMono, IGridElement<MapData> {
 	}
 	
 	public void Activate() {
+		this.gameObject.SetActive(true);
+		
 		this.SpriteRenderer.color = Util.Float4ToColor(this.Data.Color);
 		this.SpriteRenderer.sprite = ResourceManager.GetSprite(this.Data.SpriteName);
 		
@@ -23,11 +25,11 @@ public class MapTile : MyMono, IGridElement<MapData> {
 	}
 	
 	public void Deactivate() {
-		
+		this.gameObject.SetActive(false);
 	}
 	
 	public void Destroy() {
-		
+		Destroy(gameObject);
 	}
 	
 	public override void PausingUpdate() {

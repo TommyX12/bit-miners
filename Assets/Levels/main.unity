@@ -2616,7 +2616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22227b222dda0d741b9ed591e1a10552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TileSize: 0.25
+  TileSize: 0.5
   MapRadiusH: 64
   MapRadiusV: 64
 --- !u!1 &815425009
