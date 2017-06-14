@@ -634,7 +634,7 @@ Transform:
   - {fileID: 547735547}
   - {fileID: 10920253}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &95271860
 GameObject:
@@ -1740,8 +1740,8 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
-  orthographic: 1
+  field of view: 90
+  orthographic: 0
   orthographic size: 2
   m_Depth: -1
   m_CullingMask:
@@ -1765,11 +1765,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 483525124}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.762, y: 0.354, z: -10}
+  m_LocalPosition: {x: -2.762, y: 0.354, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &483525130
 MonoBehaviour:
@@ -1783,6 +1783,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1535419724}
+  Smoothing: 0.9
+  ZOffsetMin: -5
+  ZOffsetMax: -1
+  ZOffset: -2
+  ZOffsetScrollSpeed: 0.25
 --- !u!4 &509577101 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4991614413366184, guid: d418d9d653ea36d4b8bd778a0d9c3e07,
@@ -3035,7 +3040,7 @@ RectTransform:
   - {fileID: 588047412}
   - {fileID: 595927170}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4998,7 +5003,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -5485,7 +5490,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1602354921
 Prefab:
@@ -6187,7 +6192,7 @@ Transform:
   - {fileID: 2094297265}
   - {fileID: 1390789157}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1872601472
 Prefab:
@@ -6330,7 +6335,7 @@ RectTransform:
   - {fileID: 308850889}
   - {fileID: 916441614}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6836,7 +6841,7 @@ Transform:
   - {fileID: 2062091611}
   - {fileID: 697444980}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &2031175076 stripped
 Transform:

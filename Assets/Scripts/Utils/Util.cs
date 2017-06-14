@@ -255,6 +255,11 @@ static public class Util
 		};
 	}
 	
+	static public Vector3 CameraToWorld(Camera camera, Vector2 screenPos, float z) {
+		float relativeDepth = z - camera.transform.position.z;
+		return camera.ScreenToWorldPoint(new Vector3(screenPos.x, screenPos.y, relativeDepth));
+	}
+	
 	static public void SetUIScreenPos(Canvas canvas, Camera camera, Vector2 screenPos, Transform elementTransform)
 	{
 		Vector2 pos;

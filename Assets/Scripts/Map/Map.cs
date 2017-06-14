@@ -6,8 +6,11 @@ public class Map : MyMono {
 	
 	public Grid<MapData> Grid;
 	
-	public float TileSize = 0.5f;
+	[HideInInspector]
+	public float TileSize = 0.25f;
+	[HideInInspector]
 	public int MapRadiusH = 64;
+	[HideInInspector]
 	public int MapRadiusV = 64;
 	
 	private MapTile ConstructElementFunc(Grid<MapData> grid) {
