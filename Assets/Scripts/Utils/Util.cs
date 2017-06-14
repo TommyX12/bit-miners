@@ -229,6 +229,7 @@ static public class Util
 	}
 	
 	static public float[] HexToFloat4(string hex) {
+		if (hex[0] == '#') hex = hex.Substring(1);
 		hex = hex.ToLower();
 		int a = 255;
 		int r = 255;

@@ -7,8 +7,8 @@ public class Biome
 	private static int _biomeMapWidth = 2;
 	private static int _biomeMapHeight = 3;
 	private static string[,] biomeMap = new string[,]{
-		{"tundra", "taiga", "desert"},
-		{"swamp", "grass_land", "rain_forest"},
+		{"tundra", "grass_land", "desert"},
+		{"water", "swamp", "rain_forest"},
 	};
 	
 	public float[] Color = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
@@ -17,22 +17,22 @@ public class Biome
 	
 	private static Dictionary<string, Biome> biomeDict = new Dictionary<string, Biome>() {
 		{"tundra", new Biome(){
-			Color = Util.HexToFloat4("ccffff"),
+			Color = Util.HexToFloat4("#ccddff"),
 		}},
-		{"taiga", new Biome(){
-			Color = Util.HexToFloat4("009999"),
+		{"water", new Biome(){
+			Color = Util.HexToFloat4("#147caa"),
 		}},
 		{"desert", new Biome(){
-			Color = Util.HexToFloat4("ebbd4c"),
+			Color = Util.HexToFloat4("#ebbd4c"),
 		}},
 		{"swamp", new Biome(){
-			Color = Util.HexToFloat4("5e5b16"),
+			Color = Util.HexToFloat4("#504026"),
 		}},
 		{"grass_land", new Biome(){
-			Color = Util.HexToFloat4("80c13f"),
+			Color = Util.HexToFloat4("#80c13f"),
 		}},
 		{"rain_forest", new Biome(){
-			Color = Util.HexToFloat4("32780b"),
+			Color = Util.HexToFloat4("#30750b"),
 		}},
 	};
 	
