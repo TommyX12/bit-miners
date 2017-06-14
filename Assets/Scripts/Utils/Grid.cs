@@ -268,10 +268,10 @@ public class Grid<TData>
 		Vector2 camTopLeftLocal = ToLocal(Camera.main.ScreenToWorldPoint(new Vector3(cameraRect.x, cameraRect.y, relativeDepth)));
 		Vector2 camBottomRightLocal = ToLocal(Camera.main.ScreenToWorldPoint(new Vector3(cameraRect.x + cameraRect.width, cameraRect.y + cameraRect.height, relativeDepth)));
 		
-		float batchRadius = Util.Distance(this.TileSize, this.TileSize) * (1 + BatchRadius * 2) * 0.5f;
+		float batchDiameter = Util.Distance(this.TileSize, this.TileSize) * (1 + BatchRadius * 2);
 			
 		float maxViewRadius = (camBottomRightLocal - camTopLeftLocal).magnitude / 2.0f;
-		int maxViewBatchRadius = (int)Math.Ceiling(maxViewRadius / batchRadius);
+		int maxViewBatchRadius = (int)Math.Ceiling(maxViewRadius / batchDiameter) + 1;
 		
 		HashSet<GridCoord> lastActiveBatches = new HashSet<GridCoord>(m_activeBatches);
 		
