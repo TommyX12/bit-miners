@@ -1,51 +1,110 @@
+Code Structure
+
+Only code contained in events will be run. All other code will be ignored.
+
+to provide code for an event use this structure
+
+when event(){
+	code
+}
+
+referr to the example code for examples.
+
+-Events-
+
+// runs once after the programming window is closed. Runs before any update event
+start()
+
+// runs multiple times per second, time_passed is the time since the last update event in seconds
+update(time_passed)
+
+// runs once per second
+update_per_second()
+
 Documentation
 
--Movement-
-// moves the unit towards the specified coordinates
-move_to(double x, double y)
+General
 
-// stops the unit from moving
+// gets the position of the unit
+get_position()
+
+// gets the maximum hp of the unit
+get_max_hp()
+
+// gets the current hp of the unit
+get_current_hp()
+
+// moves to an x and y position
+move_to(x,y)
+
+// moves in the direction specified by a vector with components x and y
+move_in_direction(x,y)
+
+// stops movement
 stop()
 
--combat-
+Resource Storage and Mining
 
-// returs true if this unit is attacking an enemy
-is_attacking()
+// sets the type of resource this unit will configure for. Also empties the storage of any resource held.
+// Specify the resource like this, "resource name". example, set_type("iron")
+set_type(resource)
 
-// returns true if the unit is holding position when attacking
-is_holding_position()
+// returns the current units of resources stored
+get_current_capacity()
 
-// sets the distance the drone will try to stay at when attacking enemies
-set_engagement_distance(double distance)
+// returns the maximum units of resources stored
+get_max_capacity()
 
-// holds position when attacking enemies
-hold_position()
+// deposits resources to a base or logistics drone. or retrieves resources from refineries
+turn_in()
 
-// stops holding position when attacking enemies
-stop_hold_position()
+Mining Specific
 
-// stops the unit from attacking
-stop_attacking()
-
-// attacks the nearest enemy
-attack_nearest_enemy()
-
-- resource collection -
-
-// gets the maximum number of resources this unit can hold
-get_max_storage()
-
-// gets the current number of resources this unit is holding
-get_current_storage()
-
-// goes to the nearest resource
-go_to_nearest_resource()
-
-// will attempt to gather resources from nearby resources
+// starts mining the a nearby resource. The unit must be within range during the whole mining procedure
 mine()
 
-// goes to the nearest resource storage
+// returns the distance that this unit can be from a resource and be able to mine it
+get_mining_rage()
+
+// returns the position of the nearest resource of the configured type
+get_nearest_resource_position()
+
+// returns the position of the nearest silo of the configured type
+get_nearest_silo_position()
+
+// moves to the nearest resource of configured type
+go_to_nearest_resource()
+
+// moves to the nearest silo of configured type
 go_to_nearest_silo()
 
-// deposits held resources into the nearest storage
-turn_in()
+Combat Specific
+
+// returns true if the unit is engaging an enemy
+is_attacking()
+
+// returns true if the unit will not move as it engages the enemy
+is_holding_position()
+
+// sets the distance that the unit will attempt to maintain when engaging the enemy
+set_engagement_distance()
+
+// makes the unit maintain position as it attacks enemies
+hold_position()
+
+// makes the unit pursue the enemy following the rules of engagement distance
+stop_hold_position()
+
+// stops engaging the current target
+stop_attacking()
+
+// will seek out the closest enemy and pursue it
+attack_nearest_enemy()
+
+Production Specific
+
+// begins the production for one cycle of products
+process()
+
+// returns true if processing
+is_processing()
