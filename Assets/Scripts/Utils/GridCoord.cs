@@ -4,12 +4,14 @@ using UnityEngine;
 
 public struct GridCoord {
 	public static readonly GridCoord[] DIRECTIONS = {
-		new GridCoord( 1, -1),
-		new GridCoord( 0, -1),
-		new GridCoord(-1,  0),
-		new GridCoord(-1,  1),
-		new GridCoord( 0,  1),
-		new GridCoord( 1,  0)
+		new GridCoord(-1, 1),
+		new GridCoord(0, 1),
+		new GridCoord(1, 1),
+		new GridCoord(1, 0),
+		new GridCoord(1, -1),
+		new GridCoord(0, -1),
+		new GridCoord(-1, -1),
+		new GridCoord(-1, 0),
 	};
 	
 	public int x;

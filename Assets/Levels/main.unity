@@ -5368,6 +5368,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 345f61150126c664a8eac08c159a5b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Smoothing: 0.9
+  AngleOffset: 90
 --- !u!4 &1539917353 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4991614413366184, guid: d418d9d653ea36d4b8bd778a0d9c3e07,
