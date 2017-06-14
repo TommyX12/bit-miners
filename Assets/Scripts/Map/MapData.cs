@@ -11,6 +11,8 @@ public class MapData {
 	public float BiomeParam2 = 0.0f; // temperature
 	public string BiomeName = "";
 	
+	public bool Occupied = false;
+	
 	public MapData() {
 		
 	}
