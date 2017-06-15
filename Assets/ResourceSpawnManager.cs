@@ -19,7 +19,7 @@ public class ResourceSpawnManager : MonoBehaviour {
         {"gold", 1f},
         {"oil", 2f},
         {"coal", 0f},
-        {"nothing", 97f}
+        {"nothing", 997f}
     };
 
     // water
@@ -30,7 +30,7 @@ public class ResourceSpawnManager : MonoBehaviour {
         {"gold", 0f},
         {"oil", 5f},
         {"coal", 0f},
-        {"nothing", 95f}
+        {"nothing", 995f}
     };
 
     // desert
@@ -40,7 +40,7 @@ public class ResourceSpawnManager : MonoBehaviour {
         {"gold", 0f},
         {"oil", 10f},
         {"coal", 0f},
-        {"nothing", 90f}
+        {"nothing", 990f}
     };
 
     // swamp
@@ -50,7 +50,7 @@ public class ResourceSpawnManager : MonoBehaviour {
         {"gold", 9f},
         {"oil", 0f},
         {"coal", 10f},
-        {"nothing", 87f}
+        {"nothing", 987f}
     };
 
     // grass_land
@@ -60,7 +60,7 @@ public class ResourceSpawnManager : MonoBehaviour {
         {"gold", 2f},
         {"oil", 0f},
         {"coal", 5f},
-        {"nothing", 83f}
+        {"nothing", 983f}
     };
 
     // rain_forest
@@ -70,7 +70,7 @@ public class ResourceSpawnManager : MonoBehaviour {
         {"gold", 10f},
         {"oil", 2f},
         {"coal", 3f},
-        {"nothing", 80f}
+        {"nothing", 980f}
     };
 
     // this looks evil
@@ -117,6 +117,7 @@ public class ResourceSpawnManager : MonoBehaviour {
             default:
                 return;
         }
+
         resource.transform.SetParent(tile.gameObject.transform);
         resource.transform.localPosition = new Vector3( 0, 0, resource.transform.position.z);
         
