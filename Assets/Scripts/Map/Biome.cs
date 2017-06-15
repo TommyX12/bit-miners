@@ -14,31 +14,74 @@ public class Biome
 	public float[] Color = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
 	public string SpriteName = "tile";
 	public string Name = "";
+	public Dictionary<string, float> ResourceSpawnChance = new Dictionary<string, float>();
 
     private static Dictionary<string, Biome> biomeDict = new Dictionary<string, Biome>() {
         {"tundra", new Biome(){
             Color = Util.HexToFloat4("#ccddff"),
             Name = "tundra",
+			ResourceSpawnChance = new Dictionary<string, float>() {
+				{"iron", 1f},
+				{"gold", 1f},
+				{"oil", 2f},
+				{"coal", 0f},
+				{"nothing", 997f}
+			},
 		}},
 		{"water", new Biome(){
 			Color = Util.HexToFloat4("#147caa"),
-             Name = "water",
+			Name = "water",
+			ResourceSpawnChance = new Dictionary<string, float>() {
+				{"iron", 0f},
+				{"gold", 0f},
+				{"oil", 5f},
+				{"coal", 0f},
+				{"nothing", 995f}
+			},
         }},
 		{"desert", new Biome(){
 			Color = Util.HexToFloat4("#ebbd4c"),
             Name = "desert",
+			ResourceSpawnChance = new Dictionary<string, float>() {
+				{"iron", 0f},
+				{"gold", 0f},
+				{"oil", 10f},
+				{"coal", 0f},
+				{"nothing", 990f}
+			},
         }},
 		{"swamp", new Biome(){
 			Color = Util.HexToFloat4("#504026"),
             Name = "swamp",
+			ResourceSpawnChance = new Dictionary<string, float>() {
+				{"iron", 3f},
+				{"gold", 9f},
+				{"oil", 0f},
+				{"coal", 10f},
+				{"nothing", 987f}
+			},
         }},
 		{"grass_land", new Biome(){
 			Color = Util.HexToFloat4("#80c13f"),
             Name = "grass_land",
+			ResourceSpawnChance = new Dictionary<string, float>() {
+				{"iron", 10f},
+				{"gold", 2f},
+				{"oil", 0f},
+				{"coal", 5f},
+				{"nothing", 983f}
+			},
         }},
 		{"rain_forest", new Biome(){
 			Color = Util.HexToFloat4("#30750b"),
             Name = "rain_forest",
+			ResourceSpawnChance = new Dictionary<string, float>() {
+				{"iron", 5f},
+				{"gold", 10f},
+				{"oil", 2f},
+				{"coal", 3f},
+				{"nothing", 980f}
+			},
         }},
 	};
 	

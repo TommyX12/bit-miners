@@ -5413,7 +5413,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1792455887}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6320376, y: 1.782677, z: 0}
+  m_LocalPosition: {x: -2.492, y: 1.479, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1344822382}
@@ -5939,7 +5939,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1955540693}
   - component: {fileID: 1955540692}
-  - component: {fileID: 1955540694}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -5959,9 +5958,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScriptEditorObject: {fileID: 294083778}
-  MapTilePrefab: {fileID: 114260321366887552, guid: 3d9935107aeea3e4286eb1a9ae3113ca,
+  MapTilePrefab: {fileID: 114818218062138862, guid: 3d9935107aeea3e4286eb1a9ae3113ca,
     type: 2}
-  ResourceSpawnManager: {fileID: 1955540694}
 --- !u!4 &1955540693
 Transform:
   m_ObjectHideFlags: 0
@@ -5975,21 +5973,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1955540694
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1955540691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c062e11be1f4c846887df6305a098a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ironPrefab: {fileID: 1188908104282224, guid: d418d9d653ea36d4b8bd778a0d9c3e07, type: 2}
-  goldPrefab: {fileID: 1923335603183570, guid: 1d3b71ce12dfb2b46839d520edc97550, type: 2}
-  oilPrefab: {fileID: 1480745903838166, guid: f61de4a9ef528f145b7f6e58e182cad8, type: 2}
-  coalPrefab: {fileID: 1611508786508274, guid: 73467593fcebaf24f88d3944cb67d55f, type: 2}
 --- !u!1 &1983483214
 GameObject:
   m_ObjectHideFlags: 0

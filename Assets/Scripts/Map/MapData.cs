@@ -16,16 +16,24 @@ public class MapData : IGridCollidable {
 		get; set;
 	}
 	
-    public string ResourceType;
-    public int ResourcesLeft;
+	public bool Modified = true;
+	
+	public Resource ResourceObject = null;
 
 	public MapData() {
 		this.Collidable = false;
 	}
 	
-
+	public void RemoveResource() {
+		this.Modified = true;
+		
+		this.ResourceObject = null;
+		this.Collidable = false;
+	}
 
 	public void GenerateFromParam() {
+		this.Modified = true;
+		
 		this.BiomeParam1 = Util.Clamp(this.BiomeParam1, 0.0f, 1.0f);
 		this.BiomeParam2 = Util.Clamp(this.BiomeParam2, 0.0f, 1.0f);
 
@@ -42,20 +50,15 @@ public class MapData : IGridCollidable {
 		this.Color[1] *= 1.0f - (0.35f * this.BiomeParam2);
 		this.Color[2] *= 1.0f - (0.75f * this.BiomeParam2);
 		
-		if (this.BiomeName == "water") {
-			this.Collidable = true;
-		}
-		else {
-			this.Collidable = false;
-		}
+		this.Collidable = false;
 		
 		this.SpriteName = biome.SpriteName;
 
-        // Tommy if this breaks go to RayScene and see how i set up my gamemanager
-        ResourceType = GameManager.Current.ResourceSpawnManager.SpawnResource(BiomeName);
-        Debug.Log(ResourceType);
-        if (ResourceType != "nothing") {
-            ResourcesLeft = 500;
-        }
+		// resource spawning
+		string resourceType = Util.RandomSelectChance(biome.ResourceSpawnChance);
+		if (resourceType != null && resourceType != "nothing") {
+			ResourceObject = Resource.Construct(resourceType, this);
+			this.Collidable = true;
+		}
 	}
 }

@@ -26,7 +26,8 @@ public class MiningComponent : StorageComponent {
             return;
         }
 
-        RaycastHit2D[] hitsBuffer = new RaycastHit2D[25];
+		// TODO fix mining
+        /* RaycastHit2D[] hitsBuffer = new RaycastHit2D[25];
         int hitCount = miningCollider.Cast(Vector2.zero, hitsBuffer);
         for (int i = 0; i < hitCount; i++) {
             if (hitsBuffer[i].collider.gameObject.CompareTag("Resource") && hitsBuffer[i].collider.gameObject.GetComponent<Resource>().type == type) {
@@ -35,7 +36,7 @@ public class MiningComponent : StorageComponent {
                 miningTimer = resource.CollectionTime * TimeMultiplier;
                 return;
             }
-        }
+        } */
     }
 
     public override void PausingFixedUpdate()
@@ -56,10 +57,11 @@ public class MiningComponent : StorageComponent {
                 if (stored >= MaxCapacity) {
                     stored = MaxCapacity;
                 }
-                if (((Vector2)(transform.position - resource.gameObject.transform.position)).magnitude > MiningRange) {
+				// TODO fix mining
+                /* if (((Vector2)(transform.position - resource.gameObject.transform.position)).magnitude > MiningRange) {
                     mining = false;
                     resource = null;
-                }
+                } */
 
             }
         }

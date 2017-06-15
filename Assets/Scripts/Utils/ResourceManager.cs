@@ -11,7 +11,7 @@ public class ResourceManager {
 		sprites = new Dictionary<string, Sprite>();
 		foreach (Sprite sprite in spriteObjects) {
 			sprites[sprite.name] = sprite;
-			// Debug.Log(sprite.name);
+			Debug.Log(sprite.name);
 		}
 	}
 	

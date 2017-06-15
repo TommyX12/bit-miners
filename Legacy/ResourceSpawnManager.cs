@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class ResourceSpawnManager : MonoBehaviour {
 
     public GameObject ironPrefab;

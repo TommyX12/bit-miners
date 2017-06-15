@@ -9,24 +9,31 @@ public class MapTile : MyMono, IGridElement<MapData> {
 	public Vector2 GridPos{get; set;}
 	public MapData Data{get; set;}
 	
-	[HideInInspector]
-	public SpriteRenderer SpriteRenderer;
+	public SpriteRenderer BackgroundSprite;
+	public SpriteRenderer ForegroundSprite;
 	
 	void Awake() {
-		this.SpriteRenderer = this.GetComponent<SpriteRenderer>();
+		this.BackgroundSprite = this.transform.Find("BackgroundSprite").GetComponent<SpriteRenderer>();
+		this.ForegroundSprite = this.transform.Find("ForegroundSprite").GetComponent<SpriteRenderer>();
 	}
 	
 	public void Activate() {
-        Debug.Log("Active");
+		if (this.Data == null) return;
+		
 		this.gameObject.SetActive(true);
 		
-		this.SpriteRenderer.color = Util.Float4ToColor(this.Data.Color);
-		this.SpriteRenderer.sprite = ResourceManager.GetSprite(this.Data.SpriteName);
+		this.BackgroundSprite.color = Util.Float4ToColor(this.Data.Color);
+		this.BackgroundSprite.sprite = ResourceManager.GetSprite(this.Data.SpriteName);
+		
+		if (this.Data.ResourceObject != null) {
+			this.ForegroundSprite.gameObject.SetActive(true);
+			this.ForegroundSprite.sprite = ResourceManager.GetSprite(this.Data.ResourceObject.SpriteName);
+		}
+		else {
+			this.ForegroundSprite.gameObject.SetActive(false);
+		}
 		
 		this.transform.localPosition = this.GridPos;
-
-        // Tommy if this breaks go to RayScene and see how i set up my gamemanager
-        GameManager.Current.ResourceSpawnManager.ShowResource(this);
 	}
 	
 	public void Deactivate() {
@@ -38,7 +45,12 @@ public class MapTile : MyMono, IGridElement<MapData> {
 	}
 	
 	public override void PausingUpdate() {
+		if (this.Data == null) return;
 		
+		if (this.Data.Modified) {
+			this.Activate();
+			this.Data.Modified = false;
+		}
 	}
 	
 }
