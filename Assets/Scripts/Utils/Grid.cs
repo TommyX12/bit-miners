@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 
-public class Grid<TData>
+public class Grid<TData> where TData : class
 {
 	
 	public delegate IGridElement<TData> ConstructElementCallback(Grid<TData> grid);
 
-	public delegate void ApplySamplerDataFunction<TData>(Grid<TData> grid, GridCoord coord, float pixel);
+	public delegate void ApplySamplerDataFunction(Grid<TData> grid, GridCoord coord, float pixel);
 	
 	#region Members
 	
@@ -207,16 +207,21 @@ public class Grid<TData>
 		}
 	}
 	
-	public IEnumerable<GridCoord> LineFromPoint(Vector2 from, Vector2 to) {
+	public IEnumerable<GridCoord> LineFromPoint(Vector2 from, Vector2 to, bool ignoreEndPoints = false) {
 		FloatGridCoord start = PointToFloatCoord(from), end = PointToFloatCoord(to);
 
 		int distance = ManhattanDistance(start.Round(), end.Round());
 		
-		for (int i = 0; i <= distance; ++i) {
+		for (int i = 1; i < distance; ++i) {
 			float xLerp = start.x + ( end.x - start.x ) / distance * i;
 			float yLerp = start.y + ( end.y - start.y ) / distance * i;
 			
 			yield return new FloatGridCoord(xLerp, yLerp).Round();
+		}
+		
+		if (!ignoreEndPoints) {
+			yield return start.Round();
+			if (distance >= 1) yield return end.Round();
 		}
 	}
 	
@@ -325,6 +330,22 @@ public class Grid<TData>
 		return new Vector2(x, y);
 	}
 	
+	public float LeftEdge(GridCoord coord) {
+		return this.CoordToPoint(coord).x - this.TileSize * 0.5f;
+	}
+	
+	public float RightEdge(GridCoord coord) {
+		return this.CoordToPoint(coord).x + this.TileSize * 0.5f;
+	}
+	
+	public float TopEdge(GridCoord coord) {
+		return this.CoordToPoint(coord).y + this.TileSize * 0.5f;
+	}
+	
+	public float BottomEdge(GridCoord coord) {
+		return this.CoordToPoint(coord).y - this.TileSize * 0.5f;
+	}
+	
 	public static int ManhattanDistance(GridCoord a, GridCoord b) {
 		return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
 	}
@@ -340,7 +361,7 @@ public class Grid<TData>
 		return PointToFloatCoord(point).Round();
 	}
 	
-	public void ApplySampler(ArrayTexture2D sampler, int minX, int maxX, int minY, int maxY, bool useLinearFiltering, ApplySamplerDataFunction<TData> applyFunction, bool clamped = false) {
+	public void ApplySampler(ArrayTexture2D sampler, int minX, int maxX, int minY, int maxY, bool useLinearFiltering, ApplySamplerDataFunction applyFunction, bool clamped = false) {
 		Vector2 point = new Vector2();
 		foreach (GridCoord coord in this.Coords()){
 			point.x = Util.Map(coord.x, minX, maxX, 0.0f, 1.0f, clamped);
@@ -353,3 +374,103 @@ public class Grid<TData>
 	#endregion
 	
 }
+
+public static class Grid {
+	public static Vector2 GetCollideOffset<T>(Grid<T> grid, Rect rect) where T : class, IGridCollidable {
+		float top = rect.bottom, bottom = rect.top, left = rect.left, right = rect.right; // in world coordinate, rect.top is actually bottom.
+		float topDelta = 0.0f, bottomDelta = 0.0f, leftDelta = 0.0f, rightDelta = 0.0f;
+		Vector2 topLeft = new Vector2(rect.left, top);
+		Vector2 topRight = new Vector2(rect.right, top);
+		Vector2 bottomLeft = new Vector2(rect.left, bottom);
+		Vector2 bottomRight = new Vector2(rect.right, bottom);
+		T data;
+		GridCoord cornerCoord;
+		
+		// top edge
+		foreach (GridCoord coord in grid.LineFromPoint(topLeft, topRight, true)) {
+			data = grid.Get(coord);
+			if (data != null && data.Collidable) {
+				topDelta = grid.BottomEdge(coord) - top;
+				break;
+			}
+		}
+		
+		// right edge
+		foreach (GridCoord coord in grid.LineFromPoint(topRight, bottomRight, true)) {
+			data = grid.Get(coord);
+			if (data != null && data.Collidable) {
+				rightDelta = grid.LeftEdge(coord) - right;
+				break;
+			}
+		}
+		
+		// bottom edge
+		foreach (GridCoord coord in grid.LineFromPoint(bottomRight, bottomLeft, true)) {
+			data = grid.Get(coord);
+			if (data != null && data.Collidable) {
+				bottomDelta = grid.TopEdge(coord) - bottom;
+				break;
+			}
+		}
+		
+		// left edge
+		foreach (GridCoord coord in grid.LineFromPoint(bottomLeft, topLeft, true)) {
+			data = grid.Get(coord);
+			if (data != null && data.Collidable) {
+				leftDelta = grid.RightEdge(coord) - left;
+				break;
+			}
+		} 
+		
+		// top left corner
+		cornerCoord = grid.PointToCoord(topLeft);
+		data = grid.Get(cornerCoord);
+		if (data != null && data.Collidable) {
+			if (Math.Abs(top - grid.BottomEdge(cornerCoord)) < Math.Abs(left - grid.RightEdge(cornerCoord))) {
+				topDelta = grid.BottomEdge(cornerCoord) - top;
+			}
+			else {
+				leftDelta = grid.RightEdge(cornerCoord) - left;
+			}
+		}
+		
+		// top right corner
+		cornerCoord = grid.PointToCoord(topRight);
+		data = grid.Get(cornerCoord);
+		if (data != null && data.Collidable) {
+			if (Math.Abs(top - grid.BottomEdge(cornerCoord)) < Math.Abs(right - grid.LeftEdge(cornerCoord))) {
+				topDelta = grid.BottomEdge(cornerCoord) - top;
+			}
+			else {
+				rightDelta = grid.LeftEdge(cornerCoord) - right;
+			}
+		}
+		
+		// bottom left corner
+		cornerCoord = grid.PointToCoord(bottomLeft);
+		data = grid.Get(cornerCoord);
+		if (data != null && data.Collidable) {
+			if (Math.Abs(bottom - grid.TopEdge(cornerCoord)) < Math.Abs(left - grid.RightEdge(cornerCoord))) {
+				bottomDelta = grid.TopEdge(cornerCoord) - bottom;
+			}
+			else {
+				leftDelta = grid.RightEdge(cornerCoord) - left;
+			}
+		}
+		
+		// bottom right corner
+		cornerCoord = grid.PointToCoord(bottomRight);
+		data = grid.Get(cornerCoord);
+		if (data != null && data.Collidable) {
+			if (Math.Abs(bottom - grid.TopEdge(cornerCoord)) < Math.Abs(right - grid.LeftEdge(cornerCoord))) {
+				bottomDelta = grid.TopEdge(cornerCoord) - bottom;
+			}
+			else {
+				rightDelta = grid.LeftEdge(cornerCoord) - right;
+			}
+		}
+		
+		return new Vector2(leftDelta + rightDelta, topDelta + bottomDelta);
+	}
+}
+

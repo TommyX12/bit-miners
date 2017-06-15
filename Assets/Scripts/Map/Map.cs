@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Map : MyMono {
 	
+	public static Map Current;
 	public Grid<MapData> Grid;
 	
 	[HideInInspector]
@@ -19,6 +20,8 @@ public class Map : MyMono {
 	}
 	
 	void Awake() {
+		Current = this;
+		
 		this.Grid = new Grid<MapData>(
 			this.TileSize,
 			true,

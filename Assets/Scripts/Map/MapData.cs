@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class MapData {
+public class MapData : IGridCollidable {
 	public float[] Color = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
 	public string SpriteName = "tile";
 	
@@ -12,9 +12,12 @@ public class MapData {
 	public string BiomeName = "";
 	
 	public bool Occupied = false;
+	public bool Collidable {
+		get; set;
+	}
 	
 	public MapData() {
-		
+		this.Collidable = false;
 	}
 	
 	public void GenerateFromParam() {
@@ -33,6 +36,13 @@ public class MapData {
 		this.Color[0] *= 1.0f - (0.75f * this.BiomeParam1);
 		this.Color[1] *= 1.0f - (0.35f * this.BiomeParam2);
 		this.Color[2] *= 1.0f - (0.75f * this.BiomeParam2);
+		
+		if (this.BiomeName == "water") {
+			this.Collidable = true;
+		}
+		else {
+			this.Collidable = false;
+		}
 		
 		this.SpriteName = biome.SpriteName;
 	}

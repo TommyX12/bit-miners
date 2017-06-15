@@ -26,6 +26,7 @@ GameObject:
   - component: {fileID: 114011279532253114}
   - component: {fileID: 61671185503736954}
   - component: {fileID: 114295607599515022}
+  - component: {fileID: 114996539245910900}
   m_Layer: 9
   m_Name: BMD MKI
   m_TagString: Untagged
@@ -732,6 +733,26 @@ MonoBehaviour:
   MoveToTarget: 0
   IsMoveDirection: 0
   gameObjectMoveTarget: {fileID: 0}
+--- !u!114 &114996539245910900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1070059350565954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70fbc554d89c2364ba79d93004b25470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseColliderIfPossible: 1
+  Collider: {fileID: 0}
+  LocalBoundingBox:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  Map: {fileID: 0}
 --- !u!212 &212851376475286824
 SpriteRenderer:
   m_ObjectHideFlags: 1

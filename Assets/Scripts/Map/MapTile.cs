@@ -9,7 +9,8 @@ public class MapTile : MyMono, IGridElement<MapData> {
 	public Vector2 GridPos{get; set;}
 	public MapData Data{get; set;}
 	
-	private SpriteRenderer SpriteRenderer;
+	[HideInInspector]
+	public SpriteRenderer SpriteRenderer;
 	
 	void Awake() {
 		this.SpriteRenderer = this.GetComponent<SpriteRenderer>();

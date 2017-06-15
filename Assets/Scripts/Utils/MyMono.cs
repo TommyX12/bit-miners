@@ -13,12 +13,20 @@ public class MyMono : MonoBehaviour {
 		this.NormalUpdate();
 	}
 
-    public void FixedUpdate()
-    {
+	public void FixedUpdate()
+	{
 		if (!Paused) {
 			this.PausingFixedUpdate();
 		}
 		this.NormalFixedUpdate();
+	}
+
+    public void LateUpdate()
+    {
+		if (!Paused) {
+			this.PausingLateUpdate();
+		}
+		this.NormalLateUpdate();
     }
 
 	public virtual void PausingUpdate() {
@@ -36,4 +44,13 @@ public class MyMono : MonoBehaviour {
 	public virtual void NormalFixedUpdate() {
 		
 	}
+	
+	public virtual void PausingLateUpdate() {
+		
+	}
+	
+	public virtual void NormalLateUpdate() {
+		
+	}
+	
 }

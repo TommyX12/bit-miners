@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 50375573487054160}
   - component: {fileID: 61674150517230702}
   - component: {fileID: 114146273317037108}
+  - component: {fileID: 114368515451831456}
   m_Layer: 9
   m_Name: StorageDrone
   m_TagString: Untagged
@@ -463,6 +464,26 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114368515451831456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1970563472385530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70fbc554d89c2364ba79d93004b25470, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseColliderIfPossible: 1
+  Collider: {fileID: 0}
+  LocalBoundingBox:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  Map: {fileID: 0}
 --- !u!114 &114547607188713606
 MonoBehaviour:
   m_ObjectHideFlags: 1
