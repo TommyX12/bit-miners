@@ -2,6 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 4 types of basic resource.
+// iron - gold - oil - coal
+// 3 types of secondary resource
+// chip - steel - plastic
+// 2 types of tertiary resource
+// processor - titanium
+
+
 public class Resource : MyMono {
 
     public int MaxResourceValue;
@@ -19,5 +27,4 @@ public class Resource : MyMono {
         }
         return value;
     }
-
 }

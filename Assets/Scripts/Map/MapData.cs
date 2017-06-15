@@ -16,10 +16,15 @@ public class MapData : IGridCollidable {
 		get; set;
 	}
 	
+    public string ResourceType;
+    public int ResourcesLeft;
+
 	public MapData() {
 		this.Collidable = false;
 	}
 	
+
+
 	public void GenerateFromParam() {
 		this.BiomeParam1 = Util.Clamp(this.BiomeParam1, 0.0f, 1.0f);
 		this.BiomeParam2 = Util.Clamp(this.BiomeParam2, 0.0f, 1.0f);
@@ -45,5 +50,12 @@ public class MapData : IGridCollidable {
 		}
 		
 		this.SpriteName = biome.SpriteName;
+
+        // Tommy if this breaks go to RayScene and see how i set up my gamemanager
+        ResourceType = GameManager.Current.ResourceSpawnManager.SpawnResource(BiomeName);
+        Debug.Log(ResourceType);
+        if (ResourceType != "nothing") {
+            ResourcesLeft = 500;
+        }
 	}
 }

@@ -17,12 +17,16 @@ public class MapTile : MyMono, IGridElement<MapData> {
 	}
 	
 	public void Activate() {
+        Debug.Log("Active");
 		this.gameObject.SetActive(true);
 		
 		this.SpriteRenderer.color = Util.Float4ToColor(this.Data.Color);
 		this.SpriteRenderer.sprite = ResourceManager.GetSprite(this.Data.SpriteName);
 		
 		this.transform.localPosition = this.GridPos;
+
+        // Tommy if this breaks go to RayScene and see how i set up my gamemanager
+        GameManager.Current.ResourceSpawnManager.ShowResource(this);
 	}
 	
 	public void Deactivate() {

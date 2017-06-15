@@ -14,26 +14,32 @@ public class Biome
 	public float[] Color = new float[]{1.0f, 1.0f, 1.0f, 1.0f};
 	public string SpriteName = "tile";
 	public string Name = "";
-	
-	private static Dictionary<string, Biome> biomeDict = new Dictionary<string, Biome>() {
-		{"tundra", new Biome(){
-			Color = Util.HexToFloat4("#ccddff"),
+
+    private static Dictionary<string, Biome> biomeDict = new Dictionary<string, Biome>() {
+        {"tundra", new Biome(){
+            Color = Util.HexToFloat4("#ccddff"),
+            Name = "tundra",
 		}},
 		{"water", new Biome(){
 			Color = Util.HexToFloat4("#147caa"),
-		}},
+             Name = "water",
+        }},
 		{"desert", new Biome(){
 			Color = Util.HexToFloat4("#ebbd4c"),
-		}},
+            Name = "desert",
+        }},
 		{"swamp", new Biome(){
 			Color = Util.HexToFloat4("#504026"),
-		}},
+            Name = "swamp",
+        }},
 		{"grass_land", new Biome(){
 			Color = Util.HexToFloat4("#80c13f"),
-		}},
+            Name = "grass_land",
+        }},
 		{"rain_forest", new Biome(){
 			Color = Util.HexToFloat4("#30750b"),
-		}},
+            Name = "rain_forest",
+        }},
 	};
 	
 	static Biome() {
