@@ -32,7 +32,7 @@ public class Waypoint : MyMono {
     public override void PausingUpdate()
     {
         base.PausingUpdate();
-        Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 pos = Util.CameraToWorld(Camera.main, Input.mousePosition, 0);
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Waypoint.SetWaypoint(1, Map.Current.Grid.PointToCoord(pos));
