@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class ProductionUI : MyMono {
 
+    public static ProductionUI Current;
+
     public ProductionComponent Production;
+    public ProductionTooltip tooltip;
     public List<Image> ProductionBuildImages;
     public List<Image> ProductionQueueImages;
     public GameObject ProgressBar;
@@ -13,10 +16,17 @@ public class ProductionUI : MyMono {
     public float UpdateRate;
     private float timer;
 
+    public void Start()
+    {
+        Current = this;
+    }
+
     public override void PausingUpdate()
     {
         base.PausingUpdate();
-
+        if (Production == null) {
+            return;
+        }
         if (timer <= 0) {
             timer = UpdateRate;
             Refresh();
@@ -26,9 +36,24 @@ public class ProductionUI : MyMono {
 
     }
 
+    public void SetProductionComponent(ProductionComponent production) {
+
+        Production = production;
+
+        for (int i = 0; i < 15; i++) {
+            ProductionBuildImages[i].gameObject.SetActive(false);
+        }
+
+        for (int i = 0; i < production.BuildPrefabs.Count; i++) {
+            ProductionBuildImages[i].gameObject.SetActive(true);
+        }
+
+        Refresh();
+    }
+
     public void Refresh()
     {
-        for (int i = 0; i < 4 && i < Production.BuildPrefabs.Count; i++) {
+        for (int i = 0; i < 15 && i < Production.BuildPrefabs.Count; i++) {
             ProductionBuildImages[i].sprite = Production.BuildPrefabs[i].GetComponent<SpriteRenderer>().sprite;
         }
 
@@ -62,4 +87,20 @@ public class ProductionUI : MyMono {
         // logic to update progress bar
 
     }
+
+    public void PostToolTipData(int index) {
+        if (index > Production.BuildPrefabs.Count) {
+            return;
+        }
+        tooltip.PostInfo(Production.BuildPrefabs[index].GetComponent<Unit>());
+    }
+
+    public void Cancel(int index) {
+        Production.Cancel(index);
+    }
+
+    public void Build(int index) {
+        Production.Build(index);
+    }
+
 }

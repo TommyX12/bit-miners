@@ -5,8 +5,6 @@ using UnityEngine;
 public class ProductionComponent : UnitComponent {
 
     public GameObject SpawnLocation;
-    public ProductionUI UI;
-    public ProductionTooltip TT;
 
     public class BuildItem
     {
@@ -80,7 +78,6 @@ public class ProductionComponent : UnitComponent {
                 obj.transform.position = new Vector3(SpawnLocation.transform.position.x, SpawnLocation.transform.position.y, obj.transform.position.z);
             }
             buildQueue.RemoveAt(0);
-            UI.Refresh();
         } else {
             buildQueue[0].ProgressBuild(Time.fixedDeltaTime);
         }
@@ -93,24 +90,7 @@ public class ProductionComponent : UnitComponent {
         NewResourceManager.Add(buildQueue[id].cost);
         buildQueue.RemoveAt(id);
     }
-
-    public void PostData(int unit)
-    {
-        if (unit > 3 || unit < 0 || unit >= BuildPrefabs.Count) {
-            return;
-        }
-
-        TT.PostInfo(BuildPrefabs[unit].GetComponent<Unit>());
-    }
-
-    public void showTT() {
-        TT.gameObject.SetActive(true);
-    }
-
-    public void hideTT() {
-        TT.gameObject.SetActive(false);
-    }
-
+        
     public override void Register(ScriptSystem scriptSystem)
     {
     }
