@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 61908679489008432}
   - component: {fileID: 50821869103821002}
   m_Layer: 12
-  m_Name: ResourceNode
+  m_Name: Iron
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1188908104282224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 523.81573, y: 395.98532, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -103,6 +103,7 @@ MonoBehaviour:
   ResourceValue: 500
   ResourcePerCollection: 5
   CollectionTime: 3
+  type: iron
 --- !u!212 &212942219737561308
 SpriteRenderer:
   m_ObjectHideFlags: 1
