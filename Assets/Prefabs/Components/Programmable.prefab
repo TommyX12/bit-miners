@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 4940184232386466}
   - component: {fileID: 114375976170945476}
   - component: {fileID: 58467697041968730}
-  - component: {fileID: 114744159476939180}
   m_Layer: 10
   m_Name: Programmable
   m_TagString: Untagged
@@ -262,17 +261,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Program
---- !u!114 &114744159476939180
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1713351310734354}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d75fa54810ee2d542861d365af477548, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &222817686022169286
 CanvasRenderer:
   m_ObjectHideFlags: 1

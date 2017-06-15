@@ -78,9 +78,25 @@ public class MoveComponent : UnitComponent {
         MoveToTarget = false;
     }
 
+    public void MoveToWaypoint(int waypoint) {
+
+        if (waypoint > 9) {
+            return;
+        }
+
+        if (Waypoint.Exists[waypoint])
+        {
+            SetVectorTarget(Waypoint.Waypoints[waypoint].transform.position);
+        }
+        else {
+            Stop();
+        }
+    }
+
 	public override void Register(ScriptSystem scriptSystem) {
 		scriptSystem.RegisterFunction("move_to", new Action<double, double>(this.SetXYTarget));
         scriptSystem.RegisterFunction("move_in_direction", new Action<double, double>(this.MoveDirection));
+        scriptSystem.RegisterFunction("move_to_waypoint", new Action<int>(this.MoveToWaypoint));
         scriptSystem.RegisterFunction("stop", new Action(this.Stop));
 	}
 }

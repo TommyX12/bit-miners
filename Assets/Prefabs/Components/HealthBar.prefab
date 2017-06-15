@@ -55,6 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4893187394612650}
   - component: {fileID: 114794685676988974}
+  - component: {fileID: 114250164313309198}
   m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
@@ -136,6 +137,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114250164313309198
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1592092056712884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75fa54810ee2d542861d365af477548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114369837066067004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -197,7 +209,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 0}
   Health: {fileID: 224038983991813272}
-  test: 0
 --- !u!222 &222340741997381166
 CanvasRenderer:
   m_ObjectHideFlags: 1
