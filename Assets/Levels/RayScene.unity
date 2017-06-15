@@ -1577,7 +1577,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 90
-  orthographic: 1
+  orthographic: 0
   orthographic size: 2
   m_Depth: -1
   m_CullingMask:
@@ -2213,7 +2213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.006, y: 0.013}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1482697925
@@ -3514,6 +3514,9 @@ MonoBehaviour:
   coll: {fileID: 0}
   MiningRange: 0.25
   TimeMultiplier: 1
+  miningTimer: 0
+  mining: 0
+  calltimer: 0
 --- !u!114 &1846973708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3667,8 +3670,11 @@ MonoBehaviour:
   MaxCapacity: 30
   stored: 0
   coll: {fileID: 1905753460}
-  MiningRange: 0.25
+  MiningRange: 3
   TimeMultiplier: 1
+  miningTimer: 0
+  mining: 0
+  calltimer: 0
 --- !u!58 &1905753460
 CircleCollider2D:
   m_ObjectHideFlags: 0

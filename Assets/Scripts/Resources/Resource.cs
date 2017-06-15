@@ -24,35 +24,39 @@ public class Resource {
 	public Resource(MapData mapData = null) {
 		this.MapData = mapData;
 	}
-	
-	private static Dictionary<string, Resource> resourceDict = new Dictionary<string, Resource>() {
-		{"iron", new Resource(){
-			SpriteName = "iron",
-			MaxResourceValue = 500,
-			ResourceValue = 500,
-			ResourcePerCollection = 5,
-			CollectionTime = 3,
-		}},
-		{"gold", new Resource(){
-			SpriteName = "gold",
-			MaxResourceValue = 500,
-			ResourceValue = 500,
-			ResourcePerCollection = 5,
-			CollectionTime = 3,
-		}},
-		{"oil", new Resource(){
-			SpriteName = "oil",
-			MaxResourceValue = 500,
-			ResourceValue = 500,
-			ResourcePerCollection = 5,
-			CollectionTime = 3,
-		}},
-		{"coal", new Resource(){
-			SpriteName = "coal",
-			MaxResourceValue = 500,
-			ResourceValue = 500,
-			ResourcePerCollection = 5,
-			CollectionTime = 3,
+
+    private static Dictionary<string, Resource> resourceDict = new Dictionary<string, Resource>() {
+        {"iron", new Resource(){
+            SpriteName = "iron",
+            MaxResourceValue = 500,
+            ResourceValue = 500,
+            ResourcePerCollection = 5,
+            CollectionTime = 3,
+            type = "iron",
+        }},
+        {"gold", new Resource(){
+            SpriteName = "gold",
+            MaxResourceValue = 500,
+            ResourceValue = 500,
+            ResourcePerCollection = 5,
+            CollectionTime = 3,
+            type = "gold",
+        }},
+        {"oil", new Resource(){
+            SpriteName = "oil",
+            MaxResourceValue = 500,
+            ResourceValue = 500,
+            ResourcePerCollection = 5,
+            CollectionTime = 3,
+            type = "oil",
+        }},
+        {"coal", new Resource(){
+            SpriteName = "coal",
+            MaxResourceValue = 500,
+            ResourceValue = 500,
+            ResourcePerCollection = 5,
+            CollectionTime = 3,
+            type = "coal",
 		}},
 	};
 	

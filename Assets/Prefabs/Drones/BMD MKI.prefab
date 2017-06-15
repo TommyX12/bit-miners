@@ -447,8 +447,11 @@ MonoBehaviour:
   MaxCapacity: 30
   stored: 0
   coll: {fileID: 58283131441528000}
-  MiningRange: 0.25
+  MiningRange: 3
   TimeMultiplier: 1
+  miningTimer: 0
+  mining: 0
+  calltimer: 0
 --- !u!114 &114156485428814328
 MonoBehaviour:
   m_ObjectHideFlags: 1

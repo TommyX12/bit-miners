@@ -33,7 +33,6 @@ public class Waypoint : MyMono {
     {
         base.PausingUpdate();
         Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log(pos);
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Waypoint.SetWaypoint(1, Map.Current.Grid.PointToCoord(pos));

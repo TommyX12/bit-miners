@@ -6,27 +6,44 @@ using System;
 public class MiningComponent : StorageComponent {
     public float MiningRange = 0.25f;
     public float TimeMultiplier = 1f;
-    float miningTimer;
-    bool mining;
+    public float miningTimer;
+    public bool mining;
     Resource resource;
-    CircleCollider2D miningCollider;
+    GridCoord resourceCoordinate;
 
-    private void Start()
-    {
-        miningCollider = GetComponent<CircleCollider2D>();
-        miningCollider.radius = MiningRange;
-    }
+    public float calltimer;
 
     public void startMining() {
-        if (mining) {
+        if (mining || calltimer > 0)
+        {
             return;
         }
 
-        if (stored >= MaxCapacity) {
+        if (stored >= MaxCapacity)
+        {
             return;
         }
 
-		// TODO fix mining
+        GridCoord current = Map.Current.Grid.PointToCoord(unit.transform.position);
+        foreach (GridCoord gc in Map.Current.Grid.Neighbors(current)) {
+
+            Debug.DrawLine(Map.Current.Grid.CoordToPoint(gc), Vector3.zero, Color.white, 1);
+
+            if ((resource = Map.Current.Grid.GetElement(gc).Data.ResourceObject) != null) {
+                Debug.Log(resource.type);
+                Debug.DrawLine(Map.Current.Grid.CoordToPoint(gc), Vector3.zero, Color.green, 1);
+                resourceCoordinate = gc;
+                mining = true;
+                calltimer = 1;
+                miningTimer = resource.CollectionTime * TimeMultiplier;
+                return;
+            }
+
+        }
+
+        calltimer = 1;
+        return;
+
         /* RaycastHit2D[] hitsBuffer = new RaycastHit2D[25];
         int hitCount = miningCollider.Cast(Vector2.zero, hitsBuffer);
         for (int i = 0; i < hitCount; i++) {
@@ -42,27 +59,25 @@ public class MiningComponent : StorageComponent {
     public override void PausingFixedUpdate()
     {
         base.PausingFixedUpdate();
+        calltimer -= Time.fixedDeltaTime;
         if (mining) {
             miningTimer -= Time.fixedDeltaTime;
-
             if (resource == null) {
                 mining = false;
                 return;
             }
 
             if (miningTimer <= 0) {
-                Debug.Log("Collected");
                 mining = false;
                 stored += resource.GetResource();
                 if (stored >= MaxCapacity) {
                     stored = MaxCapacity;
                 }
-				// TODO fix mining
-                /* if (((Vector2)(transform.position - resource.gameObject.transform.position)).magnitude > MiningRange) {
+                GridCoord current = Map.Current.Grid.PointToCoord(unit.transform.position);
+                if (Grid<MapData>.ManhattanDistance(current, resourceCoordinate) > MiningRange) {
                     mining = false;
                     resource = null;
-                } */
-
+                }
             }
         }
     }
