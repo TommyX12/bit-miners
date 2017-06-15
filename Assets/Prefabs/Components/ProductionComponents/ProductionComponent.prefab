@@ -36,7 +36,6 @@ GameObject:
   - component: {fileID: 4093909484036002}
   - component: {fileID: 114375611272682270}
   - component: {fileID: 58249189760165848}
-  - component: {fileID: 114461205441346122}
   m_Layer: 0
   m_Name: ProductionComponent
   m_TagString: Untagged
@@ -99,23 +98,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 0}
   SpawnLocation: {fileID: 1518355725801324}
-  UI: {fileID: 0}
-  TT: {fileID: 0}
   BuildPrefabs:
   - {fileID: 1070059350565954, guid: 1fbdd51a5db213349991b65d8856fa05, type: 2}
   - {fileID: 1381549642254292, guid: 467ecbaec82d92b4d85099d7041158ef, type: 2}
   - {fileID: 1970563472385530, guid: 78db0abaadf9e054bb36390dc0ce3c83, type: 2}
   - {fileID: 1641991714982004, guid: a9395111c329a2a4dae3af22333cdb0d, type: 2}
---- !u!114 &114461205441346122
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1941512091229288}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cae34ee6f63963a429cd8eb293099683, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ToEnable: {fileID: 0}
-  col: {fileID: 58249189760165848}

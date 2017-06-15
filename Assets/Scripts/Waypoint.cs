@@ -21,7 +21,6 @@ public class Waypoint : MyMono {
 
     void Start()
     {
-        Debug.Log("StarT");
         for (int i = 0; i < 10; i++) {
             Waypoints[i] = GameObject.Instantiate(WaypointPrefab);
             Waypoints[i].GetComponentInChildren<Text>().text = (i).ToString();

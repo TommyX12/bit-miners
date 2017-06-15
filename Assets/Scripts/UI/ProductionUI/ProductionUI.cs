@@ -61,7 +61,7 @@ public class ProductionUI : MyMono {
             ProductionQueueImages[i].sprite = Production.buildQueue[i].prefab.GetComponent<SpriteRenderer>().sprite;
         }
 
-        for (int i = Production.buildQueue.Count; i < 7; i++)
+        for (int i = Production.buildQueue.Count; i < 5; i++)
         {
             ProductionQueueImages[i].sprite = null;
         }
@@ -89,6 +89,7 @@ public class ProductionUI : MyMono {
     }
 
     public void PostToolTipData(int index) {
+        ShowTT();
         if (index > Production.BuildPrefabs.Count) {
             return;
         }
@@ -97,10 +98,20 @@ public class ProductionUI : MyMono {
 
     public void Cancel(int index) {
         Production.Cancel(index);
+        Refresh();
     }
 
     public void Build(int index) {
         Production.Build(index);
+        Refresh();
     }
 
+    public void ShowTT() {
+        tooltip.gameObject.SetActive(true);
+    }
+
+    public void HideTT()
+    {
+        tooltip.gameObject.SetActive(false);
+    }
 }

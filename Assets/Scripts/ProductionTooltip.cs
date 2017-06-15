@@ -26,8 +26,6 @@ public class ProductionTooltip : MonoBehaviour {
             {"titanium", resourceCosts[8]},
         };
     }
-
-
     public void PostInfo(Unit unit) {
         title.text = unit.gameObject.name;
 
@@ -39,7 +37,7 @@ public class ProductionTooltip : MonoBehaviour {
             resourceCostsHelper[unit.ResourceTypes[i]].text = unit.ResourceCosts[i].ToString();
         }
 
-        buildtime.text = "Build Time: " + unit.BuildTime;
+        buildtime.text = unit.BuildTime.ToString();
         description.text = unit.description;
     }
 }

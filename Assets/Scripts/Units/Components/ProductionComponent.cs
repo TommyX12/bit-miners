@@ -18,8 +18,8 @@ public class ProductionComponent : UnitComponent {
 
     }
 
-    public List<GameObject> BuildPrefabs; // limit this to 4
-    public List<BuildItem> buildQueue; // max 7 build items at a time
+    public List<GameObject> BuildPrefabs; // limit this to 15
+    public List<BuildItem> buildQueue; // max 5 build items at a time
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class ProductionComponent : UnitComponent {
             return;
             // TODO: error message
         }
-        if (buildQueue.Count >= 7) {
+        if (buildQueue.Count >= 5) {
             return;
             // TODO: error message
         }

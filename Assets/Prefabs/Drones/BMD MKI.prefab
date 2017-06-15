@@ -568,7 +568,7 @@ MonoBehaviour:
   BuildTime: 60
   ResourceTypes:
   - iron
-  ResourceCosts: 2c010000
+  ResourceCosts: 00000000
   MaxHP: 3
   teamid: 0
   description: A basic drone for collecting resources. Cannot fight.

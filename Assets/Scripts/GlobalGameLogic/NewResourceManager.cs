@@ -127,11 +127,6 @@ public class NewResourceManager
             }
                 Refresh();
         }
-
-        foreach (SiloComponent s in silos) {
-            Debug.Log(s.gameObject.name);
-        }
-
     }
 
     public static void RemoveSilo(SiloComponent silo)
