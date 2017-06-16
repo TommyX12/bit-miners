@@ -4,11 +4,16 @@ This is a resource collection game.
 
 You will control a unit (the circle). Press WASD to move. The camera will follow the circle.
 
+- Waypoint -
+Press number keys to place waypoints.
+
 - Bases -
 
 There will be some base buildings Large square base buildings. Each holds it's own type of resource. iron, gold, and chips
 
 The bases also allow for the production of more units that you can program to help you collect and defend
+
+Click on a base to open building UI.
 
 - Units -
 

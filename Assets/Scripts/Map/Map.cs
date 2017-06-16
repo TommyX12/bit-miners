@@ -7,12 +7,9 @@ public class Map : MyMono {
 	public static Map Current;
 	public Grid<MapData> Grid;
 	
-	[HideInInspector]
-	public float TileSize = 0.25f;
-	[HideInInspector]
-	public int MapRadiusH = 64;
-	[HideInInspector]
-	public int MapRadiusV = 64;
+	public static float TileSize = 0.5f;
+	public static int MapRadiusH = 64;
+	public static int MapRadiusV = 64;
 	
 	private MapTile ConstructElementFunc(Grid<MapData> grid) {
 		MapTile tile = (MapTile)Util.MakeChild(this.transform, GameManager.Current.MapTilePrefab);
@@ -23,7 +20,7 @@ public class Map : MyMono {
 		Current = this;
 		
 		this.Grid = new Grid<MapData>(
-			this.TileSize,
+			TileSize,
 			true,
 			2,
 			this.transform,
@@ -32,7 +29,7 @@ public class Map : MyMono {
 	}
 	
 	private void GenerateMap() {
-		this.Grid.Fill(this.MapRadiusH, this.MapRadiusV, null);
+		this.Grid.Fill(MapRadiusH, MapRadiusV, null);
 		
 		foreach (GridCoord coord in Grid.Coords()){
 			Grid.Set(coord, new MapData());
