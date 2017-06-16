@@ -27,7 +27,7 @@ public class StorageComponent : UnitComponent, IInteractable {
         }
     }
 
-    public void TurnIn() {
+    public virtual void TurnIn() {
         RaycastHit2D[] hits = new RaycastHit2D[20];
         int hitCount = coll.Cast(Vector2.zero, hits);
         for (int i = 0; i < hitCount; i++)
