@@ -8,8 +8,29 @@ public class NewResourceManager
     private static int MaxCapacity;
     private static int AmtStored;
 
-    public static Dictionary<string, int> Capacity = new Dictionary<string, int>();
-    public static Dictionary<string, int> Stored = new Dictionary<string, int>();
+    public static Dictionary<string, int> Capacity = new Dictionary<string, int>() {
+            {"iron", 0},
+            {"gold", 0},
+            {"coal", 0},
+            {"oil", 0},
+            {"chip", 0},
+            {"steel", 0},
+            {"plastic", 0},
+            {"processor", 0},
+            {"titanium", 0},
+    };
+    public static Dictionary<string, int> Stored = new Dictionary<string, int>()
+    {
+            {"iron", 0},
+            {"gold", 0},
+            {"coal", 0},
+            {"oil", 0},
+            {"chip", 0},
+            {"steel", 0},
+            {"plastic", 0},
+            {"processor", 0},
+            {"titanium", 0},
+    };
 
     private static List<SiloComponent> silos = new List<SiloComponent>();
 
