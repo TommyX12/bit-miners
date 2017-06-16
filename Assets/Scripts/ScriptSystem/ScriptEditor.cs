@@ -84,5 +84,15 @@ public class ScriptEditor : MyMono {
 	public override void NormalUpdate() {
 		
 	}
-	
+
+    private void OnEnable()
+    {
+        Inventory.Current.gameObject.SetActive(false);
+    }
+
+    private void OnDisable()
+    {
+        Inventory.Current.gameObject.SetActive(true);
+    }
+
 }

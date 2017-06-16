@@ -8,6 +8,7 @@ public class MiningComponent : StorageComponent {
     public float TimeMultiplier = 1f;
     public float miningTimer;
     public bool mining;
+    public ParticleSystem sparker;
     Resource resource;
     GridCoord resourceCoordinate;
 
@@ -60,25 +61,34 @@ public class MiningComponent : StorageComponent {
     {
         base.PausingFixedUpdate();
         calltimer -= Time.fixedDeltaTime;
-        if (mining) {
+        if (mining)
+        {
+            sparker.Play();
             miningTimer -= Time.fixedDeltaTime;
-            if (resource == null) {
+            if (resource == null)
+            {
                 mining = false;
                 return;
             }
 
-            if (miningTimer <= 0) {
+            if (miningTimer <= 0)
+            {
                 mining = false;
                 stored += resource.GetResource();
-                if (stored >= MaxCapacity) {
+                if (stored >= MaxCapacity)
+                {
                     stored = MaxCapacity;
                 }
                 GridCoord current = Map.Current.Grid.PointToCoord(unit.transform.position);
-                if (Grid<MapData>.ManhattanDistance(current, resourceCoordinate) > MiningRange) {
+                if (Grid<MapData>.ManhattanDistance(current, resourceCoordinate) > MiningRange)
+                {
                     mining = false;
                     resource = null;
                 }
             }
+        }
+        else {
+            sparker.Pause();
         }
     }
 
