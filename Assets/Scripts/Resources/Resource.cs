@@ -32,7 +32,6 @@ public class Resource {
             ResourceValue = 500,
             ResourcePerCollection = 5,
             CollectionTime = 3,
-            type = "iron",
         }},
         {"gold", new Resource(){
             SpriteName = "gold",
@@ -40,7 +39,6 @@ public class Resource {
             ResourceValue = 500,
             ResourcePerCollection = 5,
             CollectionTime = 3,
-            type = "gold",
         }},
         {"oil", new Resource(){
             SpriteName = "oil",
@@ -48,7 +46,6 @@ public class Resource {
             ResourceValue = 500,
             ResourcePerCollection = 5,
             CollectionTime = 3,
-            type = "oil",
         }},
         {"coal", new Resource(){
             SpriteName = "coal",
@@ -56,9 +53,14 @@ public class Resource {
             ResourceValue = 500,
             ResourcePerCollection = 5,
             CollectionTime = 3,
-            type = "coal",
 		}},
 	};
+	
+	static Resource() {
+		foreach (var item in resourceDict) {
+			item.Value.type = item.Key;
+		}
+	}
 	
 	public static Resource Construct(string name, MapData mapData) {
 		Resource result = (Resource)resourceDict[name].MemberwiseClone();
