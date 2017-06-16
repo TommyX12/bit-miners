@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class WaypointManager : MyMono {
 	public static WaypointManager Current;
 	
+	public static float RemoveRadius = 0.25f;
+	
 	public static readonly int NumDefaultWaypoints = 10;
 	public static readonly KeyCode[] DefaultBindings = new KeyCode[]{
 		KeyCode.Alpha0,
@@ -23,7 +25,7 @@ public class WaypointManager : MyMono {
 	public GameObject WaypointPrefab;
 	
 	private static Dictionary<string, Waypoint> waypoints = new Dictionary<string, Waypoint>();
-	private static Dictionary<GridCoord, Waypoint> placedWaypoints = new Dictionary<GridCoord, Waypoint>();
+	// private static Dictionary<GridCoord, Waypoint> placedWaypoints = new Dictionary<GridCoord, Waypoint>();
 
 	void Awake() {
 		Current = this;
@@ -39,9 +41,14 @@ public class WaypointManager : MyMono {
 		
 		foreach (Waypoint waypoint in this.Waypoints()) {
 			if (Input.GetKeyDown(waypoint.KeyBinding)) {
-				Vector2 pos = Util.CameraToWorld(Camera.main, Input.mousePosition, 0);
-				GridCoord coord = Map.Current.Grid.PointToCoord(pos);
-				waypoint.Place(coord);
+				Vector2 mousePos = Util.CameraToWorld(Camera.main, Input.mousePosition, 0);
+				// GridCoord coord = Map.Current.Grid.PointToCoord(pos);
+				if (waypoint.Placed && Util.InRange(waypoint.Pos, mousePos, RemoveRadius)) {
+					waypoint.Remove();
+				}
+				else {
+					waypoint.Place(mousePos);
+				}
 				break;
 			}
 		}
@@ -53,25 +60,25 @@ public class WaypointManager : MyMono {
 		return waypoint;
 	}
 	
-	public Waypoint GetWaypoint(GridCoord coord) {
+	/* public Waypoint GetWaypoint(GridCoord coord) {
 		Waypoint waypoint;
 		placedWaypoints.TryGetValue(coord, out waypoint);
 		return waypoint;
-	}
+	} */
 	
-	public void PlaceWaypoint(string name, GridCoord coord) {
-		waypoints[name].Place(coord);
+	public void PlaceWaypoint(string name, Vector2 pos) {
+		waypoints[name].Place(pos);
 	}
 	
 	public void RemoveWaypoint(string name) {
 		waypoints[name].Remove();
 	}
 	
-	public void RemoveWaypoint(GridCoord coord) {
+	/* public void RemoveWaypoint(GridCoord coord) {
 		if (placedWaypoints.ContainsKey(coord)) {
 			placedWaypoints[coord].Remove();
 		}
-	}
+	} */
 	
 	public void ClearWaypoints() {
 		foreach (Waypoint waypoint in this.Waypoints()) {
@@ -83,9 +90,9 @@ public class WaypointManager : MyMono {
 		return waypoints.Values;
 	}
 	
-	public IEnumerable PlacedWaypoints() {
+	/* public IEnumerable PlacedWaypoints() {
 		return placedWaypoints.Values;
-	}
+	} */
 	
 	public class Waypoint {
 		
@@ -101,7 +108,7 @@ public class WaypointManager : MyMono {
 		public bool Placed {
 			get; private set;
 		}
-		public GridCoord Coord {
+		public Vector2 Pos {
 			get; private set;
 		}
 		
@@ -114,21 +121,11 @@ public class WaypointManager : MyMono {
 			this.Placed = false;
 		}
 		
-		public void Place(GridCoord coord) {
-			if (placedWaypoints.ContainsKey(coord)) {
-				if (coord == this.Coord) {
-					this.Remove();
-					return;
-				}
-				else {
-					placedWaypoints[coord].Remove();
-				}
-			}
+		public void Place(Vector2 pos) {
 			this.Placed = true;
-			this.Coord = coord;
+			this.Pos = pos;
 			this.View.SetActive(true);
-			this.View.transform.position = Map.Current.Grid.CoordToPoint(coord);
-			placedWaypoints[coord] = this;
+			this.View.transform.position = pos;
 		}
 		
 		public void Remove() {
@@ -136,7 +133,6 @@ public class WaypointManager : MyMono {
 			
 			this.Placed = false;
 			this.View.SetActive(false);
-			placedWaypoints.Remove(this.Coord);
 		}
 		
 	}

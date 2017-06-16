@@ -95,6 +95,16 @@ static public class Util
 		return (float)Math.Sqrt(dx*dx + dy*dy);
 	}
 	
+	static public float DistanceSq(float dx, float dy)
+	{
+		return (float)(dx*dx + dy*dy);
+	}
+	
+	static public bool InRange(Vector2 center, Vector2 point, float radius)
+	{
+		return (point - center).sqrMagnitude < radius * radius;
+	}
+	
 	static public int Mod(int i, int n) {
 		return (i % n + n) % n;
 	}

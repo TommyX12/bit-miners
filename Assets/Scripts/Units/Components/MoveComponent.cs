@@ -81,7 +81,7 @@ public class MoveComponent : UnitComponent {
 	public void MoveToWaypoint(string name) {
 		WaypointManager.Waypoint waypoint = WaypointManager.Current.GetWaypoint(name);
 		if (waypoint != null) {
-			SetVectorTarget(waypoint.View.transform.position);
+			SetVectorTarget(waypoint.Pos);
 		}
 		else {
 			Stop();
