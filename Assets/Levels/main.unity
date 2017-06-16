@@ -3904,6 +3904,7 @@ MonoBehaviour:
   miningTimer: 0
   mining: 0
   sparker: {fileID: 1852385081}
+  spriteManager: {fileID: 1866197334}
   calltimer: 0
 --- !u!4 &314580132
 Transform:
