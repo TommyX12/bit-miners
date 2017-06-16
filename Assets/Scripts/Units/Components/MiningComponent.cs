@@ -9,6 +9,7 @@ public class MiningComponent : StorageComponent {
     public float miningTimer;
     public bool mining;
     public ParticleSystem sparker;
+    public MiningSpriteManager spriteManager;
     Resource resource;
     GridCoord resourceCoordinate;
 
@@ -30,7 +31,7 @@ public class MiningComponent : StorageComponent {
 
             Debug.DrawLine(Map.Current.Grid.CoordToPoint(gc), Vector3.zero, Color.white, 1);
 
-            if ((resource = Map.Current.Grid.GetElement(gc).Data.ResourceObject) != null) {
+            if ((resource = Map.Current.Grid.GetElement(gc).Data.ResourceObject) != null && resource.type == type) {
                 Debug.Log(resource.type);
                 Debug.DrawLine(Map.Current.Grid.CoordToPoint(gc), Vector3.zero, Color.green, 1);
                 resourceCoordinate = gc;
@@ -85,6 +86,7 @@ public class MiningComponent : StorageComponent {
                     mining = false;
                     resource = null;
                 }
+                spriteManager.Refresh();
             }
         }
         else {
@@ -100,6 +102,11 @@ public class MiningComponent : StorageComponent {
         return type;
     }
 
+    public override void TurnIn()
+    {
+        base.TurnIn();
+        spriteManager.Refresh();
+    }
     public override void Register(ScriptSystem scriptSystem)
     {
         scriptSystem.RegisterFunction("set_type", new Action<string>(SetType));
