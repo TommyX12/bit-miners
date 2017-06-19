@@ -89,6 +89,7 @@ public class ScriptEditor : MyMono {
     {
         Inventory.Current.gameObject.SetActive(false);
         ProductionUI.Current.gameObject.SetActive(false);
+        ResourceDisplay.Current.gameObject.SetActive(false);
     }
 
     private void OnDisable()

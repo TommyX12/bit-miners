@@ -5,10 +5,17 @@ using UnityEngine.UI;
 
 public class BuildUI : MyMono {
     public static BuildUI Current;
+
     public ResizingButtonPanel ItemPanel;
+    [HideInInspector]
     public List<GameObject> ActiveList;
+
     public GameObject SelectedItem;
+    [HideInInspector]
     public Toggle selected;
+
+    public GameObject IndicatorObject;
+
 
     public void Start()
     {
@@ -35,6 +42,16 @@ public class BuildUI : MyMono {
     public void Deactivate() {
         gameObject.SetActive(false);
         Inventory.Current.gameObject.SetActive(true);
+    }
+
+    public override void PausingUpdate()
+    {
+        base.PausingUpdate();
+
+        if (SelectedItem != null) {
+
+        }
+
     }
 
 }

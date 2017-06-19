@@ -41,4 +41,15 @@ public class SiloComponent : UnitComponent, IInteractable
         }
 
     }
+
+    public void SetType(string type) {
+        NewResourceManager.RemoveSilo(this);
+        this.type = type;
+        NewResourceManager.AddSilo(this);
+    }
+
+    public override void Register(ScriptSystem scriptSystem)
+    {
+        scriptSystem.RegisterFunction("set_type", new Action<string>(SetType));
+    }
 }

@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ResourceDisplay : MyMono {
-
+    public static ResourceDisplay Current;
     public List<Text> resourceCosts;
     Dictionary<string, Text> resources; // Very sensitive to order of resourceCosts
 
     private void Start()
     {
+        Current = this;
         resources = new Dictionary<string, Text>()
         {
             {"iron", resourceCosts[0]},
