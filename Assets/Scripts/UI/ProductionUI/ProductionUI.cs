@@ -19,6 +19,7 @@ public class ProductionUI : MyMono {
     public void Start()
     {
         Current = this;
+        gameObject.SetActive(false);
     }
 
     public override void PausingUpdate()
