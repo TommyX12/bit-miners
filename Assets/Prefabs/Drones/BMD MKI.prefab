@@ -484,6 +484,7 @@ MonoBehaviour:
   miningTimer: 0
   mining: 0
   sparker: {fileID: 198893219065960664}
+  spriteManager: {fileID: 114549038690692302}
   calltimer: 0
 --- !u!114 &114156485428814328
 MonoBehaviour:
@@ -601,7 +602,7 @@ MonoBehaviour:
   BuildTime: 60
   ResourceTypes:
   - iron
-  ResourceCosts: 00000000
+  ResourceCosts: 2c010000
   MaxHP: 3
   teamid: 0
   description: A basic drone for collecting resources. Cannot fight.
@@ -868,7 +869,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 751429955
+  randomSeed: 1080146266
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4142,7 +4143,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1598615725
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224267656444913740

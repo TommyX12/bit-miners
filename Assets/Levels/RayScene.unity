@@ -6609,7 +6609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &846670522
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8310,7 +8310,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.02}
   m_AnchorMax: {x: 1, y: 0.98}
-  m_AnchoredPosition: {x: 0.00000031789, y: 243.70003}
+  m_AnchoredPosition: {x: 0.00000031789, y: 243.70001}
   m_SizeDelta: {x: 0, y: -487.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1185841284
@@ -11627,7 +11627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0.38354915}
-  m_AnchoredPosition: {x: -313.4004, y: -0.00018310547}
+  m_AnchoredPosition: {x: -313.40036, y: -0.00018310547}
   m_SizeDelta: {x: 626.8, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1742625238
@@ -12638,7 +12638,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1598615725
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &1800336967
@@ -14515,7 +14515,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 751429955
+  randomSeed: 1080146266
   InitialModule:
     serializedVersion: 3
     enabled: 1
