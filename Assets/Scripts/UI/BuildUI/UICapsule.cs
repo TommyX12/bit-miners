@@ -13,6 +13,7 @@ public class UICapsule : MonoBehaviour {
         {
             BuildUI.Current.SelectedItem = BuildUI.Current.ActiveList[index]; // Null Checking here
             BuildUI.Current.IndicatorObject.GetComponent<SpriteRenderer>().sprite = BuildUI.Current.SelectedItem.GetComponent<SpriteRenderer>().sprite;
+            BuildUI.Current.IndicatorObject.SetActive(true);
         }
     }
 }

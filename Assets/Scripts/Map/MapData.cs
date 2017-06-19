@@ -29,6 +29,7 @@ public class MapData : IGridCollidable {
 		
 		this.ResourceObject = null;
 		this.Collidable = false;
+        Occupied = false;
 	}
 
 	public void GenerateFromParam() {
@@ -59,6 +60,7 @@ public class MapData : IGridCollidable {
 		if (resourceType != null && resourceType != "nothing") {
 			ResourceObject = Resource.Construct(resourceType, this);
 			this.Collidable = true;
+            Occupied = true;
 		}
 	}
 }

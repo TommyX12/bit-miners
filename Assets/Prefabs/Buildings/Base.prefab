@@ -38,10 +38,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4578603122324648}
   - component: {fileID: 212320838051804082}
-  - component: {fileID: 114231842740393664}
   - component: {fileID: 114929825301109564}
   - component: {fileID: 61609912846875718}
   - component: {fileID: 50485452978777794}
+  - component: {fileID: 114378847756417232}
   m_Layer: 14
   m_Name: Base
   m_TagString: Untagged
@@ -223,7 +223,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1280223875941120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.011, y: 0.462, z: 0}
+  m_LocalPosition: {x: -5.499, y: 0.486, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4252917120230682}
@@ -359,7 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de39daaaeb8d9745ba196a59f85ce2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unit: {fileID: 114231842740393664}
+  unit: {fileID: 0}
   SpawnLocation: {fileID: 1927479731458254}
   BuildPrefabs:
   - {fileID: 1070059350565954, guid: 1fbdd51a5db213349991b65d8856fa05, type: 2}
@@ -414,31 +414,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114231842740393664
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1280223875941120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9833d81f656c1e24881f29b83b37b746, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BuildTime: 0
-  ResourceTypes: []
-  ResourceCosts: 
-  MaxHP: 300
-  teamid: 0
-  description: 
-  components:
-  - {fileID: 114929825301109564}
-  - {fileID: 114010370263629784}
-  - {fileID: 114925849344971196}
-  - {fileID: 114929825301109564}
-  - {fileID: 114010370263629784}
-  - {fileID: 114925849344971196}
-  ScriptButtonObject: {fileID: 114331757211658424}
 --- !u!114 &114291405422476828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -491,6 +466,40 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114378847756417232
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1280223875941120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2915eb921ef3d364291b96f5d323e169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildTime: 20
+  ResourceTypes:
+  - iron
+  ResourceCosts: 64000000
+  MaxHP: 6
+  teamid: 0
+  description: Base!
+  components: []
+  ScriptButtonObject: {fileID: 114331757211658424}
+  xSize: 2
+  ySize: 2
+  GridRef:
+    Color:
+    - 1
+    - 1
+    - 1
+    - 1
+    SpriteName: tile
+    BiomeParam1: 0
+    BiomeParam2: 0
+    BiomeName: 
+    Occupied: 0
+    Modified: 1
 --- !u!114 &114511979375482428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -634,7 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450fb02e06ea7dd4e8085b41f521c13b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unit: {fileID: 114231842740393664}
+  unit: {fileID: 0}
   Health: {fileID: 224430258064516736}
 --- !u!114 &114929825301109564
 MonoBehaviour:
@@ -647,8 +656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84b542c49803224083166e55d2ad9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unit: {fileID: 114231842740393664}
-  MaxCapacity: 5000
+  unit: {fileID: 0}
+  MaxCapacity: 500
   type: gold
 --- !u!114 &114995072986078872
 MonoBehaviour:
@@ -793,7 +802,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.098, y: 0.198}
+  m_AnchoredPosition: {x: 0.09799999, y: 0.19800001}
   m_SizeDelta: {x: 61.894, y: 20.206}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224250795985762160
