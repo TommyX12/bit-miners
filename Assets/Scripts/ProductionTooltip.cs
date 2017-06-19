@@ -25,6 +25,7 @@ public class ProductionTooltip : MonoBehaviour {
             {"processor", resourceCosts[7]},
             {"titanium", resourceCosts[8]},
         };
+        gameObject.SetActive(false);
     }
     public void PostInfo(Unit unit) {
         title.text = unit.gameObject.name;

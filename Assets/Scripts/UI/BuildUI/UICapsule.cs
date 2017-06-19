@@ -11,9 +11,21 @@ public class UICapsule : MonoBehaviour {
     public void Select() {
         if (BuildUI.Current.selected != null)
         {
-            BuildUI.Current.SelectedItem = BuildUI.Current.ActiveList[index]; // Null Checking here
-            BuildUI.Current.IndicatorObject.GetComponent<SpriteRenderer>().sprite = BuildUI.Current.SelectedItem.GetComponent<SpriteRenderer>().sprite;
-            BuildUI.Current.IndicatorObject.SetActive(true);
+            GameObject item = BuildUI.Current.ActiveList[index];
+            Unit info = item.GetComponent<Unit>();
+            Dictionary<string, int> cost = new Dictionary<string, int>();
+
+            for (int i = 0; i < info.ResourceTypes.Count; i++)
+            {
+                cost.Add(info.ResourceTypes[i], info.ResourceCosts[i]);
+            }
+
+            if (NewResourceManager.HasEnough(cost))
+            {
+                BuildUI.Current.SelectedItem = BuildUI.Current.ActiveList[index]; // Null Checking here
+                BuildUI.Current.IndicatorObject.GetComponent<SpriteRenderer>().sprite = BuildUI.Current.SelectedItem.GetComponent<SpriteRenderer>().sprite;
+                BuildUI.Current.IndicatorObject.SetActive(true);
+            }
         }
     }
 }

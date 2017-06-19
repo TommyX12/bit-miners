@@ -12,7 +12,7 @@ public class ResizingButtonPanel : MyMono {
     public GameObject ButtonPrefab;
     public RectTransform rt;
 
-    public List<GameObject> buttons = new List<GameObject> ();
+    public List<GameObject> buttons;
 
     private void Start()
     {
@@ -29,19 +29,11 @@ public class ResizingButtonPanel : MyMono {
         UIPosition_x += initialXpadding;
         UIPosition_y += initialYpadding;
 
-        foreach (GameObject b in buttons) {
-            Destroy(b);
-        }
-
         foreach (GameObject go in prefabItems) {
-            GameObject Button = GameObject.Instantiate(ButtonPrefab);
-            RectTransform buttonrt = Button.GetComponent<RectTransform>();
+            GameObject Button = buttons[elementCounter];
             UICapsule capsule = Button.GetComponentInChildren<UICapsule>();
             capsule.index = elementCounter;
             capsule.image.sprite = BuildUI.Current.ActiveList[elementCounter].GetComponentInChildren<SpriteRenderer>().sprite;
-            buttonrt.SetParent(rt);
-            buttonrt.localPosition = new Vector2(UIPosition_x, -UIPosition_y);
-            buttons.Add(Button);
             UIPosition_x += interpadding + ElementWidth;
             elementCounter++;
         }

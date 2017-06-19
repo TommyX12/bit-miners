@@ -100,6 +100,17 @@ public class BuildUI : MyMono {
         GameObject spawned = GameObject.Instantiate(SelectedItem);
         spawned.transform.position = IndicatorObject.transform.position;
         spawned.GetComponent<Building>().GridRef = topleft;
+
+        Unit info = spawned.GetComponent<Unit>();
+
+        Dictionary<string, int> cost = new Dictionary<string, int>();
+
+        for (int i = 0; i < info.ResourceTypes.Count; i++)
+        {
+            cost.Add(info.ResourceTypes[i], info.ResourceCosts[i]);
+        }
+
+        NewResourceManager.Remove(cost);
     }
 
     private bool check(GridCoord topleft, int xSize, int ySize) {
