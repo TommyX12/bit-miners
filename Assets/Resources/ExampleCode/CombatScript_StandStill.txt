@@ -1,10 +1,10 @@
+// attack script
+
 when start() {
 	set_engagement_distance(2)
 	stop_hold_position()
 }
 
-when update() {
-	if(!is_attacking()){
-		attack_nearest_enemy()
-	}
+when update_per_second(){
+	attack_nearest_enemy()
 }

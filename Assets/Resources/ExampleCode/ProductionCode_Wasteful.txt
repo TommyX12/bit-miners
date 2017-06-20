@@ -1,0 +1,5 @@
+// Production Code
+
+when update_per_second(){
+	process()
+}

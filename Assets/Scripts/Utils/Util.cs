@@ -289,11 +289,9 @@ static public class Util
 	}
 
     static public TFilter RaycastAndFilter<TFilter> (Vector2 position) {
-        Debug.Log("KK");
         RaycastHit2D[] hits = Physics2D.RaycastAll(position, Vector2.zero);
 
         foreach (RaycastHit2D hit in hits) {
-            Debug.Log("KKK");
             if (hit.collider.gameObject.GetComponent<TFilter>() != null) {
                 Debug.Log(hit.collider.gameObject.name);
                 return hit.collider.gameObject.GetComponent<TFilter>();

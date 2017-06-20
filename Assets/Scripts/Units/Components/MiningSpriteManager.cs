@@ -19,7 +19,6 @@ public class MiningSpriteManager : MyMono {
     {
         float seed = (float)miner.GetCurrentCapacity() / (float)miner.GetMaxCapacity();
         int sprite = (int)Mathf.Floor(seed * (sprites.Length - 1));
-        Debug.Log(sprite);
         rendy.sprite = sprites[sprite];
     }
 

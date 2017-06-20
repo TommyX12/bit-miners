@@ -1,0 +1,12 @@
+// Mining Code
+
+when start(){
+	set_type("ganmlkewfn")
+	if(get_current_capacity() < get_max_capacity()){
+		go_to_nearest_resource()
+		mine()
+	} else {
+		go_to_nearest_silo()
+		turn_in()
+	}
+}

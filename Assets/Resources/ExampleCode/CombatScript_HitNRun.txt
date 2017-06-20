@@ -1,0 +1,13 @@
+// Combat Code
+
+when update_per_second(){
+	// the ! means not. So if is_attacking() is true then ! is attacking is false, vice versa.
+	if(!is_attacking()){
+		attack_nearest_enemy()
+	}
+	if(ready_to_fire()){
+		set_engagement_distance(0)	
+	} else {
+		set_engagement_distance(10)
+	}
+}

@@ -1,0 +1,16 @@
+// Mining Script
+
+when start(){
+	set_type("iron")
+}
+
+when update_per_second(){
+	// < means less than	
+	if(get_max_capacity() < get_current_capacity()){
+		move_to_waypoint(1)
+		mine()
+	} else {
+		move_to_waypoint(9)
+		turn_in()
+	}
+}

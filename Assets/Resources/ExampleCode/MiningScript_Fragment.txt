@@ -1,0 +1,28 @@
+// mining code
+
+timer = 60
+return_resources = false
+
+when start(){
+	set_type("iron")
+}
+
+when update_per_second(){
+	timer = timer - 1
+	if(return_resources == true){
+		move_to_waypoint(1)
+		mine()
+	} else {
+		move_to_waypoint(1)
+		// missing code
+	}
+
+	if(timer < 0){
+		timer = 0
+		if(return_resources == true){
+			return_resources = false
+		} else {
+			return_resources = true
+		}
+	}
+}

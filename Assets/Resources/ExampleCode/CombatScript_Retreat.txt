@@ -1,0 +1,8 @@
+// french combat script
+
+when update_per_second(){
+	if(get_current_hp() < 4){
+		stop_attacking()
+		move_to_waypoint(1)
+	}
+}

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class SingleFireWeapon : WeaponComponent {
@@ -29,4 +30,17 @@ public class SingleFireWeapon : WeaponComponent {
         }
     }
 
+    public bool ReadyToFire() {
+        return cooldownTimer <= 0;
+    }
+
+    public double GetCooldown() {
+        return cooldownTimer;
+    }
+
+    public override void Register(ScriptSystem scriptSystem)
+    {
+        scriptSystem.RegisterFunction("ready_to_fire", new Func<bool>(ReadyToFire));
+        scriptSystem.RegisterFunction("cooldown_left", new Func<double>(GetCooldown));
+    }
 }
