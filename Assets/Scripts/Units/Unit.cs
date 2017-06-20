@@ -24,7 +24,7 @@ public class Unit : MyMono, IScriptSystemAPI {
 	
 	private float timer = 0.0f;
 	
-	private void StartEditor() {
+	public void StartEditor() {
 		GameManager.Current.ScriptEditorObject.StartEdit(this.ScriptSystemObject);
 	}
 	

@@ -15,8 +15,25 @@ public class Inventory : MonoBehaviour {
     }
 
     public void Drop(UIItem item) {
+
+        Vector3 worldPosition = Util.CameraToWorld(Camera.main, Input.mousePosition, 0);
+
+        Unit unit;
+        Debug.Log("k");
+
+
+
+        if ((unit = Util.RaycastAndFilter<Unit>(worldPosition)) != null) {
+            WorldItem world = item.item;
+            item.item.gameObject.SetActive(true);
+            item.item.gameObject.transform.position = worldPosition;
+            Destroy(item.gameObject);
+            world.DroppedOnUnit(unit);
+            return;
+        }
+
         item.item.gameObject.SetActive(true);
-        item.item.gameObject.transform.position = Util.CameraToWorld(Camera.main, Input.mousePosition, 0);
+        item.item.gameObject.transform.position = worldPosition;
         Destroy(item.gameObject);
     }
 

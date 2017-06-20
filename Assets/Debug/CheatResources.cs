@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CheatResources : MonoBehaviour {
 
+    public string file;
+    public TextAsset txt;
+
 	// Use this for initialization
 	void Start () {
 		

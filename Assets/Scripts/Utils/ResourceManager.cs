@@ -5,7 +5,8 @@ using UnityEngine;
 public class ResourceManager {
 	
 	private static Dictionary<string, Sprite> sprites;
-	
+    private static List<string> code;
+
 	public static void Initialize() {
 		Sprite[] spriteObjects = Resources.LoadAll<Sprite>("Sprites");
 		sprites = new Dictionary<string, Sprite>();

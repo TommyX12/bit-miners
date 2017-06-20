@@ -147,11 +147,17 @@ static public class Util
 	{
 		return Random.Range(min, max);
 	}
-	
-	static public T GetRandomElement<T>(List<T> list)
-	{
-		return list[RandomInt(list.Count)];
-	}
+
+    static public T GetRandomElement<T>(List<T> list)
+    {
+        if (list.Count > 0)
+        {
+            return list[RandomInt(list.Count)];
+        }
+        else {
+            throw new Exception("List is empty");
+        }
+    }
 	
 	static public int RandomSelectChance(float[] chanceArray)
 	{
@@ -281,4 +287,19 @@ static public class Util
 	static public string ColoredRichText(string color, string text) {
 		return "<color=" + color + ">" + text + "</color>";
 	}
+
+    static public TFilter RaycastAndFilter<TFilter> (Vector2 position) {
+        Debug.Log("KK");
+        RaycastHit2D[] hits = Physics2D.RaycastAll(position, Vector2.zero);
+
+        foreach (RaycastHit2D hit in hits) {
+            Debug.Log("KKK");
+            if (hit.collider.gameObject.GetComponent<TFilter>() != null) {
+                Debug.Log(hit.collider.gameObject.name);
+                return hit.collider.gameObject.GetComponent<TFilter>();
+            }
+        }
+
+        return default(TFilter);
+    }
 }
