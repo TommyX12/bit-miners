@@ -22,7 +22,12 @@ public class Unit : MyMono, IScriptSystemAPI {
 	
 	public Button ScriptButtonObject;
 	
+	public UnitSpawnPoint SpawnPoint = null;
+	
 	private float timer = 0.0f;
+	
+	[HideInInspector]
+	public bool Alive = true;
 	
 	public void StartEditor() {
 		GameManager.Current.ScriptEditorObject.StartEdit(this.ScriptSystemObject);
@@ -73,9 +78,14 @@ public class Unit : MyMono, IScriptSystemAPI {
 	public void ApplyDamage(int damage) {
 		currentHP -= damage;
 		if (currentHP <= 0) {
-			Destroy(gameObject);
+			this.Kill();
 		}
         UpdateHealthBar();
+	}
+	
+	public void Kill() {
+		this.Alive = false;
+		Destroy(gameObject);
 	}
 
     public void UpdateHealthBar() {

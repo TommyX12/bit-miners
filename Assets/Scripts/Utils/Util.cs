@@ -58,9 +58,32 @@ static public class Util
 		return hash;
 	}
 
+	static public Component Make(Component childTemplate)
+	{
+		Component newObject = (Component)UnityEngine.Object.Instantiate(childTemplate); // Instantiate
+		
+		return newObject;
+	}
+	
+	static public GameObject Make(GameObject childTemplate)
+	{
+		GameObject newObject = (GameObject)UnityEngine.Object.Instantiate(childTemplate); // Instantiate
+		
+		return newObject;
+	}
+	
 	static public Component MakeChild(Transform parentTransform, Component childTemplate)
 	{
 		Component newObject = (Component)UnityEngine.Object.Instantiate(childTemplate, parentTransform.position, parentTransform.rotation); // Instantiate
+		newObject.transform.parent = parentTransform; // Set as child
+		newObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+		
+		return newObject;
+	}
+	
+	static public GameObject MakeChild(Transform parentTransform, GameObject childTemplate)
+	{
+		GameObject newObject = (GameObject)UnityEngine.Object.Instantiate(childTemplate, parentTransform.position, parentTransform.rotation); // Instantiate
 		newObject.transform.parent = parentTransform; // Set as child
 		newObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 		
@@ -72,15 +95,6 @@ static public class Util
 		foreach(Transform child in parentTransform){
 			GameObject.Destroy(child.gameObject);
 		}
-	}
-	
-	static public GameObject MakeChild(Transform parentTransform, GameObject childTemplate)
-	{
-		GameObject newObject = (GameObject)UnityEngine.Object.Instantiate(childTemplate, parentTransform.position, parentTransform.rotation); // Instantiate
-		newObject.transform.parent = parentTransform; // Set as child
-		newObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
-		
-		return newObject;
 	}
 	
 	static public Vector2 CameraToLocal(Camera camera, Vector2 cameraPoint, Transform transform)
