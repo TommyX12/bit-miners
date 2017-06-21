@@ -8,6 +8,7 @@ public class InventorySlot : MonoBehaviour {
     public void setItem(UIItem item) {
         item.transform.position = transform.position;
         item.slot = this;
+        this.item = item;
     }
 
     public void removeItem() {

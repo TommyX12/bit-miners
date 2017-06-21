@@ -52,5 +52,6 @@ public class UIItem : MonoBehaviour {
         Start();
         this.item = item;
         rendy.sprite = item.gameObject.GetComponent<SpriteRenderer>().sprite;
+        rendy.color = item.gameObject.GetComponent<SpriteRenderer>().color;
     }
 }
