@@ -80,6 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: 
   rendy: {fileID: 212053423681817342}
+  autoGen: 0
 --- !u!212 &212053423681817342
 SpriteRenderer:
   m_ObjectHideFlags: 1

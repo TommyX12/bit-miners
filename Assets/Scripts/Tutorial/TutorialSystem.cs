@@ -59,4 +59,15 @@ public class TutorialSystem : MyMono {
             next();
         }
     }
+
+    public void SetOrAdd(string key, bool value) {
+        if (conditions.ContainsKey(key))
+        {
+            conditions[key] = value;
+        }
+        else {
+            conditions.Add(key, value);
+        }
+    }
+
 }

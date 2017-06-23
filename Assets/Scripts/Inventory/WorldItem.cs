@@ -7,7 +7,6 @@ using UnityEngine;
 public class WorldItem : MyMono, IInteractable
 {
 
-    [HideInInspector]
     public string data;
 
     public SpriteRenderer rendy;

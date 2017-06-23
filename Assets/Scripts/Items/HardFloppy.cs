@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Floppy : WorldItem {
+public class HardFloppy : Floppy {
+    public TextAsset source;
 
     private void Start()
     {
@@ -12,13 +13,12 @@ public class Floppy : WorldItem {
     public override void init()
     {
         base.init();
-        data = ExampleCode.Current.GetRandomCode();
     }
 
     public override void DroppedOnUnit(Unit unit)
     {
         base.DroppedOnUnit(unit);
-        unit.ScriptSystemObject.Script = data;
+        unit.ScriptSystemObject.Script = source.text;
         unit.StartEditor();
         Inventory.Current.Add(this);
     }

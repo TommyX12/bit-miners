@@ -1,0 +1,41 @@
+// If you're reading this you're probably trapped inside a room with a robot.
+// I've left a few of these flimsy disks around to help you get through 
+// the problems you'll face!
+
+// These two slashes you see means that anything written afterwards 
+// will not interfere with the program.
+// They're known as "comments"
+// I'll leave comments in the programs I write to try and help you out.
+
+// Below is a program that will tell the drone to move in a direction
+
+// the events you see at the bottom left are run at specific points in time.
+// Only code written in these events will work!
+
+// events are preceded with the "when" keyword. So when something "start"s 
+// it runs the code inside! 
+// Start is only called once when the robot starts up after you code it.
+
+// By the way. Use the arrow keys to move around in the script!
+
+when start(){
+	move_in_direction(1,-1)
+	// move_in_direction is a instruction you send to the robot.
+	// It tells the robot to move in a direction. But what direction!? 
+	// It takes two more pieces of information called "arguments" to tell the 
+	// robot how to move.
+	
+	// The first argument is the horizontal movement. 
+		// If you pass a negative number it will move to the right. 
+		// If you pass a positive number it will move to the left!
+	
+	// The second argument, 
+	// separated by a comma from the first is the vertical movement.
+		// If you pass in a nevative number it will move down.
+		// If you pass in a positive number it will move up!
+
+
+	// The code worked as-is for me. but they may have moved the pressure pad 
+	// since I was last there.
+	// You may need to edit the arguments to get it to work properly!
+}

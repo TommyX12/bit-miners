@@ -8,9 +8,13 @@ public class ResourceDisplay : MyMono {
     public List<Text> resourceCosts;
     Dictionary<string, Text> resources; // Very sensitive to order of resourceCosts
 
-    private void Start()
+    private void Awake()
     {
         Current = this;
+    }
+
+    private void Start()
+    {
         resources = new Dictionary<string, Text>()
         {
             {"iron", resourceCosts[0]},

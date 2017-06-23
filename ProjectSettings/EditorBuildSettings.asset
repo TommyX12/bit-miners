@@ -12,5 +12,8 @@ EditorBuildSettings:
     path: Assets/Levels/Intro.unity
     guid: 1d0e96e19b3633841bd8834a9337f9ec
   - enabled: 1
-    path: Assets/Levels/Level1.unity
+    path: Assets/Levels/Tutorial/Level1.unity
     guid: c0fe3cc4188661e4abb6a2371b023b5d
+  - enabled: 1
+    path: Assets/Levels/Tutorial/Level2.unity
+    guid: 5c59bbc615ea270458cf8ca4eb048ef4

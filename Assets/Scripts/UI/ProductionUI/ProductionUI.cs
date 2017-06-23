@@ -16,9 +16,13 @@ public class ProductionUI : MyMono {
     public float UpdateRate;
     private float timer;
 
-    public void Start()
+    private void Awake()
     {
         Current = this;
+    }
+
+    public void Start()
+    {
         gameObject.SetActive(false);
     }
 

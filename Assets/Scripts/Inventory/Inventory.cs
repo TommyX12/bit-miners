@@ -8,9 +8,14 @@ public class Inventory : MonoBehaviour {
     public List<InventorySlot> slots;
     public GameObject UIItemPrefab;
     public GameObject border;
-    private void Start()
+
+    private void Awake()
     {
         Current = this;
+    }
+
+    private void Start()
+    {
         slots = new List<InventorySlot>(GetComponentsInChildren<InventorySlot>());
     }
 
