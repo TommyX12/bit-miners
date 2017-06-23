@@ -5,21 +5,32 @@ using UnityEngine.UI;
 
 public class TutorialSystem : MyMono {
 
+    public static TutorialSystem Current;
+
     public Dictionary<string, bool> conditions;
     public DialogueDisplay display;
 
-    public Dialogue current;
+    public Dialogue active;
     public Dialogue start;
 
+    public void Start()
+    {
+        conditions = new Dictionary<string, bool>();
+        Current = this;
+        start.Run();
+        display.Show(start.text);
+
+    }
+
     public void next() {
-        if (check(current.conditions))
+        if (check(active.conditions))
         {
-            current = current.next;
-            current.Run();
-            display.Show(current.text);
+            active = active.next;
+            active.Run();
+            display.Show(active.text);
         }
         else{
-            display.Show(current.text);
+            display.Show(active.text);
         }
     }
 
