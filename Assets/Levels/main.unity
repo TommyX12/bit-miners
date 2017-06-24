@@ -481,6 +481,7 @@ MonoBehaviour:
   description: A basic drone for collecting resources. Cannot fight.
   components: []
   ScriptButtonObject: {fileID: 1449181302}
+  Alive: 1
 --- !u!50 &12102696
 Rigidbody2D:
   serializedVersion: 4
@@ -3078,6 +3079,7 @@ GameObject:
   - component: {fileID: 225193550}
   - component: {fileID: 225193549}
   - component: {fileID: 225193548}
+  - component: {fileID: 225193554}
   m_Layer: 0
   m_Name: Manager Scripts
   m_TagString: Untagged
@@ -3157,6 +3159,7 @@ MonoBehaviour:
   ScriptEditorObject: {fileID: 237130090}
   MapTilePrefab: {fileID: 114818218062138862, guid: 3d9935107aeea3e4286eb1a9ae3113ca,
     type: 2}
+  Player: {fileID: 1812752602}
 --- !u!4 &225193553
 Transform:
   m_ObjectHideFlags: 0
@@ -3170,6 +3173,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &225193554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 225193547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9fc0b350c985d24d8cf5c2088d344f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &237130088
 Prefab:
   m_ObjectHideFlags: 0
@@ -5049,6 +5063,7 @@ MonoBehaviour:
   description: A basic drone for collecting resources. Cannot fight.
   components: []
   ScriptButtonObject: {fileID: 451011250}
+  Alive: 1
 --- !u!50 &455249302
 Rigidbody2D:
   serializedVersion: 4
@@ -5589,7 +5604,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.02}
   m_AnchorMax: {x: 1, y: 0.98}
-  m_AnchoredPosition: {x: 0.00000031789, y: 243.70003}
+  m_AnchoredPosition: {x: 0.00000031789, y: 243.70006}
   m_SizeDelta: {x: 0, y: -487.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &509350397
@@ -13140,6 +13155,7 @@ MonoBehaviour:
   description: A basic drone for collecting resources. Cannot fight.
   components: []
   ScriptButtonObject: {fileID: 919059849}
+  Alive: 1
 --- !u!50 &1120066147
 Rigidbody2D:
   serializedVersion: 4
@@ -17390,6 +17406,7 @@ MonoBehaviour:
   description: A basic drone for collecting resources. Cannot fight.
   components: []
   ScriptButtonObject: {fileID: 1482414999}
+  Alive: 1
 --- !u!50 &1224589363
 Rigidbody2D:
   serializedVersion: 4
@@ -17772,7 +17789,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -340.99982}
+  m_AnchoredPosition: {x: 100, y: -340.99985}
   m_SizeDelta: {x: 100, y: -346}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1260790924
@@ -18520,7 +18537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.02}
   m_AnchorMax: {x: 1, y: 0.98}
-  m_AnchoredPosition: {x: 0.00000031789, y: 203.09999}
+  m_AnchoredPosition: {x: 0.00000031789, y: 203.10002}
   m_SizeDelta: {x: 0, y: -487.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1315792771
@@ -26178,6 +26195,7 @@ MonoBehaviour:
   description: 
   components: []
   ScriptButtonObject: {fileID: 0}
+  Alive: 1
 --- !u!61 &1812752603
 BoxCollider2D:
   m_ObjectHideFlags: 0
