@@ -17,7 +17,6 @@ public class HardFloppy : Floppy {
 
     public override void DroppedOnUnit(Unit unit)
     {
-        base.DroppedOnUnit(unit);
         unit.ScriptSystemObject.Script = source.text;
         unit.StartEditor();
         Inventory.Current.Add(this);

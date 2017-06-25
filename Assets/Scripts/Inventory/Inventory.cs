@@ -22,23 +22,21 @@ public class Inventory : MonoBehaviour {
     public void Drop(UIItem item) {
 
         Vector3 worldPosition = Util.CameraToWorld(Camera.main, Input.mousePosition, 0);
-
+        Vector3 dropPosition = Camera.main.transform.position;
+        dropPosition.z = 0;
         Unit unit;
-        Debug.Log("k");
-
-
-
         if ((unit = Util.RaycastAndFilter<Unit>(worldPosition)) != null) {
             WorldItem world = item.item;
             item.item.gameObject.SetActive(true);
-            item.item.gameObject.transform.position = worldPosition;
+            item.item.gameObject.transform.position = dropPosition;
+            item.slot.removeItem();
             Destroy(item.gameObject);
             world.DroppedOnUnit(unit);
             return;
         }
-
+        item.slot.removeItem();
         item.item.gameObject.SetActive(true);
-        item.item.gameObject.transform.position = worldPosition;
+        item.item.gameObject.transform.position = dropPosition;
         Destroy(item.gameObject);
     }
 

@@ -22,7 +22,6 @@ public class Floppy : WorldItem {
 
     public override void DroppedOnUnit(Unit unit)
     {
-        base.DroppedOnUnit(unit);
         unit.ScriptSystemObject.Script = data;
         unit.StartEditor();
         Inventory.Current.Add(this);
