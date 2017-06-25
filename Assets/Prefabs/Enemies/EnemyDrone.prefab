@@ -388,6 +388,7 @@ MonoBehaviour:
   description: A combat drone used to defend and attack.
   components: []
   ScriptButtonObject: {fileID: 0}
+  Alive: 1
 --- !u!114 &114645636723055808
 MonoBehaviour:
   m_ObjectHideFlags: 1
