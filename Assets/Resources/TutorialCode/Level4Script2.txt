@@ -1,0 +1,11 @@
+// This will tell the robot to fight... but It's missing movement code.
+// Hopefully you have some code that can do that...
+
+when start(){
+	stop_hold_position()
+	set_engagement_distance(0)
+}
+
+when update_per_second(){
+	attack_nearest_enemy()
+}

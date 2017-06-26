@@ -93,19 +93,25 @@ public class CombatComponent : UnitComponent {
         GameObject winner = null;
         for (int i = 0; i < hitcount && i < hits.Length; i++)
         {
-            if (hits[i].collider.gameObject.GetComponent<Unit>().teamid != unit.teamid)
+            try
             {
-                if (winner == null)
+                if (hits[i].collider.gameObject.GetComponent<Unit>().teamid != unit.teamid)
                 {
-                    winner = hits[i].collider.gameObject;
-                }
-                else
-                {
-                    if ((transform.position - winner.transform.position).magnitude > (transform.position - hits[i].collider.gameObject.transform.position).magnitude)
+                    if (winner == null)
                     {
                         winner = hits[i].collider.gameObject;
                     }
+                    else
+                    {
+                        if ((transform.position - winner.transform.position).magnitude > (transform.position - hits[i].collider.gameObject.transform.position).magnitude)
+                        {
+                            winner = hits[i].collider.gameObject;
+                        }
+                    }
                 }
+            }
+            catch (NullReferenceException) {
+                Debug.Log("No Unit Component On " + hits[i].collider.gameObject.name);
             }
         }
         if (winner != null)
@@ -121,9 +127,15 @@ public class CombatComponent : UnitComponent {
         int hitcount = SensorCollider.Cast(Vector2.zero, hits);
         for (int i = 0; i < hitcount && i < hits.Length; i++)
         {
-            if (hits[i].collider.gameObject.GetComponent<Unit>().teamid != unit.teamid)
+            try
             {
-                return hits[i].collider.gameObject;
+                if (hits[i].collider.gameObject.GetComponent<Unit>().teamid != unit.teamid)
+                {
+                    return hits[i].collider.gameObject;
+                }
+            }
+            catch (NullReferenceException) {
+                Debug.Log("No Unit Component On " + hits[i].collider.gameObject.name);
             }
         }
         return null;
