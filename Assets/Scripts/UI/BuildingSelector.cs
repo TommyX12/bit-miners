@@ -14,6 +14,10 @@ public class BuildingSelector : MyMono {
 
             if (Input.GetMouseButtonDown(0)) {
                 RaycastHit2D[] hits = Physics2D.RaycastAll(Util.CameraToWorld(Camera.main, Input.mousePosition, 0), Vector2.zero, Mathf.Infinity);
+                if (hits.Length == 0) {
+                    UI.gameObject.SetActive(false);
+                    return;
+                }
                 foreach (RaycastHit2D hit in hits)
                 {
                     if (hit.collider != null)

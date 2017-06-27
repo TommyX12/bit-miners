@@ -22,6 +22,9 @@ public class MapCollider : MyMono {
 	}
 	
 	public override void PausingLateUpdate() {
+        if (Map == null) {
+            return;
+        }
 		Rect worldBoundingBox;
 		if (this.Collider == null) {
 			worldBoundingBox = new Rect(new Vector2(this.transform.position.x, this.transform.position.y) + this.LocalBoundingBox.position, this.LocalBoundingBox.size);

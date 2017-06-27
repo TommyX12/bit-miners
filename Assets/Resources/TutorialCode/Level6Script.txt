@@ -1,0 +1,50 @@
+// instead of a bool we use a number to
+// decide which direction we will move.
+// 0 - stop
+// 1 - up
+// 2 - left
+// 3 - right
+// 4 - down
+MoveMode = 0
+
+// clock to sequence direction changes
+time = 0
+
+
+when update_per_second(){
+	
+	// put code that will control direction here
+	// Example code makes the robot go up and down
+	
+	if (time >= 0){
+		MoveMode = 1
+	}
+
+	if (time >= 5){
+		MoveMode = 4
+	}
+
+	if (time >= 10){
+		MoveMode = 0
+	}
+
+	// note: Only the last decision will stick.
+	// so if time = 6 then both if blocks will run
+	// but since the bottom runs last, the robot will move down.
+
+
+	// code that will control movement. Don't touch!
+	// unless you know what you're doing!
+	if(MoveMode == 0){
+		stop()	
+	} else if (MoveMode == 1){
+		move_in_direction(0,1)
+	} else if (MoveMode == 2){
+		move_in_direction(-1,0)
+	} else if (MoveMode == 3){
+		move_in_direction(1,0)
+	} else if (MoveMode == 4){
+		move_in_direction(0,-1)
+	}
+	time++
+}
