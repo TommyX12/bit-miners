@@ -1,0 +1,13 @@
+// We will introduce the concept of "waypoints" on this level
+
+// pressing 0-9 on the keyboard will place a marker
+
+// These markers can serve as move destinations
+
+when update_per_second(){
+	// move_to_waypoint(waypointNumber)
+	// will move the robot towards the waypoint specified
+	// by the number
+
+	move_to_waypoint(1)
+}

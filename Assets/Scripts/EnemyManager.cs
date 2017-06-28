@@ -26,6 +26,11 @@ public class EnemyManager : MyMono {
     
     // No longer stub!
     public Unit GetPrefabFromString(string enemyName) {
+
+        if (enemyName == null) {
+            return null;
+        }
+
         if (Enemies.ContainsKey(enemyName))
         {
             return Enemies[enemyName].GetComponent<Unit>();
