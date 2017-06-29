@@ -5795,6 +5795,20 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1970563472385530, guid: 78db0abaadf9e054bb36390dc0ce3c83, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50375573487054160, guid: 78db0abaadf9e054bb36390dc0ce3c83,
+        type: 2}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 50375573487054160, guid: 78db0abaadf9e054bb36390dc0ce3c83,
+        type: 2}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114368515451831456, guid: 78db0abaadf9e054bb36390dc0ce3c83, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 78db0abaadf9e054bb36390dc0ce3c83, type: 2}
@@ -12674,8 +12688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: It's too heavy :(
   next: {fileID: 1120569732}
-  conditions:
-  - PlayerNearDrone
+  conditions: []
 --- !u!1 &1310545717
 GameObject:
   m_ObjectHideFlags: 0
