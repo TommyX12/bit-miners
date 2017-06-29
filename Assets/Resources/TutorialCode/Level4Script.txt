@@ -5,20 +5,20 @@ GoLeft = false
 timer = 4
 
 when update_per_second(){
-	
-	// change GoLeft when timer counts down
-	if(timer <= 0){
-		GoLeft = true
-		timer = 4
-	}
+    
+    // change GoLeft when timer counts down
+    if(timer <= 0){
+        GoLeft = true
+        timer = 4
+    }
 
-	// Go up if not going left. Otherwise go left
-	if(GoLeft == false){
-		move_in_direction(0,1)
-	} else {
-		move_in_direction(-1,0)
-	}
+    // Go up if not going left. Otherwise go left
+    if(GoLeft == false){
+        move_in_direction(0,1)
+    } else {
+        move_in_direction(-1,0)
+    }
 
-	// decrement timer
-	timer--
+    // decrement timer
+    timer--
 }

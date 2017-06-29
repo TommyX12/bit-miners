@@ -2,10 +2,10 @@
 // Hopefully you have some code that can do that...
 
 when start(){
-	stop_hold_position()
-	set_engagement_distance(0)
+    stop_hold_position()
+    set_engagement_distance(0)
 }
 
 when update_per_second(){
-	attack_nearest_enemy()
+    attack_nearest_enemy()
 }

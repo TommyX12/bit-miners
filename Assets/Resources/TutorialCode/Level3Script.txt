@@ -10,66 +10,65 @@
 
 // We can use "variables" to store information.
 
-	// This variable holds what is called a boolean. 
-	// It can be either true or false.
-	// At the beginning we want to go to the pad. So goToPad is true.
-goToPad = true
-	// This variable holds the time that we will run 
-	// towards the pad and back from the pad. We have it set to 2.
-TimeToRun = 3
-	
-	// This variable tells when the robot to stop.
-TimeToStop = 6
+// This variable holds what is called a boolean. 
+// It can be either true or false.
+// At the beginning we want to go to the pad. So goToPad is true.
+var goToPad = true
+
+// This variable holds the time that we will run 
+// towards the pad and back from the pad. We have it set to 2.
+var TimeToRun = 3
+    
+// This variable tells when the robot to stop.
+var TimeToStop = 6
 
 // This segment is like start() from the last code. 
 // However this one will run once every second.
 when update_per_second(){
 
-	// If it's time to stop then we stop!
-	if(TimeToStop <= 0){
-		// this stops the robot!
-		stop()
+    // This is called an if statement. It runs certain blocks of code
+    // Based on the value of the statement.
+    // If it's time to stop then we stop!
+    if (TimeToStop <= 0){
+        // this stops the robot!
+        stop()
+    }
+    else {
+        // In this case we check that the variable TimeToRun
+        // is less than or equal to 0. If it is, it will run the
+        // code inside.
+        if (TimeToRun <= 0){
+            // If we have run for 2 seconds in a direction
+            // Then we will want to change the value of our boolean
+            // To change our direction
+            goToPad = true
 
-		// this prevents any code afterwards from running
-		return
-	}
+            // We will also want to reset the timer
+            TimeToRun = 3
+        }
 
-	// This is called an if statement. It runs certain blocks of code
-	// Based on the value of the statement.
-	// In this case it checks that the variable TimeToRun
-	// is less than or equal to 0. If it is, it will run the
-	// code inside.
-	if(TimeToRun <= 0){
-		// If we have run for 2 seconds in a direction
-		// Then we will want to change the value of our boolean
-		// To change our direction
-		goToPad = true
-
-		// We will also want to reset the timer
-		TimeToRun = 3
-	}
-
-	// This if statement is like the previous. It checks
-	// That the variable goToPad is true and runs the code
-	// within the curly braces.
-	// However there is an else afterwards.
-	// The else will run if goToPad is false.
-	// Since statements are either true or false.
-	// Either the if statement or the else statement will run
-	// garunteed.
-	if(goToPad){
-		move_in_direction(1,1)
-	} else {
-		move_in_direction(-1,-1)
-	}
+        // This if statement is like the previous. It checks
+        // That the variable goToPad is true and runs the code
+        // within the curly braces.
+        // However there is an else afterwards.
+        // The else will run if goToPad is false.
+        // Since statements are either true or false.
+        // Either the if statement or the else statement will run
+        // garunteed.
+        if (goToPad){
+            move_in_direction(1,1)
+        } else {
+            move_in_direction(-1,-1)
+        }
 
 
-	// Here we make our timers one less to mark the passing of time
-	TimeToRun = TimeToRun - 1
-	// A fancier way of saying the above!
-	TimeToStop--
-	
-	// The code didn't work perfectly for me!
-	// For some reason the robot doesn't come back
-	// After the time has passed. Maybe you can fix it!
+        // Here we make our timers one less to mark the passing of time
+        TimeToRun = TimeToRun - 1
+        // A fancier way of saying the above is:  TimeToStop--
+        
+        // The code didn't work perfectly for me!
+        // For some reason the robot doesn't come back
+        // After the time has passed. Maybe you can fix it!
+    }
+
 }

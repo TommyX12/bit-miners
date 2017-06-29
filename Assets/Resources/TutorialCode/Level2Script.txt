@@ -19,23 +19,23 @@
 // By the way. Use the arrow keys to move around in the script!
 
 when start(){
-	move_in_direction(1,-1)
-	// move_in_direction is a instruction you send to the robot.
-	// It tells the robot to move in a direction. But what direction!? 
-	// It takes two more pieces of information called "arguments" to tell the 
-	// robot how to move.
-	
-	// The first argument is the horizontal movement. 
-		// If you pass a negative number it will move to the right. 
-		// If you pass a positive number it will move to the left!
-	
-	// The second argument, 
-	// separated by a comma from the first is the vertical movement.
-		// If you pass in a nevative number it will move down.
-		// If you pass in a positive number it will move up!
+    move_in_direction(1,-1)
+    // move_in_direction is a instruction you send to the robot.
+    // It tells the robot to move in a direction. But what direction!? 
+    // It takes two more pieces of information called "arguments" to tell the 
+    // robot how to move.
+    
+    // The first argument is the horizontal movement. 
+        // If you pass a negative number it will move to the right. 
+        // If you pass a positive number it will move to the left!
+    
+    // The second argument, 
+    // separated by a comma from the first is the vertical movement.
+        // If you pass in a nevative number it will move down.
+        // If you pass in a positive number it will move up!
 
 
-	// The code worked as-is for me. but they may have moved the pressure pad 
-	// since I was last there.
-	// You may need to edit the arguments to get it to work properly!
+    // The code worked as-is for me. but they may have moved the pressure pad 
+    // since I was last there.
+    // You may need to edit the arguments to get it to work properly!
 }
