@@ -31,7 +31,7 @@ when start(){
     
     // The second argument, 
     // separated by a comma from the first is the vertical movement.
-        // If you pass in a nevative number it will move down.
+        // If you pass in a negative number it will move down.
         // If you pass in a positive number it will move up!
 
 

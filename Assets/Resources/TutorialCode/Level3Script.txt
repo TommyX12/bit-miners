@@ -16,7 +16,7 @@
 var goToPad = true
 
 // This variable holds the time that we will run 
-// towards the pad and back from the pad. We have it set to 2.
+// towards the pad and back from the pad. We have it set to 3.
 var TimeToRun = 3
     
 // This variable tells when the robot to stop.
@@ -38,7 +38,7 @@ when update_per_second(){
         // is less than or equal to 0. If it is, it will run the
         // code inside.
         if (TimeToRun <= 0){
-            // If we have run for 2 seconds in a direction
+            // If we have run for 3 seconds in a direction
             // Then we will want to change the value of our boolean
             // To change our direction
             goToPad = true
@@ -56,9 +56,9 @@ when update_per_second(){
         // Either the if statement or the else statement will run
         // garunteed.
         if (goToPad){
-            move_in_direction(1,1)
+            move_in_direction(0,1)
         } else {
-            move_in_direction(-1,-1)
+            move_in_direction(0,-1)
         }
 
 
