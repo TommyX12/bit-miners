@@ -108,7 +108,7 @@ public class InputFieldMod : UIBehaviour {
     }
 
     private void RemoveTags(string text) {
-        InputField.text = colorTags.Replace(InputField.text, @"");
+        // InputField.text = colorTags.Replace(InputField.text, @"");
     }
 
     // get text padding (min max vertical offset for size calculation)
@@ -158,7 +158,7 @@ public class InputFieldMod : UIBehaviour {
         }
 
         // update scroll rect position
-        if (scrollRect) StartCoroutine(ScrollMax());
+        // if (scrollRect) StartCoroutine(ScrollMax());
     }
 
     // update scroll rect position (after Layout was rebuilt)

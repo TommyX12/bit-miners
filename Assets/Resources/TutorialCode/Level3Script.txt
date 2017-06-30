@@ -64,7 +64,8 @@ when update_per_second(){
 
         // Here we make our timers one less to mark the passing of time
         TimeToRun = TimeToRun - 1
-        // A fancier way of saying the above is:  TimeToStop--
+        // A fancier way of saying the above is:  TimeToRun--
+        TimeToStop = TimeToStop - 1
         
         // The code didn't work perfectly for me!
         // For some reason the robot doesn't come back
