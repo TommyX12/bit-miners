@@ -13,25 +13,42 @@ public class TutorialSystem : MyMono {
     public Dialogue active;
     public Dialogue start;
 
+    public ColorBlink CanProceedIndicator;
+
     public void Start()
     {
         conditions = new Dictionary<string, bool>();
         Current = this;
         start.Run();
         display.Show(start.text);
-
+        display.portrait.sprite = active.portrait;
+        if (active.sound != null)
+        {
+            AudioSource.PlayClipAtPoint(active.sound, Camera.main.transform.position);
+        }
     }
 
     public void next() {
         if (check(active.conditions))
         {
+            active.next.last = active;
             active = active.next;
             active.Run();
-            display.Show(active.text);
+
+            display.portrait.sprite = active.portrait;
+            if (active.sound != null) {
+                AudioSource.PlayClipAtPoint(active.sound, Camera.main.transform.position);
+            }
         }
-        else{
-            display.Show(active.text);
+        display.Show(active.text);
+    }
+
+    public void last() {
+        if (active.last != null) {
+            active = active.last;
         }
+        display.Show(active.text);
+        display.portrait.sprite = active.portrait;
     }
 
     public bool check(List<string> bools){
@@ -57,6 +74,22 @@ public class TutorialSystem : MyMono {
     {
         if (Input.GetKeyDown(KeyCode.Space)) {
             next();
+        }
+
+        if (Input.GetKey(KeyCode.LeftControl)) {
+            next();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Backspace)) {
+            last();
+        }
+
+        if (check(active.conditions))
+        {
+            CanProceedIndicator.On = true;
+        }
+        else {
+            CanProceedIndicator.On = false;
         }
     }
 
