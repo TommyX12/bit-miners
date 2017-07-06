@@ -15,6 +15,8 @@ public class PlayerTriggerEnterDialogueCondition : MonoBehaviour {
             return;
         }
         TutorialSystem.Current.SetOrAdd(boolKey, OnEnter);
+        TutorialSystem.Current.next();
+        this.enabled = false;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
