@@ -123,12 +123,21 @@ static public class Util
         GameObject newObject = new GameObject("", typeof(RectTransform));
         newObject.transform.SetParent(parentTransform, false);
         RectTransform newRectTransform = (RectTransform)newObject.transform;
-        newRectTransform.anchorMin = new Vector2(0.0f, 0.0f);
-        newRectTransform.anchorMax = new Vector2(1.0f, 1.0f);
-        newRectTransform.offsetMin = new Vector2(0.0f, 0.0f);
-        newRectTransform.offsetMax = new Vector2(0.0f, 0.0f);
+        InitUIRectTransform(newRectTransform);
         
         return newObject;
+    }
+    
+    static public void InitUIRectTransform(RectTransform rectTransform) {
+        rectTransform.anchorMin = new Vector2(0.0f, 0.0f);
+        rectTransform.anchorMax = new Vector2(1.0f, 1.0f);
+        rectTransform.offsetMin = new Vector2(0.0f, 0.0f);
+        rectTransform.offsetMax = new Vector2(0.0f, 0.0f);
+    }
+    
+    static public void TopLeftUIRectTransform(RectTransform rectTransform) {
+        rectTransform.anchorMin = new Vector2(0.0f, 1.0f);
+        rectTransform.anchorMax = new Vector2(0.0f, 1.0f);
     }
     
     static public void DestroyAllChildren(Transform parentTransform)

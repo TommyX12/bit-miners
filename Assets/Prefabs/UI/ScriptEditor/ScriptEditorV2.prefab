@@ -36,10 +36,10 @@ GameObject:
   - component: {fileID: 224487571470044834}
   - component: {fileID: 222508128417789628}
   - component: {fileID: 114612270730020214}
-  - component: {fileID: 114417244734823334}
   - component: {fileID: 114584683192760304}
+  - component: {fileID: 114710841144307564}
   m_Layer: 5
-  m_Name: TestPanel
+  m_Name: ScriptPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -560,9 +560,6 @@ MonoBehaviour:
   APITextObject: {fileID: 114578304281152732}
   SaveButtonObject: {fileID: 114120977729347598}
   DiscardButtonObject: {fileID: 114043098017669076}
-  TestSEElementPrefab: {fileID: 114812731287667794, guid: c1ead6bfef6ae11459b927fe01302140,
-    type: 2}
-  TestPanel: {fileID: 114417244734823334}
 --- !u!114 &114304958209055392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -802,19 +799,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Scrollbar+ScrollEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114417244734823334
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1091074747858012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c042de8f5577474d95f626605daddcd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScrollRect: {fileID: 0}
-  Container: {fileID: 0}
 --- !u!114 &114530573232483412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -960,6 +944,27 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114710841144307564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1091074747858012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac207e6bad73b84fa961865f1ac6450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScrollRect: {fileID: 0}
+  Container: {fileID: 0}
+  ElementHeight: 22.5
+  VerticalSpacing: 2.5
+  HorizontalSpacing: 4
+  SETextElementPrefab: {fileID: 114454301413941194, guid: c1ead6bfef6ae11459b927fe01302140,
+    type: 2}
+  SECursorPrefab: {fileID: 114076119216487544, guid: d02a7c568799d9647a48aca3042f5fad,
+    type: 2}
+  CursorWidth: 2.5
 --- !u!114 &114722633763380538
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -9,23 +9,40 @@ public class SEElement : MyMono {
     private Vector2 size = new Vector2(80.0f, 20.0f);
     private RectTransform rectTransform;
     
-    public SEElement() {
-        
-    }
-    
     void Awake() {
         this.rectTransform = this.GetComponent<RectTransform>();
-        this.rectTransform.anchorMin = new Vector2(0.0f, 1.0f);
-        this.rectTransform.anchorMax = new Vector2(0.0f, 1.0f);
+        Util.TopLeftUIRectTransform(this.rectTransform);
+        
+        this.OnAwake();
     }
     
     void Start() {
         this.UpdatePosition();
+        
+        this.OnStart();
+    }
+    
+    protected virtual void OnAwake() {
+        
+    }
+    
+    protected virtual void OnStart() {
+        
     }
     
     public void SetPositionAndSize(Vector2 position, Vector2 size) {
         this.position = position;
         this.size = size;
+        this.UpdatePosition();
+    }
+    
+    public void SetWidth(float width) {
+        this.size.x = width;
+        this.UpdatePosition();
+    }
+    
+    public void SetHeight(float height) {
+        this.size.y = height;
         this.UpdatePosition();
     }
     
@@ -47,7 +64,7 @@ public class SEElement : MyMono {
         this.UpdatePosition();
     }
     
-    private void UpdatePosition() {
+    protected void UpdatePosition() {
         this.rectTransform.offsetMin = new Vector2(
             this.position.x, -(this.position.y + this.size.y)
         );

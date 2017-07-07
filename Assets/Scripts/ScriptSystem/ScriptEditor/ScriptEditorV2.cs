@@ -15,9 +15,6 @@ public class ScriptEditorV2 : MyMono {
     public Button SaveButtonObject;
     public Button DiscardButtonObject;
     
-    public SEElement TestSEElementPrefab;
-    public SEElementContainer TestPanel;
-   
     public ScriptSystem ScriptSystemObject {
         get; private set;
     }
@@ -28,14 +25,7 @@ public class ScriptEditorV2 : MyMono {
     }
 
     void Start() {
-        SEElement element;
-        element = Util.Make<SEElement>(this.TestSEElementPrefab);
-        this.TestPanel.AddElement(element);
-        element = Util.Make<SEElement>(this.TestSEElementPrefab);
-        element.SetPositionAndSize(new Vector2(100.0f, 100.0f), new Vector2(100.0f, 100.0f));
-        this.TestPanel.AddElement(element);
         
-        this.TestPanel.SetSize(new Vector2(1000.0f, 2000.0f));
     }
     
     public void StartEdit(ScriptSystem scriptSystem) {
