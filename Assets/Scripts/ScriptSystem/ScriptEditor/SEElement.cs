@@ -64,6 +64,10 @@ public class SEElement : MyMono {
         this.UpdatePosition();
     }
     
+    public void Remove() {
+        Destroy(this.gameObject);
+    }
+    
     protected void UpdatePosition() {
         this.rectTransform.offsetMin = new Vector2(
             this.position.x, -(this.position.y + this.size.y)

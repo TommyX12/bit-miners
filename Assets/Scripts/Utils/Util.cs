@@ -173,6 +173,23 @@ static public class Util
         return (i % n + n) % n;
     }
     
+    static public bool InRange(float val, float lower, float higher) {
+        return val >= lower && val <= higher;
+    }
+    
+    static public bool InRange(int val, int lower, int higher) {
+        return val >= lower && val <= higher;
+    }
+    
+    static public void SafeInsert<T>(List<T> list, int index, T item) {
+        if (index >= list.Count) {
+            list.Add(item);
+        }
+        else {
+            list.Insert(index, item);
+        }
+    }
+    
     static public float Clamp(float val, float lower, float higher)
     {
         return val < lower ? lower : (val > higher ? higher : val);

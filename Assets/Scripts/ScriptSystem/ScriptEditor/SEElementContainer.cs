@@ -56,15 +56,39 @@ public class SEElementContainer : MyMono {
         
     }
     
-    public void AddElement(int row, int column, SEElement element) {
+    public void InsertElement(int row, int column, SEElement element) {
         element.transform.SetParent(this.Container.transform, false);
         element.SetHeight(this.ElementHeight);
         row = Util.Clamp(row, 0, this.data.Count);
         if (row == this.data.Count) {
             this.data.Add(new List<SEElement>());
         }
-        column = Util.Clamp(column, 0, this.data[row].Count);
-        this.data[row].Insert(column, element);
+        if (this.data[row].Count == 0) {
+            this.data[row].Add(element);
+        }
+        else {
+            column = Util.Clamp(column, 0, this.data[row].Count - 1);
+            Util.SafeInsert(this.data[row], column + 1, element);
+        }
+        this.Redraw();
+    }
+    
+    public void InsertRow(int row) {
+        Util.SafeInsert(this.data, row, new List<SEElement>());
+        this.Redraw();
+    }
+    
+    public void DeleteElement(int row, int column) {
+        if (!Util.InRange(row, 0, this.data.Count - 1)) return;
+        if (!Util.InRange(column, 0, this.data[row].Count - 1)) return;
+        this.data[row][column].Remove();
+        this.data[row].RemoveAt(column); 
+        this.Redraw();
+    }
+    
+    public void DeleteRow(int row) {
+        if (!Util.InRange(row, 0, this.data.Count - 1)) return;
+        this.data.RemoveAt(row);
         this.Redraw();
     }
     
@@ -102,12 +126,22 @@ public class SEElementContainer : MyMono {
     }
     
     private void UpdatePosition() {
+        Vector2 scrollPosition = this.ScrollRect.normalizedPosition;
         this.Container.offsetMin = new Vector2(
             0.0f, -this.size.y
         );
         this.Container.offsetMax = new Vector2(
             this.size.x, 0.0f
         );
+        this.ScrollRect.normalizedPosition = scrollPosition;
+    }
+    
+    public void ScrollToStart() {
+        this.ScrollRect.verticalNormalizedPosition = 0.0f;
+    }
+    
+    public void ScrollToEnd() {
+        this.ScrollRect.verticalNormalizedPosition = 1.0f;
     }
     
     public override void NormalUpdate() {
