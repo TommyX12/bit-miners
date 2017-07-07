@@ -15,14 +15,10 @@ public class SEElementContainer : MyMono {
     protected Vector2 size = new Vector2(0.0f, 0.0f);
     protected List<List<SEElement>> data = new List<List<SEElement>>();
     
-    [HideInInspector]
-    protected float ElementHeight = 22.5f;
-    
-    [HideInInspector]
-    protected float VerticalSpacing = 3.0f;
-    
-    [HideInInspector]
+    protected float ElementHeight     = 22.5f;
+    protected float VerticalSpacing   = 3.0f;
     protected float HorizontalSpacing = 3.0f;
+    protected Vector2 ExtraEndSpace   = new Vector2(20.0f, 50.0f);
     
     void Awake() {
         Util.SafeGetComponent<Mask>(this.gameObject);
@@ -84,14 +80,19 @@ public class SEElementContainer : MyMono {
     public void Redraw() {
         Vector2 pos = new Vector2(0.0f, 0.0f);
         float rowHeight = this.ElementHeight + this.VerticalSpacing;
+        
+        float maxWidth = 0.0f;
         foreach (var row in this.data) {
             pos.x = 0;
             foreach (var element in row) {
                 element.SetPosition(pos);
                 pos.x += element.GetSize().x + this.HorizontalSpacing;
             }
+            maxWidth = Mathf.Max(maxWidth, pos.x);
             pos.y += rowHeight;
         }
+        
+        this.SetSize(new Vector2(maxWidth, pos.y) + this.ExtraEndSpace);
         
         this.OnRedraw();
     }

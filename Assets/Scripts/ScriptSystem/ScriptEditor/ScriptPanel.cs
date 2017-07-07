@@ -35,15 +35,15 @@ public class ScriptPanel: SEElementContainer {
         this.AddElement(0, 0, element);
         element = Util.Make<SEElement>(this.SETextElementPrefab);
         element.SetSize(new Vector2(150.0f, 100.0f));
-        this.AddElement(1, 4, element);
-        
-        this.SetSize(new Vector2(1000.0f, 2000.0f));
+        for (int i = 1; i < 50; ++i){
+            element = Util.Make<SEElement>(this.SETextElementPrefab);
+            element.SetSize(new Vector2(Util.RandomFloat(100.0f, 600.0f), 100.0f));
+            this.AddElement(i, 0, element);
+        }
     }
     
     public override void NormalUpdate() {
         base.NormalUpdate();
-        
-        // cursor flashing
     }
     
     protected override void OnRedraw() {

@@ -36,8 +36,8 @@ GameObject:
   - component: {fileID: 224487571470044834}
   - component: {fileID: 222508128417789628}
   - component: {fileID: 114612270730020214}
-  - component: {fileID: 114584683192760304}
   - component: {fileID: 114710841144307564}
+  - component: {fileID: 114434510023552554}
   m_Layer: 5
   m_Name: ScriptPanel
   m_TagString: Untagged
@@ -799,6 +799,37 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Scrollbar+ScrollEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114434510023552554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1091074747858012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e434408a05ac6664a8b416792ffb92bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Content: {fileID: 0}
+  m_Horizontal: 1
+  m_Vertical: 1
+  m_MovementType: 2
+  m_Elasticity: 0.1
+  m_Inertia: 0
+  m_DecelerationRate: 0.135
+  m_ScrollSensitivity: 10
+  m_Viewport: {fileID: 0}
+  m_HorizontalScrollbar: {fileID: 114304958209055392}
+  m_VerticalScrollbar: {fileID: 114417133436555914}
+  m_HorizontalScrollbarVisibility: 0
+  m_VerticalScrollbarVisibility: 0
+  m_HorizontalScrollbarSpacing: 0
+  m_VerticalScrollbarSpacing: 0
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114530573232483412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -859,37 +890,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: -API-
---- !u!114 &114584683192760304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1091074747858012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1367256648, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Content: {fileID: 0}
-  m_Horizontal: 1
-  m_Vertical: 1
-  m_MovementType: 1
-  m_Elasticity: 0.1
-  m_Inertia: 1
-  m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 10
-  m_Viewport: {fileID: 0}
-  m_HorizontalScrollbar: {fileID: 114304958209055392}
-  m_VerticalScrollbar: {fileID: 114417133436555914}
-  m_HorizontalScrollbarVisibility: 0
-  m_VerticalScrollbarVisibility: 0
-  m_HorizontalScrollbarSpacing: 0
-  m_VerticalScrollbarSpacing: 0
-  m_OnValueChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
-      Culture=neutral, PublicKeyToken=null
 --- !u!114 &114612270730020214
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -957,14 +957,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScrollRect: {fileID: 0}
   Container: {fileID: 0}
-  ElementHeight: 22.5
-  VerticalSpacing: 2.5
-  HorizontalSpacing: 4
   SETextElementPrefab: {fileID: 114454301413941194, guid: c1ead6bfef6ae11459b927fe01302140,
     type: 2}
   SECursorPrefab: {fileID: 114076119216487544, guid: d02a7c568799d9647a48aca3042f5fad,
     type: 2}
-  CursorWidth: 2.5
 --- !u!114 &114722633763380538
 MonoBehaviour:
   m_ObjectHideFlags: 1
