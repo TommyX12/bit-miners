@@ -6,6 +6,7 @@ public class GameManager : MyMono {
     
     public static GameManager Current;
     public ScriptEditor ScriptEditorObject;
+    public ScriptEditorV2 ScriptEditorV2Object;
     public MapTile MapTilePrefab;
     public Unit Player;
 

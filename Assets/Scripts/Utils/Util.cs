@@ -65,6 +65,14 @@ static public class Util
         return newObject;
     }
     
+    static public T Make<T>(Component childTemplate)
+        where T:Component
+    {
+        T newObject = (T)UnityEngine.Object.Instantiate(childTemplate); // Instantiate
+        
+        return newObject;
+    }
+    
     static public GameObject Make(GameObject childTemplate)
     {
         GameObject newObject = (GameObject)UnityEngine.Object.Instantiate(childTemplate); // Instantiate
@@ -86,6 +94,39 @@ static public class Util
         GameObject newObject = (GameObject)UnityEngine.Object.Instantiate(childTemplate, parentTransform.position, parentTransform.rotation); // Instantiate
         newObject.transform.parent = parentTransform; // Set as child
         newObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        
+        return newObject;
+    }
+    
+    static public T SafeGetComponent<T>(GameObject gameObject)
+        where T:Component
+    {
+        T result;
+        if ((result = gameObject.GetComponent<T>()) != null) {
+            return result;
+        }
+        
+        return gameObject.AddComponent<T>();
+    }
+    
+    static public T MakeChild<T>(Transform parentTransform, T childTemplate)
+        where T:Component
+    {
+        T newObject = (T)UnityEngine.Object.Instantiate(childTemplate, parentTransform.position, parentTransform.rotation); // Instantiate
+        newObject.transform.parent = parentTransform; // Set as child
+        newObject.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        
+        return newObject;
+    }
+    
+    static public GameObject MakeEmptyUIContainer(RectTransform parentTransform) {
+        GameObject newObject = new GameObject("", typeof(RectTransform));
+        newObject.transform.SetParent(parentTransform, false);
+        RectTransform newRectTransform = (RectTransform)newObject.transform;
+        newRectTransform.anchorMin = new Vector2(0.0f, 0.0f);
+        newRectTransform.anchorMax = new Vector2(1.0f, 1.0f);
+        newRectTransform.offsetMin = new Vector2(0.0f, 0.0f);
+        newRectTransform.offsetMax = new Vector2(0.0f, 0.0f);
         
         return newObject;
     }
