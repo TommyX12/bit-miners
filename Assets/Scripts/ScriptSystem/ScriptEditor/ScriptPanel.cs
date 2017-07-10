@@ -92,6 +92,10 @@ public class ScriptPanel: SEElementContainer {
     }
     
     protected void CursorInsert() {
+        if (this.cursorRow < this.data.Count && this.data[this.cursorRow].Count > 0 && this.cursorColumn >= this.data[this.cursorRow].Count - 1) {
+            this.CursorReturn();
+        }
+            
         SEElement element = Util.Make<SEElement>(this.SETextElementPrefab);
         element.SetSize(new Vector2(Util.RandomFloat(10.0f, 100.0f), 100.0f));
         this.cursorColumn++;
@@ -99,6 +103,10 @@ public class ScriptPanel: SEElementContainer {
     }
     
     protected void CursorInsertBlock(string blockName) {
+        if (this.cursorRow < this.data.Count && this.data[this.cursorRow].Count > 0 && this.cursorColumn >= this.data[this.cursorRow].Count - 1) {
+            this.CursorReturn();
+        }
+            
         SEBlockDef blockDef = SEBlockDef.GetPreset(blockName);
         SEElement[] elements = new SEElement[blockDef.Elements.Length];
         for (int i = 0; i < elements.Length; ++i) {

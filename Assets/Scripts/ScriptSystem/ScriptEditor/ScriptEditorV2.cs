@@ -9,9 +9,7 @@ public class ScriptEditorV2 : MyMono {
     public static readonly Color IDLE_COLOR = new Color(0.0f, 0.0f, 0.2f, 1.0f);
     public static readonly Color RUNNING_COLOR = new Color(0.0f, 0.5f, 0.1f, 1.0f);
     
-    public InputField InputFieldObject;
     public Text StatusTextObject;
-    public Text APITextObject;
     public Button SaveButtonObject;
     public Button DiscardButtonObject;
     
@@ -38,9 +36,6 @@ public class ScriptEditorV2 : MyMono {
         
         this.ScriptSystemObject = scriptSystem;
         
-        this.InputFieldObject.text = this.ScriptSystemObject.Script;
-        this.APITextObject.text = this.ScriptSystemObject.GetAPIListText();
-        
         this.ReloadStatus();
     }
     
@@ -49,7 +44,6 @@ public class ScriptEditorV2 : MyMono {
     }
     
     public void SaveAndRun() {
-        this.ScriptSystemObject.Script = this.InputFieldObject.text;
         this.ScriptSystemObject.Start();
         
         if (!this.ScriptSystemObject.ErrorCaught) this.EndEdit();
@@ -77,8 +71,6 @@ public class ScriptEditorV2 : MyMono {
         MyMono.Paused = false;
         
         this.ScriptSystemObject = null;
-        
-        InputFieldObject.text = "";
     }
     
     public override void NormalUpdate() {

@@ -8,16 +8,23 @@ public class SEBlockDef {
     public SEElementDef[] Elements = null;
     public string Name = null;
     public int CursorIndex = 0;
+    public int Flags = 0;
     public CompileFuncDelegate CompileFunc = null;
     
     public SEBlockDef() {
         
     }
     
+    public const int F_RETURN_VAL = 1 << 0;
+    public const int F_CONTROL_FLOW = 1 << 1;
+    public const int F_HAS_PROCEDURE = 1 << 2;
+    public const int F_RETURN_BOOL = 1 << 3;
+    
     private static Dictionary<string, SEBlockDef> presets = new Dictionary<string, SEBlockDef>() {
         {"if",
             new SEBlockDef(){
                 CursorIndex = 0,
+                Flags = F_CONTROL_FLOW,
                 Elements = new SEElementDef[]{
                     new SEElementDef() {
                         ElementType = "text",
@@ -46,6 +53,7 @@ public class SEBlockDef {
         {"api_move_to",
             new SEBlockDef(){
                 CursorIndex = 0,
+                Flags = F_HAS_PROCEDURE,
                 Elements = new SEElementDef[]{
                     new SEElementDef() {
                         ElementType = "text",
@@ -73,6 +81,14 @@ public class SEBlockDef {
         },
     };
     
+    private static Dictionary<string, int> regionFlags = new Dictionary<string, int>() {
+        {"end", -1},
+        {"none", 0},
+        {"expr", F_RETURN_VAL},
+        {"block", F_CONTROL_FLOW | F_HAS_PROCEDURE},
+        {"condition", F_RETURN_BOOL},
+    };
+    
     static SEBlockDef(){
         foreach (var entry in presets) {
             entry.Value.Name = entry.Key;
@@ -81,6 +97,10 @@ public class SEBlockDef {
     
     public static SEBlockDef GetPreset(string name) {
         return presets[name];
+    }
+    
+    public static int GetRegionFlag(string regionName) {
+        return regionFlags[regionName];
     }
     
 }
