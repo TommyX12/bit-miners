@@ -21,21 +21,49 @@ public class SEBlockDef {
                 Elements = new SEElementDef[]{
                     new SEElementDef() {
                         ElementType = "text",
-                        Color = new float[]{0, 0, 1, 1},
+                        Color = new float[]{0, 0.2f, 1, 1},
                         Text = "If (",
                         RegionType = "condition",
                     },
                     new SEElementDef() {
                         ElementType = "text",
-                        Color = new float[]{0, 0, 1, 1},
+                        Color = new float[]{0, 0.2f, 1, 1},
                         Text = ")",
                         RegionType = "block",
                     },
                     new SEElementDef() {
                         ElementType = "text",
-                        Color = new float[]{0, 0, 1, 1},
+                        Color = new float[]{0, 0.2f, 1, 1},
                         Text = "End",
-                        RegionType = "endl",
+                        RegionType = "end",
+                    },
+                },
+                CompileFunc = delegate (string[] regions) {
+                    return "if(" + regions[0] + "){" + regions[1] + "}";
+                },
+            }
+        },
+        {"api_move_to",
+            new SEBlockDef(){
+                CursorIndex = 0,
+                Elements = new SEElementDef[]{
+                    new SEElementDef() {
+                        ElementType = "text",
+                        Color = new float[]{1, 0, 1, 1},
+                        Text = "Move to x=(",
+                        RegionType = "expr",
+                    },
+                    new SEElementDef() {
+                        ElementType = "text",
+                        Color = new float[]{1, 0, 1, 1},
+                        Text = ") y=(",
+                        RegionType = "expr",
+                    },
+                    new SEElementDef() {
+                        ElementType = "text",
+                        Color = new float[]{1, 0, 1, 1},
+                        Text = ")",
+                        RegionType = "end",
                     },
                 },
                 CompileFunc = delegate (string[] regions) {

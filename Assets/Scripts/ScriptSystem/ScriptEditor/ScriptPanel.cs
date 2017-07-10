@@ -49,9 +49,15 @@ public class ScriptPanel: SEElementContainer {
             }
             
             if (
-                Input.GetKeyDown(KeyCode.Space)
+                Input.GetKeyDown(KeyCode.I)
             ) {
                 this.CursorInsertBlock("if");
+            }
+            
+            if (
+                Input.GetKeyDown(KeyCode.M)
+            ) {
+                this.CursorInsertBlock("api_move_to");
             }
             
             int dRow = 0;

@@ -22,7 +22,7 @@ public class SETextElement: SEElement {
     
     public static Font cachedFont = null;
     
-    public int GetTextWidth(string text) {
+    public float GetTextWidth(string text) {
         /* int totalLength = 0;
 
         if (cachedFont == null) cachedFont = this.TextObject.font;
@@ -37,14 +37,14 @@ public class SETextElement: SEElement {
 
         return totalLength; */
         
-        return text.Length * 5;
+        return text.Length * 7.5f;
     }
     
     public override void SetupDefinition() {
         this.TextObject.text = this.Definition.Text;
         this.TextObject.color = Util.Float4ToColor(this.Definition.TextColor);
         this.ImageObject.color = Util.Float4ToColor(this.Definition.Color);
-        this.SetWidth(this.GetTextWidth(this.Definition.Text) + 20);
+        this.SetWidth(this.GetTextWidth(this.Definition.Text) + 10);
     }
     
 }
