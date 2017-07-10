@@ -139,8 +139,16 @@ public class ScriptPanel: SEElementContainer {
             this.DeleteRow(this.cursorRow + 1);
         }
         else {
-            this.cursorColumn--;
-            this.DeleteElement(this.cursorRow, this.cursorColumn + 1);
+            SEElement startElement = this.GetElementByID(this.GetElement(this.cursorRow, this.cursorColumn).Definition.ParentID);
+            SEElement endElement = this.GetElementByID(startElement.Definition.Children[startElement.Definition.Children.Length - 1]);
+            this.cursorRow = this.GetRowOf(startElement);
+            this.cursorColumn = this.GetColumnOf(startElement) - 1;
+            this.DeleteElements(
+                this.GetRowOf(startElement),
+                this.GetColumnOf(startElement),
+                this.GetRowOf(endElement),
+                this.GetColumnOf(endElement)
+            );
         }
     }
     

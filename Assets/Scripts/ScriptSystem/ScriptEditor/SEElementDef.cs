@@ -27,6 +27,7 @@ public class SEElementDef: IIDBasedElememt {
     public SEElement SpawnElement(GetPrefabDelegate getPrefabFunc) {
         SEElement element = (SEElement)Util.Make(getPrefabFunc(this.ElementType));
         element.Definition = (SEElementDef)this.MemberwiseClone();
+        element.Definition.Element = element;
         element.SetupDefinition();
         return element;
     }

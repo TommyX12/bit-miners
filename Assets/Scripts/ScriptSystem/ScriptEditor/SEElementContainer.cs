@@ -107,6 +107,38 @@ public class SEElementContainer : MyMono {
         this.Redraw();
     }
     
+    public void DeleteElements(int row1, int column1, int row2, int column2) {
+        // WARNING: this does not check for some edge cases.
+        if (row1 > row2) return;
+        if (row1 == row2) {
+            for (int i = column1; i <= column2; ++i) {
+                this.data[row1][i].Remove();
+            }
+            
+            this.data[row1].RemoveRange(column1, column2 - column1 + 1);
+        }
+        else {
+            for (int i = column1; i < this.data[row1].Count; ++i) {
+                this.data[row1][i].Remove();
+            }
+            for (int i = row1 + 1; i < row2; ++i) {
+                for (int j = 0; j < this.data[i].Count; ++j) {
+                    this.data[i][j].Remove();
+                }
+            }
+            for (int i = 0; i <= column2; ++i) {
+                this.data[row2][i].Remove();
+            }
+            
+            this.data[row1].RemoveRange(column1, this.data[row1].Count - column1);
+            this.data[row2].RemoveRange(0, column2 + 1);
+            this.data[row1].AddRange(this.data[row2]);
+            this.data.RemoveAt(row2);
+            this.data.RemoveRange(row1 + 1, row2 - row1 - 1);
+        }
+        this.Redraw();
+    }
+    
     public void DeleteRow(int row) {
         if (!Util.InRange(row, 0, this.data.Count - 1)) return;
         this.data.RemoveAt(row);
@@ -115,6 +147,10 @@ public class SEElementContainer : MyMono {
     
     public SEElement GetElementByID(int id) {
         return this.IDContainer.Get(id).Element;
+    }
+    
+    public SEElement GetElement(int row, int column) {
+        return this.data[row][column];
     }
     
     public int GetRowOf(SEElement element) {
