@@ -14,11 +14,13 @@ public class SEElementContainer : MyMono {
     
     protected Vector2 size = new Vector2(0.0f, 0.0f);
     protected List<List<SEElement>> data = new List<List<SEElement>>();
+    protected List<int> cachedIndents = new List<int>();
     
     protected float ElementHeight     = 22.5f;
     protected float VerticalSpacing   = 3.0f;
     protected float HorizontalSpacing = 3.0f;
     protected Vector2 ExtraEndSpace   = new Vector2(20.0f, 50.0f);
+    protected float IndentSize        = 32;
     
     protected IDBasedContainer<SEElementDef> IDContainer = new IDBasedContainer<SEElementDef>();
     
@@ -103,7 +105,7 @@ public class SEElementContainer : MyMono {
         if (!Util.InRange(column, 0, this.data[row].Count - 1)) return;
         this.IDContainer.Remove(this.data[row][column].Definition);
         this.data[row][column].Remove();
-        this.data[row].RemoveAt(column); 
+        this.data[row].RemoveAt(column);
         this.Redraw();
     }
     
@@ -170,6 +172,7 @@ public class SEElementContainer : MyMono {
                 this.data[i][j].SetCache(i, j);
             }
         }
+        this.cacheDirty = false;
     }
     
     public Vector2 GetSize() {
@@ -188,20 +191,47 @@ public class SEElementContainer : MyMono {
         Vector2 pos = new Vector2(0.0f, 0.0f);
         float rowHeight = this.ElementHeight + this.VerticalSpacing;
         
+        Util.ResizeList(this.cachedIndents, this.data.Count, 0);
+        
         float maxWidth = 0.0f;
+        int indent = 0;
+        int indentMod = 0;
+        int i = 0;
         foreach (var row in this.data) {
-            pos.x = 0;
+            indent += indentMod;
+            indentMod = 0;
+            
+            foreach (var element in row) {
+                if (element.Definition.IndentMod > 0) {
+                    indentMod += element.Definition.IndentMod;
+                }
+                else {
+                    indent += element.Definition.IndentMod;
+                }
+            }
+            this.cachedIndents[i] = indent;
+            
+            pos.x = this.IndentSize * indent;
             foreach (var element in row) {
                 element.SetPosition(pos);
                 pos.x += element.GetSize().x + this.HorizontalSpacing;
             }
             maxWidth = Mathf.Max(maxWidth, pos.x);
             pos.y += rowHeight;
+            
+            i++;
         }
         
         this.SetSize(new Vector2(maxWidth, pos.y) + this.ExtraEndSpace);
         
         this.OnRedraw();
+    }
+    
+    public float GetIndentOf(int row) {
+        if (!Util.InRange(row, 0, this.cachedIndents.Count - 1)) {
+            return 0;
+        }
+        return this.cachedIndents[row] * this.IndentSize;
     }
     
     protected virtual void OnRedraw() {
@@ -240,7 +270,7 @@ public class SEElementContainer : MyMono {
         int column = 0;
         SEElement element = null;
         if (row < this.data.Count) {
-            float accWidth = 0.0f;
+            float accWidth = this.GetIndentOf(row);
             for (; column < this.data[row].Count; ++column) {
                 element = this.data[row][column];
                 accWidth += element.GetSize().x + this.HorizontalSpacing;

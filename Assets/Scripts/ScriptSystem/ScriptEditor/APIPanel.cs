@@ -8,6 +8,8 @@ public class APIPanel: SEElementContainer {
     public SEAPIElement SEAPIElementPrefab;
     public ScriptPanel ScriptPanelObject;
     
+    private int cachedCursorFlags = -1;
+    
     protected override void OnAwake() {
         
     }
@@ -21,12 +23,20 @@ public class APIPanel: SEElementContainer {
         
         if (this.gameObject.activeInHierarchy) {
             // check if script panel cursor region flag has changed.
-            // if so, redraw self
+            int flags = this.ScriptPanelObject.GetCursorFlags();
+            if (flags != this.cachedCursorFlags) {
+                this.cachedCursorFlags = flags;
+                this.RefreshFlags();
+            }
         }
     }
     
-    protected override void OnRedraw() {
+    protected void RefreshFlags() {
         // compares flag for each element and set availability.
+    }
+    
+    protected override void OnRedraw() {
+        this.RefreshFlags();
     }
     
     protected override void OnClicked(int row, int column, SEElement element, Vector2 rawPos) {

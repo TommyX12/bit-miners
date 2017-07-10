@@ -15,6 +15,9 @@ public class ScriptPanel: SEElementContainer {
     [HideInInspector]
     protected float CursorWidth = 4.0f;
     
+    private bool flagsDirty = true;
+    private int cachedFlags = 0;
+    
     protected override void OnAwake() {
         
         this.cursor = Util.MakeChild(this.transform, SECursorPrefab);
@@ -131,6 +134,7 @@ public class ScriptPanel: SEElementContainer {
             children[i] = elements[i].Definition.ID;
         }
         elements[0].Definition.Children = children;
+        elements[0].Definition.CompileFuncName = blockDef.Name;
         
         // reset cursor to desired position
         this.SetCursor(
@@ -179,7 +183,9 @@ public class ScriptPanel: SEElementContainer {
     }
     
     private void RedrawCursor() {
-        Vector2 pos = new Vector2(0, 0);
+        this.flagsDirty = true;
+        
+        Vector2 pos = new Vector2(this.GetIndentOf(this.cursorRow), 0);
         
         this.cursorRow = Util.Clamp(this.cursorRow, 0, this.data.Count);
         
@@ -202,6 +208,78 @@ public class ScriptPanel: SEElementContainer {
         
         this.cursor.SetPosition(pos);
         this.cursor.Reflash();
+    }
+    
+    public int GetCursorFlags() {
+        if (!this.flagsDirty) return this.cachedFlags;
+        
+        this.flagsDirty = false;
+        
+        int row = this.cursorRow;
+        int column = this.cursorColumn;
+        this.ElementClosestTo(ref row, ref column);
+        
+        int result = SEBlockDef.GetRegionFlag("top");
+        
+        while (true) {
+            if (!Util.InRange(row, 0, this.data.Count - 1)) {
+                break;
+            }
+            int flags = SEBlockDef.GetRegionFlag(this.GetElement(row, column).Definition.RegionType);
+            if (flags == -1) {
+                this.ParentOf(ref row, ref column);
+                this.OneElementBackward(ref row, ref column);
+                this.ElementClosestTo(ref row, ref column);
+            }
+            else {
+                result = flags;
+                break;
+            }
+        }
+        
+        this.cachedFlags = result;
+        
+        return this.cachedFlags;
+    }
+    
+    public void OneElementBackward(ref int row, ref int column) {
+        column--;
+        while (column < 0) {
+            row--;
+            if (Util.InRange(row, 0, this.data.Count - 1)) {
+                column = this.data[row].Count - 1;
+            }
+            else {
+                column = 0;
+                break;
+            }
+        }
+    }
+    
+    public void ElementClosestTo(ref int row, ref int column) {
+        if (row >= this.data.Count) {
+            OneElementBackward(ref row, ref column);
+        }
+        while (Util.InRange(row, 0, this.data.Count - 1)) {
+            if (this.data[row].Count > 0) {
+                if (column < 0) {
+                    column = this.data[row].Count - 1;
+                }
+                return;
+            }
+            else {
+                row--;
+                column = -1;
+            }
+        }
+        column = 0;
+    }
+    
+    public void ParentOf(ref int row, ref int column) {
+        // WARNING: this does not check for some edge cases.
+        SEElement parent = this.GetElementByID(this.GetElement(row, column).Definition.ParentID);
+        row = this.GetRowOf(parent);
+        column = this.GetColumnOf(parent);
     }
     
     private Component GetPrefab(string elementType) {

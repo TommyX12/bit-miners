@@ -19,6 +19,7 @@ public class SEBlockDef {
     public const int F_CONTROL_FLOW = 1 << 1;
     public const int F_HAS_PROCEDURE = 1 << 2;
     public const int F_RETURN_BOOL = 1 << 3;
+    public const int F_DEFINITION = 1 << 4;
     
     private static Dictionary<string, SEBlockDef> presets = new Dictionary<string, SEBlockDef>() {
         {"if",
@@ -36,12 +37,14 @@ public class SEBlockDef {
                         ElementType = "text",
                         Color = new float[]{0, 0.2f, 1, 1},
                         Text = ")",
+                        IndentMod = 1,
                         RegionType = "block",
                     },
                     new SEElementDef() {
                         ElementType = "text",
                         Color = new float[]{0, 0.2f, 1, 1},
                         Text = "End",
+                        IndentMod = -1,
                         RegionType = "end",
                     },
                 },
@@ -82,8 +85,9 @@ public class SEBlockDef {
     };
     
     private static Dictionary<string, int> regionFlags = new Dictionary<string, int>() {
-        {"end", -1},
         {"none", 0},
+        {"top", F_DEFINITION},
+        {"end", -1},
         {"expr", F_RETURN_VAL},
         {"block", F_CONTROL_FLOW | F_HAS_PROCEDURE},
         {"condition", F_RETURN_BOOL},

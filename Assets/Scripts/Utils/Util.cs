@@ -2,6 +2,8 @@
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Random = UnityEngine.Random;
 
@@ -380,5 +382,32 @@ static public class Util
         }
 
         return default(TFilter);
+    }
+    
+    static public void PrintCollection<T>(IEnumerable<T> list) {
+        string result = "[";
+        int i = 0;
+        foreach (T item in list) {
+            if (i > 0) {
+                result += ", ";
+            }
+            result += item.ToString();
+            i++;
+        }
+        result += "]";
+        Debug.Log(result);
+    }
+    
+    static public void ResizeList<T>(List<T> list, int size, T val)
+    {
+        int cur = list.Count;
+        if(size < cur)
+            list.RemoveRange(size, cur - size);
+        else if(size > cur)
+        {
+            if(size > list.Capacity)//this bit is purely an optimisation, to avoid multiple automatic capacity changes.
+              list.Capacity = size;
+            list.AddRange(Enumerable.Repeat(val, size - cur));
+        }
     }
 }
