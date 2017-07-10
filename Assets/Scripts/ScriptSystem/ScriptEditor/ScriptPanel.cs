@@ -51,7 +51,7 @@ public class ScriptPanel: SEElementContainer {
             if (
                 Input.GetKeyDown(KeyCode.Space)
             ) {
-                this.CursorInsert();
+                this.CursorInsertBlock("if");
             }
             
             int dRow = 0;
@@ -92,6 +92,39 @@ public class ScriptPanel: SEElementContainer {
         this.InsertElement(this.cursorRow, this.cursorColumn - 1, element);
     }
     
+    protected void CursorInsertBlock(string blockName) {
+        SEBlockDef blockDef = SEBlockDef.GetPreset(blockName);
+        SEElement[] elements = new SEElement[blockDef.Elements.Length];
+        for (int i = 0; i < elements.Length; ++i) {
+            elements[i] = blockDef.Elements[i].SpawnElement(this.GetPrefab);
+        }
+        int rangeStart = 0;
+        int rangeEnd;
+        for (rangeEnd = 0; rangeEnd < elements.Length; ++rangeEnd) {
+            if (elements[rangeEnd].Definition.RegionType == "block") {
+                this.InsertElements(this.cursorRow, this.cursorColumn, elements, rangeStart, rangeEnd);
+                this.cursorColumn += rangeEnd - rangeStart + 1;
+                this.CursorReturn();
+                this.CursorReturn();
+                rangeStart = rangeEnd + 1;
+            }
+        }
+        this.InsertElements(this.cursorRow, this.cursorColumn, elements, rangeStart, rangeEnd - 1);
+        
+        int[] children = new int[blockDef.Elements.Length];
+        for (int i = 0; i < elements.Length; ++i) {
+            elements[i].Definition.ParentID = elements[0].Definition.ID;
+            children[i] = elements[i].Definition.ID;
+        }
+        elements[0].Definition.Children = children;
+        
+        // reset cursor to desired position
+        this.SetCursor(
+            this.GetRowOf(elements[blockDef.CursorIndex]),
+            this.GetColumnOf(elements[blockDef.CursorIndex])
+        );
+    }
+    
     protected void CursorDelete() {
         if (this.data.Count == 0) return;
         
@@ -106,7 +139,8 @@ public class ScriptPanel: SEElementContainer {
             this.DeleteRow(this.cursorRow + 1);
         }
         else {
-            this.DeleteElement(this.cursorRow, this.cursorColumn);
+            this.cursorColumn--;
+            this.DeleteElement(this.cursorRow, this.cursorColumn + 1);
         }
     }
     
@@ -146,6 +180,18 @@ public class ScriptPanel: SEElementContainer {
         
         this.cursor.SetPosition(pos);
         this.cursor.Reflash();
+    }
+    
+    private Component GetPrefab(string elementType) {
+        switch (elementType) {
+            case "text":
+                return this.SETextElementPrefab;
+                break;
+        
+            default:
+                return null;
+                break;
+        }
     }
     
 }

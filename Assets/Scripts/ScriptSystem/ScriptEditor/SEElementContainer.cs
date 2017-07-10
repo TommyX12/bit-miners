@@ -20,6 +20,12 @@ public class SEElementContainer : MyMono {
     protected float HorizontalSpacing = 3.0f;
     protected Vector2 ExtraEndSpace   = new Vector2(20.0f, 50.0f);
     
+    protected IDBasedContainer<SEElementDef> IDContainer = new IDBasedContainer<SEElementDef>();
+    
+    protected bool Redrawable = true;
+    
+    private bool cacheDirty = true;
+    
     void Awake() {
         Util.SafeGetComponent<Mask>(this.gameObject);
         
@@ -70,6 +76,20 @@ public class SEElementContainer : MyMono {
             column = Util.Clamp(column, 0, this.data[row].Count - 1);
             Util.SafeInsert(this.data[row], column + 1, element);
         }
+        this.IDContainer.AddWithID(element.Definition.ID, element.Definition);
+        this.Redraw();
+    }
+    
+    public void InsertElements(int row, int column, SEElement[] elements, int start = 0, int end = -1) {
+        this.Redrawable = false;
+        if (end == -1) end = elements.Length - 1;
+        if (end < start) return;
+        for (int i = start; i <= end; ++i) {
+            SEElement element = elements[i];
+            this.InsertElement(row, column, element);
+            column++;
+        }
+        this.Redrawable = true;
         this.Redraw();
     }
     
@@ -81,6 +101,7 @@ public class SEElementContainer : MyMono {
     public void DeleteElement(int row, int column) {
         if (!Util.InRange(row, 0, this.data.Count - 1)) return;
         if (!Util.InRange(column, 0, this.data[row].Count - 1)) return;
+        this.IDContainer.Remove(this.data[row][column].Definition);
         this.data[row][column].Remove();
         this.data[row].RemoveAt(column); 
         this.Redraw();
@@ -90,6 +111,29 @@ public class SEElementContainer : MyMono {
         if (!Util.InRange(row, 0, this.data.Count - 1)) return;
         this.data.RemoveAt(row);
         this.Redraw();
+    }
+    
+    public SEElement GetElementByID(int id) {
+        return this.IDContainer.Get(id).Element;
+    }
+    
+    public int GetRowOf(SEElement element) {
+        this.RefreshCacheIfDirty();
+        return element.cachedRow;
+    }
+    
+    public int GetColumnOf(SEElement element) {
+        this.RefreshCacheIfDirty();
+        return element.cachedColumn;
+    }
+    
+    public void RefreshCacheIfDirty() {
+        if (!this.cacheDirty) return;
+        for (int i = 0; i < this.data.Count; ++i) {
+            for (int j = 0; j < this.data[i].Count; ++j) {
+                this.data[i][j].SetCache(i, j);
+            }
+        }
     }
     
     public Vector2 GetSize() {
@@ -102,6 +146,9 @@ public class SEElementContainer : MyMono {
     }
     
     public void Redraw() {
+        if (!this.Redrawable) return;
+        this.cacheDirty = true;
+        
         Vector2 pos = new Vector2(0.0f, 0.0f);
         float rowHeight = this.ElementHeight + this.VerticalSpacing;
         

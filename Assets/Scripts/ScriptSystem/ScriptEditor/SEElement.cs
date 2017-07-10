@@ -9,6 +9,11 @@ public class SEElement : MyMono {
     private Vector2 size = new Vector2(80.0f, 20.0f);
     private RectTransform rectTransform;
     
+    public SEElementDef Definition = null;
+    
+    public int cachedRow    = 0;
+    public int cachedColumn = 0;
+    
     void Awake() {
         this.rectTransform = this.GetComponent<RectTransform>();
         Util.TopLeftUIRectTransform(this.rectTransform);
@@ -77,7 +82,16 @@ public class SEElement : MyMono {
         );
     }
     
+    public void SetCache(int row, int column) {
+        this.cachedRow    = row;
+        this.cachedColumn = column;
+    }
+    
     public override void PausingUpdate() {
+        
+    }
+    
+    public virtual void SetupDefinition() {
         
     }
     
