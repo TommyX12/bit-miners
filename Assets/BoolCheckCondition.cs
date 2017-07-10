@@ -14,7 +14,7 @@ public class BoolCheckCondition : MonoBehaviour {
 
     private void Update()
     {
-        bool b = (bool)ScriptToCheck.GetType().GetField(BoolToCheck).GetValue((Door)ScriptToCheck);
+        bool b = (bool)ScriptToCheck.GetType().GetField(BoolToCheck).GetValue(ScriptToCheck);
         if (b == WantedValue)
         {
             TutorialSystem.Current.SetOrAdd(TutorialSystemBool, Value);
