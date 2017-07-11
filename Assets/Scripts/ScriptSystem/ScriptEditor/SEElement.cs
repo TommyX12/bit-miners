@@ -13,6 +13,7 @@ public class SEElement : MyMono {
     
     public int cachedRow    = 0;
     public int cachedColumn = 0;
+    protected bool active   = false;
     
     void Awake() {
         this.rectTransform = this.GetComponent<RectTransform>();
@@ -69,6 +70,10 @@ public class SEElement : MyMono {
         this.UpdatePosition();
     }
     
+    public virtual void SetActive(bool active) {
+        this.active = active;
+    }
+    
     public void Remove() {
         Destroy(this.gameObject);
     }
@@ -87,7 +92,7 @@ public class SEElement : MyMono {
         this.cachedColumn = column;
     }
     
-    public override void PausingUpdate() {
+    public override void NormalUpdate() {
         
     }
     

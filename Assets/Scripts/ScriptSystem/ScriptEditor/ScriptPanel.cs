@@ -51,18 +51,6 @@ public class ScriptPanel: SEElementContainer {
                 this.CursorDelete();
             }
             
-            if (
-                Input.GetKeyDown(KeyCode.I)
-            ) {
-                this.CursorInsertBlock("if");
-            }
-            
-            if (
-                Input.GetKeyDown(KeyCode.M)
-            ) {
-                this.CursorInsertBlock("api_move_to");
-            }
-            
             int dRow = 0;
             int dColumn = 0;
             if (Input.GetKeyDown(KeyCode.UpArrow)) dRow--;
@@ -83,7 +71,7 @@ public class ScriptPanel: SEElementContainer {
         this.SetCursor(row, column);
     }
     
-    protected void CursorReturn() {
+    public void CursorReturn() {
         if (this.cursorRow >= this.data.Count) {
             this.cursorRow++;
             this.InsertRow(this.cursorRow - 1);
@@ -94,7 +82,7 @@ public class ScriptPanel: SEElementContainer {
         }
     }
     
-    protected void CursorInsert() {
+    public void CursorInsert() {
         if (this.cursorRow < this.data.Count && this.data[this.cursorRow].Count > 0 && this.cursorColumn >= this.data[this.cursorRow].Count - 1) {
             this.CursorReturn();
         }
@@ -105,14 +93,17 @@ public class ScriptPanel: SEElementContainer {
         this.InsertElement(this.cursorRow, this.cursorColumn - 1, element);
     }
     
-    protected void CursorInsertBlock(string blockName) {
+    public void CursorInsertBlock(SEBlockDef blockDef) {
         if (this.cursorRow < this.data.Count && this.data[this.cursorRow].Count > 0 && this.cursorColumn >= this.data[this.cursorRow].Count - 1) {
             this.CursorReturn();
         }
             
-        SEBlockDef blockDef = SEBlockDef.GetPreset(blockName);
         SEElement[] elements = new SEElement[blockDef.Elements.Length];
+        
+        float[] color = SEBlockDef.GetTypeColor(blockDef.Type);
+            
         for (int i = 0; i < elements.Length; ++i) {
+            blockDef.Elements[i].Color = color;
             elements[i] = blockDef.Elements[i].SpawnElement(this.GetPrefab);
         }
         int rangeStart = 0;
@@ -131,10 +122,11 @@ public class ScriptPanel: SEElementContainer {
         int[] children = new int[blockDef.Elements.Length];
         for (int i = 0; i < elements.Length; ++i) {
             elements[i].Definition.ParentID = elements[0].Definition.ID;
+            elements[i].Definition.Color = color;
             children[i] = elements[i].Definition.ID;
         }
         elements[0].Definition.Children = children;
-        elements[0].Definition.CompileFuncName = blockDef.Name;
+        elements[0].Definition.BlockDefName = blockDef.Name;
         
         // reset cursor to desired position
         this.SetCursor(
@@ -143,7 +135,7 @@ public class ScriptPanel: SEElementContainer {
         );
     }
     
-    protected void CursorDelete() {
+    public void CursorDelete() {
         if (this.data.Count == 0) return;
         
         if (this.cursorRow >= this.data.Count) {
@@ -191,6 +183,12 @@ public class ScriptPanel: SEElementContainer {
         
         pos.y = this.cursorRow * (this.ElementHeight + this.VerticalSpacing);
         
+        foreach (var row in this.data) {
+            foreach (var element in row) {
+                element.SetActive(false);
+            }
+        }
+        
         if (this.cursorRow < this.data.Count) {
             if (this.data[this.cursorRow].Count > 0) {
                 this.cursorColumn = Util.Clamp(this.cursorColumn, 0, this.data[this.cursorRow].Count - 1);
@@ -199,6 +197,21 @@ public class ScriptPanel: SEElementContainer {
                 }
                 if (this.data[this.cursorRow].Count > 0) {
                     pos.x -= this.HorizontalSpacing;
+                    
+                    int parentID = this.data[this.cursorRow][this.cursorColumn].Definition.ParentID;
+                    if (parentID >= 0) {
+                        SEElement startElement = this.GetElementByID(this.GetElement(this.cursorRow, this.cursorColumn).Definition.ParentID);
+                        SEElement endElement = this.GetElementByID(startElement.Definition.Children[startElement.Definition.Children.Length - 1]);
+                        IEnumerable<SEElement> elements = this.AllBetween(
+                            this.GetRowOf(startElement),
+                            this.GetColumnOf(startElement),
+                            this.GetRowOf(endElement),
+                            this.GetColumnOf(endElement)
+                        );
+                        foreach (SEElement element in elements) {
+                            element.SetActive(true);
+                        }
+                    }
                 }
             }
         }
@@ -220,19 +233,23 @@ public class ScriptPanel: SEElementContainer {
         this.ElementClosestTo(ref row, ref column);
         
         int result = SEBlockDef.GetRegionFlag("top");
+        bool jumped = false;
         
         while (true) {
             if (!Util.InRange(row, 0, this.data.Count - 1)) {
                 break;
             }
-            int flags = SEBlockDef.GetRegionFlag(this.GetElement(row, column).Definition.RegionType);
+            SEElementDef elementDef = this.GetElement(row, column).Definition;
+            int flags = SEBlockDef.GetRegionFlag(elementDef.RegionType);
             if (flags == -1) {
                 this.ParentOf(ref row, ref column);
                 this.OneElementBackward(ref row, ref column);
                 this.ElementClosestTo(ref row, ref column);
+                jumped = true;
             }
             else {
-                result = flags;
+                if (jumped && !elementDef.MultiRegion) result = SEBlockDef.GetRegionFlag("none");
+                else result = flags;
                 break;
             }
         }
@@ -282,7 +299,7 @@ public class ScriptPanel: SEElementContainer {
         column = this.GetColumnOf(parent);
     }
     
-    private Component GetPrefab(string elementType) {
+    private SEElement GetPrefab(string elementType) {
         switch (elementType) {
             case "text":
                 return this.SETextElementPrefab;

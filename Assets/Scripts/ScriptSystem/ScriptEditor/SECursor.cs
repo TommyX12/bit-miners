@@ -28,7 +28,7 @@ public class SECursor: SEElement {
     public override void NormalUpdate() {
         if (this.gameObject.active) {
             this.t += Time.deltaTime;
-            this.color.a = (float)(Math.Cos(t * this.FlashingSpeed) + 1);
+            this.color.a = Util.Flashing(t, 0.0f, 2.0f, this.FlashingSpeed);
             this.image.color = color;
         }
     }

@@ -410,4 +410,25 @@ static public class Util
             list.AddRange(Enumerable.Repeat(val, size - cur));
         }
     }
+    
+    static public float[] GetTextColorBW(float[] color, float threshold = 0.5f) {
+        if (Luma(color) < threshold) {
+            return new float[]{1, 1, 1, 1};
+        }
+        else {
+            return new float[]{0, 0, 0, 1};
+        }
+    }
+    
+    static public float Luma(float[] color) {
+        return Luma(color[0], color[1], color[2]);
+    }
+    
+    static public float Luma(float r, float g, float b) {
+        return 0.299f * r + 0.587f * g + 0.114f * b;
+    }
+    
+    static public float Flashing(float t, float min, float max, float speed) {
+        return (float)((Math.Cos(t * speed) + 1 / 2) * (max - min) + min);
+    }
 }

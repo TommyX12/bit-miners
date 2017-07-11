@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 using System;
 
 public class BasicAPI : IScriptSystemAPI {
@@ -11,6 +12,94 @@ public class BasicAPI : IScriptSystemAPI {
         
         return instance;
     }
+    
+    private static List<SEBlockDef> blockDefs = new List<SEBlockDef>() {
+        new SEBlockDef(){
+            Name = "function",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_DEFINITION,
+            Type = "definition",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "New function (",
+                    RegionType = "args",
+                    MultiRegion = true,
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    IndentMod = 1,
+                    RegionType = "block",
+                    MultiRegion = true,
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "End",
+                    IndentMod = -1,
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions) {
+                return "function(" + regions[0] + "){" + regions[1] + "}";
+            },
+        },
+        new SEBlockDef(){
+            Name = "if",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_CONTROL_FLOW,
+            Type = "control flow",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "If (",
+                    RegionType = "condition",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    IndentMod = 1,
+                    RegionType = "block",
+                    MultiRegion = true,
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "End",
+                    IndentMod = -1,
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions) {
+                return "if(" + regions[0] + "){" + regions[1] + "}";
+            },
+        },
+        new SEBlockDef(){
+            Name = "api_move_to",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_HAS_PROCEDURE,
+            Type = "command",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "Move to x=(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ") y=(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions) {
+                return "if(" + regions[0] + "){" + regions[1] + "}";
+            },
+        },
+    };
         
     private BasicAPI() {
         
@@ -78,6 +167,10 @@ public class BasicAPI : IScriptSystemAPI {
         );
         
         scriptSystem.RegisterEvent("start", new string[]{});
+        
+        foreach (var blockDef in blockDefs) {
+            scriptSystem.RegisterBlockDef(blockDef);
+        }
     }
 
     public void PreRun(ScriptSystem scriptSystem) {

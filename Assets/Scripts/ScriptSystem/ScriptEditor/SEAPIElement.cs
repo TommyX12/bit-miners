@@ -8,6 +8,8 @@ public class SEAPIElement: SEElement {
     public Text TextObject;
     public Image ImageObject;
     
+    protected static float FlashingSpeed = 10.0f;
+    
     protected override void OnAwake() {
         this.ImageObject = Util.SafeGetComponent<Image>(this.gameObject);
     }
@@ -16,8 +18,23 @@ public class SEAPIElement: SEElement {
         
     }
     
-    public override void PausingUpdate() {
-        
+    public override void NormalUpdate() {
+        if (this.active) {
+            this.Definition.Color[3] = Util.Flashing(Time.time, 0.7f, 1.0f, FlashingSpeed);
+            this.ImageObject.color = Util.Float4ToColor(this.Definition.Color);
+        }
+    }
+    
+    public override void SetActive(bool active) {
+        base.SetActive(active);
+        if (active) {
+            this.TextObject.color = Color.white;
+        }
+        else {
+            this.TextObject.color = Color.black;
+            this.Definition.Color[3] = 0.3f;
+            this.ImageObject.color = Util.Float4ToColor(this.Definition.Color);
+        }
     }
     
     public static Font cachedFont = null;
@@ -42,7 +59,7 @@ public class SEAPIElement: SEElement {
     
     public override void SetupDefinition() {
         this.TextObject.text = this.Definition.Text;
-        this.TextObject.color = Util.Float4ToColor(this.Definition.TextColor);
+        this.TextObject.color = Color.black;
         this.ImageObject.color = Util.Float4ToColor(this.Definition.Color);
         this.SetWidth(this.GetTextWidth(this.Definition.Text) + 10);
     }

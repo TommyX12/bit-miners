@@ -47,6 +47,7 @@ public class ScriptSystem {
     private List<Macro> macros;
     private List<JavaScript> javaScripts;
     private List<Event> events;
+    private Dictionary<string, SEBlockDef> blockDefs;
     
     public bool Running {
         get; private set;
@@ -83,6 +84,7 @@ public class ScriptSystem {
         this.functions = new List<Function>();
         this.javaScripts = new List<JavaScript>();
         this.events = new List<Event>();
+        this.blockDefs = new Dictionary<string, SEBlockDef>();
         
         foreach (IScriptSystemAPI api in this.apiList) {
             api.Register(this);
@@ -108,6 +110,14 @@ public class ScriptSystem {
     
     public void RegisterEvent(string eventName, string[] eventParameters, bool listed = true) {
         this.events.Add(new Event(eventName, eventParameters, listed));
+    }
+    
+    public void RegisterBlockDef(SEBlockDef blockDef) {
+        this.blockDefs[blockDef.Name] = blockDef;
+    }
+    
+    public Dictionary<string, SEBlockDef> GetBlockDefs() {
+        return this.blockDefs;
     }
     
     private void ApplyFunction(Function function) {

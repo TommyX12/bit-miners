@@ -10,6 +10,8 @@ public class ScriptEditorV2 : MyMono {
     public static readonly Color RUNNING_COLOR = new Color(0.0f, 0.5f, 0.1f, 1.0f);
     
     public Text StatusTextObject;
+    public APIPanel APIPanelObject;
+    public ScriptPanel ScriptPanelObject;
     public Button SaveButtonObject;
     public Button DiscardButtonObject;
     
@@ -35,6 +37,7 @@ public class ScriptEditorV2 : MyMono {
         MyMono.Paused = true;
         
         this.ScriptSystemObject = scriptSystem;
+        this.APIPanelObject.LoadBlockDefs(this.ScriptSystemObject.GetBlockDefs());
         
         this.ReloadStatus();
     }

@@ -141,6 +141,28 @@ public class SEElementContainer : MyMono {
         this.Redraw();
     }
     
+    public IEnumerable<SEElement> AllBetween(int row1, int column1, int row2, int column2) {
+        if (row1 > row2) yield break;
+        if (row1 == row2) {
+            for (int i = column1; i <= column2; ++i) {
+                yield return this.data[row1][i];
+            }
+        }
+        else {
+            for (int i = column1; i < this.data[row1].Count; ++i) {
+                yield return this.data[row1][i];
+            }
+            for (int i = row1 + 1; i < row2; ++i) {
+                for (int j = 0; j < this.data[i].Count; ++j) {
+                    yield return this.data[i][j];
+                }
+            }
+            for (int i = 0; i <= column2; ++i) {
+                yield return this.data[row2][i];
+            }
+        }
+    }
+    
     public void ClearElements() {
         for (int i = 0; i < this.data.Count; ++i) {
             for (int j = 0; j < this.data[i].Count; ++j) {

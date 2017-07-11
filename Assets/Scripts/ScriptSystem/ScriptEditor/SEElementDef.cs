@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SEElementDef: IIDBasedElememt {
     
-    public delegate Component GetPrefabDelegate(string elementTyle);
+    public delegate SEElement GetPrefabDelegate(string elementTyle);
     
     public int ID {
         get; set;
@@ -12,12 +12,12 @@ public class SEElementDef: IIDBasedElememt {
     
     public int ParentID           = -1;
     public int[] Children         = null;
-    public string CompileFuncName = null;
+    public string BlockDefName    = null;
     public string ElementType     = null;
     public float[] Color          = new float[]{0, 0, 0, 1};
-    public float[] TextColor      = new float[]{1, 1, 1, 1};
     public string Text            = null;
     public string RegionType      = null;
+    public bool MultiRegion       = false;
     public int IndentMod          = 0;
     public SEElement Element      = null;
     

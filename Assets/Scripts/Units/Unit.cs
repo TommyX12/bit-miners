@@ -30,7 +30,7 @@ public class Unit : MyMono, IScriptSystemAPI {
     public bool Alive = true;
     
     public void StartEditor() {
-        GameManager.Current.ScriptEditorObject.StartEdit(this.ScriptSystemObject);
+        GameManager.Current.ScriptEditorV2Object.StartEdit(this.ScriptSystemObject);
     }
     
     public ScriptSystem ScriptSystemObject {

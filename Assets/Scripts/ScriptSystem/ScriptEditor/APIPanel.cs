@@ -10,6 +10,8 @@ public class APIPanel: SEElementContainer {
     
     private int cachedCursorFlags = -1;
     
+    private Dictionary<string, SEBlockDef> blockDefs = null;
+    
     protected override void OnAwake() {
         
     }
@@ -32,19 +34,42 @@ public class APIPanel: SEElementContainer {
     }
     
     protected void RefreshFlags() {
-        // compares flag for each element and set availability.
+        foreach (var row in this.data) {
+            SEBlockDef blockDef = this.blockDefs[row[0].Definition.BlockDefName];
+            row[0].SetActive(blockDef.CompareFlags(this.cachedCursorFlags));
+        }
     }
     
     protected override void OnRedraw() {
         this.RefreshFlags();
     }
     
+    public void LoadBlockDefs(Dictionary<string, SEBlockDef> blockDefs) {
+        this.ClearElements();
+        this.blockDefs = blockDefs;
+        
+        this.Redrawable = false;
+        int row = 0;
+        foreach (var blockDef in blockDefs.Values) {
+            this.InsertElement(row, 0, blockDef.GenerateAPIElementDef().SpawnElement(this.GetPrefab));
+            row++;
+        }
+        this.Redrawable = true;
+        this.Redraw();
+    }
+    
     protected override void OnClicked(int row, int column, SEElement element, Vector2 rawPos) {
         // check for which element is clicked
         // compare flag with at cursor.
+        if (element != null) {
+            SEBlockDef blockDef = this.blockDefs[element.Definition.BlockDefName];
+            if (blockDef.CompareFlags(this.cachedCursorFlags)) {
+                this.ScriptPanelObject.CursorInsertBlock(blockDef);
+            }
+        }
     }
     
-    private Component GetPrefab(string elementType) {
+    private SEElement GetPrefab(string elementType) {
         switch (elementType) {
             case "api":
                 return this.SEAPIElementPrefab;
