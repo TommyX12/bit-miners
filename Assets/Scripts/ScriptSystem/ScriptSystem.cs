@@ -6,386 +6,386 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 public class ScriptSystem {
-	
-	private Jurassic.ScriptEngine engine;
-	private ScriptTimeoutHelper timeoutHelper;
-	
-	public int TimeoutMS = 100;
-	public int RecursionDepthLimit = 1000;
-	
-	// the instance that is currently executing a script.
-	// used to returns an object constructed by the instance currently executing a script, used by c# functions callable in script.
-	public static ScriptSystem Current {
-		get; private set;
-	}
-	
-	public static string MatchingBracketPattern(string groupName) {
-		return @"
-			\(                      # First '('
-				(?<" + groupName + @">
-				(?:
-				[^()]               # Match all non-braces
-				|
-				(?<br> \( )         # Match '(', and capture into 'br'
-				|
-				(?<-br> \) )        # Match ')', and delete the 'br' capture
-				)*
-				(?(br)(?!))         # Fails if 'br' stack isn't empty!
-				)
-			\)                      # Last ')'
-		";
-	}
-	
-	public static string IdentifierPattern(string groupName) {
-		return @"(?<" + groupName + ">[a-zA-Z_][a-zA-Z0-9_]*)";
-	}
-	
-	public const string EVENT_HANDLER_PREFIX = "_on_";
-	
-	private List<IScriptSystemAPI> apiList;
-	private List<Function> functions;
-	private List<Macro> macros;
-	private List<JavaScript> javaScripts;
-	private List<Event> events;
-	
-	public bool Running {
-		get; private set;
-	}
-	
-	public bool ErrorCaught {
-		get; private set;
-	}
-	
-	public string Script {
-		get; set;
-	}
-	
-	public string Message {
-		get; private set;
-	}
-	
-	public ScriptSystem(List<IScriptSystemAPI> apiList = null) {
-		if (apiList == null) apiList = new List<IScriptSystemAPI>();
-		this.SetAPIList(apiList);
-		this.Running = false;
-		this.ErrorCaught = false;
-		this.Script = "";
-		this.Message = "Idle";
-		
-		this.timeoutHelper = new ScriptTimeoutHelper();
-	}
-	
-	public void SetAPIList(List<IScriptSystemAPI> apiList) {
-		this.apiList = new List<IScriptSystemAPI>(apiList);
-		this.apiList.Insert(0, BasicAPI.GetInstance());
-		
-		this.macros = new List<Macro>();
-		this.functions = new List<Function>();
-		this.javaScripts = new List<JavaScript>();
-		this.events = new List<Event>();
-		
-		foreach (IScriptSystemAPI api in this.apiList) {
-			api.Register(this);
-		}
-	}
-	
-	public void RegisterFunction(string functionName, Delegate functionDelegate, bool listed = true) {
-		this.functions.Add(new Function(functionName, functionDelegate, listed));
-	}
-	
-	public void RegisterJSFunction(string functionName, string[] functionParams, string body, bool listed = true) {
-		body = GetFunctionJS(functionName, functionParams, body);
-		this.javaScripts.Add(new JavaScript(body, listed, functionName, functionParams));
-	}
-	
-	public void RegisterJavaScript(string script) {
-		this.javaScripts.Add(new JavaScript(script, false));
-	}
-	
-	public void RegisterMacro(string pattern, string replacement, bool listed = true) {
-		this.macros.Add(new Macro(pattern, replacement, listed));
-	}
-	
-	public void RegisterEvent(string eventName, string[] eventParameters, bool listed = true) {
-		this.events.Add(new Event(eventName, eventParameters, listed));
-	}
-	
-	private void ApplyFunction(Function function) {
-		if (function.DelegateObject == null) return;
-		
-		string wrapperArguments = "";
-		int numArguments = function.DelegateObject.Method.GetParameters().Length;
-		for (int i = 0; i < numArguments; ++i) {
-			if (i > 0) wrapperArguments += ", ";
-			wrapperArguments += "a" + i;
-		}
-		string wrapperFunction = @"
-			function " + function.Name + "(" + wrapperArguments + @") {
-				_critical_on();
-				var result = __" + function.Name +"__(" + wrapperArguments + @");
-				_critical_off();
-				
-				return result;
-			}
-		";
-		this.engine.SetGlobalFunction("__" + function.Name + "__", function.DelegateObject);
-		this.engine.Execute(wrapperFunction);
-	}
-	
-	private void ApplyVariable(string variableName, object variableValue) {
-		this.engine.SetGlobalValue(variableName, variableValue);
-	}
-	
-	private void ApplyJavaScript(JavaScript javaScript) {
-		this.engine.Execute(javaScript.Script);
-	}
-	
-	private void ApplyMacro(ref string script, Macro macro) {
-		script = Regex.Replace(script, macro.Pattern, macro.Replacement, RegexOptions.IgnorePatternWhitespace);
-	}
-	
-	public string GetAPIListText() {
-		string result = "";
-		
-		result += "<b>-- Functions --</b>";
-		foreach (Function function in this.functions) {
-			if (!function.Listed) continue;
-			result += "\n" + function.GetText();
-		}
-		foreach (JavaScript javaScript in this.javaScripts) {
-			if (!javaScript.Listed) continue;
-			result += "\n" + javaScript.GetText();
-		}
-		result += "\n\n";
-		
-		result += "<b>-- Events --</b>";
-		foreach (Event eventObject in this.events) {
-			if (!eventObject.Listed) continue;
-			result += "\n" + eventObject.GetText();
-		}
-		
-		return result;
-	}
-	
-	public void Start(bool skipValidation = false) {
-		// Validation
-		if (!skipValidation && !this.ValidateScript()) {
-			Debug.LogWarning("User script contains elements not allowed for stability reasons");
-			return;
-		}
-		
-		// Initialization
-		this.engine = new Jurassic.ScriptEngine();
-		this.engine.RecursionDepthLimit = this.RecursionDepthLimit;
-		string compiledScript = this.Script;
-		
-		// API application
-		this.engine.SetGlobalFunction("_critical_on", new Action(this.timeoutHelper.EnterCriticalSection));
-		this.engine.SetGlobalFunction("_critical_off", new Action(this.timeoutHelper.ExitCriticalSection));
-		foreach (Function function in this.functions) {
-			this.ApplyFunction(function);
-		}
-		foreach (JavaScript javaScript in this.javaScripts) {
-			this.ApplyJavaScript(javaScript);
-		}
-		foreach (Macro macro in this.macros) {
-			this.ApplyMacro(ref compiledScript, macro);
-		}
-		foreach (IScriptSystemAPI api in this.apiList) {
-			api.PreRun(this);
-		}
-		
-		// Status update
-		this.Running = true;
-		this.ErrorCaught = false;
-		this.Message = "Running";
-		
-		// Execution
-		this.ExecuteAction(() => {
-			this.engine.Execute(compiledScript);
-		});
-		this.DispatchEvent("start");
-		
-		// API post application
-		foreach (IScriptSystemAPI api in this.apiList) {
-			api.PostRun(this);
-		}
-	}
-	
-	public bool ValidateScript() {
-		string pattern = @"\b_\w*\b";
-		Regex regex = new Regex(pattern);
-		Match match = regex.Match(this.Script);
-		if (match.Success) return false;
-		
-		return true;
-	}
-	
-	public Jurassic.Library.ObjectInstance ConstructObject() {
-		if (!this.Running) return null;
-		
-		return this.engine.Object.Construct();
-	}
-	
-	public void DispatchEvent(string name, params object[] args) {
-		if (!this.Running) return;
-		
-		string handlerName = EVENT_HANDLER_PREFIX + name;
-		
-		if (this.engine.Evaluate<bool>("this[\'" + handlerName + "\'] === undefined")) return;
-		
-		this.ExecuteAction(() => {
-			this.engine.CallGlobalFunction(handlerName, args);
-		});
-	}
-	
-	private void ExecuteAction(Action action) {
-		try {
-			Current = this;
-			this.timeoutHelper.RunWithTimeout(action, this.TimeoutMS);
-		}
-		catch (Exception ex) {
-			this.Running = false;
-			this.ErrorCaught = true;
-			
-			if (ex is TimeoutException) {
-				this.Message = "Time limit exceeded";
-			}
-			else if (ex is OutOfMemoryException) {
-				this.Message = "Out of memory";
-			}
-			else if (ex is StackOverflowException) {
-				this.Message = "Recursion depth limit exceeded";
-			}
-			else if (ex is Jurassic.JavaScriptException) {
-				Jurassic.JavaScriptException jsex = (Jurassic.JavaScriptException)ex;
-				this.Message = "Line " + jsex.LineNumber + " - " + jsex.ErrorObject.ToString();
-			}
-			else {
-				throw;
-			}
-			
-			Debug.LogWarning(this.Message);
-		}
-		finally {
-			Current = null;
-		}
-	}
-	
-	private static string GetFunctionJS(string name, string[] parameters, string body) {
-		return "function " + name + "(" + string.Join(", ", parameters) + ") {" + body + "}";
-	}
-	
-	private static string GetFunctionAPIText(string name, string[] parameters) {
-		string parametersString = "";
-		for (int i = 0; i < parameters.Length; ++i) {
-			var parameter = parameters[i];
-			if (i > 0) parametersString += ", ";
-			parametersString += Util.ColoredRichText("#88FFAA", parameter);
-		}
-		return Util.ColoredRichText("#88AAFF", name) + "(" + parametersString + ")";
-	}
-	
-	private static string[] DelegateToParameters(Delegate delegateObject) {
-		var parameters = delegateObject.Method.GetParameters();
-		string[] result = new string[parameters.Length];
-		for (int i = 0; i < parameters.Length; ++i) {
-			var parameter = parameters[i];
-			result[i] = parameter.Name;
-		}
-		
-		return result;
-	}
-	
-	private interface APIElement {
-		bool Listed {
-			get; set;
-		}
-		
-		string GetText();
-	}
-	
-	private struct Function : APIElement {
-		public string Name;
-		public Delegate DelegateObject;
-		public string[] Parameters;
-		public bool Listed {
-			get; set;
-		}
-		
-		public Function(string name, Delegate delegateObject, bool listed = true)
-		{
-			this.Name = name;
-			this.DelegateObject = delegateObject;
-			this.Parameters = null;
-			if (this.DelegateObject != null) {
-				this.Parameters = ScriptSystem.DelegateToParameters(this.DelegateObject);
-			}
-			this.Listed = listed;
-		}
-		
-		public string GetText() {
-			return ScriptSystem.GetFunctionAPIText(this.Name, this.Parameters);
-		}
-	}
-	
-	private struct Macro : APIElement {
-		public string Pattern;
-		public string Replacement;
-		public bool Listed {
-			get; set;
-		}
-		
-		public Macro(string pattern, string replacement, bool listed = true)
-		{
-			this.Pattern = pattern;
-			this.Replacement = replacement;
-			this.Listed = listed;
-		}
-		
-		public string GetText() {
-			return "";
-		}
-	}
-	
-	private struct JavaScript : APIElement {
-		public string Script;
-		public string Name;
-		public string[] Parameters;
-		public bool Listed {
-			get; set;
-		}
-		
-		public JavaScript(string script, bool listed = true, string name = "", string[] parameters = null)
-		{
-			this.Script = script;
-			this.Name = name;
-			this.Parameters = parameters == null ? parameters : (string[])parameters.Clone();
-			this.Listed = listed;
-		}
-		
-		public string GetText() {
-			return ScriptSystem.GetFunctionAPIText(this.Name, this.Parameters);
-		}
-	}
-	
-	private struct Event : APIElement {
-		public string Name;
-		public string[] Parameters;
-		public bool Listed {
-			get; set;
-		}
-		
-		public Event(string name, string[] parameters, bool listed = true)
-		{
-			this.Name = name;
-			this.Parameters = (string[])parameters.Clone();
-			this.Listed = listed;
-		}
-		
-		public string GetText() {
-			return ScriptSystem.GetFunctionAPIText(this.Name, this.Parameters);
-		}
-	}
-	
+    
+    private Jurassic.ScriptEngine engine;
+    private ScriptTimeoutHelper timeoutHelper;
+    
+    public int TimeoutMS = 100;
+    public int RecursionDepthLimit = 1000;
+    
+    // the instance that is currently executing a script.
+    // used to returns an object constructed by the instance currently executing a script, used by c# functions callable in script.
+    public static ScriptSystem Current {
+        get; private set;
+    }
+    
+    public static string MatchingBracketPattern(string groupName) {
+        return @"
+            \(                      # First '('
+                (?<" + groupName + @">
+                (?:
+                [^()]               # Match all non-braces
+                |
+                (?<br> \( )         # Match '(', and capture into 'br'
+                |
+                (?<-br> \) )        # Match ')', and delete the 'br' capture
+                )*
+                (?(br)(?!))         # Fails if 'br' stack isn't empty!
+                )
+            \)                      # Last ')'
+        ";
+    }
+    
+    public static string IdentifierPattern(string groupName) {
+        return @"(?<" + groupName + ">[a-zA-Z_][a-zA-Z0-9_]*)";
+    }
+    
+    public const string EVENT_HANDLER_PREFIX = "_on_";
+    
+    private List<IScriptSystemAPI> apiList;
+    private List<Function> functions;
+    private List<Macro> macros;
+    private List<JavaScript> javaScripts;
+    private List<Event> events;
+    
+    public bool Running {
+        get; private set;
+    }
+    
+    public bool ErrorCaught {
+        get; private set;
+    }
+    
+    public string Script {
+        get; set;
+    }
+    
+    public string Message {
+        get; private set;
+    }
+    
+    public ScriptSystem(List<IScriptSystemAPI> apiList = null) {
+        if (apiList == null) apiList = new List<IScriptSystemAPI>();
+        this.SetAPIList(apiList);
+        this.Running = false;
+        this.ErrorCaught = false;
+        this.Script = "";
+        this.Message = "Idle";
+        
+        this.timeoutHelper = new ScriptTimeoutHelper();
+    }
+    
+    public void SetAPIList(List<IScriptSystemAPI> apiList) {
+        this.apiList = new List<IScriptSystemAPI>(apiList);
+        this.apiList.Insert(0, BasicAPI.GetInstance());
+        
+        this.macros = new List<Macro>();
+        this.functions = new List<Function>();
+        this.javaScripts = new List<JavaScript>();
+        this.events = new List<Event>();
+        
+        foreach (IScriptSystemAPI api in this.apiList) {
+            api.Register(this);
+        }
+    }
+    
+    public void RegisterFunction(string functionName, Delegate functionDelegate, bool listed = true) {
+        this.functions.Add(new Function(functionName, functionDelegate, listed));
+    }
+    
+    public void RegisterJSFunction(string functionName, string[] functionParams, string body, bool listed = true) {
+        body = GetFunctionJS(functionName, functionParams, body);
+        this.javaScripts.Add(new JavaScript(body, listed, functionName, functionParams));
+    }
+    
+    public void RegisterJavaScript(string script) {
+        this.javaScripts.Add(new JavaScript(script, false));
+    }
+    
+    public void RegisterMacro(string pattern, string replacement, bool listed = true) {
+        this.macros.Add(new Macro(pattern, replacement, listed));
+    }
+    
+    public void RegisterEvent(string eventName, string[] eventParameters, bool listed = true) {
+        this.events.Add(new Event(eventName, eventParameters, listed));
+    }
+    
+    private void ApplyFunction(Function function) {
+        if (function.DelegateObject == null) return;
+        
+        string wrapperArguments = "";
+        int numArguments = function.DelegateObject.Method.GetParameters().Length;
+        for (int i = 0; i < numArguments; ++i) {
+            if (i > 0) wrapperArguments += ", ";
+            wrapperArguments += "a" + i;
+        }
+        string wrapperFunction = @"
+            function " + function.Name + "(" + wrapperArguments + @") {
+                _critical_on();
+                var result = __" + function.Name +"__(" + wrapperArguments + @");
+                _critical_off();
+                
+                return result;
+            }
+        ";
+        this.engine.SetGlobalFunction("__" + function.Name + "__", function.DelegateObject);
+        this.engine.Execute(wrapperFunction);
+    }
+    
+    private void ApplyVariable(string variableName, object variableValue) {
+        this.engine.SetGlobalValue(variableName, variableValue);
+    }
+    
+    private void ApplyJavaScript(JavaScript javaScript) {
+        this.engine.Execute(javaScript.Script);
+    }
+    
+    private void ApplyMacro(ref string script, Macro macro) {
+        script = Regex.Replace(script, macro.Pattern, macro.Replacement, RegexOptions.IgnorePatternWhitespace);
+    }
+    
+    public string GetAPIListText() {
+        string result = "";
+        
+        result += "<b>-- Functions --</b>";
+        foreach (Function function in this.functions) {
+            if (!function.Listed) continue;
+            result += "\n" + function.GetText();
+        }
+        foreach (JavaScript javaScript in this.javaScripts) {
+            if (!javaScript.Listed) continue;
+            result += "\n" + javaScript.GetText();
+        }
+        result += "\n\n";
+        
+        result += "<b>-- Events --</b>";
+        foreach (Event eventObject in this.events) {
+            if (!eventObject.Listed) continue;
+            result += "\n" + eventObject.GetText();
+        }
+        
+        return result;
+    }
+    
+    public void Start(bool skipValidation = false) {
+        // Validation
+        if (!skipValidation && !this.ValidateScript()) {
+            Debug.LogWarning("User script contains elements not allowed for stability reasons");
+            return;
+        }
+        
+        // Initialization
+        this.engine = new Jurassic.ScriptEngine();
+        this.engine.RecursionDepthLimit = this.RecursionDepthLimit;
+        string compiledScript = this.Script;
+        
+        // API application
+        this.engine.SetGlobalFunction("_critical_on", new Action(this.timeoutHelper.EnterCriticalSection));
+        this.engine.SetGlobalFunction("_critical_off", new Action(this.timeoutHelper.ExitCriticalSection));
+        foreach (Function function in this.functions) {
+            this.ApplyFunction(function);
+        }
+        foreach (JavaScript javaScript in this.javaScripts) {
+            this.ApplyJavaScript(javaScript);
+        }
+        foreach (Macro macro in this.macros) {
+            this.ApplyMacro(ref compiledScript, macro);
+        }
+        foreach (IScriptSystemAPI api in this.apiList) {
+            api.PreRun(this);
+        }
+        
+        // Status update
+        this.Running = true;
+        this.ErrorCaught = false;
+        this.Message = "Running";
+        
+        // Execution
+        this.ExecuteAction(() => {
+            this.engine.Execute(compiledScript);
+        });
+        this.DispatchEvent("start");
+        
+        // API post application
+        foreach (IScriptSystemAPI api in this.apiList) {
+            api.PostRun(this);
+        }
+    }
+    
+    public bool ValidateScript() {
+        string pattern = @"\b_\w*\b";
+        Regex regex = new Regex(pattern);
+        Match match = regex.Match(this.Script);
+        if (match.Success) return false;
+        
+        return true;
+    }
+    
+    public Jurassic.Library.ObjectInstance ConstructObject() {
+        if (!this.Running) return null;
+        
+        return this.engine.Object.Construct();
+    }
+    
+    public void DispatchEvent(string name, params object[] args) {
+        if (!this.Running) return;
+        
+        string handlerName = EVENT_HANDLER_PREFIX + name;
+        
+        if (this.engine.Evaluate<bool>("this[\'" + handlerName + "\'] === undefined")) return;
+        
+        this.ExecuteAction(() => {
+            this.engine.CallGlobalFunction(handlerName, args);
+        });
+    }
+    
+    private void ExecuteAction(Action action) {
+        try {
+            Current = this;
+            this.timeoutHelper.RunWithTimeout(action, this.TimeoutMS);
+        }
+        catch (Exception ex) {
+            this.Running = false;
+            this.ErrorCaught = true;
+            
+            if (ex is TimeoutException) {
+                this.Message = "Time limit exceeded";
+            }
+            else if (ex is OutOfMemoryException) {
+                this.Message = "Out of memory";
+            }
+            else if (ex is StackOverflowException) {
+                this.Message = "Recursion depth limit exceeded";
+            }
+            else if (ex is Jurassic.JavaScriptException) {
+                Jurassic.JavaScriptException jsex = (Jurassic.JavaScriptException)ex;
+                this.Message = "Line " + jsex.LineNumber + " - " + jsex.ErrorObject.ToString();
+            }
+            else {
+                throw;
+            }
+            
+            Debug.LogWarning(this.Message);
+        }
+        finally {
+            Current = null;
+        }
+    }
+    
+    private static string GetFunctionJS(string name, string[] parameters, string body) {
+        return "function " + name + "(" + string.Join(", ", parameters) + ") {" + body + "}";
+    }
+    
+    private static string GetFunctionAPIText(string name, string[] parameters) {
+        string parametersString = "";
+        for (int i = 0; i < parameters.Length; ++i) {
+            var parameter = parameters[i];
+            if (i > 0) parametersString += ", ";
+            parametersString += Util.ColoredRichText("#88FFAA", parameter);
+        }
+        return Util.ColoredRichText("#88AAFF", name) + "(" + parametersString + ")";
+    }
+    
+    private static string[] DelegateToParameters(Delegate delegateObject) {
+        var parameters = delegateObject.Method.GetParameters();
+        string[] result = new string[parameters.Length];
+        for (int i = 0; i < parameters.Length; ++i) {
+            var parameter = parameters[i];
+            result[i] = parameter.Name;
+        }
+        
+        return result;
+    }
+    
+    private interface APIElement {
+        bool Listed {
+            get; set;
+        }
+        
+        string GetText();
+    }
+    
+    private struct Function : APIElement {
+        public string Name;
+        public Delegate DelegateObject;
+        public string[] Parameters;
+        public bool Listed {
+            get; set;
+        }
+        
+        public Function(string name, Delegate delegateObject, bool listed = true)
+        {
+            this.Name = name;
+            this.DelegateObject = delegateObject;
+            this.Parameters = null;
+            if (this.DelegateObject != null) {
+                this.Parameters = ScriptSystem.DelegateToParameters(this.DelegateObject);
+            }
+            this.Listed = listed;
+        }
+        
+        public string GetText() {
+            return ScriptSystem.GetFunctionAPIText(this.Name, this.Parameters);
+        }
+    }
+    
+    private struct Macro : APIElement {
+        public string Pattern;
+        public string Replacement;
+        public bool Listed {
+            get; set;
+        }
+        
+        public Macro(string pattern, string replacement, bool listed = true)
+        {
+            this.Pattern = pattern;
+            this.Replacement = replacement;
+            this.Listed = listed;
+        }
+        
+        public string GetText() {
+            return "";
+        }
+    }
+    
+    private struct JavaScript : APIElement {
+        public string Script;
+        public string Name;
+        public string[] Parameters;
+        public bool Listed {
+            get; set;
+        }
+        
+        public JavaScript(string script, bool listed = true, string name = "", string[] parameters = null)
+        {
+            this.Script = script;
+            this.Name = name;
+            this.Parameters = parameters == null ? parameters : (string[])parameters.Clone();
+            this.Listed = listed;
+        }
+        
+        public string GetText() {
+            return ScriptSystem.GetFunctionAPIText(this.Name, this.Parameters);
+        }
+    }
+    
+    private struct Event : APIElement {
+        public string Name;
+        public string[] Parameters;
+        public bool Listed {
+            get; set;
+        }
+        
+        public Event(string name, string[] parameters, bool listed = true)
+        {
+            this.Name = name;
+            this.Parameters = (string[])parameters.Clone();
+            this.Listed = listed;
+        }
+        
+        public string GetText() {
+            return ScriptSystem.GetFunctionAPIText(this.Name, this.Parameters);
+        }
+    }
+    
 }

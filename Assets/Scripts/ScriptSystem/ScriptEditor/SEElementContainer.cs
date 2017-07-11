@@ -141,6 +141,16 @@ public class SEElementContainer : MyMono {
         this.Redraw();
     }
     
+    public void ClearElements() {
+        for (int i = 0; i < this.data.Count; ++i) {
+            for (int j = 0; j < this.data[i].Count; ++j) {
+                this.data[i][j].Remove();
+            }
+        }
+        this.data.Clear();
+        this.Redraw();
+    }
+    
     public void DeleteRow(int row) {
         if (!Util.InRange(row, 0, this.data.Count - 1)) return;
         this.data.RemoveAt(row);
