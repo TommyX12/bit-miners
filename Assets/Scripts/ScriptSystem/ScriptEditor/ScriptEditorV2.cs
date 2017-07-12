@@ -39,6 +39,8 @@ public class ScriptEditorV2 : MyMono {
         this.ScriptSystemObject = scriptSystem;
         this.APIPanelObject.LoadBlockDefs(this.ScriptSystemObject.GetBlockDefs());
         
+        this.ScriptPanelObject.LoadString(this.ScriptSystemObject.BlockScript);
+        
         this.ReloadStatus();
     }
     
@@ -47,6 +49,8 @@ public class ScriptEditorV2 : MyMono {
     }
     
     public void SaveAndRun() {
+        this.ScriptSystemObject.BlockScript = this.ScriptPanelObject.SaveString();
+        Debug.Log(this.ScriptSystemObject.BlockScript);
         this.ScriptSystemObject.Start();
         
         if (!this.ScriptSystemObject.ErrorCaught) this.EndEdit();

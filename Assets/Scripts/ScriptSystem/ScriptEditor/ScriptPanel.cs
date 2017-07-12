@@ -2,10 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class ScriptPanel: SEElementContainer {
     
     public SETextElement SETextElementPrefab;
+    public SEInputElement SEInputElementPrefab;
     public SECursor SECursorPrefab;
     
     private SECursor cursor;
@@ -71,7 +73,21 @@ public class ScriptPanel: SEElementContainer {
         this.SetCursor(row, column);
     }
     
+    public bool HasFocusedInput() {
+        foreach (var element in this.Elements()) {
+            if (element is SEInputElement) {
+                if (((SEInputElement)element).IsFocused()) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
     public void CursorReturn() {
+        if (this.HasFocusedInput()) return;
+        
         if (this.cursorRow >= this.data.Count) {
             this.cursorRow++;
             this.InsertRow(this.cursorRow - 1);
@@ -83,6 +99,8 @@ public class ScriptPanel: SEElementContainer {
     }
     
     public void CursorInsert() {
+        if (this.HasFocusedInput()) return;
+        
         if (this.cursorRow < this.data.Count && this.data[this.cursorRow].Count > 0 && this.cursorColumn >= this.data[this.cursorRow].Count - 1) {
             this.CursorReturn();
         }
@@ -94,6 +112,8 @@ public class ScriptPanel: SEElementContainer {
     }
     
     public void CursorInsertBlock(SEBlockDef blockDef) {
+        if (this.HasFocusedInput()) return;
+        
         if (this.cursorRow < this.data.Count && this.data[this.cursorRow].Count > 0 && this.cursorColumn >= this.data[this.cursorRow].Count - 1) {
             this.CursorReturn();
         }
@@ -136,6 +156,8 @@ public class ScriptPanel: SEElementContainer {
     }
     
     public void CursorDelete() {
+        if (this.HasFocusedInput()) return;
+        
         if (this.data.Count == 0) return;
         
         if (this.cursorRow >= this.data.Count) {
@@ -299,10 +321,47 @@ public class ScriptPanel: SEElementContainer {
         column = this.GetColumnOf(parent);
     }
     
+    public string SaveString() {
+        List<List<SEElementDef>> defList = new List<List<SEElementDef>>();
+        foreach (var row in this.data) {
+            List<SEElementDef> defListRow = new List<SEElementDef>();
+            foreach (var element in row) {
+                element.BeforeSave();
+                defListRow.Add(element.Definition);
+            }
+            defList.Add(defListRow);
+        }
+        return JsonConvert.SerializeObject(defList);
+    }
+    
+    public void LoadString(string json) {
+        this.ClearElements();
+        
+        List<List<SEElementDef>> defList = JsonConvert.DeserializeObject<List<List<SEElementDef>>>(json);
+        
+        this.Redrawable = false;
+        foreach (var row in defList) {
+            List<SEElement> dataRow = new List<SEElement>();
+            foreach (var elementDef in row) {
+                SEElement element = elementDef.SpawnElement(this.GetPrefab);
+                dataRow.Add(element);
+                this.InitElement(element);
+            }
+            this.data.Add(dataRow);
+        }
+        this.Redrawable = true;
+        
+        this.Redraw();
+    }
+    
     private SEElement GetPrefab(string elementType) {
         switch (elementType) {
             case "text":
                 return this.SETextElementPrefab;
+                break;
+        
+            case "input":
+                return this.SEInputElementPrefab;
                 break;
         
             default:

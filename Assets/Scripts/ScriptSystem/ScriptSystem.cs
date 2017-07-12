@@ -61,6 +61,10 @@ public class ScriptSystem {
         get; set;
     }
     
+    public string BlockScript {
+        get; set;
+    }
+    
     public string Message {
         get; private set;
     }
@@ -71,6 +75,7 @@ public class ScriptSystem {
         this.Running = false;
         this.ErrorCaught = false;
         this.Script = "";
+        this.BlockScript = "[]";
         this.Message = "Idle";
         
         this.timeoutHelper = new ScriptTimeoutHelper();

@@ -36,9 +36,10 @@ public class SEBlockDef {
     };
     
     private static Dictionary<string, float[]> typeColors = new Dictionary<string, float[]>() {
+        {"value", new float[]{0.1f, 0.3f, 1.0f, 1.0f}},
         {"command", new float[]{1.0f, 0.0f, 1.0f, 1.0f}},
         {"definition", new float[]{0.1f, 0.8f, 0.1f, 1.0f}},
-        {"control flow", new float[]{0.1f, 0.3f, 1.0f, 1.0f}},
+        {"control flow", new float[]{0.8f, 0.3f, 0.1f, 1.0f}},
     };
     
     public static int GetRegionFlag(string regionName) {

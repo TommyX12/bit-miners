@@ -79,11 +79,15 @@ public class SEElement : MyMono {
     }
     
     protected void UpdatePosition() {
+        Vector2 size = this.size;
+        if (this.Definition != null && this.Definition.ExtendSize) {
+            size += new Vector2(4.0f, 0.0f);
+        }
         this.rectTransform.offsetMin = new Vector2(
-            this.position.x, -(this.position.y + this.size.y)
+            this.position.x, -(this.position.y + size.y)
         );
         this.rectTransform.offsetMax = new Vector2(
-            this.position.x + this.size.x, -this.position.y
+            this.position.x + size.x, -this.position.y
         );
     }
     
@@ -97,6 +101,10 @@ public class SEElement : MyMono {
     }
     
     public virtual void SetupDefinition() {
+        
+    }
+    
+    public virtual void BeforeSave() {
         
     }
     

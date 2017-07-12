@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
 
+[JsonObject(MemberSerialization.OptOut)]
 public class SEElementDef: IIDBasedElememt {
     
     public delegate SEElement GetPrefabDelegate(string elementTyle);
@@ -17,8 +19,11 @@ public class SEElementDef: IIDBasedElememt {
     public float[] Color          = new float[]{0, 0, 0, 1};
     public string Text            = null;
     public string RegionType      = null;
+    public string InputType      = null;
     public bool MultiRegion       = false;
     public int IndentMod          = 0;
+    public bool ExtendSize         = false;
+    [JsonIgnoreAttribute]
     public SEElement Element      = null;
     
     public SEElementDef() {

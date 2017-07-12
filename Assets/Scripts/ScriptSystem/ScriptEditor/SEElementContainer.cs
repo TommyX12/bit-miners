@@ -82,6 +82,13 @@ public class SEElementContainer : MyMono {
         this.Redraw();
     }
     
+    public void InitElement(SEElement element) {
+        element.transform.SetParent(this.Container.transform, false);
+        element.SetHeight(this.ElementHeight);
+        this.IDContainer.AddWithID(element.Definition.ID, element.Definition);
+        this.Redraw();
+    }
+    
     public void InsertElements(int row, int column, SEElement[] elements, int start = 0, int end = -1) {
         this.Redrawable = false;
         if (end == -1) end = elements.Length - 1;
@@ -159,6 +166,14 @@ public class SEElementContainer : MyMono {
             }
             for (int i = 0; i <= column2; ++i) {
                 yield return this.data[row2][i];
+            }
+        }
+    }
+    
+    public IEnumerable<SEElement> Elements() {
+        foreach (var row in this.data) {
+            foreach (var element in row) {
+                yield return element;
             }
         }
     }
@@ -306,6 +321,7 @@ public class SEElementContainer : MyMono {
             for (; column < this.data[row].Count; ++column) {
                 element = this.data[row][column];
                 accWidth += element.GetSize().x + this.HorizontalSpacing;
+                if (element.Definition.ExtendSize) continue;
                 if (pos.x <= accWidth) break;
             }
         }

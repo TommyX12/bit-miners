@@ -96,7 +96,76 @@ public class BasicAPI : IScriptSystemAPI {
                 },
             },
             CompileFunc = delegate (string[] regions) {
-                return "if(" + regions[0] + "){" + regions[1] + "}";
+                return "";
+            },
+        },
+        new SEBlockDef(){
+            Name = "var",
+            CursorIndex = 1,
+            Flags = SEBlockDef.F_RETURN_VAL,
+            Type = "value",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "Var",
+                    ExtendSize = true,
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "input",
+                    Text = "",
+                    InputType = "id",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions) {
+                return "";
+            },
+        },
+        new SEBlockDef(){
+            Name = "text",
+            CursorIndex = 1,
+            Flags = SEBlockDef.F_RETURN_VAL,
+            Type = "value",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "Text",
+                    ExtendSize = true,
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "input",
+                    Text = "",
+                    InputType = "str",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions) {
+                return "";
+            },
+        },
+        new SEBlockDef(){
+            Name = "num",
+            CursorIndex = 1,
+            Flags = SEBlockDef.F_RETURN_VAL,
+            Type = "value",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "Num",
+                    ExtendSize = true,
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "input",
+                    Text = "",
+                    InputType = "num",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions) {
+                return "";
             },
         },
     };
