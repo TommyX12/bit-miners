@@ -29,9 +29,14 @@ public class SEInputElement: SEElement {
                 break;
         
             case "str":
-            default:
                 this.InputFieldObject.contentType = InputField.ContentType.Autocorrected;
                 this.SetWidth(100);
+                break;
+                
+            case "js":
+            default:
+                this.InputFieldObject.contentType = InputField.ContentType.Standard;
+                this.SetWidth(200);
                 break;
         }
     }

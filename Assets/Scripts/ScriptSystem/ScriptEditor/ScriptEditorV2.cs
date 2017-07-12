@@ -49,8 +49,10 @@ public class ScriptEditorV2 : MyMono {
     }
     
     public void SaveAndRun() {
-        this.ScriptSystemObject.BlockScript = this.ScriptPanelObject.SaveString();
-        Debug.Log(this.ScriptSystemObject.BlockScript);
+        List<List<SEElementDef>> defList = this.ScriptPanelObject.GetDefList();
+        this.ScriptSystemObject.BlockScript = ScriptPanel.SaveListToString(defList);
+        this.ScriptSystemObject.Script = ScriptPanel.Compile(defList, this.APIPanelObject.GetCompileFunc);
+        Debug.Log(this.ScriptSystemObject.Script);
         this.ScriptSystemObject.Start();
         
         if (!this.ScriptSystemObject.ErrorCaught) this.EndEdit();

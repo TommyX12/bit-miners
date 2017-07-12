@@ -297,11 +297,11 @@ public class SEElementContainer : MyMono {
     }
     
     public void ScrollToStart() {
-        this.ScrollRect.verticalNormalizedPosition = 0.0f;
+        this.ScrollRect.verticalNormalizedPosition = 1.0f;
     }
     
     public void ScrollToEnd() {
-        this.ScrollRect.verticalNormalizedPosition = 1.0f;
+        this.ScrollRect.verticalNormalizedPosition = 0.0f;
     }
     
     public override void NormalUpdate() {

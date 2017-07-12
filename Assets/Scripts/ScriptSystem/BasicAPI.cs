@@ -22,7 +22,19 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "New function (",
+                    Text = "New function",
+                    ExtendSize = true,
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "input",
+                    Text = "",
+                    InputType = "id",
+                    RegionType = "end",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
                     RegionType = "args",
                     MultiRegion = true,
                 },
@@ -40,8 +52,156 @@ public class BasicAPI : IScriptSystemAPI {
                     RegionType = "end",
                 },
             },
-            CompileFunc = delegate (string[] regions) {
-                return "function(" + regions[0] + "){" + regions[1] + "}";
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "function " + inputs[0] + "(" + regions[2] + "){" + regions[3] + "}";
+            },
+        },
+        new SEBlockDef(){
+            Name = "arg",
+            CursorIndex = 1,
+            Flags = SEBlockDef.F_ARG,
+            Type = "definition",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "param",
+                    ExtendSize = true,
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "input",
+                    Text = "",
+                    InputType = "id",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return inputs[0];
+            },
+        },
+        new SEBlockDef(){
+            Name = "equals_to",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_BOOL,
+            Type = "comparison",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = " = ",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")==(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            Name = "smaller_than",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_BOOL,
+            Type = "comparison",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = " < ",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")<(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            Name = "and",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_BOOL,
+            Type = "comparison",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "condition",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "and",
+                    RegionType = "condition",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")&&(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            Name = "or",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_BOOL,
+            Type = "comparison",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "condition",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "or",
+                    RegionType = "condition",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")||(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            Name = "not",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_BOOL,
+            Type = "comparison",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "Not (",
+                    RegionType = "condition",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "!(" + regions[0] + ")";
             },
         },
         new SEBlockDef(){
@@ -69,7 +229,7 @@ public class BasicAPI : IScriptSystemAPI {
                     RegionType = "end",
                 },
             },
-            CompileFunc = delegate (string[] regions) {
+            CompileFunc = delegate (string[] regions, string[] inputs) {
                 return "if(" + regions[0] + "){" + regions[1] + "}";
             },
         },
@@ -95,7 +255,7 @@ public class BasicAPI : IScriptSystemAPI {
                     RegionType = "end",
                 },
             },
-            CompileFunc = delegate (string[] regions) {
+            CompileFunc = delegate (string[] regions, string[] inputs) {
                 return "";
             },
         },
@@ -118,8 +278,8 @@ public class BasicAPI : IScriptSystemAPI {
                     RegionType = "end",
                 },
             },
-            CompileFunc = delegate (string[] regions) {
-                return "";
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return inputs[0];
             },
         },
         new SEBlockDef(){
@@ -141,8 +301,8 @@ public class BasicAPI : IScriptSystemAPI {
                     RegionType = "end",
                 },
             },
-            CompileFunc = delegate (string[] regions) {
-                return "";
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "\"" + Util.EscapeScriptString(inputs[0]) + "\"";
             },
         },
         new SEBlockDef(){
@@ -164,8 +324,40 @@ public class BasicAPI : IScriptSystemAPI {
                     RegionType = "end",
                 },
             },
-            CompileFunc = delegate (string[] regions) {
-                return "";
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return inputs[0];
+            },
+        },
+        new SEBlockDef(){
+            Name = "true",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_VAL | SEBlockDef.F_RETURN_BOOL,
+            Type = "value",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "True",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "true";
+            },
+        },
+        new SEBlockDef(){
+            Name = "false",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_VAL | SEBlockDef.F_RETURN_BOOL,
+            Type = "value",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "False",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "false";
             },
         },
     };

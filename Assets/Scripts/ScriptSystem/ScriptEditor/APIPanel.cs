@@ -56,6 +56,8 @@ public class APIPanel: SEElementContainer {
         }
         this.Redrawable = true;
         this.Redraw();
+        
+        this.ScrollToStart();
     }
     
     protected override void OnClicked(int row, int column, SEElement element, Vector2 rawPos) {
@@ -67,6 +69,10 @@ public class APIPanel: SEElementContainer {
                 this.ScriptPanelObject.CursorInsertBlock(blockDef);
             }
         }
+    }
+    
+    public SEBlockDef.CompileFuncDelegate GetCompileFunc(string blockDefName) {
+        return this.blockDefs[blockDefName].CompileFunc;
     }
     
     private SEElement GetPrefab(string elementType) {

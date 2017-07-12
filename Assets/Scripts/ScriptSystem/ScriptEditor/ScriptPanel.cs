@@ -6,6 +6,8 @@ using Newtonsoft.Json;
 
 public class ScriptPanel: SEElementContainer {
     
+    public delegate SEBlockDef.CompileFuncDelegate GetCompileFuncDelegate(string blockDefName);
+    
     public SETextElement SETextElementPrefab;
     public SEInputElement SEInputElementPrefab;
     public SECursor SECursorPrefab;
@@ -27,6 +29,7 @@ public class ScriptPanel: SEElementContainer {
         Util.InitUIRectTransform(this.cursor.transform as RectTransform);
         Util.TopLeftUIRectTransform(this.cursor.transform as RectTransform);
         
+        this.data.Add(new List<SEElement>());
     }
     
     protected override void OnStart() {
@@ -101,7 +104,10 @@ public class ScriptPanel: SEElementContainer {
     public void CursorInsert() {
         if (this.HasFocusedInput()) return;
         
-        if (this.cursorRow < this.data.Count && this.data[this.cursorRow].Count > 0 && this.cursorColumn >= this.data[this.cursorRow].Count - 1) {
+        if (this.cursorRow == 0) {
+            this.CursorReturn();
+        }
+        else if (this.cursorRow < this.data.Count && this.data[this.cursorRow].Count > 0 && this.cursorColumn >= this.data[this.cursorRow].Count - 1) {
             this.CursorReturn();
         }
             
@@ -114,7 +120,10 @@ public class ScriptPanel: SEElementContainer {
     public void CursorInsertBlock(SEBlockDef blockDef) {
         if (this.HasFocusedInput()) return;
         
-        if (this.cursorRow < this.data.Count && this.data[this.cursorRow].Count > 0 && this.cursorColumn >= this.data[this.cursorRow].Count - 1) {
+        if (this.cursorRow == 0) {
+            this.CursorReturn();
+        }
+        else if (this.cursorRow < this.data.Count && this.data[this.cursorRow].Count > 0 && this.cursorColumn >= this.data[this.cursorRow].Count - 1) {
             this.CursorReturn();
         }
             
@@ -159,6 +168,7 @@ public class ScriptPanel: SEElementContainer {
         if (this.HasFocusedInput()) return;
         
         if (this.data.Count == 0) return;
+        if (this.cursorRow == 0) return;
         
         if (this.cursorRow >= this.data.Count) {
             this.cursorRow--;
@@ -270,8 +280,20 @@ public class ScriptPanel: SEElementContainer {
                 jumped = true;
             }
             else {
-                if (jumped && !elementDef.MultiRegion) result = SEBlockDef.GetRegionFlag("none");
-                else result = flags;
+                if (!elementDef.MultiRegion) {
+                    if (jumped) {
+                        result = SEBlockDef.GetRegionFlag("none");
+                        break;
+                    }
+                    
+                    column = Util.Clamp(column + 1, 0, this.data[row].Count - 1);
+                    SEElementDef parentDef = this.GetElementByID(elementDef.ParentID).Definition;
+                    if (!Util.Contains(parentDef.Children, this.GetElement(row, column).Definition.ID)) {
+                        result = SEBlockDef.GetRegionFlag("none");
+                        break;
+                    }
+                }
+                result = flags;
                 break;
             }
         }
@@ -322,6 +344,14 @@ public class ScriptPanel: SEElementContainer {
     }
     
     public string SaveString() {
+        return SaveListToString(this.GetDefList());
+    }
+    
+    public void LoadString(string json) {
+        this.SetDefList(LoadListFromString(json));
+    }
+    
+    public List<List<SEElementDef>> GetDefList() {
         List<List<SEElementDef>> defList = new List<List<SEElementDef>>();
         foreach (var row in this.data) {
             List<SEElementDef> defListRow = new List<SEElementDef>();
@@ -331,13 +361,12 @@ public class ScriptPanel: SEElementContainer {
             }
             defList.Add(defListRow);
         }
-        return JsonConvert.SerializeObject(defList);
+        
+        return defList;
     }
     
-    public void LoadString(string json) {
+    public void SetDefList(List<List<SEElementDef>> defList) {
         this.ClearElements();
-        
-        List<List<SEElementDef>> defList = JsonConvert.DeserializeObject<List<List<SEElementDef>>>(json);
         
         this.Redrawable = false;
         foreach (var row in defList) {
@@ -352,6 +381,24 @@ public class ScriptPanel: SEElementContainer {
         this.Redrawable = true;
         
         this.Redraw();
+        
+        this.ScrollToStart();
+    }
+    
+    public static string SaveListToString(List<List<SEElementDef>> defList) {
+        return JsonConvert.SerializeObject(defList);
+    }
+    
+    public static List<List<SEElementDef>> LoadListFromString(string json) {
+        return JsonConvert.DeserializeObject<List<List<SEElementDef>>>(json);
+    }
+    
+    public string Compile(GetCompileFuncDelegate getCompileFunc) {
+        return Compile(this.GetDefList(), getCompileFunc);
+    }
+    
+    public static string Compile(List<List<SEElementDef>> defList, GetCompileFuncDelegate getCompileFunc) {
+        return new Compiler(defList, getCompileFunc).Compile();
     }
     
     private SEElement GetPrefab(string elementType) {
@@ -368,6 +415,87 @@ public class ScriptPanel: SEElementContainer {
                 return null;
                 break;
         }
+    }
+    
+    
+    
+    
+    
+    
+    private class Compiler {
+        
+        private List<SEElementDef> defs = new List<SEElementDef>();
+        private Dictionary<int, int> positionOfID = new Dictionary<int, int>();
+        private GetCompileFuncDelegate getCompileFunc;
+        
+        public Compiler(List<List<SEElementDef>> defList, GetCompileFuncDelegate getCompileFunc) {
+            this.getCompileFunc = getCompileFunc;
+            
+            int i = 0;
+            foreach (var row in defList) {
+                foreach (var elementDef in row) {
+                    this.defs.Add(elementDef);
+                    this.positionOfID[elementDef.ID] = i;
+                    i++;
+                }
+                this.defs.Add(null);
+                i++;
+            }
+        }
+        
+        public string Compile() {
+            return this.compile(0, this.defs.Count);
+        }
+        
+        // [i, j)
+        private string compile(int i, int j) {
+            if (j <= i) return "";
+            
+            string result = "";
+            bool first = true;
+            
+            while (i < j) {
+                if (this.defs[i] == null) {
+                    result += '\n';
+                    i++;
+                    first = true;
+                    continue;
+                }
+                else {
+                    if (!first) result += ", ";
+                    first = false;
+                }
+                
+                SEElementDef def = this.defs[i];
+                string[] regions = new string[def.Children.Length - 1];
+                SEBlockDef.CompileFuncDelegate compileFunc = this.getCompileFunc(def.BlockDefName);
+                int k = i + 1;
+                for (int l = 1; l < def.Children.Length; ++l) {
+                    i = this.positionOfID[def.Children[l]];
+                    regions[l - 1] = this.compile(k, i);
+                    k = i + 1;
+                }
+                i++;
+                
+                List<SEElementDef> inputDefs = new List<SEElementDef>();
+                foreach (int id in def.Children) {
+                    SEElementDef child = this.defs[this.positionOfID[id]];
+                    if (child.ElementType == "input") {
+                        inputDefs.Add(child);
+                    }
+                }
+                
+                string[] inputs = new string[inputDefs.Count];
+                for (int l = 0; l < inputDefs.Count; ++l) {
+                    inputs[l] = inputDefs[l].Text;
+                }
+                
+                result += compileFunc(regions, inputs);
+            }
+            
+            return result;
+        }
+        
     }
     
 }

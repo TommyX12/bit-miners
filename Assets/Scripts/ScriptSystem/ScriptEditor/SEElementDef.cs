@@ -17,8 +17,8 @@ public class SEElementDef: IIDBasedElememt {
     public string BlockDefName    = null;
     public string ElementType     = null;
     public float[] Color          = new float[]{0, 0, 0, 1};
-    public string Text            = null;
-    public string RegionType      = null;
+    public string Text            = "";
+    public string RegionType      = "none";
     public string InputType      = null;
     public bool MultiRegion       = false;
     public int IndentMod          = 0;

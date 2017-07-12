@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class SEBlockDef {
     
-    public delegate string CompileFuncDelegate(string[] regions);
+    public delegate string CompileFuncDelegate(string[] regions, string[] inputs);
     
     public SEElementDef[] Elements = null;
     public string Name = null;
@@ -24,13 +24,14 @@ public class SEBlockDef {
     public const int F_RETURN_BOOL = 1 << 3;
     public const int F_DEFINITION = 1 << 4;
     public const int F_ARG = 1 << 5;
+    public const int F_JS = 1 << 6;
     
     private static Dictionary<string, int> regionFlags = new Dictionary<string, int>() {
         {"none", 0},
-        {"top", F_DEFINITION},
+        {"top", F_DEFINITION | F_JS},
         {"end", -1},
         {"expr", F_RETURN_VAL},
-        {"block", F_CONTROL_FLOW | F_HAS_PROCEDURE},
+        {"block", F_CONTROL_FLOW | F_HAS_PROCEDURE | F_JS},
         {"condition", F_RETURN_BOOL},
         {"args", F_ARG},
     };
@@ -38,6 +39,7 @@ public class SEBlockDef {
     private static Dictionary<string, float[]> typeColors = new Dictionary<string, float[]>() {
         {"value", new float[]{0.1f, 0.3f, 1.0f, 1.0f}},
         {"command", new float[]{1.0f, 0.0f, 1.0f, 1.0f}},
+        {"comparison", new float[]{0.5f, 0.0f, 1.0f, 1.0f}},
         {"definition", new float[]{0.1f, 0.8f, 0.1f, 1.0f}},
         {"control flow", new float[]{0.8f, 0.3f, 0.1f, 1.0f}},
     };

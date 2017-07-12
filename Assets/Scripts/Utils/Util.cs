@@ -420,6 +420,22 @@ static public class Util
         }
     }
     
+    static public string EscapeScriptString(string str) {
+        str = str.Replace("\\", "\\\\");
+        str = str.Replace("\"", "\\\"");
+        str = str.Replace("\'", "\\\'");
+        return str;
+    }
+    
+    static public bool Contains<T>(IEnumerable<T> list, T value) {
+        foreach (T item in list) {
+            if (item.Equals(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     static public float Luma(float[] color) {
         return Luma(color[0], color[1], color[2]);
     }
