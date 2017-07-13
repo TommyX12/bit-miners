@@ -122,7 +122,11 @@ public class ScriptSystem {
     }
     
     public void RegisterEvent(string eventName, string[] eventParameters, bool listed = true) {
-        this.events.Add(new Event(eventName, eventParameters, listed));
+        Event event_ = new Event(eventName, eventParameters, listed);
+        this.events.Add(event_);
+        if (listed) {
+            this.RegisterBlockDef(event_.GenerateBlockDef());
+        }
     }
     
     public void RegisterBlockDef(SEBlockDef blockDef) {
@@ -419,6 +423,48 @@ public class ScriptSystem {
         public string GetText() {
             return ScriptSystem.GetFunctionAPIText(this.Name, this.Parameters);
         }
+        
+        public SEBlockDef GenerateBlockDef() {
+            SEBlockDef blockDef = new SEBlockDef() {
+                DisplayName = this.Name,
+                Name = "_event_" + this.Name,
+                CursorIndex = 0,
+                Flags = SEBlockDef.F_DEFINITION,
+                Type = "event",
+                // CompileFunc = new EventCompileFuncWrapper(this.Name, this.Parameters).CompileFunc,
+                Elements = new SEElementDef[]{
+                    new SEElementDef() {
+                        ElementType = "text",
+                        Text = "When " + this.Name,
+                        RegionType = "block",
+                        IndentMod = 1,
+                        MultiRegion = true,
+                    },
+                    new SEElementDef() {
+                        ElementType = "text",
+                        Text = "end",
+                        IndentMod = -1,
+                        RegionType = "end",
+                    },
+                },
+                CompileFunc = delegate (string[] regions, string[] inputs) {
+                    string result = "when " + this.Name + "(";
+                    int j = 0;
+                    foreach (string param in this.Parameters) {
+                        if (j > 0) {
+                            result += ",";
+                        }
+                        result += param;
+                        j++;
+                    }
+                    result += "){" + regions[0] + "}";
+                    
+                    return result;
+                },
+            };
+            
+            return blockDef;
+        }
     }
     
     public static SEBlockDef FuncToBlockDef(string name, string[] parameters, bool hasReturnVal) {
@@ -427,7 +473,20 @@ public class ScriptSystem {
             CursorIndex = 0,
             Flags = SEBlockDef.F_HAS_PROCEDURE,
             Type = "command",
-            CompileFunc = new CompileFuncWrapper(name).CompileFunc,
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                string result = name + "(";
+                int j = 0;
+                foreach (string region in regions) {
+                    if (j > 0) {
+                        result += ",";
+                    }
+                    result += region;
+                    j++;
+                }
+                result += ")";
+                
+                return result;
+            },
         };
         
         if (hasReturnVal) {
@@ -461,27 +520,5 @@ public class ScriptSystem {
         blockDef.Elements = elements;
         
         return blockDef;
-    }
-    
-    private class CompileFuncWrapper {
-        private string name;
-        
-        public CompileFuncWrapper(string name) {
-            this.name = name;
-        }
-        
-        public string CompileFunc(string[] regions, string[] inputs) {
-            string result = name + "(";
-            int i = 0;
-            foreach (string region in regions) {
-                if (i > 0) {
-                    result += ",";
-                }
-                result += region;
-                i++;
-            }
-            result += ")";
-            return result;
-        }
     }
 }
