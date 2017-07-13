@@ -596,7 +596,7 @@ public class BasicAPI : IScriptSystemAPI {
         new SEBlockDef(){
             DisplayName = "set variable",
             Name = "set",
-            CursorIndex = 1,
+            CursorIndex = 2,
             Flags = SEBlockDef.F_HAS_PROCEDURE | SEBlockDef.F_DEFINITION,
             Type = "value",
             Elements = new SEElementDef[]{
@@ -625,6 +625,74 @@ public class BasicAPI : IScriptSystemAPI {
             },
             CompileFunc = delegate (string[] regions, string[] inputs) {
                 return inputs[0] + "=" + regions[2];
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "increase by",
+            Name = "+=",
+            CursorIndex = 2,
+            Flags = SEBlockDef.F_HAS_PROCEDURE,
+            Type = "value",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "increase",
+                    ExtendSize = true,
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "input",
+                    Text = "",
+                    InputType = "id",
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "by (",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return inputs[0] + "+=" + regions[2];
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "decrease by",
+            Name = "-=",
+            CursorIndex = 2,
+            Flags = SEBlockDef.F_HAS_PROCEDURE,
+            Type = "value",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "decrease",
+                    ExtendSize = true,
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "input",
+                    Text = "",
+                    InputType = "id",
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "by (",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return inputs[0] + "-=" + regions[2];
             },
         },
         new SEBlockDef(){
