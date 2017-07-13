@@ -5,12 +5,25 @@ public class SEBlockDef {
     
     public delegate string CompileFuncDelegate(string[] regions, string[] inputs);
     
-    public SEElementDef[] Elements = null;
-    public string Name = null;
-    public int CursorIndex = 0;
-    public int Flags = 0;
-    public string Type = null;
+    public SEElementDef[] Elements         = null;
+    public string Name                     = null;
+    public int CursorIndex                 = 0;
+    public int Flags                       = 0;
+    public string Type                     = null;
     public CompileFuncDelegate CompileFunc = null;
+    
+    private string displayName = null;
+    public string DisplayName {
+        get {
+            if (this.displayName == null) {
+                this.displayName = this.GenerateDisplayName();
+            }
+            return this.displayName;
+        }
+        set {
+            this.displayName = value;
+        }
+    }
     
     private SEElementDef apiElementDef = null;
     
@@ -68,10 +81,35 @@ public class SEBlockDef {
             this.apiElementDef.BlockDefName = this.Name;
             this.apiElementDef.Color = GetTypeColor(this.Type);
             this.apiElementDef.ElementType = "api";
-            this.apiElementDef.Text = this.Name;
+            this.apiElementDef.Text = this.DisplayName;
         }
         
         return this.apiElementDef;
+    }
+    
+    public string GenerateDisplayName() {
+        string result = "";
+        
+        foreach (var elementDef in this.Elements) {
+            if (elementDef.ElementType == "input") {
+                result += "[]";
+            }
+            else if (elementDef.ElementType == "text") {
+                result += elementDef.Text;
+            }
+            
+            if (elementDef.RegionType == "expr") {
+                result += "..";
+            }
+            if (elementDef.RegionType == "condition") {
+                result += "?";
+            }
+            if (elementDef.RegionType == "block") {
+                result += " ... ";
+            }
+        }
+        
+        return result;
     }
     
 }

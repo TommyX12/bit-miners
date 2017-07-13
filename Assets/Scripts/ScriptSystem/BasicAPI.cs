@@ -15,6 +15,7 @@ public class BasicAPI : IScriptSystemAPI {
     
     private static List<SEBlockDef> blockDefs = new List<SEBlockDef>() {
         new SEBlockDef(){
+            DisplayName = "Raw JavaScript",
             Name = "js",
             CursorIndex = 1,
             Flags = SEBlockDef.F_JS,
@@ -38,6 +39,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "New Function",
             Name = "function",
             CursorIndex = 1,
             Flags = SEBlockDef.F_DEFINITION,
@@ -53,7 +55,7 @@ public class BasicAPI : IScriptSystemAPI {
                     ElementType = "input",
                     Text = "",
                     InputType = "id",
-                    RegionType = "end",
+                    RegionType = "none",
                 },
                 new SEElementDef() {
                     ElementType = "text",
@@ -80,6 +82,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Add Parameter",
             Name = "arg",
             CursorIndex = 1,
             Flags = SEBlockDef.F_ARG,
@@ -103,6 +106,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Run Function",
             Name = "run",
             CursorIndex = 1,
             Flags = SEBlockDef.F_HAS_PROCEDURE | SEBlockDef.F_RETURN_VAL,
@@ -137,6 +141,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Return",
             Name = "return",
             CursorIndex = 0,
             Flags = SEBlockDef.F_HAS_PROCEDURE,
@@ -158,6 +163,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Equals to",
             Name = "equals_to",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_BOOL,
@@ -184,6 +190,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Smaller than",
             Name = "smaller_than",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_BOOL,
@@ -210,6 +217,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = ".. and ..",
             Name = "and",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_BOOL,
@@ -236,6 +244,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = ".. or ..",
             Name = "or",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_BOOL,
@@ -262,6 +271,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Not ..",
             Name = "not",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_BOOL,
@@ -283,6 +293,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "If .. then ...",
             Name = "if",
             CursorIndex = 0,
             Flags = SEBlockDef.F_CONTROL_FLOW,
@@ -312,6 +323,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "... or if .. then ...",
             Name = "else if",
             CursorIndex = 0,
             Flags = SEBlockDef.F_CONTROL_FLOW,
@@ -319,7 +331,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "Otherwise if (",
+                    Text = "... or if (",
                     RegionType = "condition",
                 },
                 new SEElementDef() {
@@ -341,6 +353,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "... otherwise ...",
             Name = "else",
             CursorIndex = 0,
             Flags = SEBlockDef.F_CONTROL_FLOW,
@@ -348,7 +361,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "Otherwise",
+                    Text = "... otherwise",
                     IndentMod = 1,
                     RegionType = "block",
                     MultiRegion = true,
@@ -365,6 +378,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Start",
             Name = "event_start",
             CursorIndex = 0,
             Flags = SEBlockDef.F_DEFINITION,
@@ -389,6 +403,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Move in direction",
             Name = "api_move_in_direction",
             CursorIndex = 0,
             Flags = SEBlockDef.F_HAS_PROCEDURE,
@@ -415,6 +430,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Value of variable",
             Name = "var",
             CursorIndex = 1,
             Flags = SEBlockDef.F_RETURN_VAL,
@@ -438,6 +454,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Text",
             Name = "text",
             CursorIndex = 1,
             Flags = SEBlockDef.F_RETURN_VAL,
@@ -461,6 +478,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Number",
             Name = "num",
             CursorIndex = 1,
             Flags = SEBlockDef.F_RETURN_VAL,
@@ -484,6 +502,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "True",
             Name = "true",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_VAL | SEBlockDef.F_RETURN_BOOL,
@@ -500,6 +519,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "False",
             Name = "false",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_VAL | SEBlockDef.F_RETURN_BOOL,
@@ -516,6 +536,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "Nothing",
             Name = "undefined",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_VAL,

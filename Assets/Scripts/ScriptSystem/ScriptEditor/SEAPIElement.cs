@@ -19,6 +19,7 @@ public class SEAPIElement: SEElement {
     }
     
     public override void NormalUpdate() {
+        if (this.Definition.BlockDefName == null) return;
         if (this.active) {
             this.Definition.Color[3] = Util.Flashing(Time.time, 0.7f, 1.0f, FlashingSpeed);
             this.ImageObject.color = Util.Float4ToColor(this.Definition.Color);
@@ -27,13 +28,19 @@ public class SEAPIElement: SEElement {
     
     public override void SetActive(bool active) {
         base.SetActive(active);
+        
         if (active) {
             this.TextObject.color = Color.white;
         }
         else {
-            this.TextObject.color = Color.black;
-            this.Definition.Color[3] = 0.3f;
-            this.ImageObject.color = Util.Float4ToColor(this.Definition.Color);
+            if (this.Definition.BlockDefName == null) {
+                this.TextObject.color = Color.gray;
+            }
+            else {
+                this.Definition.Color[3] = 0.3f;
+                this.TextObject.color = Color.black;
+                this.ImageObject.color = Util.Float4ToColor(this.Definition.Color);
+            }
         }
     }
     
@@ -59,9 +66,12 @@ public class SEAPIElement: SEElement {
     
     public override void SetupDefinition() {
         this.TextObject.text = this.Definition.Text;
-        this.TextObject.color = Color.black;
+        this.TextObject.color = Color.white;
         this.ImageObject.color = Util.Float4ToColor(this.Definition.Color);
         this.SetWidth(this.GetTextWidth(this.Definition.Text) + 10);
+        if (this.Definition.BlockDefName == null) {
+            this.TextObject.fontStyle = FontStyle.Bold;
+        }
     }
     
 }

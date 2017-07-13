@@ -12,8 +12,18 @@ public class APIPanel: SEElementContainer {
     
     private Dictionary<string, SEBlockDef> blockDefs = null;
     
+    private static readonly List<string> blockTypeOrder = new List<string>(){
+        "event",
+        "command",
+        "control flow",
+        "comparison",
+        "value",
+        "function",
+        "js",
+    };
+    
     protected override void OnAwake() {
-        
+        this.VerticalSpacing = 1.0f;
     }
     
     protected override void OnStart() {
@@ -34,9 +44,27 @@ public class APIPanel: SEElementContainer {
     }
     
     protected void RefreshFlags() {
-        foreach (var row in this.data) {
-            SEBlockDef blockDef = this.blockDefs[row[0].Definition.BlockDefName];
-            row[0].SetActive(blockDef.CompareFlags(this.cachedCursorFlags));
+        int lastLabel = 0;
+        bool foundActive = false;
+        for (int i = 0; i < this.data.Count; ++i) {
+            List<SEElement> row = this.data[i];
+            
+            if (row.Count == 0) {
+                this.data[lastLabel][0].SetActive(foundActive);
+                foundActive = false;
+                continue;
+            }
+            
+            SEElementDef def = row[0].Definition;
+            if (def.BlockDefName == null) {
+                lastLabel = i;
+                continue;
+            }
+            
+            SEBlockDef blockDef = this.blockDefs[def.BlockDefName];
+            bool active = blockDef.CompareFlags(this.cachedCursorFlags);
+            row[0].SetActive(active);
+            if (active) foundActive = true;
         }
     }
     
@@ -48,10 +76,27 @@ public class APIPanel: SEElementContainer {
         this.ClearElements();
         this.blockDefs = blockDefs;
         
+        Dictionary<string, List<SEBlockDef>> dict = new Dictionary<string, List<SEBlockDef>>();
+        
+        foreach (var blockDef in blockDefs.Values) {
+            if (!dict.ContainsKey(blockDef.Type)) {
+                dict[blockDef.Type] = new List<SEBlockDef>();
+            }
+            dict[blockDef.Type].Add(blockDef);
+        }
+        
         this.Redrawable = false;
         int row = 0;
-        foreach (var blockDef in blockDefs.Values) {
-            this.InsertElement(row, 0, blockDef.GenerateAPIElementDef().SpawnElement(this.GetPrefab));
+        foreach (var type in blockTypeOrder) {
+            this.InsertElement(row, 0, SEElementDef.GenerateAPILabel(type).SpawnElement(this.GetPrefab));
+            row++;
+            
+            foreach (var blockDef in dict[type]) {
+                this.InsertElement(row, 0, blockDef.GenerateAPIElementDef().SpawnElement(this.GetPrefab));
+                row++;
+            }
+            
+            this.InsertRow(row);
             row++;
         }
         this.Redrawable = true;
@@ -63,7 +108,7 @@ public class APIPanel: SEElementContainer {
     protected override void OnClicked(int row, int column, SEElement element, Vector2 rawPos) {
         // check for which element is clicked
         // compare flag with at cursor.
-        if (element != null) {
+        if (element != null && element.Definition.BlockDefName != null) {
             SEBlockDef blockDef = this.blockDefs[element.Definition.BlockDefName];
             if (blockDef.CompareFlags(this.cachedCursorFlags)) {
                 this.ScriptPanelObject.CursorInsertBlock(blockDef);

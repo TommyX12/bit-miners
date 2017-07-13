@@ -17,26 +17,31 @@ public class SEInputElement: SEElement {
     
     public override void SetupDefinition() {
         this.InputFieldObject.text = this.Definition.Text;
+        Text placeholder = this.InputFieldObject.placeholder.GetComponent<Text>();
         switch (this.Definition.InputType) {
             case "num":
                 this.InputFieldObject.contentType = InputField.ContentType.DecimalNumber;
                 this.SetWidth(60);
+                placeholder.text = "(num)";
                 break;
         
             case "id":
                 this.InputFieldObject.contentType = InputField.ContentType.Alphanumeric;
                 this.SetWidth(75);
+                placeholder.text = "(name)";
                 break;
         
             case "str":
                 this.InputFieldObject.contentType = InputField.ContentType.Autocorrected;
                 this.SetWidth(100);
+                placeholder.text = "(text)";
                 break;
                 
             case "js":
             default:
                 this.InputFieldObject.contentType = InputField.ContentType.Standard;
-                this.SetWidth(200);
+                this.SetWidth(250);
+                placeholder.text = "(script)";
                 break;
         }
     }

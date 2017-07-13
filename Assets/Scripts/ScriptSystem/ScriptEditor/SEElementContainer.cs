@@ -34,7 +34,7 @@ public class SEElementContainer : MyMono {
         this.Container = Util.MakeEmptyUIContainer((RectTransform)this.transform).GetComponent<RectTransform>();
         this.Container.SetAsFirstSibling();
         Util.TopLeftUIRectTransform(this.Container);
-        this.Container.pivot     = new Vector2(0.0f, 1.0f);
+        this.Container.pivot = new Vector2(0.0f, 1.0f);
         
         this.ScrollRect = Util.SafeGetComponent<ScrollRect>(this.gameObject);
         this.ScrollRect.content = this.Container;

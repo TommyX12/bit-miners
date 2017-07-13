@@ -38,4 +38,12 @@ public class SEElementDef: IIDBasedElememt {
         return element;
     }
     
+    public static SEElementDef GenerateAPILabel(string text) {
+        return new SEElementDef() {
+            ElementType = "api",
+            Color = new float[]{0, 0, 0, 0},
+            Text = text,
+        };
+    }
+    
 }
