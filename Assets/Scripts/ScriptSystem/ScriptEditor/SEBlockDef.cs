@@ -37,14 +37,15 @@ public class SEBlockDef {
     public const int F_RETURN_BOOL = 1 << 3;
     public const int F_DEFINITION = 1 << 4;
     public const int F_ARG = 1 << 5;
-    public const int F_JS = 1 << 6;
+    public const int F_COMMENT = 1 << 6;
+    public const int F_ALL = ~0;
     
     private static Dictionary<string, int> regionFlags = new Dictionary<string, int>() {
         {"none", 0},
-        {"top", F_DEFINITION | F_JS},
+        {"top", F_DEFINITION | F_COMMENT},
         {"end", -1},
         {"expr", F_RETURN_VAL},
-        {"block", F_CONTROL_FLOW | F_HAS_PROCEDURE | F_JS},
+        {"block", F_CONTROL_FLOW | F_HAS_PROCEDURE | F_COMMENT},
         {"condition", F_RETURN_BOOL},
         {"args", F_ARG},
     };

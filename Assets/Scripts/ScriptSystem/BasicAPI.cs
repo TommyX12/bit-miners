@@ -18,7 +18,7 @@ public class BasicAPI : IScriptSystemAPI {
             DisplayName = "comment",
             Name = "comment",
             CursorIndex = 1,
-            Flags = SEBlockDef.F_JS,
+            Flags = SEBlockDef.F_COMMENT,
             Type = "others",
             Elements = new SEElementDef[]{
                 new SEElementDef() {
@@ -42,7 +42,7 @@ public class BasicAPI : IScriptSystemAPI {
             DisplayName = "raw javascript",
             Name = "js",
             CursorIndex = 1,
-            Flags = SEBlockDef.F_JS,
+            Flags = SEBlockDef.F_ALL,
             Type = "js",
             Elements = new SEElementDef[]{
                 new SEElementDef() {
@@ -65,7 +65,7 @@ public class BasicAPI : IScriptSystemAPI {
         new SEBlockDef(){
             DisplayName = "new function",
             Name = "function",
-            CursorIndex = 1,
+            CursorIndex = 2,
             Flags = SEBlockDef.F_DEFINITION,
             Type = "function",
             Elements = new SEElementDef[]{
@@ -132,7 +132,7 @@ public class BasicAPI : IScriptSystemAPI {
         new SEBlockDef(){
             DisplayName = "run function",
             Name = "run",
-            CursorIndex = 1,
+            CursorIndex = 2,
             Flags = SEBlockDef.F_HAS_PROCEDURE | SEBlockDef.F_RETURN_VAL,
             Type = "function",
             Elements = new SEElementDef[]{
@@ -541,12 +541,12 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "if (",
+                    Text = "if",
                     RegionType = "condition",
                 },
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = ")",
+                    Text = "then",
                     IndentMod = 1,
                     RegionType = "block",
                     MultiRegion = true,
@@ -571,12 +571,12 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "... or if (",
+                    Text = "... or if",
                     RegionType = "condition",
                 },
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = ")",
+                    Text = "then",
                     IndentMod = 1,
                     RegionType = "block",
                     MultiRegion = true,
@@ -615,6 +615,199 @@ public class BasicAPI : IScriptSystemAPI {
             },
             CompileFunc = delegate (string[] regions, string[] inputs) {
                 return "else{" + regions[0] + "}";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "from .. to .. repeat ...",
+            Name = "for",
+            CursorIndex = 2,
+            Flags = SEBlockDef.F_CONTROL_FLOW,
+            Type = "control flow",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "for",
+                    ExtendSize = true,
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "input",
+                    Text = "",
+                    InputType = "id",
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "from",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "to",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "repeat",
+                    IndentMod = 1,
+                    RegionType = "block",
+                    MultiRegion = true,
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "end",
+                    IndentMod = -1,
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "for(var " + inputs[0] + ")from(" + regions[2] + ")to(" + regions[3] + "){" + regions[4] + "}";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "from .. to .. by ..",
+            Name = "for_by",
+            CursorIndex = 2,
+            Flags = SEBlockDef.F_CONTROL_FLOW,
+            Type = "control flow",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "for",
+                    ExtendSize = true,
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "input",
+                    Text = "",
+                    InputType = "id",
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "from",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "to",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "by",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "repeat",
+                    IndentMod = 1,
+                    RegionType = "block",
+                    MultiRegion = true,
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "end",
+                    IndentMod = -1,
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "for(var " + inputs[0] + ")from(" + regions[2] + ")to(" + regions[3] + ")by(" + regions[4] + "){" + regions[5] + "}";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "while .. repeat ...",
+            Name = "while",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_CONTROL_FLOW,
+            Type = "control flow",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "while",
+                    RegionType = "condition",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "repeat",
+                    IndentMod = 1,
+                    RegionType = "block",
+                    MultiRegion = true,
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "end",
+                    IndentMod = -1,
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "while(" + regions[0] + "){" + regions[1] + "}";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "repeat ... until ..",
+            Name = "do_while_not",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_CONTROL_FLOW,
+            Type = "control flow",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "repeat",
+                    IndentMod = 1,
+                    RegionType = "block",
+                    MultiRegion = true,
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "until (",
+                    IndentMod = -1,
+                    RegionType = "condition",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "do{" + regions[0] + "}while(!(" + regions[1] + "))";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "stop repeat",
+            Name = "break",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_HAS_PROCEDURE,
+            Type = "control flow",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "stop repeat",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "break";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "skip",
+            Name = "continue",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_HAS_PROCEDURE,
+            Type = "control flow",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "skip",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "continue";
             },
         },
         new SEBlockDef(){
@@ -895,12 +1088,12 @@ public class BasicAPI : IScriptSystemAPI {
         );
         
         scriptSystem.RegisterMacro(
-            @"\bfor\s+\(\s*var\s+" + ScriptSystem.IdentifierPattern("var") + @"\s*\)\s+from\s+" + ScriptSystem.MatchingBracketPattern("from") + @"\s+to\s+" + ScriptSystem.MatchingBracketPattern("to") + @"\s+by\s+" + ScriptSystem.MatchingBracketPattern("by"),
+            @"\bfor\s*\(\s*var\s+" + ScriptSystem.IdentifierPattern("var") + @"\s*\)\s*from\s*" + ScriptSystem.MatchingBracketPattern("from") + @"\s*to\s*" + ScriptSystem.MatchingBracketPattern("to") + @"\s*by\s*" + ScriptSystem.MatchingBracketPattern("by"),
             @"for (var ${var} = ${from}; _in_between(${var}, ${from}, ${to}); ${var} += ${by})"
         );
         
         scriptSystem.RegisterMacro(
-            @"\bfor\s+\(\s*var\s+" + ScriptSystem.IdentifierPattern("var") + @"\s*\)\s+from\s+" + ScriptSystem.MatchingBracketPattern("from") + @"\s+to\s+" + ScriptSystem.MatchingBracketPattern("to"),
+            @"\bfor\s*\(\s*var\s+" + ScriptSystem.IdentifierPattern("var") + @"\s*\)\s*from\s*" + ScriptSystem.MatchingBracketPattern("from") + @"\s*to\s*" + ScriptSystem.MatchingBracketPattern("to"),
             @"for (var ${var} = ${from}; _in_between(${var}, ${from}, ${to}); ${var} = _closer_to(${var}, ${from}, ${to}))"
         );
         
