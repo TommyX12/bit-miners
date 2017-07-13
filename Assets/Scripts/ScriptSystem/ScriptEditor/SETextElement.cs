@@ -20,7 +20,7 @@ public class SETextElement: SEElement {
     
     public override void NormalUpdate() {
         if (this.active) {
-            this.Definition.Color[3] = Util.Flashing(Time.time, 0.8f, 1.0f, FlashingSpeed);
+            this.Definition.Color[3] = Util.Flashing(Time.time, 0.85f, 0.95f, FlashingSpeed);
             this.ImageObject.color = Util.Float4ToColor(this.Definition.Color);
         }
     }

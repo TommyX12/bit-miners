@@ -97,12 +97,20 @@ public class ScriptSystem {
     }
     
     public void RegisterFunction(string functionName, Delegate functionDelegate, bool listed = true) {
-        this.functions.Add(new Function(functionName, functionDelegate, listed));
+        Function function = new Function(functionName, functionDelegate, listed);
+        this.functions.Add(function);
+        if (listed) {
+            this.RegisterBlockDef(function.GenerateBlockDef());
+        }
     }
     
     public void RegisterJSFunction(string functionName, string[] functionParams, string body, bool listed = true) {
         body = GetFunctionJS(functionName, functionParams, body);
-        this.javaScripts.Add(new JavaScript(body, listed, functionName, functionParams));
+        JavaScript js = new JavaScript(body, listed, functionName, functionParams);
+        this.javaScripts.Add(js);
+        if (listed) {
+            this.RegisterBlockDef(js.GenerateBlockDef());
+        }
     }
     
     public void RegisterJavaScript(string script) {
@@ -344,64 +352,9 @@ public class ScriptSystem {
         }
         
         public SEBlockDef GenerateBlockDef() {
-            SEBlockDef blockDef = new SEBlockDef() {
-                Name = "_api_" + this.Name,
-                CursorIndex = 0,
-                Flags = SEBlockDef.F_HAS_PROCEDURE,
-                Type = "command",
-                CompileFunc = new CompileFuncWrapper(this.Name).CompileFunc,
-            };
-            
-            if (this.DelegateObject.Method.ReturnType != typeof(void)) {
-                blockDef.Flags |= SEBlockDef.F_RETURN_VAL;
-            }
-            
-            SEElementDef[] elements = new SEElementDef[this.Parameters.Length + 1];
-            
-            int i = 0;
-            for (i = 0; i < elements.Length; ++i) {
-                SEElementDef element = new SEElementDef() {
-                    ElementType = "text",
-                    RegionType = "expr",
-                    Text = ")",
-                };
-                elements[i] = element;
-            }
-            
-            i = 0;
-            foreach (string param in this.Parameters) {
-                elements[i].Text += " " + param + "=(";
-                i++;
-            }
-            elements[0].Text = blockDef.Name;
-            elements[elements.Length - 1].RegionType = "end";
-            
-            blockDef.Elements = elements;
-            
-            return blockDef;
+            return FuncToBlockDef(this.Name, this.Parameters, this.DelegateObject.Method.ReturnType != typeof(void));
         }
         
-        private class CompileFuncWrapper {
-            private string name;
-            
-            public CompileFuncWrapper(string name) {
-                this.name = name;
-            }
-            
-            public string CompileFunc(string[] regions, string[] inputs) {
-                string result = name + "(";
-                int i = 0;
-                foreach (string region in regions) {
-                    if (i > 0) {
-                        result += ",";
-                    }
-                    result += region;
-                    i++;
-                }
-                result += ")";
-                return result;
-            }
-        }
     }
     
     private class Macro : APIElement {
@@ -435,13 +388,18 @@ public class ScriptSystem {
         {
             this.Script = script;
             this.Name = name;
-            this.Parameters = parameters == null ? parameters : (string[])parameters.Clone();
+            this.Parameters = parameters == null ? new string[0] : (string[])parameters.Clone();
             this.Listed = listed;
         }
         
         public string GetText() {
             return ScriptSystem.GetFunctionAPIText(this.Name, this.Parameters);
         }
+        
+        public SEBlockDef GenerateBlockDef() {
+            return FuncToBlockDef(this.Name, this.Parameters, true);
+        }
+        
     }
     
     private class Event : APIElement {
@@ -463,4 +421,67 @@ public class ScriptSystem {
         }
     }
     
+    public static SEBlockDef FuncToBlockDef(string name, string[] parameters, bool hasReturnVal) {
+        SEBlockDef blockDef = new SEBlockDef() {
+            Name = "_api_" + name,
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_HAS_PROCEDURE,
+            Type = "command",
+            CompileFunc = new CompileFuncWrapper(name).CompileFunc,
+        };
+        
+        if (hasReturnVal) {
+            blockDef.Flags |= SEBlockDef.F_RETURN_VAL;
+        }
+        
+        SEElementDef[] elements = new SEElementDef[parameters.Length + 1];
+        
+        int i = 0;
+        for (i = 0; i < elements.Length; ++i) {
+            SEElementDef element = new SEElementDef() {
+                ElementType = "text",
+                RegionType = "expr",
+                Text = "",
+            };
+            elements[i] = element;
+        }
+        elements[0].Text = name;
+        elements[elements.Length - 1].RegionType = "end";
+        if (parameters.Length > 0) {
+            elements[0].Text += " (";
+            elements[elements.Length - 1].Text = ")";
+        }
+        
+        i = 0;
+        foreach (string param in parameters) {
+            elements[i].Text += param + "=";
+            i++;
+        }
+        
+        blockDef.Elements = elements;
+        
+        return blockDef;
+    }
+    
+    private class CompileFuncWrapper {
+        private string name;
+        
+        public CompileFuncWrapper(string name) {
+            this.name = name;
+        }
+        
+        public string CompileFunc(string[] regions, string[] inputs) {
+            string result = name + "(";
+            int i = 0;
+            foreach (string region in regions) {
+                if (i > 0) {
+                    result += ",";
+                }
+                result += region;
+                i++;
+            }
+            result += ")";
+            return result;
+        }
+    }
 }
