@@ -320,7 +320,7 @@ public class ScriptSystem {
         string GetText();
     }
     
-    private struct Function : APIElement {
+    private class Function : APIElement {
         public string Name;
         public Delegate DelegateObject;
         public string[] Parameters;
@@ -342,9 +342,69 @@ public class ScriptSystem {
         public string GetText() {
             return ScriptSystem.GetFunctionAPIText(this.Name, this.Parameters);
         }
+        
+        public SEBlockDef GenerateBlockDef() {
+            SEBlockDef blockDef = new SEBlockDef() {
+                Name = "_api_" + this.Name,
+                CursorIndex = 0,
+                Flags = SEBlockDef.F_HAS_PROCEDURE,
+                Type = "command",
+                CompileFunc = new CompileFuncWrapper(this.Name).CompileFunc,
+            };
+            
+            if (this.DelegateObject.Method.ReturnType != typeof(void)) {
+                blockDef.Flags |= SEBlockDef.F_RETURN_VAL;
+            }
+            
+            SEElementDef[] elements = new SEElementDef[this.Parameters.Length + 1];
+            
+            int i = 0;
+            for (i = 0; i < elements.Length; ++i) {
+                SEElementDef element = new SEElementDef() {
+                    ElementType = "text",
+                    RegionType = "expr",
+                    Text = ")",
+                };
+                elements[i] = element;
+            }
+            
+            i = 0;
+            foreach (string param in this.Parameters) {
+                elements[i].Text += " " + param + "=(";
+                i++;
+            }
+            elements[0].Text = blockDef.Name;
+            elements[elements.Length - 1].RegionType = "end";
+            
+            blockDef.Elements = elements;
+            
+            return blockDef;
+        }
+        
+        private class CompileFuncWrapper {
+            private string name;
+            
+            public CompileFuncWrapper(string name) {
+                this.name = name;
+            }
+            
+            public string CompileFunc(string[] regions, string[] inputs) {
+                string result = name + "(";
+                int i = 0;
+                foreach (string region in regions) {
+                    if (i > 0) {
+                        result += ",";
+                    }
+                    result += region;
+                    i++;
+                }
+                result += ")";
+                return result;
+            }
+        }
     }
     
-    private struct Macro : APIElement {
+    private class Macro : APIElement {
         public string Pattern;
         public string Replacement;
         public bool Listed {
@@ -363,7 +423,7 @@ public class ScriptSystem {
         }
     }
     
-    private struct JavaScript : APIElement {
+    private class JavaScript : APIElement {
         public string Script;
         public string Name;
         public string[] Parameters;
@@ -384,7 +444,7 @@ public class ScriptSystem {
         }
     }
     
-    private struct Event : APIElement {
+    private class Event : APIElement {
         public string Name;
         public string[] Parameters;
         public bool Listed {

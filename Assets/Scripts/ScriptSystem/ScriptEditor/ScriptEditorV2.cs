@@ -22,6 +22,8 @@ public class ScriptEditorV2 : MyMono {
     void Awake() {
         this.DiscardButtonObject.onClick.AddListener(this.DiscardEdit);
         this.SaveButtonObject.onClick.AddListener(this.SaveAndRun);
+        
+        this.gameObject.SetActive(false);
     }
 
     void Start() {
