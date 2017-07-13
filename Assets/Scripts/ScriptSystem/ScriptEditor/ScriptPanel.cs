@@ -201,6 +201,7 @@ public class ScriptPanel: SEElementContainer {
     }
     
     public void CursorMove(int dRow, int dColumn) {
+        if (this.HasFocusedInput()) return;
         this.cursorRow    += dRow;
         this.cursorColumn += dColumn;
         this.RedrawCursor();

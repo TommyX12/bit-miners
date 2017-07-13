@@ -15,7 +15,7 @@ public class BasicAPI : IScriptSystemAPI {
     
     private static List<SEBlockDef> blockDefs = new List<SEBlockDef>() {
         new SEBlockDef(){
-            DisplayName = "Raw JavaScript",
+            DisplayName = "raw javascript",
             Name = "js",
             CursorIndex = 1,
             Flags = SEBlockDef.F_JS,
@@ -39,7 +39,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "New Function",
+            DisplayName = "new function",
             Name = "function",
             CursorIndex = 1,
             Flags = SEBlockDef.F_DEFINITION,
@@ -47,7 +47,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "New function",
+                    Text = "new function",
                     ExtendSize = true,
                     RegionType = "none",
                 },
@@ -72,7 +72,7 @@ public class BasicAPI : IScriptSystemAPI {
                 },
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "End",
+                    Text = "end",
                     IndentMod = -1,
                     RegionType = "end",
                 },
@@ -82,7 +82,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "Add Parameter",
+            DisplayName = "add parameter",
             Name = "arg",
             CursorIndex = 1,
             Flags = SEBlockDef.F_ARG,
@@ -90,7 +90,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "Param",
+                    Text = "param",
                     ExtendSize = true,
                     RegionType = "none",
                 },
@@ -106,7 +106,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "Run Function",
+            DisplayName = "run function",
             Name = "run",
             CursorIndex = 1,
             Flags = SEBlockDef.F_HAS_PROCEDURE | SEBlockDef.F_RETURN_VAL,
@@ -114,7 +114,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "Run",
+                    Text = "run",
                     ExtendSize = true,
                     RegionType = "none",
                 },
@@ -141,7 +141,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "Return",
+            DisplayName = "return",
             Name = "return",
             CursorIndex = 0,
             Flags = SEBlockDef.F_HAS_PROCEDURE,
@@ -149,7 +149,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "Return (",
+                    Text = "return (",
                     RegionType = "expr",
                 },
                 new SEElementDef() {
@@ -163,8 +163,8 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "Equals to",
-            Name = "equals_to",
+            DisplayName = "equals to",
+            Name = "==",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_BOOL,
             Type = "comparison",
@@ -190,8 +190,35 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "Smaller than",
-            Name = "smaller_than",
+            DisplayName = "not equals to",
+            Name = "!=",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_BOOL,
+            Type = "comparison",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = " not = ",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")!==(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "smaller than",
+            Name = "<",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_BOOL,
             Type = "comparison",
@@ -214,6 +241,87 @@ public class BasicAPI : IScriptSystemAPI {
             },
             CompileFunc = delegate (string[] regions, string[] inputs) {
                 return "(" + regions[0] + ")<(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "larger than",
+            Name = ">",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_BOOL,
+            Type = "comparison",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = " > ",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")>(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "smaller than or equals",
+            Name = "<=",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_BOOL,
+            Type = "comparison",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = " <= ",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")<=(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "larger than or equals",
+            Name = ">=",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_BOOL,
+            Type = "comparison",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = " >= ",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")>=(" + regions[1] + ")";
             },
         },
         new SEBlockDef(){
@@ -271,7 +379,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "Not ..",
+            DisplayName = "not ..",
             Name = "not",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_BOOL,
@@ -279,7 +387,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "Not (",
+                    Text = "not (",
                     RegionType = "condition",
                 },
                 new SEElementDef() {
@@ -293,7 +401,115 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "If .. then ...",
+            DisplayName = ".. + ..",
+            Name = "+",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_VAL,
+            Type = "operator",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "+",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")+(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = ".. - ..",
+            Name = "-",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_VAL,
+            Type = "operator",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "-",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")-(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = ".. x ..",
+            Name = "*",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_VAL,
+            Type = "operator",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "x",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")*(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = ".. / ..",
+            Name = "/",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_VAL,
+            Type = "operator",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "(",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "/",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")/(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "if .. then ...",
             Name = "if",
             CursorIndex = 0,
             Flags = SEBlockDef.F_CONTROL_FLOW,
@@ -301,7 +517,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "If (",
+                    Text = "if (",
                     RegionType = "condition",
                 },
                 new SEElementDef() {
@@ -313,7 +529,7 @@ public class BasicAPI : IScriptSystemAPI {
                 },
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "End",
+                    Text = "end",
                     IndentMod = -1,
                     RegionType = "end",
                 },
@@ -343,7 +559,7 @@ public class BasicAPI : IScriptSystemAPI {
                 },
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "End",
+                    Text = "end",
                     IndentMod = -1,
                     RegionType = "end",
                 },
@@ -368,7 +584,7 @@ public class BasicAPI : IScriptSystemAPI {
                 },
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "End",
+                    Text = "end",
                     IndentMod = -1,
                     RegionType = "end",
                 },
@@ -378,45 +594,27 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "Start",
-            Name = "event_start",
-            CursorIndex = 0,
-            Flags = SEBlockDef.F_DEFINITION,
-            Type = "event",
+            DisplayName = "set variable",
+            Name = "set",
+            CursorIndex = 1,
+            Flags = SEBlockDef.F_HAS_PROCEDURE | SEBlockDef.F_DEFINITION,
+            Type = "value",
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "When start",
-                    RegionType = "block",
-                    IndentMod = 1,
-                    MultiRegion = true,
+                    Text = "set",
+                    ExtendSize = true,
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "input",
+                    Text = "",
+                    InputType = "id",
+                    RegionType = "none",
                 },
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "end",
-                    IndentMod = -1,
-                    RegionType = "end",
-                },
-            },
-            CompileFunc = delegate (string[] regions, string[] inputs) {
-                return "when start(){" + regions[0] + "}";
-            },
-        },
-        new SEBlockDef(){
-            DisplayName = "Move in direction",
-            Name = "api_move_in_direction",
-            CursorIndex = 0,
-            Flags = SEBlockDef.F_HAS_PROCEDURE,
-            Type = "command",
-            Elements = new SEElementDef[]{
-                new SEElementDef() {
-                    ElementType = "text",
-                    Text = "Move in dir x=(",
-                    RegionType = "expr",
-                },
-                new SEElementDef() {
-                    ElementType = "text",
-                    Text = ") y=(",
+                    Text = "to (",
                     RegionType = "expr",
                 },
                 new SEElementDef() {
@@ -426,11 +624,11 @@ public class BasicAPI : IScriptSystemAPI {
                 },
             },
             CompileFunc = delegate (string[] regions, string[] inputs) {
-                return "move_in_direction(" + regions[0] + "," + regions[1] + ")";
+                return inputs[0] + "=" + regions[2];
             },
         },
         new SEBlockDef(){
-            DisplayName = "Value of variable",
+            DisplayName = "value of variable",
             Name = "var",
             CursorIndex = 1,
             Flags = SEBlockDef.F_RETURN_VAL,
@@ -438,7 +636,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "Var",
+                    Text = "var",
                     ExtendSize = true,
                     RegionType = "none",
                 },
@@ -454,7 +652,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "Text",
+            DisplayName = "text",
             Name = "text",
             CursorIndex = 1,
             Flags = SEBlockDef.F_RETURN_VAL,
@@ -462,7 +660,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "Text",
+                    Text = "text",
                     ExtendSize = true,
                     RegionType = "none",
                 },
@@ -478,7 +676,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "Number",
+            DisplayName = "number",
             Name = "num",
             CursorIndex = 1,
             Flags = SEBlockDef.F_RETURN_VAL,
@@ -486,7 +684,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "Num",
+                    Text = "num",
                     ExtendSize = true,
                     RegionType = "none",
                 },
@@ -502,7 +700,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "True",
+            DisplayName = "true",
             Name = "true",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_VAL | SEBlockDef.F_RETURN_BOOL,
@@ -510,7 +708,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "True",
+                    Text = "true",
                     RegionType = "end",
                 },
             },
@@ -519,7 +717,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "False",
+            DisplayName = "false",
             Name = "false",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_VAL | SEBlockDef.F_RETURN_BOOL,
@@ -527,7 +725,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "False",
+                    Text = "false",
                     RegionType = "end",
                 },
             },
@@ -536,7 +734,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "Nothing",
+            DisplayName = "nothing",
             Name = "undefined",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_VAL,
@@ -544,7 +742,7 @@ public class BasicAPI : IScriptSystemAPI {
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
-                    Text = "Nothing",
+                    Text = "nothing",
                     RegionType = "end",
                 },
             },

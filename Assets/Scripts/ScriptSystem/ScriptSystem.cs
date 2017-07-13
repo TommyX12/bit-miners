@@ -425,8 +425,9 @@ public class ScriptSystem {
         }
         
         public SEBlockDef GenerateBlockDef() {
+            string displayName = this.Name.Replace('_', ' ');
             SEBlockDef blockDef = new SEBlockDef() {
-                DisplayName = this.Name,
+                DisplayName = displayName,
                 Name = "_event_" + this.Name,
                 CursorIndex = 0,
                 Flags = SEBlockDef.F_DEFINITION,
@@ -435,7 +436,7 @@ public class ScriptSystem {
                 Elements = new SEElementDef[]{
                     new SEElementDef() {
                         ElementType = "text",
-                        Text = "When " + this.Name,
+                        Text = "When " + displayName,
                         RegionType = "block",
                         IndentMod = 1,
                         MultiRegion = true,
@@ -504,7 +505,7 @@ public class ScriptSystem {
             };
             elements[i] = element;
         }
-        elements[0].Text = name;
+        elements[0].Text = name.Replace('_', ' ');
         elements[elements.Length - 1].RegionType = "end";
         if (parameters.Length > 0) {
             elements[0].Text += " (";
@@ -513,7 +514,7 @@ public class ScriptSystem {
         
         i = 0;
         foreach (string param in parameters) {
-            elements[i].Text += param + "=";
+            elements[i].Text += param.Replace('_', ' ') + "=";
             i++;
         }
         

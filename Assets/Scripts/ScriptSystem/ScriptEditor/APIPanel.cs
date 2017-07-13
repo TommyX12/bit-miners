@@ -15,6 +15,7 @@ public class APIPanel: SEElementContainer {
     private static readonly List<string> blockTypeOrder = new List<string>(){
         "event",
         "command",
+        "operator",
         "control flow",
         "comparison",
         "value",
