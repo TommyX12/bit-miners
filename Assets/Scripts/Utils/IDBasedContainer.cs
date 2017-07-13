@@ -39,6 +39,12 @@ public class IDBasedContainer<T>
         this.unusedID.Push(id);
     }
     
+    public void Clear() {
+        this.MaxID = -1;
+        this.unusedID.Clear();
+        this.data.Clear();
+    }
+    
     public void AddWithID(int id, T element) {
         if (id < 0) {
             this.Add(element);

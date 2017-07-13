@@ -110,8 +110,8 @@ public class SEElementContainer : MyMono {
     public void DeleteElement(int row, int column) {
         if (!Util.InRange(row, 0, this.data.Count - 1)) return;
         if (!Util.InRange(column, 0, this.data[row].Count - 1)) return;
-        this.IDContainer.Remove(this.data[row][column].Definition);
         this.data[row][column].Remove();
+        this.IDContainer.Remove(this.data[row][column].Definition);
         this.data[row].RemoveAt(column);
         this.Redraw();
     }
@@ -119,25 +119,15 @@ public class SEElementContainer : MyMono {
     public void DeleteElements(int row1, int column1, int row2, int column2) {
         // WARNING: this does not check for some edge cases.
         if (row1 > row2) return;
+        
+        foreach (SEElement element in this.AllBetween(row1, column1, row2, column2)){
+            element.Remove();
+            this.IDContainer.Remove(element.Definition);
+        }
         if (row1 == row2) {
-            for (int i = column1; i <= column2; ++i) {
-                this.data[row1][i].Remove();
-            }
-            
             this.data[row1].RemoveRange(column1, column2 - column1 + 1);
         }
         else {
-            for (int i = column1; i < this.data[row1].Count; ++i) {
-                this.data[row1][i].Remove();
-            }
-            for (int i = row1 + 1; i < row2; ++i) {
-                for (int j = 0; j < this.data[i].Count; ++j) {
-                    this.data[i][j].Remove();
-                }
-            }
-            for (int i = 0; i <= column2; ++i) {
-                this.data[row2][i].Remove();
-            }
             
             this.data[row1].RemoveRange(column1, this.data[row1].Count - column1);
             this.data[row2].RemoveRange(0, column2 + 1);
@@ -184,12 +174,17 @@ public class SEElementContainer : MyMono {
                 this.data[i][j].Remove();
             }
         }
+        this.IDContainer.Clear();
         this.data.Clear();
         this.Redraw();
     }
     
     public void DeleteRow(int row) {
         if (!Util.InRange(row, 0, this.data.Count - 1)) return;
+        foreach (SEElement element in this.data[row]) {
+            element.Remove();
+            this.IDContainer.Remove(element.Definition);
+        }
         this.data.RemoveAt(row);
         this.Redraw();
     }
