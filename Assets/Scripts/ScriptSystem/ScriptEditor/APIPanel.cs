@@ -20,6 +20,7 @@ public class APIPanel: SEElementContainer {
         "comparison",
         "value",
         "function",
+        "others",
         "js",
     };
     

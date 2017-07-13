@@ -51,6 +51,7 @@ public class SEBlockDef {
     
     private static Dictionary<string, float[]> typeColors = new Dictionary<string, float[]>() {
         {"js", new float[]{0.7f, 0.0f, 0.0f, 1.0f}},
+        {"others", new float[]{0.4f, 0.4f, 0.4f, 1.0f}},
         {"value", new float[]{0.1f, 0.3f, 1.0f, 1.0f}},
         {"command", new float[]{1.0f, 0.0f, 1.0f, 1.0f}},
         {"comparison", new float[]{0.6f, 0.0f, 0.9f, 1.0f}},

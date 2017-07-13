@@ -15,6 +15,30 @@ public class BasicAPI : IScriptSystemAPI {
     
     private static List<SEBlockDef> blockDefs = new List<SEBlockDef>() {
         new SEBlockDef(){
+            DisplayName = "comment",
+            Name = "comment",
+            CursorIndex = 1,
+            Flags = SEBlockDef.F_JS,
+            Type = "others",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "comment",
+                    ExtendSize = true,
+                    RegionType = "none",
+                },
+                new SEElementDef() {
+                    ElementType = "input",
+                    Text = "",
+                    InputType = "comment",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "//" + inputs[0];
+            },
+        },
+        new SEBlockDef(){
             DisplayName = "raw javascript",
             Name = "js",
             CursorIndex = 1,

@@ -37,8 +37,13 @@ public class SEInputElement: SEElement {
                 placeholder.text = "(text)";
                 break;
                 
+            case "comment":
+                this.InputFieldObject.contentType = InputField.ContentType.Autocorrected;
+                this.SetWidth(250);
+                placeholder.text = "(text)";
+                break;
+                
             case "js":
-            default:
                 this.InputFieldObject.contentType = InputField.ContentType.Standard;
                 this.SetWidth(250);
                 placeholder.text = "(script)";
