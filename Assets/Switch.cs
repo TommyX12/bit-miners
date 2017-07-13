@@ -8,12 +8,15 @@ public class Switch : MyMono {
     public Sprite OffSprite;
     public bool on = false;
     public float AnimationTime;
+    public Collider2D colly;
     SpriteRenderer rendy;
     float select;
+    int count = 0;
 
     private void Start()
     {
         rendy = GetComponent<SpriteRenderer>();
+        colly = GetComponent<Collider2D>();
     }
 
 
@@ -42,5 +45,25 @@ public class Switch : MyMono {
     public void TurnOff() {
         select = 0;
         on = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        count++;
+        if (count > 0) {
+            TurnOn();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        count--;
+        if (count > 0)
+        {
+
+        }
+        else {
+            TurnOff();
+        }
     }
 }
