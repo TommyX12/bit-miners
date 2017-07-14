@@ -533,6 +533,33 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
+            DisplayName = "remainder of .. / ..",
+            Name = "mod",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_RETURN_VAL,
+            Type = "calculation",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "remainder (",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "/",
+                    RegionType = "expr",
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = ")",
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "(" + regions[0] + ")%(" + regions[1] + ")";
+            },
+        },
+        new SEBlockDef(){
             DisplayName = "if .. then ...",
             Name = "if",
             CursorIndex = 0,
@@ -714,6 +741,31 @@ public class BasicAPI : IScriptSystemAPI {
             },
             CompileFunc = delegate (string[] regions, string[] inputs) {
                 return "for(var " + inputs[0] + ")from(" + regions[2] + ")to(" + regions[3] + ")by(" + regions[4] + "){" + regions[5] + "}";
+            },
+        },
+        new SEBlockDef(){
+            DisplayName = "repeat ...",
+            Name = "loop",
+            CursorIndex = 0,
+            Flags = SEBlockDef.F_CONTROL_FLOW,
+            Type = "control flow",
+            Elements = new SEElementDef[]{
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "repeat",
+                    IndentMod = 1,
+                    RegionType = "block",
+                    MultiRegion = true,
+                },
+                new SEElementDef() {
+                    ElementType = "text",
+                    Text = "end",
+                    IndentMod = -1,
+                    RegionType = "end",
+                },
+            },
+            CompileFunc = delegate (string[] regions, string[] inputs) {
+                return "while(true){" + regions[0] + "}";
             },
         },
         new SEBlockDef(){
