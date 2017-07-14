@@ -811,7 +811,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "set variable",
+            DisplayName = "set variable to ..",
             Name = "set",
             CursorIndex = 2,
             Flags = SEBlockDef.F_HAS_PROCEDURE | SEBlockDef.F_DEFINITION,
@@ -845,7 +845,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "increase by",
+            DisplayName = "increase .. by ..",
             Name = "+=",
             CursorIndex = 2,
             Flags = SEBlockDef.F_HAS_PROCEDURE,
@@ -879,7 +879,7 @@ public class BasicAPI : IScriptSystemAPI {
             },
         },
         new SEBlockDef(){
-            DisplayName = "decrease by",
+            DisplayName = "decrease .. by ..",
             Name = "-=",
             CursorIndex = 2,
             Flags = SEBlockDef.F_HAS_PROCEDURE,
