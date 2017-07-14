@@ -429,7 +429,7 @@ public class BasicAPI : IScriptSystemAPI {
             Name = "+",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_VAL,
-            Type = "operator",
+            Type = "calculation",
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
@@ -456,7 +456,7 @@ public class BasicAPI : IScriptSystemAPI {
             Name = "-",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_VAL,
-            Type = "operator",
+            Type = "calculation",
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
@@ -483,7 +483,7 @@ public class BasicAPI : IScriptSystemAPI {
             Name = "*",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_VAL,
-            Type = "operator",
+            Type = "calculation",
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",
@@ -510,7 +510,7 @@ public class BasicAPI : IScriptSystemAPI {
             Name = "/",
             CursorIndex = 0,
             Flags = SEBlockDef.F_RETURN_VAL,
-            Type = "operator",
+            Type = "calculation",
             Elements = new SEElementDef[]{
                 new SEElementDef() {
                     ElementType = "text",

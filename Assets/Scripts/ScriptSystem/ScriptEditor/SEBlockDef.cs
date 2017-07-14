@@ -56,7 +56,7 @@ public class SEBlockDef {
         {"value", new float[]{0.1f, 0.3f, 1.0f, 1.0f}},
         {"command", new float[]{1.0f, 0.0f, 1.0f, 1.0f}},
         {"comparison", new float[]{0.6f, 0.0f, 0.9f, 1.0f}},
-        {"operator", new float[]{0.5f, 0.7f, 0.2f, 1.0f}},
+        {"calculation", new float[]{0.6f, 0.6f, 0.2f, 1.0f}},
         {"event", new float[]{0.0f, 0.5f, 0.5f, 1.0f}},
         {"function", new float[]{0.1f, 0.8f, 0.1f, 1.0f}},
         {"control flow", new float[]{0.8f, 0.3f, 0.1f, 1.0f}},

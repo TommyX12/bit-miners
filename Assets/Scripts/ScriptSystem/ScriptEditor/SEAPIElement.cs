@@ -34,7 +34,7 @@ public class SEAPIElement: SEElement {
         }
         else {
             if (this.Definition.BlockDefName == null) {
-                this.TextObject.color = Color.gray;
+                this.TextObject.color = new Color(0.3f, 0.3f, 0.3f, 1.0f);
             }
             else {
                 this.Definition.Color[3] = 0.3f;
