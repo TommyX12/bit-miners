@@ -153,7 +153,7 @@ public class ScriptPanel: SEElementContainer {
         }
         this.InsertElements(this.cursorRow, this.cursorColumn, elements, rangeStart, rangeEnd - 1);
         
-        ((SEInputElement)firstInput).Focus();
+        if (firstInput != null) ((SEInputElement)firstInput).Focus();
         
         int[] children = new int[blockDef.Elements.Length];
         for (int i = 0; i < elements.Length; ++i) {
