@@ -65,8 +65,7 @@ public class SEElementContainer : MyMono {
     }
     
     public void InsertElement(int row, int column, SEElement element) {
-        element.transform.SetParent(this.Container.transform, false);
-        element.SetHeight(this.ElementHeight);
+        this.InitElement(element);
         row = Util.Clamp(row, 0, this.data.Count);
         if (row == this.data.Count) {
             this.data.Add(new List<SEElement>());
@@ -78,13 +77,14 @@ public class SEElementContainer : MyMono {
             column = Util.Clamp(column, 0, this.data[row].Count - 1);
             Util.SafeInsert(this.data[row], column + 1, element);
         }
-        this.IDContainer.AddWithID(element.Definition.ID, element.Definition);
         this.Redraw();
     }
     
     public void InitElement(SEElement element) {
+        element.Container = this;
         element.transform.SetParent(this.Container.transform, false);
         element.SetHeight(this.ElementHeight);
+        element.Init();
         this.IDContainer.AddWithID(element.Definition.ID, element.Definition);
         this.Redraw();
     }

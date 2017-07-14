@@ -11,6 +11,8 @@ public class SEElement : MyMono {
     
     public SEElementDef Definition = null;
     
+    public SEElementContainer Container = null;
+    
     public int cachedRow    = 0;
     public int cachedColumn = 0;
     protected bool active   = false;
@@ -74,7 +76,7 @@ public class SEElement : MyMono {
         this.active = active;
     }
     
-    public void Remove() {
+    public virtual void Remove() {
         Destroy(this.gameObject);
     }
     
@@ -105,6 +107,10 @@ public class SEElement : MyMono {
     }
     
     public virtual void BeforeSave() {
+        
+    }
+    
+    public virtual void Init() {
         
     }
     
