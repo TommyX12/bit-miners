@@ -13,9 +13,6 @@ public class Dialogue : MonoBehaviour {
     public AudioClip sound;
     bool run = false;
 
-
-
-
     public virtual void PreDisplay() {
 
     }

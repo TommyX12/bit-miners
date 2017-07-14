@@ -26,7 +26,7 @@ public class ElevatorScript : MyMono {
             GameObject go = collision.gameObject.transform.root.gameObject;
             passenger = go;
             passenger.GetComponent<SpriteRenderer>().sortingLayerName = "BelowMap";
-            passenger.layer = LayerMask.NameToLayer("Bullet");
+            passenger.layer = LayerMask.NameToLayer("Bullets");
             transition_panel.SetActive(true);
         }
     }

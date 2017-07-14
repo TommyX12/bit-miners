@@ -10,6 +10,7 @@ public class GameManager : MyMono {
     public MapTile MapTilePrefab;
     public Unit Player;
 
+
     void Awake() {
         Current = this;
         ResourceManager.Initialize();
