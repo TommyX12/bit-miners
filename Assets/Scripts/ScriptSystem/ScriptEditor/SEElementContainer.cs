@@ -316,7 +316,7 @@ public class SEElementContainer : MyMono {
             for (; column < this.data[row].Count; ++column) {
                 element = this.data[row][column];
                 accWidth += element.GetSize().x + this.HorizontalSpacing;
-                if (element.Definition.ExtendSize) continue;
+                if (SEBlockDef.GetRegionFlag(element.Definition.RegionType) == 0) continue;
                 if (pos.x <= accWidth) break;
             }
         }
