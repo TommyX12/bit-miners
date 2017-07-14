@@ -11,3 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/Tutorialv.2/Level1.unity
     guid: f1b5d408946b4854ab9d4e32acf6f843
+  - enabled: 1
+    path: Assets/Levels/Tutorialv.2/Level2.unity
+    guid: d04dde29edcd1084a8819e5dd839bcda
+  - enabled: 1
+    path: Assets/Levels/Tutorialv.2/Level3.unity
+    guid: 4791fe7c9d90161478c5ca2a1de33699
+  - enabled: 1
+    path: Assets/Levels/Tutorialv.2/Level4.unity
+    guid: 26e0416423c640546beaaae3d1cb03c7
+  - enabled: 1
+    path: Assets/Levels/Tutorialv.2/Level5.unity
+    guid: 470620638acfd414b8faa55599190e6c
