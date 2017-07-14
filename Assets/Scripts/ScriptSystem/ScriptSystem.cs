@@ -436,7 +436,7 @@ public class ScriptSystem {
                 Elements = new SEElementDef[]{
                     new SEElementDef() {
                         ElementType = "text",
-                        Text = "When " + displayName,
+                        Text = "when " + displayName,
                         RegionType = "block",
                         IndentMod = 1,
                         MultiRegion = true,
