@@ -130,10 +130,15 @@ public class ScriptPanel: SEElementContainer {
         SEElement[] elements = new SEElement[blockDef.Elements.Length];
         
         float[] color = SEBlockDef.GetTypeColor(blockDef.Type);
+        
+        SEElement firstInput = null;
             
         for (int i = 0; i < elements.Length; ++i) {
             blockDef.Elements[i].Color = color;
             elements[i] = blockDef.Elements[i].SpawnElement(this.GetPrefab);
+            if (firstInput == null && blockDef.Elements[i].ElementType == "input") {
+                firstInput = elements[i];
+            }
         }
         int rangeStart = 0;
         int rangeEnd;
@@ -147,6 +152,8 @@ public class ScriptPanel: SEElementContainer {
             }
         }
         this.InsertElements(this.cursorRow, this.cursorColumn, elements, rangeStart, rangeEnd - 1);
+        
+        ((SEInputElement)firstInput).Focus();
         
         int[] children = new int[blockDef.Elements.Length];
         for (int i = 0; i < elements.Length; ++i) {

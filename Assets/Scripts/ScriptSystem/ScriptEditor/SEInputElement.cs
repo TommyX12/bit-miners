@@ -102,4 +102,8 @@ public class SEInputElement: SEElement {
         this.OnTextChanged(this.InputFieldObject.text);
     }
     
+    public void Focus() {
+        this.InputFieldObject.ActivateInputField();
+    }
+    
 }
