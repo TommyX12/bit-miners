@@ -22,8 +22,6 @@ GameObject:
   - component: {fileID: 212506616348349788}
   - component: {fileID: 114956638884293146}
   - component: {fileID: 58782962813337756}
-  - component: {fileID: 114403868593934156}
-  - component: {fileID: 114226376818714214}
   m_Layer: 10
   m_Name: Switch
   m_TagString: Untagged
@@ -38,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1747350671110182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.25, y: -0.75, z: 0}
+  m_LocalPosition: {x: -4.75, y: -1.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,36 +57,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
---- !u!114 &114226376818714214
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1747350671110182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b0a8aa02cbd09489621f84f0fbd648, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sw: {fileID: 114956638884293146}
-  OnEnter: 1
-  OnExit: 1
---- !u!114 &114403868593934156
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1747350671110182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c8ffbe5cf47f1f4e91c4111ebeade92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ScriptToCheck: {fileID: 114956638884293146}
-  BoolToCheck: on
-  WantedValue: 1
-  TutorialSystemBool: Switch
-  Value: 1
 --- !u!114 &114956638884293146
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,6 +76,8 @@ MonoBehaviour:
   OffSprite: {fileID: 21300000, guid: 81509224b11d2ea4e9856191d0177d9f, type: 3}
   on: 0
   AnimationTime: 1
+  colly: {fileID: 58782962813337756}
+  oneShot: 0
 --- !u!212 &212506616348349788
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class TimedSwitch : MyMono {
+public class TimedSwitch : SwitchBase {
 
     public Sprite[] onSprite;
     public Sprite offSprite;
     public float maxtime;
     public SpriteRenderer rendy;
-    public bool on;
     public BoxCollider2D boxy;
 
     float selector;

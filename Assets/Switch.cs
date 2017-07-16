@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
-public class Switch : MyMono {
+public class Switch : SwitchBase {
     public Sprite[] OnSprites;
     public Sprite OffSprite;
-    public bool on = false;
     public float AnimationTime;
     public Collider2D colly;
+    public bool oneShot;
     SpriteRenderer rendy;
     float select;
     int count = 0;
@@ -57,6 +57,10 @@ public class Switch : MyMono {
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (oneShot) {
+            return;
+        }
+
         count--;
         if (count > 0)
         {
