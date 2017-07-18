@@ -8,6 +8,12 @@ public class ElevatorScript : MyMono {
 
     GameObject passenger;
     public GameObject transition_panel;
+    AudioSource player;
+
+    private void Start()
+    {
+        player = GetComponent<AudioSource>();
+    }
 
     public override void PausingFixedUpdate()
     {
@@ -28,6 +34,7 @@ public class ElevatorScript : MyMono {
             passenger.GetComponent<SpriteRenderer>().sortingLayerName = "BelowMap";
             passenger.layer = LayerMask.NameToLayer("Bullets");
             transition_panel.SetActive(true);
+            player.Play();
         }
     }
 }

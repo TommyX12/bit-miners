@@ -7,7 +7,7 @@ public class CatchMouseCondition : MonoBehaviour {
     public RectTransform tranny;
     public string conditionToActivate;
     public bool value;
-
+    public bool advancing = false;
     private void Start()
     {
     }
@@ -17,6 +17,9 @@ public class CatchMouseCondition : MonoBehaviour {
         if (Input.GetMouseButtonUp(0)) {
             if (RectTransformUtility.RectangleContainsScreenPoint(tranny, Input.mousePosition)) {
                 ScriptEditorTutorial.Current.SetOrAdd(conditionToActivate, value);
+                if (advancing) {
+                    ScriptEditorTutorial.Current.next();
+                }
             }
         }
     }

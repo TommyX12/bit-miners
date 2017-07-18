@@ -1027,7 +1027,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0.38354915}
-  m_AnchoredPosition: {x: -313.40036, y: -0.00018310547}
+  m_AnchoredPosition: {x: -313.4004, y: -0.00018310547}
   m_SizeDelta: {x: 626.8, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &71898673
@@ -2077,7 +2077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sc: {fileID: 1453379092}
-  value: 0.1783795
+  value: 0.1702
 --- !u!224 &145108564
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2996,6 +2996,7 @@ MonoBehaviour:
   tranny: {fileID: 205476254}
   conditionToActivate: lock
   value: 1
+  advancing: 0
 --- !u!222 &205476256
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4019,7 +4020,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.19999999, y: -1.1999817}
+  m_AnchoredPosition: {x: 0.19999999, y: -1.1999779}
   m_SizeDelta: {x: 240.8, y: -7.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &292296041
@@ -4891,6 +4892,7 @@ MonoBehaviour:
   tranny: {fileID: 350737414}
   conditionToActivate: xvar
   value: 1
+  advancing: 0
 --- !u!222 &350737416
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5317,6 +5319,8 @@ GameObject:
   - component: {fileID: 387113953}
   - component: {fileID: 387113952}
   - component: {fileID: 387113951}
+  - component: {fileID: 387113959}
+  - component: {fileID: 387113958}
   m_Layer: 9
   m_Name: Player (1)
   m_TagString: Player
@@ -5490,6 +5494,99 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &387113958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 387113949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94a32acb8e29b54a8ac0213cfc88303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceThreshold: 0.4
+  stepSound: {fileID: 8300000, guid: 381adfeda4f4cba41babc57c918545dc, type: 3}
+--- !u!82 &387113959
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 387113949}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 381adfeda4f4cba41babc57c918545dc, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0.523
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &391073133
 GameObject:
   m_ObjectHideFlags: 0
@@ -11414,7 +11511,7 @@ Prefab:
     - target: {fileID: 224285176108210810, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 68.45383
+      value: 68.45386
       objectReference: {fileID: 0}
     - target: {fileID: 224285176108210810, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -11470,7 +11567,7 @@ Prefab:
     - target: {fileID: 224609071666198694, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 224894333615652768, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -15925,6 +16022,7 @@ MonoBehaviour:
   tranny: {fileID: 1115176390}
   conditionToActivate: x
   value: 1
+  advancing: 1
 --- !u!222 &1115176392
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16997,6 +17095,7 @@ MonoBehaviour:
   tranny: {fileID: 1194686685}
   conditionToActivate: move
   value: 1
+  advancing: 0
 --- !u!222 &1194686687
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17294,6 +17393,7 @@ MonoBehaviour:
   tranny: {fileID: 1218775805}
   conditionToActivate: xvar
   value: 1
+  advancing: 1
 --- !u!222 &1218775807
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17714,6 +17814,7 @@ GameObject:
   - component: {fileID: 1238941112}
   - component: {fileID: 1238941111}
   - component: {fileID: 1238941110}
+  - component: {fileID: 1238941113}
   m_Layer: 10
   m_Name: ElevatorE
   m_TagString: Untagged
@@ -17803,6 +17904,86 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!82 &1238941113
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1238941108}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 588becb4abf7e9c418e1eca33e8b8a5d, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1240093532
 GameObject:
   m_ObjectHideFlags: 0
@@ -18769,7 +18950,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -340.99982}
+  m_AnchoredPosition: {x: 100, y: -340.99985}
   m_SizeDelta: {x: 100, y: -346}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1276333604
@@ -19195,6 +19376,7 @@ MonoBehaviour:
   tranny: {fileID: 1308432680}
   conditionToActivate: start
   value: 1
+  advancing: 1
 --- !u!222 &1308432682
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19501,6 +19683,7 @@ MonoBehaviour:
   tranny: {fileID: 1312592400}
   conditionToActivate: move
   value: 1
+  advancing: 0
 --- !u!222 &1312592402
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20084,6 +20267,7 @@ MonoBehaviour:
   tranny: {fileID: 1344693293}
   conditionToActivate: move
   value: 1
+  advancing: 0
 --- !u!222 &1344693295
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20455,7 +20639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: -209.49997}
+  m_AnchoredPosition: {x: -0.000061035156, y: -209.5}
   m_SizeDelta: {x: 0, y: 419}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1367541268
@@ -20559,7 +20743,7 @@ MonoBehaviour:
   last: {fileID: 193649048}
   conditions:
   - move
-  text: The command we'll be using is "move in direction"
+  text: The command we'll be using is "move in direction". Click on it!
 --- !u!224 &1375542955
 RectTransform:
   m_ObjectHideFlags: 0
@@ -22142,15 +22326,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511bcee9b16e6d54d99dd4d042b09fde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  on: 0
   OnSprites:
   - {fileID: 21300002, guid: 81509224b11d2ea4e9856191d0177d9f, type: 3}
   - {fileID: 21300004, guid: 81509224b11d2ea4e9856191d0177d9f, type: 3}
   - {fileID: 21300006, guid: 81509224b11d2ea4e9856191d0177d9f, type: 3}
   - {fileID: 21300008, guid: 81509224b11d2ea4e9856191d0177d9f, type: 3}
   OffSprite: {fileID: 21300000, guid: 81509224b11d2ea4e9856191d0177d9f, type: 3}
-  on: 0
   AnimationTime: 1
   colly: {fileID: 0}
+  oneShot: 0
 --- !u!58 &1471293523
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -27397,7 +27582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -90.00003}
+  m_AnchoredPosition: {x: 100, y: -90}
   m_SizeDelta: {x: 100, y: -346}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1860495224
@@ -27502,7 +27687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShouldRun: 1
   time: 3.5
-  SceneId: 0
+  SceneId: 4
 --- !u!114 &1860813675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27618,6 +27803,7 @@ MonoBehaviour:
   tranny: {fileID: 1872876515}
   conditionToActivate: move
   value: 1
+  advancing: 1
 --- !u!222 &1872876517
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28299,6 +28485,7 @@ MonoBehaviour:
   tranny: {fileID: 1904797713}
   conditionToActivate: 
   value: 0
+  advancing: 0
 --- !u!222 &1904797715
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29514,6 +29701,7 @@ MonoBehaviour:
   tranny: {fileID: 2025905537}
   conditionToActivate: lock
   value: 1
+  advancing: 0
 --- !u!222 &2025905539
 CanvasRenderer:
   m_ObjectHideFlags: 0

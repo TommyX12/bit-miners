@@ -18,8 +18,17 @@ EditorBuildSettings:
     path: Assets/Levels/Tutorialv.2/Level3.unity
     guid: 4791fe7c9d90161478c5ca2a1de33699
   - enabled: 1
+    path: Assets/Levels/Tutorialv.2/Level4.1.unity
+    guid: 77cccf2f2e43e77468040a26fe476ddd
+  - enabled: 1
+    path: Assets/Levels/Tutorialv.2/Level4.2.unity
+    guid: ddad39265b2d46a4ab9699d24a382213
+  - enabled: 1
     path: Assets/Levels/Tutorialv.2/Level4.unity
     guid: 26e0416423c640546beaaae3d1cb03c7
   - enabled: 1
     path: Assets/Levels/Tutorialv.2/Level5.unity
+    guid: bcae3b60646d7484583033e2c75a7a15
+  - enabled: 1
+    path: Assets/Levels/Tutorialv.2/Level6.unity
     guid: 470620638acfd414b8faa55599190e6c

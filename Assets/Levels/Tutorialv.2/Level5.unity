@@ -1736,7 +1736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf285723620c3647a282f0bbc817653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: '*Extreme elevator music*'
+  text: This level looks easy!
   next: {fileID: 677699545}
   last: {fileID: 0}
   conditions: []
@@ -2721,6 +2721,7 @@ MonoBehaviour:
   tranny: {fileID: 127629935}
   conditionToActivate: statement
   value: 1
+  advancing: 1
 --- !u!222 &127629937
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2776,6 +2777,7 @@ MonoBehaviour:
   tranny: {fileID: 128997637}
   conditionToActivate: 
   value: 0
+  advancing: 0
 --- !u!222 &128997639
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4839,6 +4841,7 @@ MonoBehaviour:
   tranny: {fileID: 223615299}
   conditionToActivate: 
   value: 0
+  advancing: 0
 --- !u!222 &223615301
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5099,6 +5102,7 @@ MonoBehaviour:
   tranny: {fileID: 244663936}
   conditionToActivate: 
   value: 0
+  advancing: 0
 --- !u!222 &244663938
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5747,6 +5751,7 @@ MonoBehaviour:
   tranny: {fileID: 291258212}
   conditionToActivate: 
   value: 0
+  advancing: 0
 --- !u!222 &291258214
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6875,7 +6880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -340.99985}
+  m_AnchoredPosition: {x: 100, y: -340.99982}
   m_SizeDelta: {x: 100, y: -346}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &363793548
@@ -9388,6 +9393,7 @@ MonoBehaviour:
   tranny: {fileID: 530688843}
   conditionToActivate: 
   value: 0
+  advancing: 0
 --- !u!222 &530688845
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10310,55 +10316,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 582875401}
---- !u!1 &584912956
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 584912958}
-  - component: {fileID: 584912957}
-  m_Layer: 0
-  m_Name: Dlog (5)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &584912957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 584912956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f8fdad054c8d054f8d9b981e0d55dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: Neato! A bridge came!
-  next: {fileID: 0}
-  last: {fileID: 0}
-  conditions:
-  - false
-  portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
-  sound: {fileID: 8300000, guid: 20318173d8413474799b26c2807369e5, type: 3}
-  ToActivate:
-  - {fileID: 0}
---- !u!4 &584912958
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 584912956}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1122639425}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &585568218
 GameObject:
   m_ObjectHideFlags: 0
@@ -11507,11 +11464,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf285723620c3647a282f0bbc817653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: I'll need to find the other elevator to exit this area.
+  text: Wait. Looks like there's a bend in the hall. I can't get there to change the
+    direction of the robot.
   next: {fileID: 1660059467}
   last: {fileID: 0}
-  conditions:
-  - Bridge
+  conditions: []
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
   sound: {fileID: 8300000, guid: 20318173d8413474799b26c2807369e5, type: 3}
 --- !u!4 &677699546
@@ -11669,53 +11626,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &684763837
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 684763839}
-  - component: {fileID: 684763838}
-  m_Layer: 0
-  m_Name: Dlog (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &684763838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 684763837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf285723620c3647a282f0bbc817653, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: Maybe this robot can reach it for me!
-  next: {fileID: 584912957}
-  last: {fileID: 0}
-  conditions:
-  - Switch
-  portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
-  sound: {fileID: 8300000, guid: 20318173d8413474799b26c2807369e5, type: 3}
---- !u!4 &684763839
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 684763837}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1122639425}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &689044664
 GameObject:
   m_ObjectHideFlags: 0
@@ -11987,6 +11897,7 @@ MonoBehaviour:
   tranny: {fileID: 710062018}
   conditionToActivate: 
   value: 0
+  advancing: 0
 --- !u!222 &710062020
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12656,6 +12567,7 @@ MonoBehaviour:
   tranny: {fileID: 735989015}
   conditionToActivate: timerval
   value: 1
+  advancing: 0
 --- !u!222 &735989017
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12711,6 +12623,7 @@ MonoBehaviour:
   tranny: {fileID: 736049021}
   conditionToActivate: if
   value: 1
+  advancing: 0
 --- !u!222 &736049023
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16971,6 +16884,7 @@ GameObject:
   - component: {fileID: 933128439}
   - component: {fileID: 933128438}
   - component: {fileID: 933128437}
+  - component: {fileID: 933128440}
   m_Layer: 10
   m_Name: ElevatorE
   m_TagString: Untagged
@@ -17060,6 +16974,86 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!82 &933128440
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 933128435}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 588becb4abf7e9c418e1eca33e8b8a5d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &938609891
 GameObject:
   m_ObjectHideFlags: 0
@@ -17626,6 +17620,7 @@ MonoBehaviour:
   tranny: {fileID: 959468137}
   conditionToActivate: tvv
   value: 1
+  advancing: 0
 --- !u!222 &959468139
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18506,6 +18501,7 @@ MonoBehaviour:
   tranny: {fileID: 997268541}
   conditionToActivate: timer
   value: 1
+  advancing: 1
 --- !u!222 &997268543
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18744,6 +18740,7 @@ MonoBehaviour:
   tranny: {fileID: 1022092134}
   conditionToActivate: zero
   value: 1
+  advancing: 0
 --- !u!222 &1022092136
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20342,6 +20339,7 @@ MonoBehaviour:
   tranny: {fileID: 1092639838}
   conditionToActivate: zero
   value: 1
+  advancing: 0
 --- !u!222 &1092639840
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20857,6 +20855,7 @@ MonoBehaviour:
   tranny: {fileID: 1122495641}
   conditionToActivate: 
   value: 0
+  advancing: 0
 --- !u!222 &1122495643
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20907,9 +20906,6 @@ Transform:
   - {fileID: 88870189}
   - {fileID: 677699546}
   - {fileID: 1660059468}
-  - {fileID: 1887149214}
-  - {fileID: 684763839}
-  - {fileID: 584912958}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20967,8 +20963,7 @@ MonoBehaviour:
   last: {fileID: 1632525136}
   conditions: []
   text: Now all that's left to do is to insert the move instructions in the right
-    places. Remember the first if block will run for the first three seconds. The
-    second, afterwards.
+    places. Remember the first if block will run for the first three seconds.
 --- !u!1 &1124666048
 GameObject:
   m_ObjectHideFlags: 0
@@ -24448,6 +24443,7 @@ MonoBehaviour:
   tranny: {fileID: 1339273369}
   conditionToActivate: otherwise
   value: 1
+  advancing: 0
 --- !u!222 &1339273371
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24862,6 +24858,7 @@ MonoBehaviour:
   tranny: {fileID: 1354828863}
   conditionToActivate: red
   value: 1
+  advancing: 1
 --- !u!222 &1354828865
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24917,6 +24914,7 @@ MonoBehaviour:
   tranny: {fileID: 1365198917}
   conditionToActivate: if
   value: 1
+  advancing: 0
 --- !u!222 &1365198919
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26038,6 +26036,7 @@ MonoBehaviour:
   tranny: {fileID: 1415091731}
   conditionToActivate: timername
   value: 1
+  advancing: 0
 --- !u!222 &1415091733
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -26413,6 +26412,7 @@ MonoBehaviour:
   tranny: {fileID: 1435122835}
   conditionToActivate: 
   value: 0
+  advancing: 0
 --- !u!222 &1435122837
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28287,6 +28287,7 @@ MonoBehaviour:
   tranny: {fileID: 1503702791}
   conditionToActivate: tvv
   value: 1
+  advancing: 0
 --- !u!222 &1503702793
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28677,7 +28678,7 @@ Prefab:
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 210.36153
+      value: 210.36151
       objectReference: {fileID: 0}
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -29215,6 +29216,7 @@ MonoBehaviour:
   tranny: {fileID: 1523491348}
   conditionToActivate: tv
   value: 1
+  advancing: 1
 --- !u!222 &1523491350
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32086,10 +32088,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: faf285723620c3647a282f0bbc817653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Hmm... Seems like the bridge is out.
-  next: {fileID: 1887149213}
+  text: Oh no...
+  next: {fileID: 0}
   last: {fileID: 0}
-  conditions: []
+  conditions:
+  - false
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
   sound: {fileID: 8300000, guid: 20318173d8413474799b26c2807369e5, type: 3}
 --- !u!4 &1660059468
@@ -32602,6 +32605,7 @@ MonoBehaviour:
   tranny: {fileID: 1686887065}
   conditionToActivate: lock
   value: 1
+  advancing: 0
 --- !u!222 &1686887067
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32657,6 +32661,7 @@ MonoBehaviour:
   tranny: {fileID: 1689495813}
   conditionToActivate: if
   value: 1
+  advancing: 0
 --- !u!222 &1689495815
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -34298,6 +34303,7 @@ MonoBehaviour:
   tranny: {fileID: 1759773814}
   conditionToActivate: if
   value: 1
+  advancing: 0
 --- !u!222 &1759773816
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -34896,6 +34902,7 @@ MonoBehaviour:
   tranny: {fileID: 1779861330}
   conditionToActivate: otherwise
   value: 1
+  advancing: 1
 --- !u!222 &1779861332
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -34951,6 +34958,7 @@ MonoBehaviour:
   tranny: {fileID: 1781253299}
   conditionToActivate: 
   value: 0
+  advancing: 0
 --- !u!222 &1781253301
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -36298,6 +36306,7 @@ MonoBehaviour:
   tranny: {fileID: 1854000692}
   conditionToActivate: 
   value: 0
+  advancing: 0
 --- !u!222 &1854000694
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -36615,6 +36624,7 @@ MonoBehaviour:
   tranny: {fileID: 1861720971}
   conditionToActivate: if
   value: 1
+  advancing: 1
 --- !u!222 &1861720973
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -36637,6 +36647,8 @@ GameObject:
   - component: {fileID: 1863098727}
   - component: {fileID: 1863098726}
   - component: {fileID: 1863098725}
+  - component: {fileID: 1863098733}
+  - component: {fileID: 1863098732}
   m_Layer: 9
   m_Name: Player (1)
   m_TagString: Player
@@ -36810,6 +36822,99 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1863098732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863098723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f94a32acb8e29b54a8ac0213cfc88303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceThreshold: 0.4
+  stepSound: {fileID: 8300000, guid: 381adfeda4f4cba41babc57c918545dc, type: 3}
+--- !u!82 &1863098733
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863098723}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &1868938176
 GameObject:
   m_ObjectHideFlags: 0
@@ -36995,6 +37100,7 @@ MonoBehaviour:
   tranny: {fileID: 1879391597}
   conditionToActivate: update
   value: 1
+  advancing: 1
 --- !u!222 &1879391599
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -37242,58 +37348,13 @@ MonoBehaviour:
   tranny: {fileID: 1885242658}
   conditionToActivate: lock
   value: 1
+  advancing: 0
 --- !u!222 &1885242660
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1885242657}
---- !u!1 &1887149212
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1887149214}
-  - component: {fileID: 1887149213}
-  m_Layer: 0
-  m_Name: Dlog (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1887149213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1887149212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faf285723620c3647a282f0bbc817653, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: There seems to be a switch down there but I can't reach it.
-  next: {fileID: 684763838}
-  last: {fileID: 0}
-  conditions: []
-  portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
-  sound: {fileID: 8300000, guid: 20318173d8413474799b26c2807369e5, type: 3}
---- !u!4 &1887149214
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1887149212}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1122639425}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1899612309
 GameObject:
   m_ObjectHideFlags: 0
@@ -37946,6 +38007,7 @@ MonoBehaviour:
   tranny: {fileID: 1915126359}
   conditionToActivate: zero
   value: 1
+  advancing: 0
 --- !u!222 &1915126361
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -38832,6 +38894,7 @@ MonoBehaviour:
   tranny: {fileID: 1957696399}
   conditionToActivate: t
   value: 1
+  advancing: 0
 --- !u!222 &1957696401
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -40403,6 +40466,7 @@ MonoBehaviour:
   tranny: {fileID: 2055956164}
   conditionToActivate: if
   value: 1
+  advancing: 0
 --- !u!222 &2055956166
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -40821,6 +40885,7 @@ MonoBehaviour:
   tranny: {fileID: 2087102857}
   conditionToActivate: valueofvar
   value: 1
+  advancing: 1
 --- !u!222 &2087102859
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -40876,6 +40941,7 @@ MonoBehaviour:
   tranny: {fileID: 2087692603}
   conditionToActivate: valueofvar
   value: 1
+  advancing: 0
 --- !u!222 &2087692605
 CanvasRenderer:
   m_ObjectHideFlags: 0
