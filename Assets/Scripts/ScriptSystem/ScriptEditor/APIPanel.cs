@@ -74,13 +74,14 @@ public class APIPanel: SEElementContainer {
         this.RefreshFlags();
     }
     
-    public void LoadBlockDefs(Dictionary<string, SEBlockDef> blockDefs) {
+    public void LoadBlockDefs(Dictionary<string, SEBlockDef> blockDefs, List<string> filter = null) {
         this.ClearElements();
         this.blockDefs = blockDefs;
         
         Dictionary<string, List<SEBlockDef>> dict = new Dictionary<string, List<SEBlockDef>>();
         
         foreach (var blockDef in blockDefs.Values) {
+            if (filter != null && !filter.Contains(blockDef.Type)) continue;
             if (!dict.ContainsKey(blockDef.Type)) {
                 dict[blockDef.Type] = new List<SEBlockDef>();
             }
@@ -90,6 +91,8 @@ public class APIPanel: SEElementContainer {
         this.Redrawable = false;
         int row = 0;
         foreach (var type in blockTypeOrder) {
+            if (!dict.ContainsKey(type)) continue;
+            
             this.InsertElement(row, 0, SEElementDef.GenerateAPILabel(type).SpawnElement(this.GetPrefab));
             row++;
             

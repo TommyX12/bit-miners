@@ -15,6 +15,8 @@ public class ScriptEditorV2 : MyMono {
     public Button SaveButtonObject;
     public Button DiscardButtonObject;
     
+    private List<string> blockTypeFilter = null;
+    
     public ScriptSystem ScriptSystemObject {
         get; private set;
     }
@@ -39,11 +41,15 @@ public class ScriptEditorV2 : MyMono {
         MyMono.Paused = true;
         
         this.ScriptSystemObject = scriptSystem;
-        this.APIPanelObject.LoadBlockDefs(this.ScriptSystemObject.GetBlockDefs());
+        this.APIPanelObject.LoadBlockDefs(this.ScriptSystemObject.GetBlockDefs(), this.blockTypeFilter);
         
         this.ScriptPanelObject.LoadString(this.ScriptSystemObject.BlockScript);
         
         this.ReloadStatus();
+    }
+    
+    public void SetBlockTypeFilter(List<string> filter) {
+        this.blockTypeFilter = filter;
     }
     
     public void DiscardEdit() {
