@@ -339,7 +339,10 @@ public class SEElementContainer : MyMono {
     }
     
     public void ClearHighlight() {
-        // TODO
+        foreach (var highlight in this.highlights) {
+            highlight.Remove();
+        }
+        this.highlights.Clear();
     }
     
     private void OnPointerDown(PointerEventData data) {
