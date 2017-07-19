@@ -11,9 +11,12 @@ public class SEElement : MyMono {
     
     public SEElementDef Definition = null;
     
+    [HideInInspector]
     public SEElementContainer Container = null;
     
+    [HideInInspector]
     public int cachedRow    = 0;
+    [HideInInspector]
     public int cachedColumn = 0;
     protected bool active   = false;
     

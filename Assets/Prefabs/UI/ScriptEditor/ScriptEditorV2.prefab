@@ -608,6 +608,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScrollRect: {fileID: 0}
   Container: {fileID: 0}
+  HighlightContainer: {fileID: 0}
+  SEHighlightPrefab: {fileID: 0}
   SEAPIElementPrefab: {fileID: 114591733382069948, guid: e51a35bd12126f648988522c2cb52eb7,
     type: 2}
   ScriptPanelObject: {fileID: 114710841144307564}
@@ -819,7 +821,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224609071666198694}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1066,7 +1068,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224894333615652768}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1252,7 +1254,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScrollRect: {fileID: 0}
   Container: {fileID: 0}
+  HighlightContainer: {fileID: 0}
+  SEHighlightPrefab: {fileID: 114922897883357636, guid: f1d8558f399c7834ea9aed7886569f1d,
+    type: 2}
   SETextElementPrefab: {fileID: 114454301413941194, guid: c1ead6bfef6ae11459b927fe01302140,
+    type: 2}
+  SEInputElementPrefab: {fileID: 114538547172628846, guid: 0d288c8d80cd13e4db7d18bafceb6fa2,
     type: 2}
   SECursorPrefab: {fileID: 114076119216487544, guid: d02a7c568799d9647a48aca3042f5fad,
     type: 2}

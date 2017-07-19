@@ -11,6 +11,10 @@ public class SEElementContainer : MyMono {
     
     [HideInInspector]
     public RectTransform Container;
+    [HideInInspector]
+    public RectTransform HighlightContainer;
+    
+    public SEHighlight SEHighlightPrefab;
     
     protected Vector2 size = new Vector2(0.0f, 0.0f);
     protected List<List<SEElement>> data = new List<List<SEElement>>();
@@ -24,6 +28,8 @@ public class SEElementContainer : MyMono {
     
     protected IDBasedContainer<SEElementDef> IDContainer = new IDBasedContainer<SEElementDef>();
     
+    protected HashSet<SEHighlight> highlights = new HashSet<SEHighlight>();
+    
     protected bool Redrawable = true;
     
     private bool cacheDirty = true;
@@ -35,6 +41,11 @@ public class SEElementContainer : MyMono {
         this.Container.SetAsFirstSibling();
         Util.TopLeftUIRectTransform(this.Container);
         this.Container.pivot = new Vector2(0.0f, 1.0f);
+        
+        this.HighlightContainer = Util.MakeEmptyUIContainer(this.Container).GetComponent<RectTransform>();
+        this.HighlightContainer.SetAsFirstSibling();
+        Util.TopUIRectTransform(this.HighlightContainer);
+        this.HighlightContainer.pivot = new Vector2(0.0f, 1.0f);
         
         this.ScrollRect = Util.SafeGetComponent<ScrollRect>(this.gameObject);
         this.ScrollRect.content = this.Container;
@@ -207,6 +218,14 @@ public class SEElementContainer : MyMono {
         return element.cachedColumn;
     }
     
+    public float GetRowPosition(int row) {
+        return row * (this.ElementHeight + this.VerticalSpacing);
+    }
+    
+    public float GetVerticalSpacing() {
+        return this.VerticalSpacing;
+    }
+    
     public void RefreshCacheIfDirty() {
         if (!this.cacheDirty) return;
         for (int i = 0; i < this.data.Count; ++i) {
@@ -301,6 +320,26 @@ public class SEElementContainer : MyMono {
     
     public override void NormalUpdate() {
         
+    }
+    
+    public SEHighlight AddHighlight(int row1, int row2, float[] color) {
+        SEHighlight highlight = (SEHighlight)Util.Make(this.SEHighlightPrefab);
+        highlight.Container = this;
+        highlight.transform.SetParent(this.HighlightContainer, false);
+        highlight.SetRows(row1, row2);
+        highlight.SetColor(color);
+        this.highlights.Add(highlight);
+        
+        return highlight;
+    }
+    
+    public void RemoveHighlight(SEHighlight highlight) {
+        this.highlights.Remove(highlight);
+        highlight.Remove();
+    }
+    
+    public void ClearHighlight() {
+        // TODO
     }
     
     private void OnPointerDown(PointerEventData data) {

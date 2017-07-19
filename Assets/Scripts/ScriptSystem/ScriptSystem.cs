@@ -57,6 +57,10 @@ public class ScriptSystem {
         get; private set;
     }
     
+    public int ErrorLine {
+        get; private set;
+    }
+    
     public string Script {
         get; set;
     }
@@ -277,16 +281,20 @@ public class ScriptSystem {
             
             if (ex is TimeoutException) {
                 this.Message = "Time limit exceeded";
+                this.ErrorLine = -1;
             }
             else if (ex is OutOfMemoryException) {
                 this.Message = "Out of memory";
+                this.ErrorLine = -1;
             }
             else if (ex is StackOverflowException) {
                 this.Message = "Recursion depth limit exceeded";
+                this.ErrorLine = -1;
             }
             else if (ex is Jurassic.JavaScriptException) {
                 Jurassic.JavaScriptException jsex = (Jurassic.JavaScriptException)ex;
                 this.Message = "Line " + jsex.LineNumber + " - " + jsex.ErrorObject.ToString();
+                this.ErrorLine = jsex.LineNumber;
             }
             else {
                 throw;

@@ -142,6 +142,11 @@ static public class Util
         rectTransform.anchorMax = new Vector2(0.0f, 1.0f);
     }
     
+    static public void TopUIRectTransform(RectTransform rectTransform) {
+        rectTransform.anchorMin = new Vector2(0.0f, 1.0f);
+        rectTransform.anchorMax = new Vector2(1.0f, 1.0f);
+    }
+    
     static public void DestroyAllChildren(Transform parentTransform)
     {
         foreach(Transform child in parentTransform){

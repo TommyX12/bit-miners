@@ -6,11 +6,16 @@ using Newtonsoft.Json;
 
 public class ScriptPanel: SEElementContainer {
     
+    public static readonly float[] SELECT_COLOR = new float[]{0.2f, 0.4f, 0.8f, 0.35f};
+    public static readonly float[] ERROR_COLOR = new float[]{1.0f, 0, 0, 0.35f};
+    
     public delegate SEBlockDef.CompileFuncDelegate GetCompileFuncDelegate(string blockDefName);
     
     public SETextElement SETextElementPrefab;
     public SEInputElement SEInputElementPrefab;
     public SECursor SECursorPrefab;
+    
+    private SEHighlight errorHighlight = null;
     
     private SECursor cursor;
     private int cursorRow = 0;
@@ -91,6 +96,8 @@ public class ScriptPanel: SEElementContainer {
     public void CursorReturn() {
         if (this.HasFocusedInput()) return;
         
+        this.ClearErrorLine();
+        
         if (this.cursorRow >= this.data.Count) {
             this.cursorRow++;
             this.InsertRow(this.cursorRow - 1);
@@ -99,6 +106,21 @@ public class ScriptPanel: SEElementContainer {
             this.cursorRow++;
             this.InsertRow(this.cursorRow);
         }
+    }
+    
+    public void SetErrorLine(int line) {
+        if (this.errorHighlight == null) {
+            this.errorHighlight = this.AddHighlight(line, line + 1, ERROR_COLOR);
+        }
+        else {
+            this.errorHighlight.SetRows(line, line + 1);
+        }
+    }
+    
+    public void ClearErrorLine() {
+        if (this.errorHighlight == null) return;
+        
+        this.RemoveHighlight(this.errorHighlight);
     }
     
     public void CursorInsert() {
@@ -375,6 +397,7 @@ public class ScriptPanel: SEElementContainer {
     
     public void SetDefList(List<List<SEElementDef>> defList) {
         this.ClearElements();
+        this.ClearErrorLine();
         
         this.Redrawable = false;
         foreach (var row in defList) {

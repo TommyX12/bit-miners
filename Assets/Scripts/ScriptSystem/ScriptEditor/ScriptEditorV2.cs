@@ -64,8 +64,10 @@ public class ScriptEditorV2 : MyMono {
     private void ReloadStatus() {
         if (this.ScriptSystemObject.ErrorCaught) {
             this.StatusTextObject.color = ERROR_COLOR;
+            if (this.ScriptSystemObject.ErrorLine > 0) this.ScriptPanelObject.SetErrorLine(this.ScriptSystemObject.ErrorLine - 1);
         }
         else {
+            this.ScriptPanelObject.ClearErrorLine();
             if (this.ScriptSystemObject.Running) {
                 this.StatusTextObject.color = RUNNING_COLOR;
             }
