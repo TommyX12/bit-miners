@@ -44,6 +44,23 @@ public class MoveComponent : UnitComponent {
 		MoveToTarget = true;
 	}
 
+    public void MoveUp() {
+        MoveDirection(0, 1);
+    }
+
+    public void MoveDown ()
+    {
+        MoveDirection(0, -1);
+    }
+
+    public void MoveLeft() {
+        MoveDirection(-1, 0);
+    }
+
+    public void MoveRight() {
+        MoveDirection(1, 0);
+    }
+
 	public override void PausingFixedUpdate()
 	{
 		base.PausingFixedUpdate();
@@ -93,5 +110,9 @@ public class MoveComponent : UnitComponent {
 		scriptSystem.RegisterFunction("move_in_direction", new Action<double, double>(this.MoveDirection));
 		scriptSystem.RegisterFunction("move_to_waypoint", new Action<string>(this.MoveToWaypoint));
 		scriptSystem.RegisterFunction("stop", new Action(this.Stop));
-	}
+        scriptSystem.RegisterFunction("move_up", new Action(this.MoveUp));
+        scriptSystem.RegisterFunction("move_down", new Action(this.MoveDown));
+        scriptSystem.RegisterFunction("move_left", new Action(this.MoveLeft));
+        scriptSystem.RegisterFunction("move_right", new Action(this.MoveRight));
+    }
 }
