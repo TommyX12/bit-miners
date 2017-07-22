@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OnStartDisable : MonoBehaviour {
     public GameObject ToDisable;
-    private void Start()
+    private void OnEnable()
     {
         ToDisable.SetActive(false);
     }

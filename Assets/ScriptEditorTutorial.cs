@@ -94,6 +94,18 @@ public class ScriptEditorTutorial : MonoBehaviour {
         }
     }
 
+    public void Restart() {
+        GameManager.Current.ScriptEditorV2Object.ScriptPanelObject.ClearElements();
+        active.gameObject.SetActive(false);
+        active = start;
+        display.Show(active.text);
+        active.gameObject.SetActive(true);
+        gameObject.SetActive(true);
+        foreach (string key in new List<string>(conditions.Keys)) {
+            conditions[key] = false;
+        }
+    }
+
     public void SetOrAdd(string key, bool value)
     {
         if (conditions.ContainsKey(key))
