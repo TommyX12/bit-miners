@@ -11,13 +11,32 @@ public class TextDisplayComponent : UnitComponent {
     private double timer = 0;
     
     public Text Text;
+    public Canvas Canvas;
+    
+    private bool errorFound = false;
     
     void Awake() {
-        this.gameObject.SetActive(false);
+        this.Hide();
     }
     
-    public override void PausingFixedUpdate() {
-        base.PausingFixedUpdate();
+    protected void Hide() {
+        this.Canvas.gameObject.SetActive(false);
+    }
+    
+    protected void Show() {
+        this.Canvas.gameObject.SetActive(true);
+    }
+    
+    public override void PausingUpdate() {
+        base.PausingUpdate();
+        
+        if (this.unit != null && this.unit.ScriptSystemObject.ErrorCaught) {
+            if (!this.errorFound) {
+                this.DisplayError(this.unit.ScriptSystemObject.Message);
+                this.errorFound = true;
+            }
+        }
+        
         if (this.timer <= 0) return;
         
         this.timer -= Time.deltaTime;
@@ -34,17 +53,30 @@ public class TextDisplayComponent : UnitComponent {
         if (duration < 0.01) duration = 0.01;
         this.timer = duration;
         this.Text.text = text;
-        this.gameObject.SetActive(true);
+        this.Text.color = Color.black;
+        this.Show();
+    }
+    
+    public void DisplayError(string text) {
+        this.timer = -1;
+        this.Text.text = text;
+        this.Text.color = Color.red;
+        this.Show();
     }
     
     public void StopDisplay() {
         this.timer = 0;
-        this.gameObject.SetActive(false);
+        this.Hide();
     }
 
     public override void Register(ScriptSystem scriptSystem) {
         scriptSystem.RegisterFunction("display", new Action<string>(this.Display));
         scriptSystem.RegisterFunction("display_for", new Action<string, double>(this.DisplayFor));
         scriptSystem.RegisterFunction("stop_display", new Action(this.StopDisplay));
+    }
+    
+    public override void PreRun(ScriptSystem scriptSystem) {
+        this.StopDisplay();
+        this.errorFound = false;
     }
 }
