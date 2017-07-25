@@ -48,6 +48,7 @@ public class ScriptEditorV2 : MyMono {
         this.ReloadStatus();
     }
     
+    // set to null for no filter
     public void SetBlockTypeFilter(List<string> filter) {
         this.blockTypeFilter = filter;
     }

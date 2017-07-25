@@ -1097,7 +1097,30 @@ public class BasicAPI : IScriptSystemAPI {
         Debug.Log(str);
     }
     
+    private static string initScript = @"
+        var _event_listeners = {};
+    
+        function event_dispatch(event) {
+            if (_event_listeners.hasOwnProperty(event)) {
+                var handlers = _event_listeners[event];
+                var args = Array.prototype.splice.call(arguments, 1);
+                for (var i = 0; i < handlers.length; ++i) {
+                    handlers[i].apply(null, args);
+                }
+            }
+        }
+        
+        function event_add_listener(event, handler) {
+            if (!_event_listeners.hasOwnProperty(event)) {
+                _event_listeners[event] = [];
+            }
+            _event_listeners[event].push(handler);
+        }
+    ";
+    
     public void Register(ScriptSystem scriptSystem) {
+        scriptSystem.RegisterJavaScript(initScript);
+        
         scriptSystem.RegisterFunction("print", new Action<string>(Print), false);
         
         scriptSystem.RegisterJSFunction(
@@ -1134,10 +1157,10 @@ public class BasicAPI : IScriptSystemAPI {
             @"for (var _ = 0; _ < ${param}; ++_)"
         ); */
         
-        scriptSystem.RegisterMacro(
+        /* scriptSystem.RegisterMacro(
             @"\bwhen\s+" + ScriptSystem.IdentifierPattern("name") + ScriptSystem.MatchingBracketPattern("param"),
             @"function " + ScriptSystem.EVENT_HANDLER_PREFIX + @"${name}(${param})"
-        );
+        ); */
         
         scriptSystem.RegisterMacro(
             @"\bfor\s*\(\s*var\s+" + ScriptSystem.IdentifierPattern("var") + @"\s*\)\s*from\s*" + ScriptSystem.MatchingBracketPattern("from") + @"\s*to\s*" + ScriptSystem.MatchingBracketPattern("to") + @"\s*by\s*" + ScriptSystem.MatchingBracketPattern("by"),
