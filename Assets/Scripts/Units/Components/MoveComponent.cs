@@ -76,8 +76,8 @@ public class MoveComponent : UnitComponent {
 				transform.position += (Vector3) dv.normalized * speed * Time.fixedDeltaTime;
 			}
 
-			// 5 degrees off is okay
-			if (da >= -5 && da <= 5)
+			// 1 degrees off is okay
+			if (da >= -1 && da <= 1)
 			{
 
 			}

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222136921527980164}
   - component: {fileID: 114710441777253298}
   - component: {fileID: 114576516815184772}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 224938416231618484}
   - component: {fileID: 222429535766399474}
   - component: {fileID: 114806362899398760}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,7 +79,7 @@ GameObject:
   - component: {fileID: 61113554631211980}
   - component: {fileID: 114243636483826968}
   - component: {fileID: 95668556799707520}
-  m_Layer: 9
+  m_Layer: 17
   m_Name: TutorialDrone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 223604804157153020}
   - component: {fileID: 114158778118369588}
   - component: {fileID: 114586166576714570}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1616887681397766}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
