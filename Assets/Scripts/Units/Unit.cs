@@ -108,7 +108,7 @@ public class Unit : MyMono, IScriptSystemAPI {
     }
 
     public void RegisterComponents() {
-        foreach (UnitComponent component in GetComponentsInChildren<UnitComponent>()) {
+        foreach (UnitComponent component in GetComponentsInChildren<UnitComponent>(true)) {
             component.unit = this;
             components.Add(component);
         }
