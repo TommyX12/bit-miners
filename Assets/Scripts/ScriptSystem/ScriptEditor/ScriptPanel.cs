@@ -121,6 +121,7 @@ public class ScriptPanel: SEElementContainer {
         if (this.errorHighlight == null) return;
         
         this.RemoveHighlight(this.errorHighlight);
+        this.errorHighlight = null;
     }
     
     public void CursorInsert() {
