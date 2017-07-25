@@ -21,8 +21,8 @@ public class ScriptPanel: SEElementContainer {
     private int cursorRow = 0;
     private int cursorColumn = 0;
     
-    [HideInInspector]
     protected float CursorWidth = 4.0f;
+    protected float CursorGapSnap = 10.0f;
     
     private bool flagsDirty = true;
     private int cachedFlags = 0;
@@ -78,6 +78,17 @@ public class ScriptPanel: SEElementContainer {
     }
     
     protected override void OnClicked(int row, int column, SEElement element, Vector2 rawPos) {
+        if (element != null) {
+            if (column > 0 &&
+                rawPos.x > element.GetPosition().x &&
+                rawPos.x < element.GetPosition().x + Mathf.Min(element.GetSize().x * 0.5f, this.CursorGapSnap)
+            ) {
+                column--;
+            }
+            else if (SEBlockDef.GetRegionFlag(element.Definition.RegionType) == 0) {
+                column++;
+            }
+        }
         this.SetCursor(row, column);
     }
     
