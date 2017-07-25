@@ -90,8 +90,8 @@ public class RefineryComponent : UnitComponent, IInteractable
 
     public override void Register(ScriptSystem scriptSystem)
     {
-        scriptSystem.RegisterFunction("get_stored", new Func<string, int>(GetStored));
+        scriptSystem.RegisterFunction("get_stored", new Func<string, int>(GetStored), true, false);
         scriptSystem.RegisterFunction("process", new Action(Process));
-        scriptSystem.RegisterFunction("is_processing", new Func<bool>(IsProcessing));
+        scriptSystem.RegisterFunction("is_processing", new Func<bool>(IsProcessing), true, false);
     }
 }

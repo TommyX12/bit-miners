@@ -40,7 +40,7 @@ public class SingleFireWeapon : WeaponComponent {
 
     public override void Register(ScriptSystem scriptSystem)
     {
-        scriptSystem.RegisterFunction("ready_to_fire", new Func<bool>(ReadyToFire));
-        scriptSystem.RegisterFunction("cooldown_left", new Func<double>(GetCooldown));
+        scriptSystem.RegisterFunction("ready_to_fire", new Func<bool>(ReadyToFire), true, false);
+        scriptSystem.RegisterFunction("cooldown_left", new Func<double>(GetCooldown), true, false);
     }
 }

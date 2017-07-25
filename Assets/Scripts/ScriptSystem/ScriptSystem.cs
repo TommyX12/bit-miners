@@ -100,17 +100,17 @@ public class ScriptSystem {
         }
     }
     
-    public void RegisterFunction(string functionName, Delegate functionDelegate, bool listed = true) {
-        Function function = new Function(functionName, functionDelegate, listed);
+    public void RegisterFunction(string functionName, Delegate functionDelegate, bool listed = true, bool hasProcedure = true) {
+        Function function = new Function(functionName, functionDelegate, listed, hasProcedure);
         this.functions.Add(function);
         if (listed) {
             this.RegisterBlockDef(function.GenerateBlockDef());
         }
     }
     
-    public void RegisterJSFunction(string functionName, string[] functionParams, string body, bool listed = true) {
+    public void RegisterJSFunction(string functionName, string[] functionParams, string body, bool listed = true, bool hasProcedure = true, bool hasReturnVal = true) {
         body = GetFunctionJS(functionName, functionParams, body);
-        JavaScript js = new JavaScript(body, listed, functionName, functionParams);
+        JavaScript js = new JavaScript(body, listed, functionName, functionParams, hasProcedure, hasReturnVal);
         this.javaScripts.Add(js);
         if (listed) {
             this.RegisterBlockDef(js.GenerateBlockDef());
@@ -361,8 +361,9 @@ public class ScriptSystem {
             get; set;
         }
         
-        public Function(string name, Delegate delegateObject, bool listed = true)
-        {
+        public bool hasProcedure;
+        
+        public Function(string name, Delegate delegateObject, bool listed = true, bool hasProcedure = true) {
             this.Name = name;
             this.DelegateObject = delegateObject;
             this.Parameters = null;
@@ -370,6 +371,7 @@ public class ScriptSystem {
                 this.Parameters = ScriptSystem.DelegateToParameters(this.DelegateObject);
             }
             this.Listed = listed;
+            this.hasProcedure = hasProcedure;
         }
         
         public string GetText() {
@@ -377,7 +379,7 @@ public class ScriptSystem {
         }
         
         public SEBlockDef GenerateBlockDef() {
-            return FuncToBlockDef(this.Name, this.Parameters, this.DelegateObject.Method.ReturnType != typeof(void));
+            return FuncToBlockDef(this.Name, this.Parameters, this.hasProcedure, this.DelegateObject.Method.ReturnType != typeof(void));
         }
         
     }
@@ -389,8 +391,7 @@ public class ScriptSystem {
             get; set;
         }
         
-        public Macro(string pattern, string replacement, bool listed = true)
-        {
+        public Macro(string pattern, string replacement, bool listed = true) {
             this.Pattern = pattern;
             this.Replacement = replacement;
             this.Listed = listed;
@@ -409,12 +410,16 @@ public class ScriptSystem {
             get; set;
         }
         
-        public JavaScript(string script, bool listed = true, string name = "", string[] parameters = null)
-        {
+        public bool hasProcedure;
+        public bool hasReturnVal;
+        
+        public JavaScript(string script, bool listed = true, string name = "", string[] parameters = null, bool hasProcedure = true, bool hasReturnVal = true) {
             this.Script = script;
             this.Name = name;
             this.Parameters = parameters == null ? new string[0] : (string[])parameters.Clone();
             this.Listed = listed;
+            this.hasProcedure = hasProcedure;
+            this.hasReturnVal = hasReturnVal;
         }
         
         public string GetText() {
@@ -422,7 +427,7 @@ public class ScriptSystem {
         }
         
         public SEBlockDef GenerateBlockDef() {
-            return FuncToBlockDef(this.Name, this.Parameters, true);
+            return FuncToBlockDef(this.Name, this.Parameters, this.hasProcedure, this.hasReturnVal);
         }
         
     }
@@ -489,11 +494,11 @@ public class ScriptSystem {
         }
     }
     
-    public static SEBlockDef FuncToBlockDef(string name, string[] parameters, bool hasReturnVal) {
+    public static SEBlockDef FuncToBlockDef(string name, string[] parameters, bool hasProcedure, bool hasReturnVal) {
         SEBlockDef blockDef = new SEBlockDef() {
             Name = "_api_" + name,
             CursorIndex = 0,
-            Flags = SEBlockDef.F_HAS_PROCEDURE,
+            Flags = 0,
             Type = "command",
             CompileFunc = delegate (string[] regions, string[] inputs) {
                 string result = name + "(";
@@ -510,6 +515,10 @@ public class ScriptSystem {
                 return result;
             },
         };
+        
+        if (hasProcedure) {
+            blockDef.Flags |= SEBlockDef.F_HAS_PROCEDURE;
+        }
         
         if (hasReturnVal) {
             blockDef.Flags |= SEBlockDef.F_RETURN_VAL;

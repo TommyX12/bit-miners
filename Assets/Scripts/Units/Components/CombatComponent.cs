@@ -181,8 +181,8 @@ public class CombatComponent : UnitComponent {
 
     public override void Register(ScriptSystem scriptSystem)
     {
-        scriptSystem.RegisterFunction("is_attacking", new Func<bool>(isAttacking));
-        scriptSystem.RegisterFunction("is_holding_position", new Func<bool>(isHoldingPosition));
+        scriptSystem.RegisterFunction("is_attacking", new Func<bool>(isAttacking), true, false);
+        scriptSystem.RegisterFunction("is_holding_position", new Func<bool>(isHoldingPosition), true, false);
         scriptSystem.RegisterFunction("set_engagement_distance", new Action<double>(SetEngagementDistance));
         scriptSystem.RegisterFunction("hold_position", new Action(HoldPosition));
         scriptSystem.RegisterFunction("stop_hold_position", new Action(StopHoldingPosition));

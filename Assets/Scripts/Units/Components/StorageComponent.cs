@@ -58,9 +58,9 @@ public class StorageComponent : UnitComponent, IInteractable {
     public override void Register(ScriptSystem scriptSystem)
     {
         scriptSystem.RegisterFunction("set_type", new Action<string>(SetType));
-        scriptSystem.RegisterFunction("get_type", new Func<string>(GetResourceType));
-        scriptSystem.RegisterFunction("get_current_capacity", new Func<int>(GetCurrentCapacity));
-        scriptSystem.RegisterFunction("get_max_capacity", new Func<int>(GetMaxCapacity));
+        scriptSystem.RegisterFunction("get_type", new Func<string>(GetResourceType), true, false);
+        scriptSystem.RegisterFunction("get_current_capacity", new Func<int>(GetCurrentCapacity), true, false);
+        scriptSystem.RegisterFunction("get_max_capacity", new Func<int>(GetMaxCapacity), true, false);
         scriptSystem.RegisterFunction("turn_in", new Action(TurnIn));
     }
 

@@ -131,9 +131,9 @@ public class Unit : MyMono, IScriptSystemAPI {
 
     public void Register(ScriptSystem scriptSystem)
     {
-        scriptSystem.RegisterFunction("get_position", new Func<Jurassic.Library.ObjectInstance>(GetPositionScript));
-        scriptSystem.RegisterFunction("get_max_hp", new Func<int>(GetMaxHP));
-        scriptSystem.RegisterFunction("get_current_hp", new Func<int>(GetCurrentHP));
+        scriptSystem.RegisterFunction("get_position", new Func<Jurassic.Library.ObjectInstance>(GetPositionScript), true, false);
+        scriptSystem.RegisterFunction("get_max_hp", new Func<int>(GetMaxHP), true, false);
+        scriptSystem.RegisterFunction("get_current_hp", new Func<int>(GetCurrentHP), true, false);
         scriptSystem.RegisterEvent("update", new string[]{"timepassed"});
         scriptSystem.RegisterEvent("update_per_second", new string[]{});
     }
