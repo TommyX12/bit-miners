@@ -40,7 +40,7 @@ public class ScriptSystem {
         return @"(?<" + groupName + ">[a-zA-Z_][a-zA-Z0-9_]*)";
     }
     
-    public const string EVENT_HANDLER_PREFIX = "_on_";
+    // public const string EVENT_HANDLER_PREFIX = "_on_";
     
     private List<IScriptSystemAPI> apiList;
     private List<Function> functions;
@@ -171,6 +171,14 @@ public class ScriptSystem {
         this.engine.Execute(javaScript.Script);
     }
     
+    public void ExecuteJavaScript(string script) {
+        this.engine.Execute(script);
+    }
+    
+    public T EvalJavaScript<T>(string script) {
+        return this.engine.Evaluate<T>(script);
+    }
+    
     private void ApplyMacro(ref string script, Macro macro) {
         script = Regex.Replace(script, macro.Pattern, macro.Replacement, RegexOptions.IgnorePatternWhitespace);
     }
@@ -229,7 +237,7 @@ public class ScriptSystem {
         // Status update
         this.Running = true;
         this.ErrorCaught = false;
-        this.Message = "Running";
+        this.Message = "Standby";
         
         // Execution
         this.ExecuteAction(() => {
@@ -261,12 +269,17 @@ public class ScriptSystem {
     public void DispatchEvent(string name, params object[] args) {
         if (!this.Running) return;
         
-        string handlerName = EVENT_HANDLER_PREFIX + name;
+        // string handlerName = EVENT_HANDLER_PREFIX + name;
+        // if (this.engine.Evaluate<bool>("this[\'" + handlerName + "\'] === undefined")) return;
         
-        if (this.engine.Evaluate<bool>("this[\'" + handlerName + "\'] === undefined")) return;
-        
+        object[] scriptArgs = new object[args.Length + 1];
+        scriptArgs[0] = name;
+        for (int i = 0; i < args.Length; ++i) {
+            scriptArgs[i + 1] = args[i];
+        }
+            
         this.ExecuteAction(() => {
-            this.engine.CallGlobalFunction(handlerName, args);
+            this.engine.CallGlobalFunction("event_dispatch", scriptArgs);
         });
     }
     
@@ -457,7 +470,7 @@ public class ScriptSystem {
                     },
                 },
                 CompileFunc = delegate (string[] regions, string[] inputs) {
-                    string result = "when " + this.Name + "(";
+                    string result = "event_add_listener(\"" + this.Name + "\", function(";
                     int j = 0;
                     foreach (string param in this.Parameters) {
                         if (j > 0) {
@@ -466,7 +479,7 @@ public class ScriptSystem {
                         result += param;
                         j++;
                     }
-                    result += "){" + regions[0] + "}";
+                    result += "){" + regions[0] + "})";
                     
                     return result;
                 },
