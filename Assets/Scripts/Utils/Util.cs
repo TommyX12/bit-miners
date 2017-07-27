@@ -452,4 +452,19 @@ static public class Util
     static public float Flashing(float t, float min, float max, float speed) {
         return (float)((Math.Cos(t * speed) + 1 / 2) * (max - min) + min);
     }
+
+    // returns true if done moving to target
+    // call it constantly while you want to move
+    static public bool MoveToTarget(GameObject ToMove, GameObject Target, float speed) {
+        Vector3 deltaV = Target.transform.position - ToMove.transform.position;
+        if (deltaV.magnitude < speed * Time.fixedDeltaTime)
+        {
+            ToMove.transform.position = Target.transform.position;
+            return true;
+        }
+        else {
+            ToMove.transform.position += deltaV.normalized * speed * Time.fixedDeltaTime;
+            return false;
+        }
+    }
 }
