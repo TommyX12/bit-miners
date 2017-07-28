@@ -6,7 +6,7 @@ public class LevelAction : MyMono {
 
     public bool isDone = false;
     public bool running = false;
-    public bool restrictInput = false;
+    public LevelAction NextAction;
 
     public virtual void run() {
         running = true;
