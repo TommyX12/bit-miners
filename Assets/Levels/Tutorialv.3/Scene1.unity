@@ -2128,7 +2128,7 @@ AudioSource:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 344130711}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
@@ -2342,7 +2342,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2601399, y: 0.79358256}
   m_AnchorMax: {x: 0.521, y: 1}
-  m_AnchoredPosition: {x: 845.004, y: -1}
+  m_AnchoredPosition: {x: 845.0039, y: -1}
   m_SizeDelta: {x: -3, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &367113454
@@ -13898,7 +13898,7 @@ Prefab:
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 210.36151
+      value: 210.36153
       objectReference: {fileID: 0}
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
