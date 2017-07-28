@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnableDisableGameObjectAction : LevelAction {
 
     public GameObject[] targets;
-    bool active;
+    public bool active;
     public override void run()
     {
         base.run();

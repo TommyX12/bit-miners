@@ -467,4 +467,30 @@ static public class Util
             return false;
         }
     }
+
+    // i'll make it later :)
+    static public bool RotateSingleAxis(GameObject ToRotate, GameObject AxisToRotate, Vector3 AxisToRotateAlong, Vector3 targetRotation, float speed) {
+        
+
+        return false;
+    }
+
+    static public bool RotateTowards2D(GameObject ToRotate, GameObject Target, float degreespersec) {
+
+        Vector2 dv = Target.transform.position - ToRotate.transform.position;
+        float da = Vector2.SignedAngle(ToRotate.transform.up, dv);
+
+        if (Mathf.Abs(da) <= degreespersec * Time.fixedDeltaTime)
+        {
+            ToRotate.transform.rotation = Quaternion.LookRotation(ToRotate.transform.forward, dv);
+            return true;
+        }
+        else
+        {
+            ToRotate.transform.Rotate(new Vector3(0, 0, (da / Mathf.Abs(da)) * degreespersec * Time.fixedDeltaTime));
+        }
+
+        return false;
+    }
+
 }

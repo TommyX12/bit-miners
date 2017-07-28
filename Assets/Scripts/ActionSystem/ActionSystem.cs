@@ -7,8 +7,47 @@ public class ActionSystem : MonoBehaviour
 {
 
     public static ActionSystem Current;
+    public static Dictionary<string, bool> Conditions = new Dictionary<string, bool>();
+
+    public static bool check(List<string> bools)
+    {
+        foreach (string s in bools)
+        {
+            if (Conditions.ContainsKey(s))
+            {
+                if (Conditions[s])
+                {
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void SetOrAdd(string key, bool value)
+    {
+        if (Conditions.ContainsKey(key))
+        {
+            Conditions[key] = value;
+        }
+        else
+        {
+            Conditions.Add(key, value);
+        }
+    }
+
+    // -------------------------------- \\
 
     public LevelAction currentAction;
+
+
 
     public void proceed()
     {
@@ -39,7 +78,10 @@ public class ActionSystem : MonoBehaviour
             }
         }
         currentAction = multiactions[0];
+        if(currentAction!=null)
+        currentAction.run();
     }
+
 
     private void Update()
     {

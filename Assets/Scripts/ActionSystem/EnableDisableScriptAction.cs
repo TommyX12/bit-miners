@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnableDisableScriptAction : LevelAction {
 
-    Behaviour[] targets;
+    public Behaviour[] targets;
 
-    bool active;
+    public bool active;
     public override void run()
     {
         base.run();

@@ -32,6 +32,7 @@ public class DialoguePanel : MyMono
     private string nextName;
 
     private bool CanAdvance;
+    private bool hasText;
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public class DialoguePanel : MyMono
 
     public void CharacterTransition(Sprite portrait, string name, string text)
     {
+        CanAdvance = false;
         nextName = name; nextPortrait = portrait; textScroller.LoadText(text);
         changeNameplate = true;
         changeFaceplate = true;
@@ -49,6 +51,7 @@ public class DialoguePanel : MyMono
 
     public void FacialTransition(Sprite portrait, string text)
     {
+        CanAdvance = false;
         nextPortrait = portrait; textScroller.LoadText(text);
         changeFaceplate = true;
         fpmove = true;
@@ -56,8 +59,9 @@ public class DialoguePanel : MyMono
 
     public void TextTransition(string text)
     {
+        CanAdvance = false;
         textScroller.LoadText(text);
-        textScroller.Display();
+        hasText = true;
     }
 
 
@@ -119,9 +123,15 @@ public class DialoguePanel : MyMono
         {
             CanAdvance = true;
         }
-        else if (Input.GetMouseButton(0) && !changeFaceplate && !changeNameplate)
+        else if (Input.GetMouseButtonDown(0) && !changeFaceplate && !changeNameplate && !hasText)
         {
             textScroller.fastforward();
+        }
+
+        if (hasText)
+        {
+            textScroller.Display();
+            hasText = false;
         }
 
     }
