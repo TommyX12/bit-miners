@@ -106,9 +106,9 @@ public class MoveComponent : UnitComponent {
 	}
 
 	public override void Register(ScriptSystem scriptSystem) {
-		scriptSystem.RegisterFunction("move_to", new Action<double, double>(this.SetXYTarget));
-		scriptSystem.RegisterFunction("move_in_direction", new Action<double, double>(this.MoveDirection));
-		scriptSystem.RegisterFunction("move_to_waypoint", new Action<string>(this.MoveToWaypoint));
+		// scriptSystem.RegisterFunction("move_to", new Action<double, double>(this.SetXYTarget));
+		// scriptSystem.RegisterFunction("move_in_direction", new Action<double, double>(this.MoveDirection));
+		// scriptSystem.RegisterFunction("move_to_waypoint", new Action<string>(this.MoveToWaypoint));
 		scriptSystem.RegisterFunction("stop", new Action(this.Stop));
         scriptSystem.RegisterFunction("move_up", new Action(this.MoveUp));
         scriptSystem.RegisterFunction("move_down", new Action(this.MoveDown));
