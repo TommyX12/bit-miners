@@ -3534,7 +3534,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: That's a switch with a timer.
-  charname: Kojima
+  charname: ???
   portrait: {fileID: 21300000, guid: 170a93e8e8cb03f4689217d2356222b3, type: 3}
   sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &920496453
@@ -7028,7 +7028,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Look over there.
-  charname: Kojima
+  charname: ???
   portrait: {fileID: 21300000, guid: 170a93e8e8cb03f4689217d2356222b3, type: 3}
   sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &1689803045
