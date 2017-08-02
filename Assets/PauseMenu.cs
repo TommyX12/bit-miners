@@ -34,6 +34,7 @@ public class PauseMenu : MonoBehaviour {
     }
 
     public void Quit() {
+        MyMono.Paused = false;
         SceneManager.LoadScene(0);
     }
 
