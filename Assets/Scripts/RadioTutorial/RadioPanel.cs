@@ -73,6 +73,7 @@ public class RadioPanel : MonoBehaviour {
         current = objs[0];
         scroller.LoadText(current.text);
         scroller.Display();
+        scroller.fastforward();
     }
 
     public void proceed(string code = "") {
@@ -81,6 +82,7 @@ public class RadioPanel : MonoBehaviour {
             current = current.GetNext(code);
             scroller.LoadText(current.text);
             scroller.Display();
+            scroller.fastforward();
             return;
         }
 
@@ -92,6 +94,7 @@ public class RadioPanel : MonoBehaviour {
                 current = current.GetNext();
                 scroller.LoadText(current.text);
                 scroller.Display();
+                scroller.fastforward();
             }
         }
         else {
@@ -108,6 +111,7 @@ public class RadioPanel : MonoBehaviour {
             current = current.last;
             scroller.LoadText(current.text);
             scroller.Display();
+            scroller.fastforward();
         }
     }
 

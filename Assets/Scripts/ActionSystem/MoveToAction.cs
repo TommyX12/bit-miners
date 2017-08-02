@@ -7,7 +7,8 @@ public class MoveToAction : LevelAction {
     public GameObject[] ToMove;
     public GameObject Target;
     public float speed;
-
+    public static float SpeedMultiplier = 2.0f;
+    
     public override void run()
     {
         base.run();
@@ -22,7 +23,7 @@ public class MoveToAction : LevelAction {
         bool checker = true;
 
         foreach (GameObject tm in ToMove) {
-            if (!Util.MoveToTarget(tm, Target, speed)) {
+            if (!Util.MoveToTarget(tm, Target, speed * SpeedMultiplier)) {
                 checker = false;
             }
         }

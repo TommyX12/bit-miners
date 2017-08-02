@@ -6,20 +6,30 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour {
 
     public GameObject Menu;
+    public GameObject Hint;
     
-    bool isOn = false;
-
-    void TurnOn() {
+    bool isOn;
+    
+    void Awake() {
+        this.isOn = false;
+        Menu.SetActive(false);
+    }
+    
+    public void TurnOn() {
+        if (MyMono.Paused || this.isOn) return;
         Menu.SetActive(true);
-        isOn = true;
+        MyMono.Paused = true;
+        this.isOn = true;
     }
 
-    void TurnOff() {
+    public void TurnOff() {
         Menu.SetActive(false);
-        isOn = false;
+        MyMono.Paused = false;
+        this.isOn = false;
     }
 
     public void Restart() {
+        MyMono.Paused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -29,9 +39,18 @@ public class PauseMenu : MonoBehaviour {
 
     private void Update()
     {
+        if (MyMono.Paused) {
+            if (this.Hint.activeSelf) {
+                this.Hint.SetActive(false);
+            }
+        }
+        else {
+            if (!this.Hint.activeSelf) {
+                this.Hint.SetActive(true);
+            }
+        }
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (isOn)
-            {
+            if (this.isOn) {
                 TurnOff();
             }
             else {
