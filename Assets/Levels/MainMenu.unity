@@ -164,7 +164,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 522628279}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 1}
@@ -295,9 +295,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 2112347576}
   - {fileID: 503332224}
   - {fileID: 960065420}
+  - {fileID: 2112347576}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -336,7 +336,7 @@ RectTransform:
   m_Children:
   - {fileID: 1003311112}
   m_Father: {fileID: 522628279}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.335}
   m_AnchorMax: {x: 1, y: 1}
@@ -683,8 +683,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd1b32928d43fb4c88c885793f827a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShouldRun: 1
-  time: 3.5
+  ShouldRun: 0
+  time: 0.5
   SceneId: 1
 --- !u!114 &2112347573
 MonoBehaviour:
@@ -700,7 +700,7 @@ MonoBehaviour:
   From: {r: 1, g: 1, b: 1, a: 0}
   To: {r: 0, g: 0, b: 0, a: 1}
   target: {fileID: 2112347574}
-  time: 10
+  time: 0.5
 --- !u!114 &2112347574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,7 +745,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 522628279}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
