@@ -252,6 +252,7 @@ MonoBehaviour:
   text: Looks like some sort of... prison?
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!114 &28035540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,6 +314,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: It's an advanced hacking tool. Pick it up.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1 &39102247
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,6 +1499,7 @@ MonoBehaviour:
   text: Psst. Hey you. Come closer to the door.
   charname: ???
   portrait: {fileID: 21300000, guid: 170a93e8e8cb03f4689217d2356222b3, type: 3}
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &263220625
 Prefab:
   m_ObjectHideFlags: 0
@@ -1653,6 +1656,7 @@ MonoBehaviour:
   text: Exactly. I put it there.
   charname: ???
   portrait: {fileID: 21300000, guid: 170a93e8e8cb03f4689217d2356222b3, type: 3}
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &274742523
 Prefab:
   m_ObjectHideFlags: 0
@@ -1858,6 +1862,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: It's really heavy.
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!1 &335159729 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1524013421835362, guid: 1f2ad24c9988b5642b5a540635ade09d,
@@ -2507,6 +2512,7 @@ MonoBehaviour:
   text: '....'
   charname: ???
   portrait: {fileID: 21300000, guid: 170a93e8e8cb03f4689217d2356222b3, type: 3}
+  sound: {fileID: 0}
 --- !u!1 &411361232
 GameObject:
   m_ObjectHideFlags: 0
@@ -2536,7 +2542,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 44
+  m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &411361234
 MonoBehaviour:
@@ -2572,6 +2578,7 @@ MonoBehaviour:
   text: Let's hope this thing brings me somewhere less crazy.
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!114 &411361236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3408,6 +3415,7 @@ MonoBehaviour:
   text: Who are you?
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!114 &474452838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3575,7 +3583,7 @@ Transform:
   m_Children:
   - {fileID: 1191074876}
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 34
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &493748367
 MonoBehaviour:
@@ -4551,7 +4559,7 @@ Transform:
   m_Children:
   - {fileID: 2125247920}
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 40
+  m_RootOrder: 41
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &620361847
 MonoBehaviour:
@@ -4666,6 +4674,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: I don't rememer going today though....
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!1001 &631426242
 Prefab:
   m_ObjectHideFlags: 0
@@ -5257,6 +5266,7 @@ MonoBehaviour:
   text: okay...
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!1001 &705684340
 Prefab:
   m_ObjectHideFlags: 0
@@ -5393,7 +5403,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 33
+  m_RootOrder: 34
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &709629565
 MonoBehaviour:
@@ -5410,6 +5420,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: I'm going to go rescue the other prisoners now. Good luck kid.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &724709729
 Prefab:
   m_ObjectHideFlags: 0
@@ -5618,10 +5629,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1992702731124746, guid: 0b4e985e36963974daec1e3955a25c82, type: 2}
-      propertyPath: m_Name
-      value: DialoguePanel
       objectReference: {fileID: 0}
     - target: {fileID: 224780616964041662, guid: 0b4e985e36963974daec1e3955a25c82,
         type: 2}
@@ -5891,7 +5898,7 @@ Transform:
   m_Children:
   - {fileID: 1967897534}
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 35
+  m_RootOrder: 36
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &825081629
 MonoBehaviour:
@@ -6058,7 +6065,7 @@ Transform:
   m_Children:
   - {fileID: 872383150}
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 37
+  m_RootOrder: 38
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &847998734
 MonoBehaviour:
@@ -6352,6 +6359,7 @@ MonoBehaviour:
   text: '....'
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 0}
 --- !u!1001 &893399105
 Prefab:
   m_ObjectHideFlags: 0
@@ -6698,7 +6706,7 @@ Transform:
   m_Children:
   - {fileID: 2097187587}
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 38
+  m_RootOrder: 39
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &982909202
 MonoBehaviour:
@@ -7026,6 +7034,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Huh?
+  sound: {fileID: 0}
 --- !u!114 &997602479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7193,6 +7202,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: NOT LIKE THAT.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &1021587589
 Prefab:
   m_ObjectHideFlags: 0
@@ -7455,7 +7465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 45
+  m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1046403459
 MonoBehaviour:
@@ -7641,7 +7651,7 @@ Transform:
   m_Children:
   - {fileID: 397512935}
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 41
+  m_RootOrder: 42
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1051446936
 MonoBehaviour:
@@ -7991,7 +8001,7 @@ Transform:
   m_Children:
   - {fileID: 2004686088}
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 36
+  m_RootOrder: 37
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1118423360
 MonoBehaviour:
@@ -8027,6 +8037,7 @@ MonoBehaviour:
   text: I guess I should try unlocking the door now.
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!1001 &1128530472
 Prefab:
   m_ObjectHideFlags: 0
@@ -8123,6 +8134,7 @@ MonoBehaviour:
   text: O-okay?
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!1 &1149577786
 GameObject:
   m_ObjectHideFlags: 0
@@ -8475,7 +8487,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 46
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1188998346
 MonoBehaviour:
@@ -8492,6 +8504,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Try using it on the door.
+  sound: {fileID: 0}
 --- !u!1 &1191074875
 GameObject:
   m_ObjectHideFlags: 0
@@ -9210,6 +9223,7 @@ Transform:
   - {fileID: 299479520}
   - {fileID: 1809600980}
   - {fileID: 1911526379}
+  - {fileID: 1188998345}
   - {fileID: 709629564}
   - {fileID: 493748366}
   - {fileID: 825081628}
@@ -9223,7 +9237,6 @@ Transform:
   - {fileID: 1575298678}
   - {fileID: 411361233}
   - {fileID: 1046403458}
-  - {fileID: 1188998345}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9885,7 +9898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShouldRun: 1
   time: 3.5
-  SceneId: 0
+  SceneId: 2
 --- !u!114 &1348318788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10016,7 +10029,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 42
+  m_RootOrder: 43
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1352109834
 MonoBehaviour:
@@ -10100,6 +10113,7 @@ MonoBehaviour:
   text: Yeah... I can't open it.
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!1001 &1371282690
 Prefab:
   m_ObjectHideFlags: 0
@@ -10322,6 +10336,7 @@ MonoBehaviour:
   text: Doesn't matter. See the door between us?
   charname: ???
   portrait: {fileID: 21300000, guid: 170a93e8e8cb03f4689217d2356222b3, type: 3}
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1 &1402168854
 GameObject:
   m_ObjectHideFlags: 0
@@ -11100,7 +11115,7 @@ Transform:
   m_Children:
   - {fileID: 444363504}
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 43
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1575298679
 MonoBehaviour:
@@ -11377,6 +11392,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Woah. There's something HUGE in here!
+  sound: {fileID: 8300000, guid: 8782137c86f5d6340b562f1e11b1e4a3, type: 3}
 --- !u!1001 &1665102058
 Prefab:
   m_ObjectHideFlags: 0
@@ -11572,6 +11588,7 @@ MonoBehaviour:
   text: That's cause it's locked. Notice how it's all red? Red doors are locked.
   charname: ???
   portrait: {fileID: 21300000, guid: 170a93e8e8cb03f4689217d2356222b3, type: 3}
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1 &1721677012
 GameObject:
   m_ObjectHideFlags: 0
@@ -11618,6 +11635,7 @@ MonoBehaviour:
   text: How can I open it? I don't see a keyhole anywhere.
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!1001 &1727470373
 Prefab:
   m_ObjectHideFlags: 0
@@ -11885,6 +11903,7 @@ MonoBehaviour:
   text: Auuuu.... Where am I?
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!4 &1758452253
 Transform:
   m_ObjectHideFlags: 0
@@ -12044,6 +12063,7 @@ MonoBehaviour:
   text: Check the toilet.
   charname: ???
   portrait: {fileID: 21300000, guid: 170a93e8e8cb03f4689217d2356222b3, type: 3}
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &1791990581
 Prefab:
   m_ObjectHideFlags: 0
@@ -12196,6 +12216,7 @@ MonoBehaviour:
   text: It's an advanced piece of technology.
   charname: ???
   portrait: {fileID: 21300000, guid: 170a93e8e8cb03f4689217d2356222b3, type: 3}
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1 &1817232072
 GameObject:
   m_ObjectHideFlags: 0
@@ -12681,6 +12702,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: You should be able to hack almost anything now.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1 &1913238548
 GameObject:
   m_ObjectHideFlags: 0
@@ -13804,7 +13826,7 @@ Prefab:
     - target: {fileID: 224285176108210810, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 48.90287
+      value: 48.902832
       objectReference: {fileID: 0}
     - target: {fileID: 224285176108210810, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -14114,7 +14136,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1289771630}
-  m_RootOrder: 39
+  m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2069221906
 MonoBehaviour:
@@ -14150,6 +14172,7 @@ MonoBehaviour:
   text: Time for me to get outta here. Looks like there's an elevator up ahead.
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!114 &2069221908
 MonoBehaviour:
   m_ObjectHideFlags: 0

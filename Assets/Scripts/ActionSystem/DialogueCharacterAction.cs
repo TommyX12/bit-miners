@@ -7,11 +7,13 @@ public class DialogueCharacterAction : LevelAction {
     public string text;
     public string charname;
     public Sprite portrait;
+    public AudioClip sound;
 
     public override void run()
     {
         base.run();
         DialoguePanel.current.CharacterTransition(portrait, charname, text);
+        DialoguePanel.current.SetAudio(sound);
     }
 
     public override void PausingFixedUpdate()

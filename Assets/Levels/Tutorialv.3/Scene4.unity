@@ -837,6 +837,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: But the real stuff starts here.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1 &71584070
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,6 +882,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Good job making it this far.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &83479361
 Prefab:
   m_ObjectHideFlags: 0
@@ -1755,7 +1757,7 @@ Prefab:
     - target: {fileID: 224285176108210810, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -18.96629
       objectReference: {fileID: 0}
     - target: {fileID: 224285176108210810, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -1765,7 +1767,7 @@ Prefab:
     - target: {fileID: 224285176108210810, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 37.93258
       objectReference: {fileID: 0}
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -1785,7 +1787,7 @@ Prefab:
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -18.96629
       objectReference: {fileID: 0}
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -1795,7 +1797,7 @@ Prefab:
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 37.93258
       objectReference: {fileID: 0}
     - target: {fileID: 224609071666198694, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -1914,6 +1916,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Pretty neat huh?
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1 &192916098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,6 +1992,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: '*Cool hacking noises*'
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1 &217009107
 GameObject:
   m_ObjectHideFlags: 0
@@ -2828,6 +2832,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Gimme a second to program this thing.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1 &347499513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2973,6 +2978,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Over here!
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &388666242
 Prefab:
   m_ObjectHideFlags: 0
@@ -3223,6 +3229,7 @@ MonoBehaviour:
   text: Then we're stuck here?
   charname: Steve
   portrait: {fileID: 21300000, guid: f6d86b247f6fb9a4282930131400524b, type: 3}
+  sound: {fileID: 8300000, guid: e17c1695f860e0446a27daba0bb32a19, type: 3}
 --- !u!1001 &428945602
 Prefab:
   m_ObjectHideFlags: 0
@@ -3804,12 +3811,32 @@ Prefab:
     - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
         type: 2}
       propertyPath: m_SortingLayerID
-      value: 1538016885
+      value: 964572643
       objectReference: {fileID: 0}
     - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
         type: 2}
       propertyPath: m_SortingLayer
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.16911763
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.16911763
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.16911763
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfb198c2f5976a64c94d8d4b730ec03d, type: 2}
@@ -4066,7 +4093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &530298848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4396,12 +4423,32 @@ Prefab:
     - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
         type: 2}
       propertyPath: m_SortingLayerID
-      value: 1538016885
+      value: 964572643
       objectReference: {fileID: 0}
     - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
         type: 2}
       propertyPath: m_SortingLayer
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.16911763
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.16911763
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.16911763
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfb198c2f5976a64c94d8d4b730ec03d, type: 2}
@@ -4507,7 +4554,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShouldRun: 1
   time: 3.5
-  SceneId: 0
+  SceneId: 5
 --- !u!114 &592284663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4867,12 +4914,32 @@ Prefab:
     - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
         type: 2}
       propertyPath: m_SortingLayerID
-      value: 1538016885
+      value: 964572643
       objectReference: {fileID: 0}
     - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
         type: 2}
       propertyPath: m_SortingLayer
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.16911763
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.16911763
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.16911763
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfb198c2f5976a64c94d8d4b730ec03d, type: 2}
@@ -4926,6 +4993,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Easy as that.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &681789473
 Prefab:
   m_ObjectHideFlags: 0
@@ -5072,6 +5140,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Take a good look at those switches.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &721463954
 Prefab:
   m_ObjectHideFlags: 0
@@ -5896,6 +5965,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: That should do it.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &861433087
 Prefab:
   m_ObjectHideFlags: 0
@@ -6058,6 +6128,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Any switch we can activate. These drones can too.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &882624315
 Prefab:
   m_ObjectHideFlags: 0
@@ -6204,6 +6275,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: See those weird looking floor tiles?
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1 &886420698
 GameObject:
   m_ObjectHideFlags: 0
@@ -6374,6 +6446,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Watch
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &941716614
 Prefab:
   m_ObjectHideFlags: 0
@@ -6712,6 +6785,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: It's gonna be impossible for us to reach them.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &980581151
 Prefab:
   m_ObjectHideFlags: 0
@@ -7674,6 +7748,7 @@ MonoBehaviour:
   text: Psst. Hey kid.
   charname: ???
   portrait: {fileID: 21300000, guid: 170a93e8e8cb03f4689217d2356222b3, type: 3}
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!114 &1215418190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8006,6 +8081,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: Voila! Our very own flying drone.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1 &1257875912
 GameObject:
   m_ObjectHideFlags: 0
@@ -8453,6 +8529,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: If I push on the panel hard enough...
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &1331715286
 Prefab:
   m_ObjectHideFlags: 0
@@ -9323,6 +9400,7 @@ MonoBehaviour:
   running: 0
   NextAction: {fileID: 0}
   text: See ya on the other side kid.
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &1495668237
 Prefab:
   m_ObjectHideFlags: 0
@@ -10264,6 +10342,7 @@ MonoBehaviour:
   text: Nah kid. Let me show you how the pros do it.
   charname: ???
   portrait: {fileID: 21300000, guid: 170a93e8e8cb03f4689217d2356222b3, type: 3}
+  sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
 --- !u!1001 &1653186249
 Prefab:
   m_ObjectHideFlags: 0
@@ -10459,12 +10538,32 @@ Prefab:
     - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
         type: 2}
       propertyPath: m_SortingLayerID
-      value: 1538016885
+      value: 964572643
       objectReference: {fileID: 0}
     - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
         type: 2}
       propertyPath: m_SortingLayer
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.16911763
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.16911763
+      objectReference: {fileID: 0}
+    - target: {fileID: 212615914591408664, guid: dfb198c2f5976a64c94d8d4b730ec03d,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.16911763
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dfb198c2f5976a64c94d8d4b730ec03d, type: 2}

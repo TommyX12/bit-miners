@@ -64,6 +64,12 @@ public class DialoguePanel : MyMono
         hasText = true;
     }
 
+    public void SetAudio(AudioClip sound) {
+        if (sound != null) {
+            talkSoundEffect.clip = sound;
+            talkSoundEffect.Play();
+        }
+    }
 
     public override void PausingUpdate()
     {
@@ -134,6 +140,10 @@ public class DialoguePanel : MyMono
             hasText = false;
         }
 
+        if (textScroller.isDone)
+        {
+            talkSoundEffect.Stop();
+        }
     }
 
     public bool isDone()
