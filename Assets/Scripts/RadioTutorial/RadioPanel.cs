@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RadioPanel : MonoBehaviour {
+public class RadioPanel : MyMono {
     public static RadioPanel Current;
     public static Dictionary<string, bool> Conditions = new Dictionary<string, bool>();
     public static bool check(List<string> bools)
@@ -115,8 +115,7 @@ public class RadioPanel : MonoBehaviour {
         }
     }
 
-    public void Update()
-    {
+    public override void NormalUpdate() {
         if (current.defaultNext == null || !check(current.conditions))
         {
             RightButton.SetActive(false);
