@@ -8042,6 +8042,7 @@ GameObject:
   - component: {fileID: 1917180580}
   - component: {fileID: 1917180579}
   - component: {fileID: 1917180578}
+  - component: {fileID: 1917180581}
   m_Layer: 0
   m_Name: Manager Scripts
   m_TagString: Untagged
@@ -8091,6 +8092,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1917180581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1917180577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 871d5c5bd957f3d428b641e27e110d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  types:
+  - event
+  - command
+  editor: {fileID: 982457041}
 --- !u!1001 &1924460201
 Prefab:
   m_ObjectHideFlags: 0

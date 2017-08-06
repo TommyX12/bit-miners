@@ -379,7 +379,7 @@ public class ScriptSystem {
         }
         
         public SEBlockDef GenerateBlockDef() {
-            return FuncToBlockDef(this.Name, this.Parameters, this.hasProcedure, this.DelegateObject.Method.ReturnType != typeof(void));
+            return FuncToBlockDef(this.Name, this.Parameters, this.hasProcedure, this.DelegateObject.Method.ReturnType != typeof(void), this.DelegateObject.Method.ReturnType == typeof(bool));
         }
         
     }
@@ -412,14 +412,16 @@ public class ScriptSystem {
         
         public bool hasProcedure;
         public bool hasReturnVal;
+        public bool returnBool;
         
-        public JavaScript(string script, bool listed = true, string name = "", string[] parameters = null, bool hasProcedure = true, bool hasReturnVal = true) {
-            this.Script = script;
-            this.Name = name;
-            this.Parameters = parameters == null ? new string[0] : (string[])parameters.Clone();
-            this.Listed = listed;
+        public JavaScript(string script, bool listed = true, string name = "", string[] parameters = null, bool hasProcedure = true, bool hasReturnVal = true, bool returnBool = false) {
+            this.Script       = script;
+            this.Name         = name;
+            this.Parameters   = parameters == null ? new string[0] : (string[])parameters.Clone();
+            this.Listed       = listed;
             this.hasProcedure = hasProcedure;
             this.hasReturnVal = hasReturnVal;
+            this.returnBool   = returnBool;
         }
         
         public string GetText() {
@@ -427,7 +429,7 @@ public class ScriptSystem {
         }
         
         public SEBlockDef GenerateBlockDef() {
-            return FuncToBlockDef(this.Name, this.Parameters, this.hasProcedure, this.hasReturnVal);
+            return FuncToBlockDef(this.Name, this.Parameters, this.hasProcedure, this.hasReturnVal, this.returnBool);
         }
         
     }
@@ -494,7 +496,7 @@ public class ScriptSystem {
         }
     }
     
-    public static SEBlockDef FuncToBlockDef(string name, string[] parameters, bool hasProcedure, bool hasReturnVal) {
+    public static SEBlockDef FuncToBlockDef(string name, string[] parameters, bool hasProcedure, bool hasReturnVal, bool returnBool = false) {
         SEBlockDef blockDef = new SEBlockDef() {
             Name = "_api_" + name,
             CursorIndex = 0,
@@ -516,13 +518,9 @@ public class ScriptSystem {
             },
         };
         
-        if (hasProcedure) {
-            blockDef.Flags |= SEBlockDef.F_HAS_PROCEDURE;
-        }
-        
-        if (hasReturnVal) {
-            blockDef.Flags |= SEBlockDef.F_RETURN_VAL;
-        }
+        if (hasProcedure) blockDef.Flags |= SEBlockDef.F_HAS_PROCEDURE;
+        if (hasReturnVal) blockDef.Flags |= SEBlockDef.F_RETURN_VAL;
+        if (returnBool) blockDef.Flags   |= SEBlockDef.F_RETURN_BOOL;
         
         SEElementDef[] elements = new SEElementDef[parameters.Length + 1];
         
