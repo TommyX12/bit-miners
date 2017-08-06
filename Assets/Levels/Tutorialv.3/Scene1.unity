@@ -4063,9 +4063,9 @@ RectTransform:
   - {fileID: 26967962}
   - {fileID: 2040050379}
   - {fileID: 1348318786}
+  - {fileID: 1495977129}
   - {fileID: 1570067211}
   - {fileID: 1634178297}
-  - {fileID: 1495977129}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5642,7 +5642,7 @@ Prefab:
     - target: {fileID: 224056971652145016, guid: 0b4e985e36963974daec1e3955a25c82,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224056971652145016, guid: 0b4e985e36963974daec1e3955a25c82,
         type: 2}
@@ -9811,7 +9811,7 @@ Prefab:
     - target: {fileID: 224955919836594614, guid: 15679af67c41f394693d225de8873413,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224955919836594614, guid: 15679af67c41f394693d225de8873413,
         type: 2}
@@ -11101,7 +11101,7 @@ RectTransform:
   m_Children:
   - {fileID: 1317761344}
   m_Father: {fileID: 522817534}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.99749994, y: 0.0033333336}
   m_AnchorMax: {x: 0.99749994, y: 0.0033333336}
@@ -14289,7 +14289,7 @@ Prefab:
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 210.36153
+      value: 210.36148
       objectReference: {fileID: 0}
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -14305,10 +14305,6 @@ Prefab:
         type: 2}
       propertyPath: m_SizeDelta.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1510423041140804, guid: 44e8f3d65a658ab4fbcf6d6741b59995, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44e8f3d65a658ab4fbcf6d6741b59995, type: 2}
