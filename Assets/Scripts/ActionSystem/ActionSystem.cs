@@ -61,6 +61,10 @@ public class ActionSystem : MonoBehaviour
     private void Start()
     {
         Current = this;
+
+        // reset bools. Or they won't be reset after reloading scene.
+        Conditions.Clear();
+
         List<LevelMultiAction> multiactions = new List<LevelMultiAction>();
         for (int i = 0; i < transform.childCount; i++)
         {
