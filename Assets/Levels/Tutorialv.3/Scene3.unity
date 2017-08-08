@@ -9950,6 +9950,7 @@ GameObject:
   - component: {fileID: 1118691679}
   - component: {fileID: 1118691678}
   - component: {fileID: 1118691681}
+  - component: {fileID: 1118691682}
   m_Layer: 0
   m_Name: Manager Scripts
   m_TagString: Untagged
@@ -9986,6 +9987,7 @@ MonoBehaviour:
   MapTilePrefab: {fileID: 114818218062138862, guid: 3d9935107aeea3e4286eb1a9ae3113ca,
     type: 2}
   Player: {fileID: 471376708}
+  Paused: 0
 --- !u!4 &1118691680
 Transform:
   m_ObjectHideFlags: 0
@@ -10014,6 +10016,21 @@ MonoBehaviour:
   - event
   - command
   editor: {fileID: 360702508}
+--- !u!114 &1118691682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1118691677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c77fffaa04b4541ba80ed9af625070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mixer: {fileID: 0}
+  FadeInTime: 2
+  FadeOutTime: 2
+  StartFadeInTime: 1
 --- !u!1001 &1136852964
 Prefab:
   m_ObjectHideFlags: 0

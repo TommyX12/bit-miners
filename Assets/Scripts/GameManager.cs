@@ -17,7 +17,7 @@ public class GameManager : MyMono {
     }
 
     void Start() {
-        
+        MusicManager.Current.Play("ambient");
     }
 
     public override void PausingUpdate() {

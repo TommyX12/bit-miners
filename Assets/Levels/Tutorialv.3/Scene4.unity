@@ -7843,6 +7843,7 @@ GameObject:
   - component: {fileID: 1256689043}
   - component: {fileID: 1256689042}
   - component: {fileID: 1256689045}
+  - component: {fileID: 1256689046}
   m_Layer: 0
   m_Name: Manager Scripts
   m_TagString: Untagged
@@ -7908,6 +7909,21 @@ MonoBehaviour:
   - event
   - command
   editor: {fileID: 188674947}
+--- !u!114 &1256689046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1256689041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c77fffaa04b4541ba80ed9af625070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mixer: {fileID: 0}
+  FadeInTime: 2
+  FadeOutTime: 2
+  StartFadeInTime: 1
 --- !u!1 &1257556688
 GameObject:
   m_ObjectHideFlags: 0

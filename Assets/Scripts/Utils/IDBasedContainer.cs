@@ -1,13 +1,20 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
-public class IDBasedContainer<T> 
+public class IDBasedContainer<T>
     where T:IIDBasedElememt
 {
     private Dictionary<int, T> data = new Dictionary<int, T>();
     private Stack<int> unusedID = new Stack<int>();
     public int MaxID {
         get; private set;
+    }
+    
+    public int Count {
+        get {
+            return this.data.Count;
+        }
     }
     
     public IDBasedContainer() {
@@ -30,6 +37,10 @@ public class IDBasedContainer<T>
         return this.data[id];
     }
     
+    public bool Contains(int id) {
+        return this.data.ContainsKey(id);
+    }
+    
     public void Remove(T element) {
         this.Remove(element.ID);
     }
@@ -39,10 +50,26 @@ public class IDBasedContainer<T>
         this.unusedID.Push(id);
     }
     
+    public IEnumerable<int> IDs() {
+        foreach (int id in this.data.Keys) {
+            yield return id;
+        }
+    }
+    
     public void Clear() {
         this.MaxID = -1;
         this.unusedID.Clear();
         this.data.Clear();
+    }
+    
+    public int LowestID() {
+        int result = -1;
+        foreach (int id in this.IDs()) {
+            if (result < 0 || id < result) {
+                result = id;
+            }
+        }
+        return result;
     }
     
     public void AddWithID(int id, T element) {
