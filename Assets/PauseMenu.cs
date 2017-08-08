@@ -16,31 +16,31 @@ public class PauseMenu : MonoBehaviour {
     }
     
     public void TurnOn() {
-        if (MyMono.Paused || this.isOn) return;
+        if (GameManager.Current.Paused || this.isOn) return;
         Menu.SetActive(true);
-        MyMono.Paused = true;
+        GameManager.Current.Paused = true;
         this.isOn = true;
     }
 
     public void TurnOff() {
         Menu.SetActive(false);
-        MyMono.Paused = false;
+        GameManager.Current.Paused = false;
         this.isOn = false;
     }
 
     public void Restart() {
-        MyMono.Paused = false;
+        GameManager.Current.Paused = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void Quit() {
-        MyMono.Paused = false;
+        GameManager.Current.Paused = false;
         SceneManager.LoadScene(0);
     }
 
     private void Update()
     {
-        if (MyMono.Paused) {
+        if (GameManager.Current.Paused) {
             if (this.Hint.activeSelf) {
                 this.Hint.SetActive(false);
             }

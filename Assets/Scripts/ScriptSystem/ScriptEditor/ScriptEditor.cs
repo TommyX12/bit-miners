@@ -34,7 +34,7 @@ public class ScriptEditor : MyMono {
 		}
 		
 		this.gameObject.SetActive(true);
-		MyMono.Paused = true;
+		GameManager.Current.Paused = true;
 		
 		this.ScriptSystemObject = scriptSystem;
 		
@@ -74,7 +74,7 @@ public class ScriptEditor : MyMono {
 	
 	private void EndEdit() {
 		this.gameObject.SetActive(false);
-		MyMono.Paused = false;
+		GameManager.Current.Paused = false;
 		
 		this.ScriptSystemObject = null;
 		

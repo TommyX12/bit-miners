@@ -37,7 +37,7 @@ public class ScriptEditorV2 : MyMono {
         }
         
         this.gameObject.SetActive(true);
-        MyMono.Paused = true;
+        GameManager.Current.Paused = true;
         
         this.ScriptSystemObject = scriptSystem;
         this.APIPanelObject.LoadBlockDefs(this.ScriptSystemObject.GetBlockDefs(), this.blockTypeFilter);
@@ -87,7 +87,7 @@ public class ScriptEditorV2 : MyMono {
     
     private void EndEdit() {
         this.gameObject.SetActive(false);
-        MyMono.Paused = false;
+        GameManager.Current.Paused = false;
         
         this.ScriptSystemObject = null;
     }
