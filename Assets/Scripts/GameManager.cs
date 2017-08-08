@@ -14,7 +14,6 @@ public class GameManager : MyMono {
 
     void Awake() {
         Current = this;
-        ResourceManager.Initialize();
     }
 
     void Start() {

@@ -121,11 +121,17 @@ static public class Util
         return newObject;
     }
     
+    static public GameObject MakeEmptyContainer(Transform parentTransform) {
+        GameObject newObject = new GameObject("");
+        newObject.transform.SetParent(parentTransform, false);
+        
+        return newObject;
+    }
+    
     static public GameObject MakeEmptyUIContainer(RectTransform parentTransform) {
         GameObject newObject = new GameObject("", typeof(RectTransform));
         newObject.transform.SetParent(parentTransform, false);
-        RectTransform newRectTransform = (RectTransform)newObject.transform;
-        InitUIRectTransform(newRectTransform);
+        InitUIRectTransform((RectTransform)newObject.transform);
         
         return newObject;
     }
