@@ -1,19 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class SwitchDoor : UnitComponent {
+public class KeypadDoor : UnitComponent {
 
     public Sprite[] anim;
     public Sprite DoorLockedSprite;
     public bool locked;
-    public SwitchBase sw;
     public SpriteRenderer rendy;
     public Collider2D circlecollider;
     public BoxCollider2D boxcollider;
     public bool proximity;
     public float picker = 0;
+    public TextDisplayComponent TextDisplay;
+    public string password;
     int count = 0;
+    
 
     private void Start()
     {
@@ -26,8 +29,6 @@ public class SwitchDoor : UnitComponent {
     public override void PausingUpdate()
     {
         base.PausingUpdate();
-
-        locked = !sw.on;
 
         if (count >= 1)
         {
@@ -106,7 +107,24 @@ public class SwitchDoor : UnitComponent {
         count--;
     }
 
+    public void EnterCode(string code) {
+        if (code == password)
+        {
+            Unlock();
+            TextDisplay.Display("Correct Code Entered");
+        }
+        else {
+            TextDisplay.Display("Incorrect Code Entered");
+        }
+    }
+
+    public void DisplayCode() {
+        TextDisplay.Display(password);
+    }
+
     public override void Register(ScriptSystem scriptSystem)
     {
+        scriptSystem.RegisterFunction("Enter_Code", new Action<string>(EnterCode));
+        scriptSystem.RegisterFunction("Display_Code", new Action(DisplayCode));
     }
 }
