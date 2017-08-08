@@ -9511,7 +9511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShouldRun: 1
   time: 3.5
-  SceneId: 5
+  SceneId: 6
 --- !u!114 &1564402999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11652,6 +11652,7 @@ MonoBehaviour:
   MapTilePrefab: {fileID: 114818218062138862, guid: 3d9935107aeea3e4286eb1a9ae3113ca,
     type: 2}
   Player: {fileID: 602892767}
+  Paused: 0
 --- !u!4 &1929630452
 Transform:
   m_ObjectHideFlags: 0
