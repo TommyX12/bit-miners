@@ -27,5 +27,8 @@ EditorBuildSettings:
     path: Assets/Levels/Tutorialv.3/Scene6.unity
     guid: 09d7c376fd0e6904f9170444e62922c0
   - enabled: 1
+    path: Assets/Levels/Tutorialv.3/EndGame.unity
+    guid: 96429c5b010f6594ca02477e4a0ef940
+  - enabled: 1
     path: Assets/Levels/Tutorialv.3/EndOFDevBuild.unity
     guid: 8e49f6e897e6c324aa49ff818a3519b0
