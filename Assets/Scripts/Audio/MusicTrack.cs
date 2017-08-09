@@ -19,9 +19,9 @@ public class MusicTrack {
         get; private set;
     }
     
-    public float Volumn = 1.0f;
-    private float volumnMul = 0.0f;
-    private float volumnMulFade = 0.0f;
+    public float Volume = 1.0f;
+    private float volumeMul = 0.0f;
+    private float volumeMulFade = 0.0f;
     
     private AudioSource audioSource;
     
@@ -48,18 +48,18 @@ public class MusicTrack {
     }
     
     public void Update(float deltaTime) {
-        this.volumnMul = Util.Clamp(
-            this.volumnMul + deltaTime * this.volumnMulFade,
+        this.volumeMul = Util.Clamp(
+            this.volumeMul + deltaTime * this.volumeMulFade,
             0, 1
         );
-        if (this.Playing && this.Stopping && this.volumnMul <= 0) {
+        if (this.Playing && this.Stopping && this.volumeMul <= 0) {
             this.audioSource.Stop();
         }
-        this.UpdateVolumn();
+        this.UpdateVolume();
     }
     
-    public void UpdateVolumn() {
-        this.audioSource.volume = this.Volumn * this.volumnMul;
+    public void UpdateVolume() {
+        this.audioSource.volume = MusicManager.Current.MasterVolume * this.Volume * this.volumeMul;
     }
     
     public void Start(float FadeInTime, bool loop) {
@@ -67,7 +67,7 @@ public class MusicTrack {
         this.audioSource.Play();
         
         this.Stopping = false;
-        this.volumnMul = 0;
+        this.volumeMul = 0;
         this.SetFade(true, FadeInTime);
         this.Update(0);
     }
@@ -94,7 +94,7 @@ public class MusicTrack {
     }
     
     private void SetFade(bool fadeIn, float FadeTime) {
-        this.volumnMulFade = (fadeIn ? 1 : -1) / FadeTime;
+        this.volumeMulFade = (fadeIn ? 1 : -1) / FadeTime;
     }
     
     public void ForceStop() {

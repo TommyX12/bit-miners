@@ -17,8 +17,8 @@ public class MusicManager : MyMono {
         public float fade_out_time = 2.0f;
         public float start_fade_in_time = 1.0f;
         
-        public void Enable(float volumnMul) {
-            MusicManager.Current.GetMusicTrack(this.name).Volumn = this.volume * volumnMul;
+        public void Enable(float volumeMul) {
+            MusicManager.Current.GetMusicTrack(this.name, true).Volume = this.volume * volumeMul;
             MusicManager.Current.Play(this.name, this.loop, false, this.fade_in_time, this.start_fade_in_time);
         }
         public void Disable() {
@@ -57,8 +57,8 @@ public class MusicManager : MyMono {
             if (this.ConditionSatisfied()) {
                 foreach (var entry in this.tracks) {
                     string name = entry.Key;
-                    float volumnMul = entry.Value;
-                    MusicManager.Current.GetTrackConfigs()[name].Enable(volumnMul);
+                    float volumeMul = entry.Value;
+                    MusicManager.Current.GetTrackConfigs()[name].Enable(volumeMul);
                 }
             }
         }
@@ -78,6 +78,8 @@ public class MusicManager : MyMono {
     public float DefaultStartFadeInTime = 1.0f;
     
     public TextAsset DefaultConfigText;
+    
+    public float MasterVolume = 1.0f;
     
     private Dictionary<string, TrackConfig> trackConfigs = null;
     private List<PatternConfig> patternConfigs = null;
@@ -162,8 +164,8 @@ public class MusicManager : MyMono {
         return this.activeTracks.ContainsKey(name);
     }
     
-    public MusicTrack GetMusicTrack(string name) {
-        if (!this.HasMusicTrack(name)) {
+    public MusicTrack GetMusicTrack(string name, bool initIfNotExist = false) {
+        if (initIfNotExist && !this.HasMusicTrack(name)) {
             return this.AddMusicTrack(name);
         }
         MusicTrack result;
@@ -179,7 +181,7 @@ public class MusicManager : MyMono {
         if (fadeInTime < 0) fadeInTime = this.DefaultFadeInTime;
         if (startFadeInTime < 0) startFadeInTime = this.DefaultStartFadeInTime;
         
-        MusicTrack track = this.GetMusicTrack(name);
+        MusicTrack track = this.GetMusicTrack(name, true);
         if (!forceRestart && track.Playing) {
             track.Resume(fadeInTime);
         }
