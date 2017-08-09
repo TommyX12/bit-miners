@@ -883,6 +883,57 @@ MonoBehaviour:
   NextAction: {fileID: 0}
   text: Good job making it this far.
   sound: {fileID: 8300000, guid: ba238a2151d17174ab7583b0886b2f0c, type: 3}
+--- !u!1 &80927111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 80927112}
+  - component: {fileID: 80927113}
+  m_Layer: 5
+  m_Name: 'Snake: Hey kid'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &80927112
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 80927111}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1260957540}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -39.855118, y: -105.67633}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &80927113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 80927111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37970e5cbb34f4c8a5ec1dccc85364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions: []
+  codes: []
+  altNext: []
+  defaultNext: {fileID: 0}
+  last: {fileID: 0}
+  text: Hey kid. It's me.
 --- !u!1001 &83479361
 Prefab:
   m_ObjectHideFlags: 0
@@ -1695,7 +1746,7 @@ Prefab:
     - target: {fileID: 224609071666198694, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0.000000059604645
+      value: 0.00000013411045
       objectReference: {fileID: 0}
     - target: {fileID: 224894333615652768, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -1725,7 +1776,7 @@ Prefab:
     - target: {fileID: 224851752557756016, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.000000029802322
       objectReference: {fileID: 0}
     - target: {fileID: 1510423041140804, guid: 44e8f3d65a658ab4fbcf6d6741b59995, type: 2}
       propertyPath: m_IsActive
@@ -7021,6 +7072,57 @@ Transform:
   m_PrefabParentObject: {fileID: 4318200525025040, guid: dfb198c2f5976a64c94d8d4b730ec03d,
     type: 2}
   m_PrefabInternal: {fileID: 1016742033}
+--- !u!1 &1021319101
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1021319102}
+  - component: {fileID: 1021319103}
+  m_Layer: 5
+  m_Name: 'Snake: Hey kid (7)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1021319102
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1021319101}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1260957540}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -39.855164, y: -105.67633}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1021319103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1021319101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37970e5cbb34f4c8a5ec1dccc85364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions: []
+  codes: []
+  altNext: []
+  defaultNext: {fileID: 0}
+  last: {fileID: 0}
+  text: Good luck kid.
 --- !u!1001 &1038404354
 Prefab:
   m_ObjectHideFlags: 0
@@ -7568,6 +7670,57 @@ Transform:
   m_PrefabParentObject: {fileID: 4369567842954446, guid: be2ba37b447ab2e4d8947db375ec8c65,
     type: 2}
   m_PrefabInternal: {fileID: 1201713460}
+--- !u!1 &1212247236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1212247237}
+  - component: {fileID: 1212247238}
+  m_Layer: 5
+  m_Name: 'Snake: Hey kid (1)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1212247237
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1212247236}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1260957540}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -39.855164, y: -105.67633}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1212247238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1212247236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37970e5cbb34f4c8a5ec1dccc85364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions: []
+  codes: []
+  altNext: []
+  defaultNext: {fileID: 0}
+  last: {fileID: 0}
+  text: Select "start" and then...
 --- !u!1 &1215418188
 GameObject:
   m_ObjectHideFlags: 0
@@ -8051,6 +8204,111 @@ Transform:
   m_PrefabParentObject: {fileID: 4594213277109814, guid: 883b4d2f0f9d5474e897ceb06c82ea4d,
     type: 2}
   m_PrefabInternal: {fileID: 1258749128}
+--- !u!1001 &1260957539
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 188674948}
+    m_Modifications:
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0.6886667
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0.29951435
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0.88527906
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: cd7104885f932dd49b51748c1386e616, type: 2}
+  m_IsPrefabParent: 0
+--- !u!224 &1260957540 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224867240448042216, guid: cd7104885f932dd49b51748c1386e616,
+    type: 2}
+  m_PrefabInternal: {fileID: 1260957539}
 --- !u!1001 &1261407136
 Prefab:
   m_ObjectHideFlags: 0
@@ -9070,6 +9328,57 @@ Transform:
   m_Father: {fileID: 1861100504}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1470057871
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1470057872}
+  - component: {fileID: 1470057873}
+  m_Layer: 5
+  m_Name: 'Snake: Hey kid (5)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1470057872
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1470057871}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1260957540}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -39.855164, y: -105.67633}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1470057873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1470057871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37970e5cbb34f4c8a5ec1dccc85364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions: []
+  codes: []
+  altNext: []
+  defaultNext: {fileID: 0}
+  last: {fileID: 0}
+  text: You might wanna get a better view.
 --- !u!1001 &1484905450
 Prefab:
   m_ObjectHideFlags: 0
@@ -9340,6 +9649,57 @@ Transform:
   m_PrefabParentObject: {fileID: 4594213277109814, guid: 883b4d2f0f9d5474e897ceb06c82ea4d,
     type: 2}
   m_PrefabInternal: {fileID: 1495668237}
+--- !u!1 &1497539496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1497539497}
+  - component: {fileID: 1497539498}
+  m_Layer: 5
+  m_Name: 'Snake: Hey kid (4)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1497539497
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497539496}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1260957540}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -39.855164, y: -105.67633}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1497539498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497539496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37970e5cbb34f4c8a5ec1dccc85364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions: []
+  codes: []
+  altNext: []
+  defaultNext: {fileID: 0}
+  last: {fileID: 0}
+  text: Oh by the way.
 --- !u!1001 &1499711753
 Prefab:
   m_ObjectHideFlags: 0
@@ -10509,6 +10869,108 @@ Transform:
   m_PrefabParentObject: {fileID: 4318200525025040, guid: dfb198c2f5976a64c94d8d4b730ec03d,
     type: 2}
   m_PrefabInternal: {fileID: 1688120093}
+--- !u!1 &1696577245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1696577246}
+  - component: {fileID: 1696577247}
+  m_Layer: 5
+  m_Name: 'Snake: Hey kid (2)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1696577246
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1696577245}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1260957540}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -39.855164, y: -105.67633}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1696577247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1696577245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37970e5cbb34f4c8a5ec1dccc85364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions: []
+  codes: []
+  altNext: []
+  defaultNext: {fileID: 0}
+  last: {fileID: 0}
+  text: The direction that the switch is in.
+--- !u!1 &1705188034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1705188035}
+  - component: {fileID: 1705188036}
+  m_Layer: 5
+  m_Name: 'Snake: Hey kid (3)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1705188035
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1705188034}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1260957540}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -39.855164, y: -105.67633}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1705188036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1705188034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37970e5cbb34f4c8a5ec1dccc85364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions: []
+  codes: []
+  altNext: []
+  defaultNext: {fileID: 0}
+  last: {fileID: 0}
+  text: I think for you it was "left".
 --- !u!1 &1706154252
 GameObject:
   m_ObjectHideFlags: 0
@@ -10944,6 +11406,57 @@ Transform:
   m_PrefabParentObject: {fileID: 4594213277109814, guid: 883b4d2f0f9d5474e897ceb06c82ea4d,
     type: 2}
   m_PrefabInternal: {fileID: 1756730917}
+--- !u!1 &1763517495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1763517496}
+  - component: {fileID: 1763517497}
+  m_Layer: 5
+  m_Name: 'Snake: Hey kid (6)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1763517496
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1763517495}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1260957540}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -39.855164, y: -105.67633}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1763517497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1763517495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d37970e5cbb34f4c8a5ec1dccc85364, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions: []
+  codes: []
+  altNext: []
+  defaultNext: {fileID: 0}
+  last: {fileID: 0}
+  text: Try using mousewheel for that.
 --- !u!1001 &1784286724
 Prefab:
   m_ObjectHideFlags: 0
@@ -11040,6 +11553,11 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224415378107204952, guid: 15679af67c41f394693d225de8873413,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -19.699951
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 15679af67c41f394693d225de8873413, type: 2}
@@ -12487,106 +13005,6 @@ MonoBehaviour:
   ToRotate: {fileID: 438452073}
   Target: {fileID: 2137829217}
   DegreesPerSecond: 90
---- !u!1001 &2084828438
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 188674948}
-    m_Modifications:
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0.6886667
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0.29951435
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0.88527906
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224319128362571486, guid: cd7104885f932dd49b51748c1386e616,
-        type: 2}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: cd7104885f932dd49b51748c1386e616, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &2095409619
 GameObject:
   m_ObjectHideFlags: 0
