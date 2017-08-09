@@ -6,6 +6,7 @@ using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Random = UnityEngine.Random;
+using Newtonsoft.Json;
 
 static public class Util
 {
@@ -497,5 +498,17 @@ static public class Util
         }
 
         return false;
+    }
+    
+    static public string ToJson<T>(T obj) {
+        return JsonConvert.SerializeObject(obj);
+    }
+    
+    static public string ToJson(object obj) {
+        return JsonConvert.SerializeObject(obj);
+    }
+    
+    static public T FromJson<T>(string json) {
+        return JsonConvert.DeserializeObject<T>(json);
     }
 }

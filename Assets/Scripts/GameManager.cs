@@ -26,7 +26,7 @@ public class GameManager : MyMono {
     }
     
     public override void NormalUpdate() {
-        this.HackEnabled = Camera.main.GetComponent<FollowScript>().isActiveAndEnabled;
+        this.HackEnabled = PlayerMoveComponent.Current.isActiveAndEnabled;
     }
     
     public override void PausingFixedUpdate() {

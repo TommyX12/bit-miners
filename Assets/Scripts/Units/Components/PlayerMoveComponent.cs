@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMoveComponent : UnitComponent {
+    
+    public static PlayerMoveComponent Current;
 
     public float speed;
+    
+    void Awake() {
+        Current = this;
+    }
 
     public override void PausingFixedUpdate()
     {

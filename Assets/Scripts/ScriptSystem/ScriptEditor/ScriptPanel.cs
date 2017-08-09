@@ -429,11 +429,11 @@ public class ScriptPanel: SEElementContainer {
     }
     
     public static string SaveListToString(List<List<SEElementDef>> defList) {
-        return JsonConvert.SerializeObject(defList);
+        return Util.ToJson(defList);
     }
     
     public static List<List<SEElementDef>> LoadListFromString(string json) {
-        return JsonConvert.DeserializeObject<List<List<SEElementDef>>>(json);
+        return Util.FromJson<List<List<SEElementDef>>>(json);
     }
     
     public string Compile(GetCompileFuncDelegate getCompileFunc) {
