@@ -2743,6 +2743,7 @@ GameObject:
   - component: {fileID: 411361234}
   - component: {fileID: 411361235}
   - component: {fileID: 411361236}
+  - component: {fileID: 411361237}
   m_Layer: 0
   m_Name: 'Steve: Time to go!'
   m_TagString: Untagged
@@ -2816,6 +2817,21 @@ MonoBehaviour:
   - {fileID: 801155921}
   - {fileID: 801155919}
   active: 0
+--- !u!114 &411361237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 411361232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1d448b9b7b47346a16a35fac2ab90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDone: 0
+  running: 0
+  NextAction: {fileID: 0}
+  Enable: 0
 --- !u!1 &415000768
 GameObject:
   m_ObjectHideFlags: 0
@@ -6310,6 +6326,7 @@ GameObject:
   - component: {fileID: 847998737}
   - component: {fileID: 847998736}
   - component: {fileID: 847998735}
+  - component: {fileID: 847998738}
   m_Layer: 0
   m_Name: Enable Controls + Programming
   m_TagString: Untagged
@@ -6405,6 +6422,21 @@ MonoBehaviour:
   targets:
   - {fileID: 1570067207}
   active: 0
+--- !u!114 &847998738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 847998732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1d448b9b7b47346a16a35fac2ab90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDone: 0
+  running: 0
+  NextAction: {fileID: 0}
+  Enable: 1
 --- !u!1001 &864117321
 Prefab:
   m_ObjectHideFlags: 0
@@ -7799,6 +7831,7 @@ GameObject:
   - component: {fileID: 1046403458}
   - component: {fileID: 1046403460}
   - component: {fileID: 1046403459}
+  - component: {fileID: 1046403461}
   m_Layer: 0
   m_Name: Play (1)
   m_TagString: Untagged
@@ -7854,6 +7887,21 @@ MonoBehaviour:
   - {fileID: 801155921}
   - {fileID: 801155919}
   active: 1
+--- !u!114 &1046403461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1046403457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1d448b9b7b47346a16a35fac2ab90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDone: 0
+  running: 0
+  NextAction: {fileID: 0}
+  Enable: 1
 --- !u!1 &1047147545
 GameObject:
   m_ObjectHideFlags: 0
@@ -10405,6 +10453,7 @@ GameObject:
   - component: {fileID: 1352109834}
   - component: {fileID: 1352109835}
   - component: {fileID: 1352109836}
+  - component: {fileID: 1352109837}
   m_Layer: 0
   m_Name: Play
   m_TagString: Untagged
@@ -10478,6 +10527,21 @@ MonoBehaviour:
   targets:
   - {fileID: 1967354619}
   active: 1
+--- !u!114 &1352109837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1352109832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1d448b9b7b47346a16a35fac2ab90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDone: 0
+  running: 0
+  NextAction: {fileID: 0}
+  Enable: 1
 --- !u!1 &1366307758
 GameObject:
   m_ObjectHideFlags: 0
@@ -11493,6 +11557,7 @@ MonoBehaviour:
     type: 2}
   Player: {fileID: 801155917}
   Paused: 0
+  HackEnabled: 1
 --- !u!4 &1551376172
 Transform:
   m_ObjectHideFlags: 0
@@ -12700,6 +12765,7 @@ GameObject:
   - component: {fileID: 1758452252}
   - component: {fileID: 1758452254}
   - component: {fileID: 1758452255}
+  - component: {fileID: 1758452256}
   m_Layer: 0
   m_Name: Wake up
   m_TagString: Untagged
@@ -12778,6 +12844,21 @@ MonoBehaviour:
   - {fileID: 907111969}
   - {fileID: 1971819247}
   active: 0
+--- !u!114 &1758452256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1758452251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1d448b9b7b47346a16a35fac2ab90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDone: 0
+  running: 0
+  NextAction: {fileID: 0}
+  Enable: 0
 --- !u!1001 &1777719145
 Prefab:
   m_ObjectHideFlags: 0
@@ -14587,7 +14668,7 @@ Prefab:
     - target: {fileID: 224609071666198694, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0.000000059604645
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1510423041140804, guid: 44e8f3d65a658ab4fbcf6d6741b59995, type: 2}
       propertyPath: m_IsActive
@@ -15067,6 +15148,7 @@ GameObject:
   - component: {fileID: 2069221907}
   - component: {fileID: 2069221908}
   - component: {fileID: 2069221909}
+  - component: {fileID: 2069221910}
   m_Layer: 0
   m_Name: Elevator
   m_TagString: Untagged
@@ -15157,6 +15239,21 @@ MonoBehaviour:
   targets:
   - {fileID: 26967961}
   active: 0
+--- !u!114 &2069221910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2069221904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1d448b9b7b47346a16a35fac2ab90c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDone: 0
+  running: 0
+  NextAction: {fileID: 0}
+  Enable: 0
 --- !u!1001 &2070406901
 Prefab:
   m_ObjectHideFlags: 0

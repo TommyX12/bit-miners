@@ -10,12 +10,13 @@ public class GameManager : MyMono {
     public MapTile MapTilePrefab;
     public Unit Player;
 
-    public bool Paused = false;
+    public bool Paused      = false;
+    public bool HackEnabled = true;
 
     void Awake() {
         Current = this;
     }
-
+    
     void Start() {
         MusicManager.Current.Play("ambient");
     }
@@ -25,7 +26,7 @@ public class GameManager : MyMono {
     }
     
     public override void NormalUpdate() {
-        
+        this.HackEnabled = Camera.main.GetComponent<FollowScript>().isActiveAndEnabled;
     }
     
     public override void PausingFixedUpdate() {

@@ -30,6 +30,8 @@ public class Unit : MyMono, IScriptSystemAPI {
     public bool Alive = true;
     
     public void StartEditor() {
+        if (!GameManager.Current.HackEnabled) return;
+        
         GameManager.Current.ScriptEditorV2Object.StartEdit(this.ScriptSystemObject);
     }
     
