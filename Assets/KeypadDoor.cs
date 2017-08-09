@@ -14,7 +14,7 @@ public class KeypadDoor : UnitComponent {
     public bool proximity;
     public float picker = 0;
     public TextDisplayComponent TextDisplay;
-    public string password;
+	private string password = "default";
     int count = 0;
     
 
@@ -24,6 +24,7 @@ public class KeypadDoor : UnitComponent {
         {
             rendy = GetComponent<SpriteRenderer>();
         }
+		password = PasswordLoader.Current.GetPassword ();
     }
 
     public override void PausingUpdate()
