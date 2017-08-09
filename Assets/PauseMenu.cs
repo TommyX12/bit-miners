@@ -40,6 +40,7 @@ public class PauseMenu : MonoBehaviour {
 
     private void Update()
     {
+        MusicManager.Current.SetCondition("pause_menu_open", Menu.activeSelf);
         if (GameManager.Current.Paused) {
             if (this.Hint.activeSelf) {
                 this.Hint.SetActive(false);

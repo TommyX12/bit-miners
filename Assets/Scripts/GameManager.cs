@@ -18,7 +18,7 @@ public class GameManager : MyMono {
     }
     
     void Start() {
-        MusicManager.Current.Play("ambient");
+        
     }
 
     public override void PausingUpdate() {
@@ -26,7 +26,9 @@ public class GameManager : MyMono {
     }
     
     public override void NormalUpdate() {
-        this.HackEnabled = PlayerMoveComponent.Current.isActiveAndEnabled;
+        if (PlayerMoveComponent.Current) {
+            this.HackEnabled = PlayerMoveComponent.Current.isActiveAndEnabled;
+        }
     }
     
     public override void PausingFixedUpdate() {

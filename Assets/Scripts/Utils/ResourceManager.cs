@@ -6,6 +6,7 @@ public class ResourceManager {
     
     private static Dictionary<string, Sprite> sprites;
     private static Dictionary<string, AudioClip> music;
+    private static Dictionary<string, string> texts;
     private static List<string> code;
     
     private static bool initialized = false;
@@ -25,6 +26,12 @@ public class ResourceManager {
         foreach (AudioClip clip in musicObjects) {
             music[clip.name] = clip;
         }
+        
+        TextAsset[] textObjects = Resources.LoadAll<TextAsset>("Data");
+        texts = new Dictionary<string, string>();
+        foreach (TextAsset text in textObjects) {
+            texts[text.name] = text.text;
+        }
     }
     
     public static Sprite GetSprite(string name) {
@@ -38,6 +45,13 @@ public class ResourceManager {
         Initialize();
         AudioClip result;
         music.TryGetValue(name, out result);
+        return result;
+    }
+    
+    public static string GetText(string name) {
+        Initialize();
+        string result;
+        texts.TryGetValue(name, out result);
         return result;
     }
     

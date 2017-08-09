@@ -9988,6 +9988,7 @@ MonoBehaviour:
     type: 2}
   Player: {fileID: 471376708}
   Paused: 0
+  HackEnabled: 1
 --- !u!4 &1118691680
 Transform:
   m_ObjectHideFlags: 0
@@ -10031,6 +10032,7 @@ MonoBehaviour:
   FadeInTime: 2
   FadeOutTime: 2
   StartFadeInTime: 1
+  DefaultConfigText: {fileID: 4900000, guid: d4cb9c24a02e6e94ba59fe379e28ec54, type: 3}
 --- !u!1001 &1136852964
 Prefab:
   m_ObjectHideFlags: 0

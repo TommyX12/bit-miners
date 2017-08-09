@@ -1,0 +1,35 @@
+{
+  tracks: [
+    {
+      name: 'ambient',
+      volume: 1.0,
+      synced: true,
+      loop: true,
+    },
+    {
+      name: 'tech',
+      volume: 1.0,
+      synced: true,
+      loop: true,
+    },
+  ],
+  patterns: [
+    {
+      tracks: {
+        ambient: 1.0,
+      },
+      conditions: [
+        ['!editor_open', '!pause_menu_open'],
+      ],
+    },
+    {
+      tracks: {
+        tech: 1.0,
+      },
+      conditions: [
+        ['editor_open'],
+        ['pause_menu_open'],
+      ],
+    },
+  ],
+}

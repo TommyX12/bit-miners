@@ -116,6 +116,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 148553514}
+  - component: {fileID: 148553510}
+  - component: {fileID: 148553509}
+  - component: {fileID: 148553508}
   m_Layer: 0
   m_Name: Manager Scripts
   m_TagString: Untagged
@@ -123,6 +126,52 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &148553508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 148553507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2309d04de36b37d40afe8041de8a5e77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Condition: editor_open
+  Value: 1
+--- !u!114 &148553509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 148553507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5fd20b1115c7254098451ce916ea3fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScriptEditorObject: {fileID: 0}
+  ScriptEditorV2Object: {fileID: 0}
+  MapTilePrefab: {fileID: 0}
+  Player: {fileID: 0}
+  Paused: 0
+  HackEnabled: 1
+--- !u!114 &148553510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 148553507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c77fffaa04b4541ba80ed9af625070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Mixer: {fileID: 0}
+  FadeInTime: 2
+  FadeOutTime: 2
+  StartFadeInTime: 1
+  DefaultConfigText: {fileID: 4900000, guid: d4cb9c24a02e6e94ba59fe379e28ec54, type: 3}
 --- !u!4 &148553514
 Transform:
   m_ObjectHideFlags: 0

@@ -98,6 +98,7 @@ public class ScriptEditorV2 : MyMono {
 
     private void OnEnable()
     {
+        MusicManager.Current.SetCondition("editor_open", true);
         // Inventory.Current.gameObject.SetActive(false);
         // ProductionUI.Current.gameObject.SetActive(false);
         // ResourceDisplay.Current.gameObject.SetActive(false);
@@ -105,6 +106,7 @@ public class ScriptEditorV2 : MyMono {
 
     private void OnDisable()
     {
+        MusicManager.Current.SetCondition("editor_open", false);
         // Inventory.Current.gameObject.SetActive(true);
         // ResourceDisplay.Current.gameObject.SetActive(true);
     }

@@ -1746,7 +1746,7 @@ Prefab:
     - target: {fileID: 224609071666198694, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0.00000013411045
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224894333615652768, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -1776,7 +1776,7 @@ Prefab:
     - target: {fileID: 224851752557756016, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0.000000029802322
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1510423041140804, guid: 44e8f3d65a658ab4fbcf6d6741b59995, type: 2}
       propertyPath: m_IsActive
@@ -8034,6 +8034,7 @@ MonoBehaviour:
     type: 2}
   Player: {fileID: 618557456}
   Paused: 0
+  HackEnabled: 1
 --- !u!4 &1256689044
 Transform:
   m_ObjectHideFlags: 0
@@ -8077,6 +8078,7 @@ MonoBehaviour:
   FadeInTime: 2
   FadeOutTime: 2
   StartFadeInTime: 1
+  DefaultConfigText: {fileID: 4900000, guid: d4cb9c24a02e6e94ba59fe379e28ec54, type: 3}
 --- !u!1 &1257556688
 GameObject:
   m_ObjectHideFlags: 0
