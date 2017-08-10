@@ -59,7 +59,10 @@ public class MusicTrack {
     }
     
     public void UpdateVolume() {
-        this.audioSource.volume = MusicManager.Current.MasterVolume * this.Volume * this.volumeMul;
+        this.audioSource.volume = 
+            MusicManager.Current.MasterVolume * 
+            MusicManager.Current.ContextVolume * 
+            this.Volume * this.volumeMul;
     }
     
     public void Start(float FadeInTime, bool loop) {
@@ -94,7 +97,7 @@ public class MusicTrack {
     }
     
     private void SetFade(bool fadeIn, float FadeTime) {
-        this.volumeMulFade = (fadeIn ? 1 : -1) / FadeTime;
+        this.volumeMulFade = (fadeIn ? 1 : -1) / (FadeTime == 0 ? 0.0001f : FadeTime);
     }
     
     public void ForceStop() {

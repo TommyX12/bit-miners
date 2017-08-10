@@ -13,15 +13,7 @@
       loop: true,
     },
   ],
-  patterns: [
-    {
-      tracks: {
-        ambient: 1.0,
-      },
-      conditions: [
-        ['!editor_open', '!pause_menu_open'],
-      ],
-    },
+  snapshots: [
     {
       tracks: {
         tech: 1.0,
@@ -29,6 +21,14 @@
       conditions: [
         ['editor_open'],
         ['pause_menu_open'],
+      ],
+    },
+    {
+      tracks: {
+        ambient: 1.0,
+      },
+      conditions: [
+        
       ],
     },
   ],

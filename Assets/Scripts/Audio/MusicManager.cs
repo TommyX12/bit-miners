@@ -13,15 +13,27 @@ public class MusicManager : MyMono {
         public float volume = 1.0f;
         public bool synced = true;
         public bool loop = true;
-        public float fade_in_time = 2.0f;
-        public float fade_out_time = 2.0f;
-        public float start_fade_in_time = 1.0f;
         
-        public void Enable(float volumeMul) {
+        public float fade_in_time = -1;
+        public float fade_out_time = -1;
+        public float start_fade_in_time = -1;
+        
+        public void Init() {
+            if (this.synced) {
+                MusicManager.Current.Play(this.name, true, true, 999.0f, 999.0f);
+                MusicManager.Current.Silence(this.name, 0.01f);
+            }
+        }
+        public void Enable(float volumeMul, float fadeInTime = -1, float startFadeInTime = -1) {
+            if (fadeInTime < 0) fadeInTime = this.fade_in_time;
+            if (startFadeInTime < 0) startFadeInTime = this.start_fade_in_time;
+            
             MusicManager.Current.GetMusicTrack(this.name, true).Volume = this.volume * volumeMul;
             MusicManager.Current.Play(this.name, this.loop, false, this.fade_in_time, this.start_fade_in_time);
         }
-        public void Disable() {
+        public void Disable(float fadeOutTime = -1) {
+            if (fadeOutTime < 0) fadeOutTime = this.fade_out_time;
+            
             if (this.synced) {
                 MusicManager.Current.Silence(this.name, this.fade_out_time);
             }
@@ -31,11 +43,17 @@ public class MusicManager : MyMono {
         }
     }
     
-    public class PatternConfig {
+    public class SnapshotConfig {
         public Dictionary<string, float> tracks = new Dictionary<string, float>();
         public List<List<string>> conditions = new List<List<string>>();
         
+        public float fade_in_time = -1;
+        public float fade_out_time = -1;
+        public float start_fade_in_time = -1;
+        
         public bool ConditionSatisfied() {
+            if (this.conditions.Count == 0) return true;
+            
             foreach (var c in this.conditions) {
                 bool passed = true;
                 foreach (string d in c) {
@@ -53,36 +71,35 @@ public class MusicManager : MyMono {
             return false;
         }
         
-        public void PlayOnCondition() {
-            if (this.ConditionSatisfied()) {
-                foreach (var entry in this.tracks) {
-                    string name = entry.Key;
-                    float volumeMul = entry.Value;
-                    MusicManager.Current.GetTrackConfigs()[name].Enable(volumeMul);
-                }
+        public void Play() {
+            foreach (var entry in this.tracks) {
+                string name = entry.Key;
+                float volumeMul = entry.Value;
+                MusicManager.Current.GetTrackConfigs()[name].Enable(volumeMul, this.fade_in_time, this.start_fade_in_time);
             }
         }
     }
     
     public class Config {
         public List<TrackConfig> tracks = new List<TrackConfig>();
-        public List<PatternConfig> patterns = new List<PatternConfig>();
+        public List<SnapshotConfig> snapshots = new List<SnapshotConfig>();
     }
     
     private Dictionary<string, MusicTrack> activeTracks = new Dictionary<string, MusicTrack>();
     private GameObject audioSourceContainer;
     
     public AudioMixerGroup Mixer = null;
-    public float DefaultFadeInTime = 2.0f;
-    public float DefaultFadeOutTime = 2.0f;
+    public float DefaultFadeInTime = 1.5f;
+    public float DefaultFadeOutTime = 2.5f;
     public float DefaultStartFadeInTime = 1.0f;
     
     public TextAsset DefaultConfigText;
     
     public float MasterVolume = 1.0f;
+    public float ContextVolume = 1.0f;
     
     private Dictionary<string, TrackConfig> trackConfigs = null;
-    private List<PatternConfig> patternConfigs = null;
+    private List<SnapshotConfig> snapshotConfigs = null;
     private Dictionary<string, bool> conditions = new Dictionary<string, bool>();
     
     private bool conditionsDirty = true;
@@ -111,9 +128,10 @@ public class MusicManager : MyMono {
         this.trackConfigs = new Dictionary<string, TrackConfig>();
         foreach (TrackConfig trackConfig in config.tracks) {
             this.trackConfigs[trackConfig.name] = trackConfig;
+            trackConfig.Init();
         }
         
-        this.patternConfigs = config.patterns;
+        this.snapshotConfigs = config.snapshots;
         
         this.conditionsDirty = true;
     }
@@ -141,12 +159,21 @@ public class MusicManager : MyMono {
     
     public override void NormalFixedUpdate() {
         if (this.conditionsDirty) {
-            if (this.trackConfigs != null && this.patternConfigs != null) {
-                foreach (TrackConfig trackConfig in this.trackConfigs.Values) {
-                    trackConfig.Disable();
+            if (this.trackConfigs != null && this.snapshotConfigs != null) {
+                float fadeOutTime = -1;
+                SnapshotConfig nextSnapshot = null;
+                foreach (SnapshotConfig snapshotConfig in this.snapshotConfigs) {
+                    if (snapshotConfig.ConditionSatisfied()) {
+                        nextSnapshot = snapshotConfig;
+                        fadeOutTime = snapshotConfig.fade_out_time;
+                        break;
+                    }
                 }
-                foreach (PatternConfig patternConfig in this.patternConfigs) {
-                    patternConfig.PlayOnCondition();
+                foreach (TrackConfig trackConfig in this.trackConfigs.Values) {
+                    trackConfig.Disable(fadeOutTime);
+                }
+                if (nextSnapshot != null) {
+                    nextSnapshot.Play();
                 }
             }
             
