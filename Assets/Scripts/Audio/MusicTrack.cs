@@ -65,39 +65,39 @@ public class MusicTrack {
             this.Volume * this.volumeMul;
     }
     
-    public void Start(float FadeInTime, bool loop) {
+    public void Start(float fadeInTime, bool loop) {
         this.audioSource.loop = loop;
         this.audioSource.Play();
         
         this.Stopping = false;
         this.volumeMul = 0;
-        this.SetFade(true, FadeInTime);
+        this.SetFade(true, fadeInTime);
         this.Update(0);
     }
     
-    public void Stop(float FadeOutTime) {
+    public void Stop(float fadeOutTime) {
         if (!this.Playing) return;
         this.Stopping = true;
-        this.SetFade(false, FadeOutTime);
+        this.SetFade(false, fadeOutTime);
         this.Update(0);
     }
     
-    public void Resume(float FadeInTime) {
+    public void Resume(float fadeInTime) {
         if (!this.Playing) return;
         this.Stopping = false;
-        this.SetFade(true, FadeInTime);
+        this.SetFade(true, fadeInTime);
         this.Update(0);
     }
     
-    public void Silence(float FadeOutTime) {
+    public void Silence(float fadeOutTime) {
         if (!this.Playing) return;
         this.Stopping = false;
-        this.SetFade(false, FadeOutTime);
+        this.SetFade(false, fadeOutTime);
         this.Update(0);
     }
     
-    private void SetFade(bool fadeIn, float FadeTime) {
-        this.volumeMulFade = (fadeIn ? 1 : -1) / (FadeTime == 0 ? 0.0001f : FadeTime);
+    private void SetFade(bool fadeIn, float fadeTime) {
+        this.volumeMulFade = (fadeIn ? 1 : -1) / (fadeTime == 0 ? 0.0001f : fadeTime);
     }
     
     public void ForceStop() {
