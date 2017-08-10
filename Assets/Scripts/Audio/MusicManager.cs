@@ -29,16 +29,16 @@ public class MusicManager : MyMono {
             if (startFadeInTime < 0) startFadeInTime = this.start_fade_in_time;
             
             MusicManager.Current.GetMusicTrack(this.name, true).Volume = this.volume * volumeMul;
-            MusicManager.Current.Play(this.name, this.loop, false, this.fade_in_time, this.start_fade_in_time);
+            MusicManager.Current.Play(this.name, this.loop, false, fadeInTime, startFadeInTime);
         }
         public void Disable(float fadeOutTime = -1) {
             if (fadeOutTime < 0) fadeOutTime = this.fade_out_time;
             
             if (this.synced) {
-                MusicManager.Current.Silence(this.name, this.fade_out_time);
+                MusicManager.Current.Silence(this.name, fadeOutTime);
             }
             else {
-                MusicManager.Current.Stop(this.name, false, this.fade_out_time);
+                MusicManager.Current.Stop(this.name, false, fadeOutTime);
             }
         }
     }
@@ -83,6 +83,9 @@ public class MusicManager : MyMono {
     public class Config {
         public List<TrackConfig> tracks = new List<TrackConfig>();
         public List<SnapshotConfig> snapshots = new List<SnapshotConfig>();
+        public float fade_in_time = -1;
+        public float fade_out_time = -1;
+        public float start_fade_in_time = -1;
     }
     
     private Dictionary<string, MusicTrack> activeTracks = new Dictionary<string, MusicTrack>();
@@ -132,6 +135,10 @@ public class MusicManager : MyMono {
         }
         
         this.snapshotConfigs = config.snapshots;
+        
+        if (config.fade_in_time >= 0) this.DefaultFadeInTime = config.fade_in_time;
+        if (config.fade_out_time >= 0) this.DefaultFadeOutTime = config.fade_out_time;
+        if (config.start_fade_in_time >= 0) this.DefaultStartFadeInTime = config.start_fade_in_time;
         
         this.conditionsDirty = true;
     }
