@@ -24,11 +24,10 @@ public class ScriptEditorV2 : MyMono {
     void Awake() {
         this.DiscardButtonObject.onClick.AddListener(this.DiscardEdit);
         this.SaveButtonObject.onClick.AddListener(this.SaveAndRun);
-        this.gameObject.SetActive(false);
     }
 
     void Start() {
-        
+        this.gameObject.SetActive(false);
     }
     
     public void StartEdit(ScriptSystem scriptSystem) {
@@ -45,6 +44,8 @@ public class ScriptEditorV2 : MyMono {
         this.ScriptPanelObject.LoadString(this.ScriptSystemObject.BlockScript);
         
         this.ReloadStatus();
+        
+        MusicManager.Current.SetCondition("editor_open", true);
     }
     
     // set to null for no filter
@@ -90,6 +91,8 @@ public class ScriptEditorV2 : MyMono {
         GameManager.Current.Paused = false;
         
         this.ScriptSystemObject = null;
+        
+        MusicManager.Current.SetCondition("editor_open", false);
     }
     
     public override void NormalUpdate() {
@@ -98,7 +101,6 @@ public class ScriptEditorV2 : MyMono {
 
     private void OnEnable()
     {
-        MusicManager.Current.SetCondition("editor_open", true);
         // Inventory.Current.gameObject.SetActive(false);
         // ProductionUI.Current.gameObject.SetActive(false);
         // ResourceDisplay.Current.gameObject.SetActive(false);
@@ -106,7 +108,6 @@ public class ScriptEditorV2 : MyMono {
 
     private void OnDisable()
     {
-        MusicManager.Current.SetCondition("editor_open", false);
         // Inventory.Current.gameObject.SetActive(true);
         // ResourceDisplay.Current.gameObject.SetActive(true);
     }
