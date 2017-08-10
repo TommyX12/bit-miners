@@ -24,6 +24,7 @@ public class MusicManager : MyMono {
                 MusicManager.Current.Silence(this.name, 0.01f);
             }
         }
+        
         public void Enable(float volumeMul, float fadeInTime = -1, float startFadeInTime = -1) {
             if (fadeInTime < 0) fadeInTime = this.fade_in_time;
             if (startFadeInTime < 0) startFadeInTime = this.start_fade_in_time;
@@ -31,6 +32,7 @@ public class MusicManager : MyMono {
             MusicManager.Current.GetMusicTrack(this.name, true).Volume = this.volume * volumeMul;
             MusicManager.Current.Play(this.name, this.loop, false, fadeInTime, startFadeInTime);
         }
+        
         public void Disable(float fadeOutTime = -1) {
             if (fadeOutTime < 0) fadeOutTime = this.fade_out_time;
             
