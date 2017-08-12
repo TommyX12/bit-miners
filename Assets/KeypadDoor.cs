@@ -14,7 +14,7 @@ public class KeypadDoor : UnitComponent {
     public bool proximity;
     public float picker = 0;
     public TextDisplayComponent TextDisplay;
-	private string password = "default";
+	public string password = "default";
     int count = 0;
     
 
@@ -109,7 +109,7 @@ public class KeypadDoor : UnitComponent {
     }
 
     public void EnterCode(string code) {
-        if (code == password)
+        if (code.Equals(password.Trim()))
         {
             Unlock();
             TextDisplay.Display("Correct Code Entered");
