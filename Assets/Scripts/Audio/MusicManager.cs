@@ -12,7 +12,7 @@ public class MusicManager : MyMono {
         public string name = null;
         public float volume = 1.0f;
         public bool synced = true;
-        public bool play_on_awake = true;
+        public bool synced_on_awake = true;
         public bool loop = true;
         
         public float fade_in_time = -1;
@@ -20,7 +20,7 @@ public class MusicManager : MyMono {
         public float start_fade_in_time = -1;
         
         public void Init() {
-            if (this.play_on_awake) {
+            if (this.synced_on_awake) {
                 MusicManager.Current.Play(this.name, true, true, 999.0f, 999.0f);
                 MusicManager.Current.Silence(this.name, 0.01f);
             }
