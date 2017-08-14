@@ -12,6 +12,7 @@ public class MusicManager : MyMono {
         public string name = null;
         public float volume = 1.0f;
         public bool synced = true;
+        public bool play_on_awake = true;
         public bool loop = true;
         
         public float fade_in_time = -1;
@@ -19,7 +20,7 @@ public class MusicManager : MyMono {
         public float start_fade_in_time = -1;
         
         public void Init() {
-            if (this.synced) {
+            if (this.play_on_awake) {
                 MusicManager.Current.Play(this.name, true, true, 999.0f, 999.0f);
                 MusicManager.Current.Silence(this.name, 0.01f);
             }
@@ -88,6 +89,7 @@ public class MusicManager : MyMono {
         public float fade_in_time = -1;
         public float fade_out_time = -1;
         public float start_fade_in_time = -1;
+        public float bpm = 0;
     }
     
     private Dictionary<string, MusicTrack> activeTracks = new Dictionary<string, MusicTrack>();
@@ -106,6 +108,23 @@ public class MusicManager : MyMono {
     private Dictionary<string, TrackConfig> trackConfigs = null;
     private List<SnapshotConfig> snapshotConfigs = null;
     private Dictionary<string, bool> conditions = new Dictionary<string, bool>();
+    private float beatLength = 0;
+    private float beatTimer = 0;
+    private float bpm = 0;
+    public float CurrentBPM {
+        get {
+            return bpm;
+        }
+        set {
+            if (value == 0) {
+                this.beatLength = 0;
+            }
+            else {
+                this.beatLength = 60 / value;
+            }
+            this.bpm = value;
+        }
+    }
     
     private bool conditionsDirty = true;
     
@@ -143,6 +162,9 @@ public class MusicManager : MyMono {
         if (config.start_fade_in_time >= 0) this.DefaultStartFadeInTime = config.start_fade_in_time;
         
         this.conditionsDirty = true;
+        
+        this.beatTimer = 0;
+        this.CurrentBPM = config.bpm;
     }
     
     public void SetCondition(string condition, bool value) {
@@ -167,7 +189,14 @@ public class MusicManager : MyMono {
     }
     
     public override void NormalFixedUpdate() {
-        if (this.conditionsDirty) {
+        bool onBeat = false;
+        if (this.beatTimer >= this.beatLength) {
+            onBeat = true;
+            this.beatTimer = this.beatTimer % this.beatLength;
+        }
+        this.beatTimer += Time.fixedDeltaTime;
+        
+        if (this.conditionsDirty && onBeat) {
             if (this.trackConfigs != null && this.snapshotConfigs != null) {
                 float fadeOutTime = -1;
                 SnapshotConfig nextSnapshot = null;

@@ -11599,10 +11599,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mixer: {fileID: 0}
-  FadeInTime: 2
-  FadeOutTime: 2
-  StartFadeInTime: 1
+  DefaultFadeInTime: 1.5
+  DefaultFadeOutTime: 2.5
+  DefaultStartFadeInTime: 1
   DefaultConfigText: {fileID: 4900000, guid: d4cb9c24a02e6e94ba59fe379e28ec54, type: 3}
+  MasterVolume: 1
+  ContextVolume: 1
 --- !u!114 &1551376175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14638,7 +14640,7 @@ Prefab:
     - target: {fileID: 224285176108210810, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -18.96629
       objectReference: {fileID: 0}
     - target: {fileID: 224285176108210810, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -14648,7 +14650,7 @@ Prefab:
     - target: {fileID: 224285176108210810, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 37.93258
       objectReference: {fileID: 0}
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -14668,7 +14670,7 @@ Prefab:
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -18.96629
       objectReference: {fileID: 0}
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
@@ -14678,7 +14680,7 @@ Prefab:
     - target: {fileID: 224217151610122306, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 37.93258
       objectReference: {fileID: 0}
     - target: {fileID: 224609071666198694, guid: 44e8f3d65a658ab4fbcf6d6741b59995,
         type: 2}
